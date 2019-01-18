@@ -1,0 +1,337 @@
+@(req: Form[Requirement])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+	
+	<h2>Searching Property Details</h2>
+	<hr/>
+	<div class = "marginNone">
+		<table>
+			<tr id="nonVisibleRow" style="display:none">
+            	<td style="width:300px;"><label>requirementSubType</label></td>
+            	<td>@helper.inputText(req("requirementSubType"))</td>
+            </tr>
+        </table>
+		<div id="requirementDiv">
+	        <table id="searchingPropertyDetails" class="fieldstable">
+	            <tr></tr>
+	            <tr>
+	                <td style="width:300px;"><label>Select Requirement</label></td>
+	                <td>
+	                	<select  id="dummyRequirementSubType">
+							<optgroup label="Residential"  id="residentialTypeDetail">
+							    @buildOptionTag("FlatOrTerraceFlat")
+							    @buildOptionTag("ChawlRoom")
+						    	@buildOptionTag("DuplexFlat")
+			                    @buildOptionTag("PentHouse")
+			                    @buildOptionTag("StudioApartment")
+			                    @buildOptionTag("HighriseApartment")
+			                    @buildOptionTag("IndependentBungalow")
+			                    @buildOptionTag("JointBanglowOrTwinBungalow")
+			                    @buildOptionTag("RowHouse")
+			                    @buildOptionTag("RowHousePlot")
+			                    @buildOptionTag("IndependentBungalowPlot")
+			                    @buildOptionTag("JointBungalowPlot")
+			                    @buildOptionTag("FarmHouse")
+			                    @buildOptionTag("FarmHousePlot")
+			                    @buildOptionTag("HolidayHome")
+			                    @buildOptionTag("ServiceApartment")
+			                    @buildOptionTag("Villa")
+			                    @buildOptionTag("SecondHome")
+			                    @buildOptionTag("Other")
+							</optgroup>
+							<optgroup label="Commercial" id="commercialTypeDetail">
+						    	@buildOptionTag("Shop")
+						    	@buildOptionTag("OfficeInITParkOrSez")
+			                    @buildOptionTag("CommercialLand")
+			                    @buildOptionTag("CommercialOfficeOrSpace")
+			                    @buildOptionTag("CommercialShowroom")
+			                    @buildOptionTag("Kiosk")
+			                    @buildOptionTag("ConstructedHotelSpace")
+			                    @buildOptionTag("HotelPlot")
+			                    @buildOptionTag("GuestHouse")
+			                    @buildOptionTag("BusinessCenterOrBusinessPark")
+			                    @buildOptionTag("Warehouse")
+			                    @buildOptionTag("IndustrialLand")
+			                    @buildOptionTag("IndustrialBuilding")
+			                    @buildOptionTag("IndustrialShed")
+			                    @buildOptionTag("BenquetHall")
+			                    @buildOptionTag("SpaceInRetailMall")
+			                    @buildOptionTag("Godown")
+			                    @buildOptionTag("ColdStorage")
+			                    @buildOptionTag("Factory")
+			                    @buildOptionTag("ManufacturingUnit")
+			                    @buildOptionTag("HotelSpace")
+			                    @buildOptionTag("HospitalSpace")
+			                    @buildOptionTag("SchoolSpace")
+			                    @buildOptionTag("BankSpace")
+			                    @buildOptionTag("Other")
+							</optgroup>
+							<optgroup label="Agricultural" id="agriculturalTypeDetail">
+								@buildOptionTag("AgriculturalLand")
+								@buildOptionTag("FarmLand")
+			                    @buildOptionTag("Other")
+							</optgroup>
+						</select>
+					</td>
+	            </tr>
+	            <tr id="selectionOther" style="display:none">
+	                <td style="width:300px;"><label>If other</label></td>
+	                <td>@helper.inputText(req("typeDetail"), 'class -> "input-medium", 'maxlength -> "8")</td>
+	            </tr>
+	        </table>
+	        <div id="renderSelectedRequirementDiv">
+		        @if(req("requirementSubType").value() != null){
+					@{
+						if((req("requirementSubType").value() == "ChawlRoom") || (req("requirementSubType").value() == "FlatOrTerraceFlat") || (req("requirementSubType").value() == "DuplexFlat") || (req("requirementSubType").value() == "SecondHome") || (req("requirementSubType").value() == "RowHouse") || (req("requirementSubType").value() == "IndependentBungalow") || (req("requirementSubType").value() == "FarmHouse") || (req("requirementSubType").value() == "JointBanglowOrTwinBungalow") || (req("requirementSubType").value() == "HolidayHome") || (req("requirementSubType").value() == "Villa") || (req("requirementSubType").value() == "PentHouse") || (req("requirementSubType").value() == "RowHousePlot") || (req("requirementSubType").value() == "IndependentBungalowPlot") || (req("requirementSubType").value() == "JointBungalowPlot") || (req("requirementSubType").value() == "FarmHousePlot") ||(req("requirementSubType").value() == "StudioApartment") || (req("requirementSubType").value() == "HighriseApartment") || (req("requirementSubType").value() == "ServiceApartment")){
+							renderSubReq(req,"res_".concat(req("requirementSubType").value()))
+						}
+						else if ((req("requirementSubType").value() == "Shop") ||(req("requirementSubType").value() == "GuestHouse") ||(req("requirementSubType").value() == "CommercialLand") || (req("requirementSubType").value() == "BusinessCenterOrBusinessPark") || (req("requirementSubType").value() == "OfficeInITParkOrSez") || (req("requirementSubType").value() == "Warehouse") || (req("requirementSubType").value() == "CommercialOfficeOrSpace") || (req("requirementSubType").value() == "ConstructedHotelSpace") || (req("requirementSubType").value() == "BenquetHall") || (req("requirementSubType").value() == "IndustrialBuilding") || (req("requirementSubType").value() == "HotelPlot") || (req("requirementSubType").value() == "IndustrialLand") || (req("requirementSubType").value() == "HotelSpace") || (req("requirementSubType").value() == "HospitalSpace") || (req("requirementSubType").value() == "SchoolSpace") || (req("requirementSubType").value() == "BankSpace") || (req("requirementSubType").value() == "IndustrialShed") || (req("requirementSubType").value() == "SpaceInRetailMall") || (req("requirementSubType").value() == "Godown") || (req("requirementSubType").value() == "ColdStorage") || (req("requirementSubType").value() == "ManufacturingUnit") || (req("requirementSubType").value() == "Factory")|| (req("requirementSubType").value() == "CommercialShowroom")|| (req("requirementSubType").value() == "Kiosk")){
+							renderSubReq(req,"comm_".concat(req("requirementSubType").value()))
+						}
+						else if((req("requirementSubType").value() == "AgriculturalLand") || (req("requirementSubType").value() == "FarmLand")){
+							renderSubReq(req,"agri_".concat(req("requirementSubType").value()))
+						}
+					}
+				}else {
+					@renderSubReq(req,"res_FlatOrTerraceFlat")
+				}
+				<!-- <p>requirement sub type: @@req("requirementSubType").valueOr("abc")</p> -->
+			</div>
+           
+			<h3  class="fieldname required">----Desired location of property</h3>
+	        <hr/>
+           <div class="alert alert-error" id="showLocationError" style="display:none">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <p>Enter the desired property location</p>
+           </div> 
+	       <div id="dynamicLocationTableDiv">
+	        	<table id ="dynamicLocationTable"  class="table table-striped" style="display:none;">
+	        		<thead>
+	        			<tr>
+	        				<th style="width: 160px;">State</th>
+	        				<th style="width: 122px;">District</th>
+	        				<th style="width: 122px;">Taluka</th>
+	        				<th style="width: 122px;">Pincode</th>
+	        				<th style="width: 160px;">Locality</th>
+	        				<th style="width: 122px;">Sub Locality/Area</th>
+	        				<th></th>
+	        				<th></th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        		</tbody>
+	        	</table>
+	        </div>
+	        <div id="locationDiv">
+		      <div id="requirementLocationTable" style="display: none">
+		      	@selectLocation()
+		      </div>
+		        <div class="form-actions">
+					<input type="button" id ="showLocTable" class="btn btn-large btn-pink" align="right" value="Add More">
+					<input type="button" id ="cancelAddedLocation" class="btn btn-large btn-pink" align="right" value="Cancel" style="display:none">
+					<input type="button" id ="saveLocations" name="saveLocations" class="btn btn-large btn-pink" align="right" value="Save" style="display:none">
+				</div>
+		        <input type="hidden" id="locationsHiddenField" name="locationsHiddenField" value="@req("locationsHiddenField").valueOr("")"/>
+			</div>
+		
+		<h2>Location Near To <font size="4">(Please Select)</font> :</h2>
+        <hr/>
+		<div class="dropDownDiv">
+			<table>
+				<tr>
+					<td>
+						<select id="locationNearTo" name="locationNearTo">
+			                <option value="">Select</option>
+					        <option value="RailwayStation">Railway Station</option>
+					        <option value="Highway">Highway</option>
+					        <option value="Market">Market</option>
+					        <option value="Garden">Garden</option>
+					        <option value="PlayGround">Play Ground</option>
+					        <option value="School">School</option>
+					        <option value="College">College</option>
+					        <option value="Hospital">Hospital</option>
+					        <option value="BusDepot">Bus Depot</option>
+					        <option value="Airport">Airport</option>
+					        <option value="Other">Other</option>
+					    </select>
+					</td>
+					<td>
+					    <div id="locationInputs">
+					    	<table>
+						    	<tr>
+						    		<td>
+						    			<input type="text" name="ifOtherTextForNearBy" id="ifOtherTextForNearBy" placeholder="Enter here...">
+						    		</td>
+						    		<td>
+						    			<input type="button" id="OtherTextForLoc" name="OtherTextForLoc" value="Add"/>
+						    		</td>
+								</tr>
+							</table>
+							<input type="hidden" id="nearbyHidden" name="nearbyHidden" value="@req("nearbyHidden").valueOr("")"/>
+					    </div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="locationNearToDiv">
+   			<div id="locationNearToTagDiv">
+	   			<p>"  Near-By Location Tags..."</p>
+   			</div> 
+		</div>
+
+		<h2>External Amenities <font size="4">(Please Select)</font> :</h2>
+	    <hr/>
+		<div class="dropDownDivForExt">
+			<table>
+				<tr>
+					<td>
+						<select id="externalAmenities"> 
+			                <option value="">Select</option>
+					        <option value="ChildrenPlayArea">Children Play Area</option>
+					        <option value="CommonDriverServentRoom">Common Driver/Servent room</option>
+					        <option value="GuestWaitingRoom">Guest Waiting Room</option>
+					        <option value="SocietyOffice">Society Office</option>
+					        <option value="Gymnasium">Gymnasium</option>
+					        <option value="JoggingWalkingTracks">Jogging/Walking Tracks</option>
+					        <option value="Library">Library</option>
+					        <option value="SecurityCabins">Security Cabins</option>
+					        <option value="24x7SecurityFacilityArrangement">24 x 7 Security & Facility Arrangement</option>
+					        <option value="PartyLawn">Party Lawn</option>
+					        <option value="ConferenceRoom">Conference Room</option>
+					        <option value="MeditationPavilion">Meditation Pavilion</option>
+					        <option value="GreenLandscapeWithNaturalWaterfall">Green Landscape With Natural Waterfall</option>
+					        <option value="NaturalEcofriendlyEnvironment">Natural & Eco-friendly Environment</option>
+					        <option value="DecorativeEntranceGate">Decorative Entrance Gate</option>
+					        <option value="Roads">Roads</option>
+					        <option value="StreetLight">Street Light</option>
+					        <option value="SolarStreetLight">Solar Street Light</option>
+					        <option value="CinemascopeTheater">Cinemascope Theater</option>
+					        <option value="SteamSaunaBath">Steam & Sauna Bath</option>
+					        <option value="TropicalSwimmingPoolKidsPool">Tropical Swimming Pool/Kids Pool</option>
+					        <option value="SquashRoom">Squash Room</option>
+					        <option value="DecorativeMainDoorWithGoodQualityFittings">Decorative Main Door With Good Quality Fittings</option>
+					        <option value="TennisCourt">Tennis Court</option>
+					        <option value="IndoorGames">Indoor Games</option>
+					        <option value="Amphitheater">Amphi-theater</option>
+					        <option value="EquippedChildrensPlayArea">Equipped Childrens Play Area</option>
+					        <option value="Trekking">Trekking</option>
+					        <option value="Skating">Skating</option>
+					        <option value="MultiCuisineRestaurant">Multi Cuisine Restaurant</option>
+					        <option value="BanquetHall">Banquet Hall</option>
+					        <option value="CafeteriaArea">Cafeteria Area</option>
+					        <option value="PetHouse">Pet House</option>
+					        <option value="SunsetPoint">Sunset Point</option>
+					        <option value="BarbequeArea">Barbeque Area</option>
+					        <option value="ConvenientStore">Convenient Store</option>
+					        <option value="Other">Other</option>
+					    </select>
+		    		</td>
+		    		<td>
+					    <div id="externalInputs">
+					    	<table>
+						    	<tr>
+						    		<td>
+					    				<input type="text" name="ifOtherTextForExtAmnts" id="ifOtherTextForExtAmnts" placeholder="Enter here...">
+					    			</td>
+					    			<td>
+					    				<input type="button" id="OtherTextForExt" name="OtherTextForExt" value="Add" />
+					    			</td>
+					    		</tr>
+					    	</table>
+							<input type="hidden" id="externalAmenitiesHidden" name="externalAmenitiesHidden" value="@req("externalAmenitiesHidden").valueOr("")"/>
+					    </div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="externalAmenitiesDiv">
+   			<div id="externalAmenitiesTagDiv">
+   				<p>"  External Amenities Tags..."</p>
+   			</div> 
+		</div>
+		
+		<h2>Internal Amenities <font size="4">(Please Select)</font> :</h2>
+		<hr/>
+		<div class="dropDownDivForInt">
+			<table>
+				<tr>
+					<td>
+						<select id="internalAmenities">
+			                <option value="">Select</option>
+					        <option value="IntercomFacilityForHighSecurityReasons">Intercom Facility For High Security Reasons</option>
+					        <option value="AnodisedAluminiumSlidingWindow">Anodised Aluminium Sliding Window</option>
+					        <option value="ConcealCopperWiringWithQualitySwitches">Conceal Copper Wiring With Quality Switches</option>
+					        <option value="MarboGraniteFlooring">Marbo Granite Flooring</option>
+					        <option value="GranitePlatformWithSSSinkWith2FeetDedo">Granite Platform With S. S. Sink With 2 Feet Dedo</option>
+					        <option value="DesignerToiletAndBathroomsWithDoorLevelGlazedTiles">Designer Toilet And Bathrooms With Door Level Glazed Tiles</option>
+					        <option value="ConcealedPlumbingWithSuperiorQualitySanitaryWare">Concealed Plumbing With Superior Quality Sanitary Ware</option>
+					        <option value="DecorativeMainDoor">Decorative Main Door</option>
+					        <option value="PlasticPaint">Plastic Paint</option>
+					        <option value="VideoDoorBell">Video Door Bell</option>
+					        <option value="CableSetTopBoxFacility">Cable / Set Top Box Facility</option>
+					        <option value="InternetFacility">Internet Facility</option>
+					        <option value="CCTvCamera">CC Tv Camera</option>
+					        <option value="GasConnectionFacility">Gas Connection Facility</option>
+					        <option value="BusService">Bus Service</option>
+					        <option value="VehicleCleaningArea">Vehicle Cleaning Area</option>
+					        <option value="Other">Other</option>
+					    </select>
+					</td>
+					<td>
+					    <div id="internalInputs">
+					    	<table>
+						    	<tr>
+						    		<td>
+					    				<input type="text" name="ifOtherTextForIntAmnts" id="ifOtherTextForIntAmnts" placeholder="Enter here...">
+					    			</td>
+					    			<td>
+					    				<input type="button" id="OtherTextForInt" name="OtherTextForInt" value="Add" />
+					    			</td>
+								</tr>
+							</table>
+							<input type="hidden" id="internalAmenitiesHidden" name="internalAmenitiesHidden" value="@req("internalAmenitiesHidden").valueOr("")"/>
+					    </div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="internalAmenitiesDiv">
+   			<div id="internalAmenitiesTagDiv">
+   				<p>"  Internal Amenities Tags..."</p>
+   			</div> 
+		</div>
+	</div>
+        <!-- <div class="form-actions">
+				<a href="@routes.ApplicationFormController.summaryPage" class="btn btn-large btn-pink" align="right">Next</a>
+		</div> -->
+       <!--  <div class="form-actions">
+        	<a href="@@routes.OwnContributionController.entireOwnContribution" class="btn btn-large btn-pink" align="right">Back</a>
+			<button type="submit" class="btn btn-large btn-pink" id="req_submit">Next</button>
+		</div> -->
+     
+
+@fieldVal(field: Object,defaultVal: String) = {
+	@if(field != null) {
+		@field	
+	}else{
+		@defaultVal
+	}
+}
+
+@concat(val1: String,val2: String) = {
+	@val1.concat(val2.replaceAll("[^a-zA-Z0-9]", ""))
+}
+
+@buildOptionTag(val1: String) = {
+	<option value=@val1 @isSelected(val1)>@insertSpaceBeforeCamelCase(val1)</option>
+}
+
+@insertSpaceBeforeCamelCase(val1: String) = {
+	@val1.replaceAll("Or", "/").replaceAll("(.)([A-Z])", "$1 $2")
+}
+
+@isSelected(val1: String) = {
+	@if(req("requirementSubType").valueOr("FlatOrTerraceFlat").equals(val1)){selected="selected"}
+}

@@ -1,0 +1,97 @@
+@(user: User, code: PaymentCode)
+
+@import helper.twitterBootstrap._
+@import views.helpers.DateFormatHelper._
+
+<!DOCTYPE html> 
+
+<html>
+@views.html.dashboard.head("View Payment Code") {
+    <style>
+        #view-code {
+            margin: 10px auto;
+            min-height: 280px;
+        }
+
+        #view-code table {
+            border: 1px solid gray;
+            margin: 10px auto;
+        }
+
+        #view-code table td {
+            padding: 8px;
+            border-collapse: collapse;
+            border: 1px solid gray;
+            width: 200px;
+        }
+
+        .links {
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+
+        .links a {
+            color: white;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .links a:HOVER {
+            color: white;
+        }
+
+        .links a:VISITED {
+            color: white;
+        }
+
+        .code {
+            font-weight: bold;
+            font-size: 2em;
+        }
+    </style>
+}
+
+@views.html.dashboard.body(user) {
+	<div class="cms form_process">
+         <h2>View Code</h2>
+         <hr/>
+         <div id="view-code">
+            @if(code == null) {
+                <p>Record does not exist.</p>
+            } else {
+                 <table>
+                     <tr>
+                         <td>Issue Time</td>
+                         <td>@formatDate("dd/MM/yyyy HH:mm a", code.generationTime)</td>
+                     </tr>
+                     <tr>
+                         <td>Name</td>
+                         <td>@code.name</td>
+                     </tr>
+                     <tr>
+                         <td>Email</td>
+                         <td>@code.email</td>
+                     </tr>
+                     <tr>
+                         <td>Mobile</td>
+                         <td>@code.mobile</td>
+                     </tr>
+                     <tr>
+                         <td>Amount</td>
+                         <td>Rs. @code.amount</td>
+                     </tr>
+                     <tr>
+                         <td>Unique Payment Code</td>
+                         <td><span class="code">@code.code</span></td>
+                     </tr>
+                 </table>
+            }
+
+            <div class="links clearfix">
+                <a href="#" class="btn btn-pink">View All</a>
+                <a href="@routes.PaymentCodeController.newPaymentCode" class="btn btn-pink">New Code</a>
+            </div>
+         </div>
+     </div>
+}
+</html>

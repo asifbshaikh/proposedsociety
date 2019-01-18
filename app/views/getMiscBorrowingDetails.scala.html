@@ -1,0 +1,13 @@
+@(mbdata: List[MiscBorrowing])
+<div id="miscdatatDiv">
+	<h2>Miscellaneous Borrowings Details</h2>
+	<hr/>
+	@if(mbdata != null && !mbdata.isEmpty()) {
+		@getMiscBorrowingTable(mbdata,true)
+	}else{
+		<div id="miscNoDataParaDiv">
+			<p id="miscNoDataPara">Click on Add More button to add details</p>
+		</div>
+	}	
+	
+</div>

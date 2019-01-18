@@ -1,0 +1,572 @@
+@(reqrmnt: List[Requirement])
+<div>
+	
+	@if(reqrmnt != null && !reqrmnt.isEmpty()) {
+		@for(req <- reqrmnt) {
+			<div id="ApplicantsDataDiv">
+				@if(req != null) {
+					@if(req.requirementSubType.equals("ChawlRoom")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Chawl Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Sub Type</td>
+										<td>@if(req.ifChawlTypeOther != null){@req.subType}</td>
+									</tr>
+									<tr>
+										<td>If Chawl Type Is Other</td>
+										<td>@if(req.ifChawlTypeOther != null){@req.ifChawlTypeOther}</td>
+									</tr>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.noOfCommonToilets != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>	
+					}
+					@if(req.requirementSubType.equals("FlatOrTerraceFlat") || req.requirementSubType.equals("DuplexFlat") || req.requirementSubType.equals("SecondHome")){	
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Flat Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Sub Type</td>
+										<td>@if(req.subType != null){@req.subType}</td>
+									</tr>
+									<tr>
+										<td>Choice Of Floor</td>
+										<td>@if(req.choiceOfFloor != null){@req.choiceOfFloor}</td>
+									</tr>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("RowHouse") || req.requirementSubType.equals("IndependentBungalow") || req.requirementSubType.equals("FarmHouse")|| req.requirementSubType.equals("JointBanglowOrTwinBungalow") || req.requirementSubType.equals("HolidayHome") || req.requirementSubType.equals("Villa") || req.requirementSubType.equals("PentHouse")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Row House Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Choice Of Floor</td>
+										<td>@if(req.choiceOfFloor != null){@req.choiceOfFloor}</td>
+									</tr>
+									<tr>
+										<td>Open Space</td>
+										<td>@if(req.openSpace != null){@req.openSpace}</td>
+									</tr>
+									<tr>
+										<td>No Of Bedrooms</td>
+										<td>@if(req.noOfBedrooms != null){@req.noOfBedrooms}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Garden Area</td>
+										<td>@if(req.gardenArea != null){@req.gardenArea}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("RowHousePlot") || req.requirementSubType.equals("IndependentBungalowPlot") || req.requirementSubType.equals("JointBungalowPlot") || req.requirementSubType.equals("FarmHousePlot")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Row House Plot Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>Plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Use Of Land</td>
+										<td>@if(req.useOfLand != null){@req.useOfLand}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("StudioApartment") || req.requirementSubType.equals("HighriseApartment") || req.requirementSubType.equals("ServiceApartment")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Studio Apartment Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Open Space</td>
+										<td>@if(req.openSpace != null){@req.openSpace}</td>
+									</tr>
+									<tr>
+										<td>No of Bedrooms</td>
+										<td>@if(req.noOfBedrooms != null){@req.noOfBedrooms}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.gardenArea != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Garden Area</td>
+										<td>@if(req.gardenArea != null){@req.gardenArea}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("GuestHouse")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Guest House Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Choice Of Floor</td>
+										<td>@if(req.choiceOfFloor != null){@req.choiceOfFloor}</td>
+									</tr>
+									<tr>
+										<td>Open Space</td>
+										<td>@if(req.openSpace != null){@req.openSpace}</td>
+									</tr>
+									<tr>
+										<td>No Of Bedrooms</td>
+										<td>@if(req.noOfBedrooms != null){@req.noOfBedrooms}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Garden Area</td>
+										<td>@if(req.gardenArea != null){@req.gardenArea}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("CommercialLand") || req.requirementSubType.equals("BusinessCenterOrBusinessPark")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Commercial Land Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Use Of Land</td>
+										<td>@if(req.useOfLand != null){@req.useOfLand}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("Shop")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Shop Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>
+									<tr>
+										<td>Loft Area</td>
+										<td>@if(req.loftArea != null){@req.loftArea}</td>
+									</tr>
+									<tr>
+										<td>Otla Area</td>
+										<td>@if(req.otlaArea != null){@req.otlaArea}</td>
+									</tr>
+									<tr>
+										<td>Height</td>
+										<td>@if(req.height != null){@req.height}</td>
+									</tr>
+									<tr>
+										<td>Open Space</td>
+										<td>@if(req.openSpace != null){@req.openSpace}</td>
+									</tr>
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Toilet Type</td>
+										<td>@if(req.toiletType != null){@req.toiletType}</td>
+									</tr>
+									<tr>
+										<td>No Of Attached Toilets</td>
+										<td>@if(req.noOfAttachedToilets != null){@req.noOfAttachedToilets}</td>
+									</tr>
+									<tr>
+										<td>No Of Attached Urinals</td>
+										<td>@if(req.noOfAttachedUrinals != null){@req.noOfAttachedUrinals}</td>
+									</tr>
+									<tr>
+										<td>Is Separate Water Connection Required</td>
+										<td>@if(req.isSeparateWaterConnectionRequired != null){@req.isSeparateWaterConnectionRequired}</td>
+									</tr>
+									<tr>
+										<td>Water Pipe Size</td>
+										<td>@if(req.waterPipeSize != null){@req.waterPipeSize}</td>
+									</tr>
+									<tr>
+										<td>Is Separate Power Connection Required</td>
+										<td>@if(req.isSeparatePowerConnectionRequired != null){@req.isSeparatePowerConnectionRequired}</td>
+									</tr>
+									<tr>
+										<td>Power Connection Type</td>
+										<td>@if(req.powerConnectionType != null){@req.powerConnectionType}</td>
+									</tr>
+									<tr>
+										<td>If Connection Type Is Other</td>
+										<td>@if(req.ifConnectionTypeOther != null){@req.ifConnectionTypeOther}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("OfficeInITParkOrSez") || req.requirementSubType.equals("Warehouse") || req.requirementSubType.equals("CommercialOfficeOrSpace") || req.requirementSubType.equals("ConstructedHotelSpace") || req.requirementSubType.equals("BenquetHall") || req.requirementSubType.equals("IndustrialBuilding")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Office Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>Plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("HotelPlot") || req.requirementSubType.equals("IndustrialLand") || req.requirementSubType.equals("HotelSpace") || req.requirementSubType.equals("HospitalSpace") || req.requirementSubType.equals("SchoolSpace") || req.requirementSubType.equals("BankSpace")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Hotel Plot Details</th></thead>
+								<tbody>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>No Of Rooms Required</td>
+										<td>@if(req.noOfRoomsRequired != null){@req.noOfRoomsRequired}</td>
+									</tr>
+									<tr>
+										<td>Area For Each Room</td>
+										<td>@if(req.areaForEachRoom != null){@req.areaForEachRoom}</td>
+									</tr>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>Plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Use Of Land</td>
+										<td>@if(req.useOfLand != null){@req.useOfLand}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("IndustrialShed") || req.requirementSubType.equals("SpaceInRetailMall") || req.requirementSubType.equals("Godown") || req.requirementSubType.equals("ColdStorage") || req.requirementSubType.equals("ManufacturingUnit") || req.requirementSubType.equals("Factory") || req.requirementSubType.equals("CommercialShowroom") || req.requirementSubType.equals("Kiosk")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Industrial Shed Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Carpet Area</td>
+										<td>@if(req.carpetArea != null){@req.carpetArea}</td>
+									</tr>	
+									<tr>
+										<td>Builtup Area</td>
+										<td>@if(req.builtupArea != null){@req.builtupArea}</td>
+									</tr>	
+									<tr>
+										<td>Terrace Area</td>
+										<td>@if(req.terraceArea != null){@req.terraceArea}</td>
+									</tr>
+									<tr>
+										<td>Open Space</td>
+										<td>@if(req.openSpace != null){@req.openSpace}</td>
+									</tr>
+									<tr>
+										<td>No Of Rooms Required</td>
+										<td>@if(req.noOfRoomsRequired != null){@req.noOfRoomsRequired}</td>
+									</tr>
+									<tr>
+										<td>Toilet/Wc/Bath Requirements</td>
+										<td>@if(req.toiletWcBathRequirements != null){@req.toiletWcBathRequirements}</td>
+									</tr>
+									<tr>
+										<td>No of Common Toilets</td>
+										<td>@if(req.noOfCommonToilets != null){@req.noOfCommonToilets}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Wc</td>
+										<td>@if(req.noOfSeparateWc != null){@req.noOfSeparateWc}</td>
+									</tr>
+									<tr>
+										<td>No of Separate Bathroom</td>
+										<td>@if(req.noOfSeparateBathroom != null){@req.noOfSeparateBathroom}</td>
+									</tr>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>Plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Garden Area</td>
+										<td>@if(req.gardenArea != null){@req.gardenArea}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+					@if(req.requirementSubType.equals("AgriculturalLand") || req.requirementSubType.equals("FarmLand")){
+						<div class="span4">
+							<table class="table table-striped">
+								<thead><th colspan="2">Agricultural Land Details</th></thead>
+								<tbody>
+									<tr>
+										<td>Plot Area</td>
+										<td>@if(req.plotArea != null){@req.plotArea}</td>
+									</tr>
+									<tr>
+										<td>Plot Area Measure</td>
+										<td>@if(req.plotAreaMeasure != null){@req.plotAreaMeasure}</td>
+									</tr>
+									<tr>
+										<td>Use Of Land</td>
+										<td>@if(req.useOfLand != null){@req.useOfLand}</td>
+									</tr>
+									<tr>
+										<td>Other Details</td>
+										<td>@if(req.otherDetails != null){@req.otherDetails}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					}
+				}
+			</div>
+		}
+	}
+</div>

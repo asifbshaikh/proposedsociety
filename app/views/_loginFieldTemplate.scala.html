@@ -1,0 +1,5 @@
+@(elements: helper.FieldElements)
+
+@elements.input
+<span class="reqfld">@if(elements.args.contains(Symbol("_required"))) {	* }</span> 
+<p class="error">@if(elements.field.hasErrors) { @elements.field.error.get.message }</p>

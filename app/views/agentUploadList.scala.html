@@ -1,0 +1,186 @@
+@(agent:Agent)
+	<div>
+		<h2> Identity Uploads</h2>
+		<hr>
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>Document</th>
+					<th>Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Identity 1</td>
+					<td>@if(agent.form.identity1 != null){@checkHas(agent.form.identity1.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.identity1 != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.identity1.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>Identity 2</td>
+					<td>@if(agent.form.identity2 != null){@checkHas(agent.form.identity2.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.identity2 != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.identity2.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>Identity 3</td>
+					<td>@if(agent.form.identity3 != null){@checkHas(agent.form.identity3.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.identity3 != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.identity3.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>Photograph</td>
+					<td>@if(agent.form.photograph != null){@checkHas(agent.form.photograph.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.photograph != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.photograph.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>Birth Certificate</td>
+					<td>@if(agent.form.birthCertificate != null){@checkHas(agent.form.birthCertificate.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.birthCertificate != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.birthCertificate.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div>
+	<h2>Residential Address Proof</h2>
+	<hr>
+		<table class="table table-condensed" >
+			<thead>
+				<tr>
+					<th>Document</th>
+					<th>Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Registered Agreement</td>
+					<td>@if(agent.form.addressproof != null){@checkHas(agent.form.addressproof.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.addressproof != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.addressproof.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>Light Bill</td>
+					<td>@if(agent.form.resi_light_bill != null){@checkHas(agent.form.resi_light_bill.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+					<td>
+						@if(agent.form.resi_light_bill != null){
+							<div >
+								<p style="text-align: center;">
+								<a href="@routes.AttachmentsController.download(agent.form.resi_light_bill.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+								</p>						
+							</div>
+						}
+					</td>
+				</tr>
+			
+					<tr>
+						<td>Tax Receipt</td>
+						<td>@if(agent.form.resi_tax_receipt != null){@checkHas(agent.form.resi_tax_receipt.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+						<td>
+							@if(agent.form.resi_tax_receipt != null){
+								<div >
+									<p style="text-align: center;">
+									<a href="@routes.AttachmentsController.download(agent.form.resi_tax_receipt.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+									</p>						
+								</div>
+							}
+						</td>
+					</tr>
+			</tbody>
+		</table>
+	
+	</div>
+	<div>
+	<h2>Office Address Proof</h2>
+	<hr>
+		<table class="table table-condensed" >
+			<thead>
+				<tr>
+					<th>Document</th>
+					<th>Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td>Registered / Leave and License Agreement</td>
+						<td>@if(agent.form.office_addressproof != null){@checkHas(agent.form.office_addressproof.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+						<td>
+							@if(agent.form.office_addressproof != null){
+								<div >
+									<p style="text-align: center;">
+									<a href="@routes.AttachmentsController.download(agent.form.office_addressproof.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+									</p>						
+								</div>
+							}
+						</td>
+					</tr>
+					<tr>
+						<td>Light Bill</td>
+						<td>@if(agent.form.office_light_bill != null){@checkHas(agent.form.office_light_bill.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+						<td>
+							@if(agent.form.office_light_bill != null){
+								<div >
+									<p style="text-align: center;">
+									<a href="@routes.AttachmentsController.download(agent.form.office_light_bill.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+									</p>						
+								</div>
+							}
+						</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+
+@checkHas(field: String,defaultVal : String) = {
+	@if(field != null) {
+		@field
+	}else{
+		@defaultVal
+	}
+}

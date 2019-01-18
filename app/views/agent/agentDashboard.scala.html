@@ -1,0 +1,98 @@
+@(page : com.avaje.ebean.Page[User],agent: Agent)
+@import views.html.agent._
+@import views.helpers.FieldValue._
+@import  com.avaje.ebean.Page
+@import controllers.FormStatus
+@import common.Roles 
+
+@agentDashboardTemlate("Proposed Society - Agent Dashboard",Seq(routes.Assets.at("stylesheets/global.css")),Seq(), agent){
+	 <div>
+        <h1>Agent Status</h1>
+        <hr/>
+	        <ul class="fnt-li">
+			 	 <li>Your application is &nbsp; &nbsp;<span class="label label-info status">@agent.form.status</span></li><hr/>
+			 	 @if(agent.form.status.equals(FormStatus.ON_HOLD)){
+			 	 	 <li>To edit your application form <a href="@routes.AgentFormController.agentForm"  >Click here</a></li><hr/>
+			 	 	
+			 	 }
+			 	 <li>You have <span class="label label-info status">@agent.formCredits</span>&nbsp &nbspform credit available</li><hr/>
+			 	 @if(agent.form.status == "Approved" && agent.user.hasRole(Roles.AGENT)){
+			 	 	 <li>Please click here to confirm your agency and proceed with payment of deposit <a href="@routes.AgentFormController.payment"  >Click here</a></li><hr/>
+			 	 	
+			 	 }
+			 	 
+			 	 
+			 	 @if(agent.user.hasRole(Roles.AGENT) && agent.formCredits > 0){  
+			 	 	<li> 
+			 	 		Please click here to fill new application 
+			 	 		<a href= "@routes.ApplicationFormController.createNewApplicantPage">Click here</a>
+			 	 	</li><hr>
+			 	 }
+			<li>
+			<div>
+			<h2 align="left">Agent Commission Report</h2><hr>
+					<table id="viewBankDetails" class="table table-striped">
+							<thead>	
+								<tr>
+									  <th class="leftAlignClass">Number of Forms Filled</th>
+									  <th class="leftAlignClass">Commission earned</th>
+								 </tr>
+							</thead>
+							<tbody>
+								<tr>	
+									  <td class="leftAlignClass">@agent.totalFormFilledCount</td>
+									  <td class="leftAlignClass">@(agent.totalFormFilledCount*100)</td>
+							 	</tr>
+							</tbody>
+					</table>
+			</div>
+			</ul>
+			<div>
+			@if(page != null && !page.getList().isEmpty()) {
+				<h2>Incompleted Form Applicants List</h2>
+				<hr/>
+				<table  class="table table-striped" style="font-family: 'Roboto', Helvetica, sans-serif, Arial;">
+					<thead>
+						<tr>	
+					  		<th class="leftAlignClass">Name</th>
+					  		<th class="leftAlignClass">Mobile Number</th>
+					  		<th class="rightAlignClass">Email</th>
+						 </tr>
+					</thead>
+					<tbody>
+						@for(applicationForm <- page.getList()) {
+						  	<tr>
+						  		<td class="leftAlignClass">@fieldVal(applicationForm.name,"NA")</td>
+								<td class="leftAlignClass">@fieldVal(applicationForm.mobile,"NA")</td>
+								<td class="rightAlignClass">@fieldVal(applicationForm.email,"NA")</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			@if(page.getTotalPageCount() > 1){
+					<div class="form-sections">
+					  		<ul class="pager">
+								@if(page. hasPrev()){
+									
+							  		  <li><a href="@routes.AgentFormController.incompleteApplicantForms(page.getPageIndex() -1)">Previous</a></li>
+						 			
+								}else{
+									<li class="disabled"><a href = "#"> Previous</a></li>
+								}
+								@if(page.hasNext()){
+									<li><a href="@routes.AgentFormController.incompleteApplicantForms(page.getPageIndex() + 1)">Next</a></li>
+								}else{
+									<li class="disabled"><a href = "#"> Next</a></li>
+								}
+						</ul>
+					</div>
+			}
+		}else{
+			<div>
+				<h3>No Applicant with incomplete application form</h3>
+				<hr/>
+			</div>
+		}
+		</div>
+	</div>	
+}

@@ -1,0 +1,11 @@
+@(title : String ,user : User,scriptFiles :Seq[Call]=Seq.empty, cssFiles :Seq[Call] = Seq.empty)(body :Html)
+
+<!-- Define sub menu here  -->
+
+@sub_menu = {
+	<li><a href="@routes.UserController.logout">Logout</a></li>
+}
+
+@baseDashboardTemplate(title,scriptFiles,cssFiles, user,sub_menu){
+		@body
+}

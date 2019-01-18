@@ -1,0 +1,12 @@
+@(badata: List[BankAccount])
+<div id="bnKdatatDiv">
+	<h2>Bank Account Details</h2>
+	<hr/>
+	@if(badata != null && !badata.isEmpty()){
+		@getBankAccountTable(badata,true)
+	}else{
+		<div id="bankNoDataParaDiv">
+			<p id="bankNoDataPara">Click on Add More button to add details</p>
+		</div>
+	}
+</div>

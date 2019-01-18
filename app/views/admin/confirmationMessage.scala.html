@@ -1,0 +1,21 @@
+@(newuser: User, user: User)
+@adminTemplate("Proposed Society - Confirm Agent Message",user,Seq(),Seq()){
+
+<style type="text/css">
+    	.fields {
+    		margin: 50px auto;
+    		border: 1px solid black;
+    		padding: 20px;
+    		width: 300px;
+    		border-radius: 10px;
+    		align:central;
+    	}
+</style> 
+   
+<div class=fields>
+	<p>
+		<h2>Thanks @user.name,</h2><br/>
+		<b>@newuser.name</b> has been registered successfully
+	</p>
+</div>
+}

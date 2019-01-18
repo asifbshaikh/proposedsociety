@@ -1,0 +1,434 @@
+@(agent : Agent ,form: InvestigationReport)
+<!-- Solve bug : redirect to error element if error occur -->
+
+@pageTemplate("Agent - Personal Information") {
+<div id="ApplicantsDataDiv">
+	
+ 	<!--feedback report  -->
+ 	<div>
+		@if(form != null){
+			<h2> Feedback
+			<a href="@routes.AdminUserController.dashboard" class="btn btn-medium btn-pink backBtn" style="color :white;"> Back</a></h2> </h2>
+			<hr>
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Document</th>
+						<th>Name</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Feedback </td>
+						@if(form !=null){
+							<td>@if(form.attachment != null){@checkHas(form.attachment.fileName,"Not Available")}else{<label>Not Available</label>}</td>
+							<td>
+								@if(form.attachment.id != null){
+									<div>
+										<p style="text-align: center;">
+										<a href="@routes.AttachmentsController.download(form.attachment.filePath)" class="btn  btn-success btn-mini" style="color:#ffffff" align="right" >Download</a>
+										</p>						
+									</div>
+								}else{
+								
+								}
+							</td>
+						}
+					</tr>
+				</tbody>
+			</table>
+		}
+	<hr/>
+ 	<!--feedback  -->
+ 	<div>					
+			<h2>Agent Personal Information
+			@if(form == null){<a href="@routes.AdminUserController.dashboard" class="btn btn-medium btn-pink backBtn" style="color :white;"> Back</a>}</h2> 
+	</div>
+ 	<hr/>
+ 	
+	<div class="span12">
+		<table  class="table table-striped" class="span12">
+			<tr>
+				<td style="width:250px;">
+						Agent's Name
+				</td>
+				<td>
+					@defaultIfNull(agent.form.title,"")
+					@defaultIfNull(agent.form.fname,"")
+					@defaultIfNull(agent.form.mname,"")
+					@defaultIfNull(agent.form.lname,"")
+				</td>
+			</tr>
+			<tr calspan="1">
+				<td style="width:350px;">
+					@if(agent.form.fh_relation != null){@if(agent.form.fh_relation.equals("F")){Father}else{Husband}'s Name}else{NA}
+				</td>
+				<td >
+					@defaultIfNull(agent.form.fh_title,"")
+					@defaultIfNull(agent.form.fh_fname,"")
+					@defaultIfNull(agent.form.fh_mname,"")
+					@defaultIfNull(agent.form.fh_lname,"")
+				</td>
+			</tr>
+			<tr>
+				<td>Date of Birth of Applicant</td>
+				<td>@if(agent.form.dob != null){@dateFormat(agent.form.dob)}else{NA}</td>
+			</tr>
+			<tr>	
+				<td>Sex</td>
+				<td>@if(agent.form.sex != null){@if(agent.form.sex.equals("M")){Male}else{Female}}else{NA}</td>								
+			</tr>	
+			<tr>	 
+				 <td>Residential Status</td>
+				 <td>@if(agent.form.resi_status != null){@if(agent.form.resi_status.equals("I")){Indian}else{Non Indian}}else{NA}</td>
+			</tr>	
+			<tr>
+				<td>Email</td>
+				<td>@defaultIfNull(agent.form.email,"NA")</td>
+			</tr>
+			<tr>
+				<td>Phone 1</td>
+				<td>@phonetype(agent.form.phone1_type,agent.form.phone1,"NA") @defaultIfNull(agent.form.phone1,"NA")</td>
+			</tr>
+			<tr>	
+				<td>Phone 2</td>
+				<td>@phonetype(agent.form.phone2_type,agent.form.phone2,"NA") @defaultIfNull(agent.form.phone2,"NA")</td>
+			</tr>
+			<tr>	
+				<td>Phone 3</td>
+				<td>@phonetype(agent.form.phone3_type,agent.form.phone3,"NA") @defaultIfNull(agent.form.phone3,"NA")</td>
+			</tr>
+			<tr>	
+				<td>Identity 1</td>
+				<td>@defaultIfNull(agent.form.identity_number1_type,"NA")
+					@defaultIfNull(agent.form.identity_number1,"NA")
+				</td>								
+			</tr>
+			<tr>	
+				<td>Identity 2 </td>
+				<td>@defaultIfNull(agent.form.identity_number2_type,"NA")
+					@defaultIfNull(agent.form.identity_number2,"NA")
+				</td>
+			</tr>	
+			<tr>	
+				<td>Identity 3</td>
+				<td>@defaultIfNull(agent.form.identity_number3_type,"NA")
+					@defaultIfNull(agent.form.identity_number3,"NA")
+				</td>
+			</tr>	
+		
+		</table>
+	</div>
+	
+	
+	<div class="span12">
+			<h2>Agent - Address Details</h2>
+		<hr/>
+	</div>	
+	<div class="span3">
+		<table class="table table-striped">
+			<thead><th colspan="1">Birth Place</th></thead>
+			<tbody>
+				@if(agent.form.birth_place != null){
+					<tr><td>
+							<p>@formatAddress(agent.form.birth_place)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Permanent Address</th></thead>
+			<tbody>
+				@if(agent.form.permanent_address != null){
+					<tr> 
+						<td>
+							<p> @formatAddress(agent.form.permanent_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Residential Address</th></thead>
+			<tbody>
+				@if(agent.form.residential_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(agent.form.residential_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Address Of Communication</th></thead>
+			<tbody>
+				@if(agent.form.communication_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(agent.form.communication_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span12">
+		<table class="table table-striped" class="span12">
+			<tr>
+				<td class="span6">Residencial Status</td>
+				<td class="span6" align="left">@if(agent.form.resi_status != null){ @if(agent.form.resi_status.equals("rented")){Rented}else{ @if(agent.form.resi_status.equals("ownership")){Ownership}else{Other}}}</td>
+			</tr>
+			<tr>
+				<td class="span6">No of years residing at Residence</td>
+				<td class="span6" align="left">@defaultIfNull(agent.form.residence_yrs_residing,"NA")</td>
+			</tr>
+			<tr>
+				<td class="span6">No of years residing in City</td>
+				<td class="span6" align="left">@defaultIfNull(agent.form.city_yrs_residing,"NA")</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="form-section" class="span12">
+	<table class="fieldstable" >
+		<tr>
+		   <td><label>Language</label></td>
+		   <td>
+			      <table class=" table table-bordered" style="width:290px;">
+				          <tr>	
+				            <td> </td>
+				            <td>Read</td>
+				            <td>Write</td>
+				            <td>Speak</td>
+				        </tr>
+				        <tr>
+				           <td><label>Marathi</label></td>
+				           <td><label>@if(agent.form.marathi.canRead.equals("true")){Yes}else{No}</label></td>
+				           <td><label>@if(agent.form.marathi.canWrite.equals("true")){Yes}else{No}</td>
+				           <td><label>@if(agent.form.marathi.canSpeak.equals("true")){Yes}else{No}</td>
+				       </tr>
+				       <tr>
+				           <td><label>Hindi</label></td>
+				           <td><label>@if(agent.form.hindi.canRead.equals("true")){Yes}else{No}</label></td>
+				           <td><label>@if(agent.form.hindi.canWrite.equals("true")){Yes}else{No}</td>
+				           <td><label>@if(agent.form.hindi.canSpeak.equals("true")){Yes}else{No}</td>
+				       </tr>
+				       <tr>
+				           <td><label>English</label></td>
+				           <td><label>@if(agent.form.english.canRead.equals("true")){Yes}else{No}</label></td>
+				           <td><label>@if(agent.form.english.canWrite.equals("true")){Yes}else{No}</td>
+				           <td><label>@if(agent.form.english.canSpeak.equals("true")){Yes}else{No}</td>
+				       </tr>
+			   	</table>
+			</td>
+			</tr>
+	</table>
+	<table class="table table-striped " class="span12">
+			<tr class="span12">
+				<td class="span5">Qualification</td>
+				<td class="span7" align="left">@defaultIfNull(agent.form.qualification,"NA")</td>
+			</tr>
+			<tr class="span12">
+					<td class="span5"> If any Occupation other than Agent</td>
+					<td class="span7" align="left">@defaultIfNull(agent.form.occupation,"NA")</td>
+			</tr>
+			<tr class="span12">
+					<td class="span5"> Status of Agent</td>
+					<td class="span7" align="left">@defaultIfNull(agent.form.agentType,"NA")&nbsp&nbsp&nbsp@defaultIfNull(agent.form.companyName,"NA")</td>
+			</tr>
+			<tr class="span12">
+					<td class="span5"> Is Agent IncomeTax Payee</td>
+					<td class="span7" align="left">@if(agent.form.isIncomeTaxPayee.equals("true")){Yes}else{No}</td>
+			</tr>
+			<tr class="span12">
+					<td class="span5">PAN Number</td>
+					<td class="span7" align="left">@defaultIfNull(agent.form.panCardNumber,"NA")</td>
+			</tr>
+			<tr class="span12">
+					<td class="span5">Online Monetary Transaction Facility</td>
+					<td class="span7" align="left">@if(agent.form.onlineMonatoryTransactionFacility.equals("true")){Yes}else{No}</td>
+			</tr>
+	</table>
+	<h2>Bank Account Particulars</h2>
+	<hr/>
+	<table id="viewBankDetails" class="table table-striped">
+		<thead>
+			<tr>	
+		  		<th class="leftAlignClass">Bank Name</th>
+		  		<th class="leftAlignClass">Branch Name</th>
+		  		<th class="leftAlignClass">Bank A/c Number</th>
+			 </tr>
+		</thead>
+		<tbody>
+			<td class="leftAlignClass">@defaultIfNull(agent.form.bankName,"NA")</td>
+		  	<td class="leftAlignClass">@defaultIfNull(agent.form.branchName,"NA")</td>
+		  	<td class="leftAlignClass">@defaultIfNull(agent.form.bankAccount,"NA")</td>
+		</tbody>
+	 </table>
+</div>
+	<div class="span12">
+			<h2>Agent -Office Address</h2>
+		<hr/>
+	</div>
+	<div class="span6">
+		<table class="table table-striped" class="span6">
+			<thead><th colspan="2">Occupation Information</th></thead>
+			<tbody>
+				<tr>
+					<td style="padding-right: 25px;">Occupation</td>
+					<td>
+						@professionVal(agent.form.occupation,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Email</td>
+					<td>@defaultIfNull(agent.form.off_mail,"NA")</td>
+				</tr>
+				<tr>
+					<td>Office Phone 1</td>
+					<td>
+						@phonetype(agent.form.off_phone1_type, agent.form.off_phone1,"NA")
+						@defaultIfNull(agent.form.off_phone1,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Phone 2</td>
+					<td>
+						@phonetype(agent.form.off_phone2_type, agent.form.off_phone2,"NA")
+						@defaultIfNull(agent.form.off_phone2,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Phone 3</td>
+					<td>
+						@phonetype(agent.form.off_phone3_type, agent.form.off_phone3,"NA")
+						@defaultIfNull(agent.form.off_phone3,"NA")
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="span6">
+		<table class="table table-striped" class="span6">	
+			<thead><th colspan="2">Office Address</th></thead>
+			<tbody>
+				@if(agent.form.office_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(agent.form.office_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>	
+	
+	<div class="span12">
+			@agentUploadList(agent)
+	</div>
+	<br>
+	<br>
+	<div class="span12">
+		 <hr>
+			<form action="@routes.AdminUserController.approveOrRejectAgentForm(agent.id)" method="POST" id="msgForm">
+				<p style="text-align: center;">
+				<style type="text/css"> 
+	   				input[type="radio"]{margin-left:50px; }; 
+				</style>
+				<input type="radio" name="approve" value="A" > <span class="label " style=" margin-left: 10px ;padding:8px; ">Approve Form </span>
+				<input type="radio" name="approve" value="N" ><span class="label " style=" margin-left: 10px ;padding:8px; ">Reject Form</span>
+				<input type="radio" name="approve" value="H" ><span class="label " style=" margin-left: 10px ;padding:8px; ">On Hold</span>
+				<p style="display:none; color: #c10000; "id="redioerror" >Select Button Then Approve</p>		
+			    </p>	
+			   
+				<div  id="sendMsg" style="display:none;" >	
+					<textarea  placeholder="Write mail message for agent" rows="5" name="txtarea" id="txtarea" class="input-block-level" required></textarea>
+					<p style="display:none; color: #c10000;" id="erroeMsg" >Enter Some text</p>		
+				</div>
+				<div id = "btndiv" class="form-actions" style="align:center;">
+			
+					<input type="submit" id="smtbtn" value="Approve" class="btn btn-large btn-pink "/> 
+			
+				</div>
+			</form>
+		 	
+	 </div>
+</div>
+	
+
+}
+				
+	
+@defaultIfNull(field: Object,defaultVal: String) = {
+	@if(field != null) {
+		@field	
+	}else{
+		@defaultVal
+	}
+}
+
+@dateFormat(date :Date) = @{
+	new java.text.SimpleDateFormat("dd/MM/yyyy").format(date)
+}
+
+@phonetype(phonefield: String, phoneNumber: String, defaultVal: String) = {
+	@if((phoneNumber != null && !phoneNumber.isEmpty()) && phonefield != null){
+		@if(phonefield.equals("M")){Mob.}
+		@if(phonefield.equals("L")){Landline}
+	}else{
+		@defaultVal
+	}
+}
+
+@professionVal(occupationSymbol: String,defaultVal: String) = {
+	@if(occupationSymbol != null) {
+		@if(occupationSymbol.equals("HW")){Unemployed}
+		@if(occupationSymbol.equals("E")){Employed}
+		@if(occupationSymbol.equals("SE") || occupationSymbol.equals("S")){Self Employed}
+		@if(occupationSymbol.equals("RT")){Retired}	
+	}else{
+		@defaultVal
+	}
+}
+
+@formatAddress(address: AgentAddress) = {
+	@if(!isTrivial(address.line1)) { @address.line1,</br> }
+	
+	@if(!isTrivial(address.line2)) { @address.line2,</br> }
+
+	@if(!isTrivial(address.street)) { @address.street, } 
+	@if(!isTrivial(address.area)) { @address.area, }
+	@if(!isTrivial(address.city)) { @address.city, }
+
+	</br>
+
+	@if(!isTrivial(address.taluka)) { Tal: @address.taluka, } 
+	@if(!isTrivial(address.district)) { Dist: @address.district, }
+	@if(!isTrivial(address.state)) { @address.state, }
+
+	</br>
+
+	@if(!isTrivial(address.country)) {@address.country, }
+	@if(!isTrivial(address.pin)) { @address.pin }
+}
+
+@isTrivial(value: String) = @{
+	if(value != null && value.trim().length > 0) { false } else { true }
+}
+<!--To download feedback  -->
+@checkHas(field: String,defaultVal : String) = {
+	@if(field != null) {
+		@field
+	}else{
+		@defaultVal
+	}
+}

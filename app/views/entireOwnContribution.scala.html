@@ -1,0 +1,723 @@
+@(bAForm: Form[OwnContributionController.BankAccountDetails],
+bad: Form[OwnContributionController.BankAccountDeduction],
+bald: Form[OwnContributionController.BankAccountLoanDeduction],
+
+fd: Form[OwnContributionController.FixedDepositDetails],
+dedFrmSal: Form[OwnContributionController.FixedDepositDetailsDedFrmSal],
+will: Form[OwnContributionController.FixedDepositDetailsWillSurrender],
+useAmnt: Form[OwnContributionController.FixedDepositDetailsUseAmnt],
+lonDtls: Form[OwnContributionController.FDLoanDetails],
+
+rd: Form[OwnContributionController.RecurringDep],
+rdwsy: Form[OwnContributionController.RecurringDepWillSurrenderYes],
+rdwsn: Form[OwnContributionController.RecurringDepWillSurrenderNo],
+rdncfs: Form[OwnContributionController.RecurringDepNoCuttingFrmSal],
+
+insD: Form[OwnContributionController.InsuranceDetails],
+insAU: Form[OwnContributionController.InsuranceDetailsAmountUsage],
+
+aff: Form[OwnContributionController.AmountFromFriends],
+affl: Form[OwnContributionController.AmountFromFriendsAsLoan],
+affd: Form[OwnContributionController.AmountFromFriendsAsDonation],
+affr: Form[OwnContributionController.AmountFromFriendsAsRepayment],
+property : Form[Property],
+appForm: ApplicationForm,
+apptype : Form[PersonalContribution]
+)
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant's Own Contribution Details", 
+					2,
+					Seq(
+						routes.Assets.at("stylesheets/property.css"),
+						routes.Assets.at("stylesheets/amountFromFriends.css")
+					),
+					Seq(
+						routes.Assets.at("js/bankAccount.js"),
+						routes.Assets.at("js/fixedDeposit.js"),
+						routes.Assets.at("js/rddetails.js"),
+						routes.Assets.at("js/cashWithYou.js"),
+						routes.Assets.at("js/insurance.js"),
+						routes.Assets.at("js/amountFromFriends.js"),
+						routes.Assets.at("js/propertyDetails.js")
+					)
+) {
+@helper.form(action = routes.OwnContributionController.personalContribution, 'class -> "form-horizontal" ,'id -> "nxtbtnform") {
+		<h1>Applicant Own Contribution
+		 	<a href="@routes.ApplicationFormController.wholePersonalInfo" class="btn btn-large btn-pink backBtn" style="color :white;"> Back</a>
+		</h1>
+			<label>This amount would be consider as Booking Amount or Down payment.</label>
+		<hr/>
+			<div>
+				<table id="totalBudgetForPS" class="fieldstable">
+					<tr>
+						<td style="width:300px;"><label  class="fieldname">Cash With You</label></td>
+						<td>@helper.inputText(apptype("cashWithYou"),'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr>
+						<td style="width:300px;"><label  class="fieldname required">Please Spacify Your Personal Contribution to Buy Property (Apart from Loan)</label></td>
+						<td>
+							@helper.inputText(apptype("personalContribution"),'class -> "input-medium", 'maxlength -> "10", 'required -> "true")
+						</td>
+					</tr>
+				</table>
+			</div>
+		<br>
+	}
+	<form class= "form-horizontal">
+		
+		<div id="bankBalanceDetailsDiv">
+			<div id="viewBankAccntTable">
+				@getBankAccountDetails(appForm.bankAccounts)					
+			</div>
+			<div id="bankFormShow">
+				<hr/>
+				<div id="bankDetailsDiv">	
+					<table id="bankDetails" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Name Of The Bank</label></td>
+							<td>@helper.inputText(bAForm("bankName"),'class -> "input-large", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Account Number</label></td>
+							<td>@helper.inputText(bAForm("accountNumber"), 'class -> "input-large", 'maxlength -> 50)</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Balance Amount</label></td>
+							<td>@helper.inputText(bAForm("balance"), 'class -> "input-large", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="anyDedFromBankAccount">Any deduction directly from the Bank Account ?</label></td>
+							<td>@form.horizontalRadioGroup(bAForm("anyDedFromBankAccount"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+					</table>
+				</div>
+				<div id="deductionsFromBankDiv">
+					<h2>Details Of Deductions From Bank</h2>
+					<hr/>
+					<table>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="loan">Is it loan </label></td>
+							<td>@form.horizontalRadioGroup(bad("loan"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+						<tr class="loanTakenTr"><td colspan="2" style="color: #9F6000; background-color: #FEEFB3;">Any other loan apart from the once declared on the personal info page</td></tr>
+						<tr class="loanTakenTr"><td><h4>Enter Loan Details</h4></td></tr>
+						<tr class="loanTakenTr">
+							<td style="width:250px;"><label  class="fieldname required">Monthly EMI amount</label></td>
+							<td>@helper.inputText(bald("loanEmi"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="loanTakenTr">
+							<td style="width:250px;"><label  class="fieldname required">Number of Balance Installments</label></td>
+							<td>@helper.inputText(bald("balanceInstallments"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="loanTakenTr">
+							<td style="width:250px;"><label  class="fieldname required">Total Balance Loan Amount</label></td>
+							<td>@helper.inputText(bald("balanceLoanAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+					<hr/>
+					<table>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">If any other regular deduction(Light Bill,Phone Bill etc.)</label></td>
+							<td>@helper.inputText(bad("otherMonthlyDeduction"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Total monthly average deduction amount</label></td>
+							<td>@helper.inputText(bad("totalMonthlyDeduction"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div id="usageOfAmountFromBankDiv">
+					<h2>Allocation Of Amount For Searching Property Purpose</h2>
+					<hr/>
+					<table>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">How much amount from your bank balance you would like use for searching property purpose</label></td>
+							<td>@helper.inputText(bAForm("allocateToBuy"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddBankAccnt" class="btn btn-large btn-pink" align="right" value="Save" onclick="addBankAccntsToList();">
+					<input type="button" id ="buttonHideFormBankAccnt" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>			
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormBankAccnt" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>
+		
+		<div id="fixedDepositeDetailsDiv">
+			<div id="viewfdTable">
+				@getFDDetails(appForm.fixedDeposits)					
+			</div>
+			<div id="FDFormShow">
+				<div id="fdBankDetailsDiv">
+					<table id="fdBankDetails" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Name of the Bank/Company</label></td>
+							<td>@helper.inputText(fd("bankName"), 'class -> "input-large", 'maxlength -> "100")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Name of Deposit Holder</label></td>
+							<td>@helper.inputText(fd("nameOfHolder"), 'class -> "input-large", 'maxlength -> "100")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Date of Deposit</label></td>
+							<td>@helper.inputText(fd("startDate"), 'class -> "input-medium datepicker" , 'placeholder -> "yyyy-mm-dd")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Date of Maturity</label></td>
+							<td>@helper.inputText(fd("maturityDate"), 'class -> "input-medium datepicker", 'placeholder -> "yyyy-MM-dd")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Principal Amount</label></td>
+							<td>@helper.inputText(fd("pricipal"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Interest Rate (%)</label></td>
+							<td>@helper.inputText(fd("interestRate"), 'class -> "input-medium", 'maxlength -> "6")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Amount receivable on maturity date</label></td>
+							<td>@helper.inputText(fd("maturityAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="haveTakenLoanOnFD">Have you taken any Loan on FD</label></td>
+							<td>@form.horizontalRadioGroup(fd("haveTakenLoanOnFD"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+						<tr id="deductionFrmSalTr">
+							<td style="width:250px;"><label  class="fieldname required" for="monthlyAmntDedctedFrmSal">Is Loan EMI Deducted from your salary?</label></td>
+							<td>@form.horizontalRadioGroup(dedFrmSal("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+					</table>
+				</div>
+				<div id="fdLoanDiv">
+					<h2>FD Loan Details</h2>
+					<hr/>
+					<table id="FDLoanDetailsTable" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Loan Amount</label></td>
+							<td>@helper.inputText(lonDtls("loanAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+			        	<tr>
+							<td style="width:250px;"><label  class="fieldname required">Monthly EMI Amount</label></td>
+							<td>@helper.inputText(lonDtls("montlyEmi"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Number of Paid Installments</label></td>
+							<td>@helper.inputText(lonDtls("installmentsPaid"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Number of Balance Installment</label></td>
+							<td>@helper.inputText(lonDtls("balanceInstallments"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Total Balance Loan Amount</label></td>
+							<td>@helper.inputText(lonDtls("balanceLoanAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<table id="willtoSurrenderTable" class="fieldstable">
+					<tr>
+						<td style="width:250px;"><label  class="fieldname required" for="willSurrender">Are you willing to use your fixed deposit for searching property purpose?</label></td>
+						<td>@form.horizontalRadioGroup(will("willSurrender"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>
+				<div id="amountAllocationYes">
+					<h2>FD Amount Allocation For Property</h2>
+					<hr/>	
+					<table id="fdAmountForPropertySearchYes" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Total Fixed Deposit Amount you can avail from financer/bank?</label></td>
+							<td>@helper.inputText(useAmnt("amountCanAvail"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>	
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">How much amount from your FD would you like to use for searching property purpose?</label></td>
+							<td>@helper.inputText(useAmnt("allocation"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div id="amountAllocationNo">
+					<h2>FD Amount Allocation For Property</h2>
+					<hr/>
+					<table id="fdAmountForPropertySearchNo" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Amount deducted</label></td>
+							<td>@helper.inputText(fd("AmountDeducted"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddFD" class="btn btn-large btn-pink" value="Save" onclick="addFDsToList();">
+					<input type="button" id ="buttonHideFormFD" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormFD" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>
+		<div id="recurringDepositDetailsDiv">
+			<div id="viewRdDetailsTable">
+				@getRDDetails(appForm.recurringDeposits)			
+			</div>
+			<div id="RDFormShow">
+				
+				<div class="RDDetailsDiv">
+					<table id="RDDetails" class="fieldstable">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Name of Deposit Holder</label></td>
+							<td>@helper.inputText(rd("nameOfHolder"), 'class -> "input-large", 'maxlength -> "100")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Name of the Bank/Company</label></td>
+							<td>@helper.inputText(rd("bankName"), 'class -> "input-large", 'maxlength -> "100")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Plan Start Date</label></td>
+							<td>@helper.inputText(rd("rdstartDate"), 'class -> "input-medium datepicker" , 'placeholder -> "yyyy-MM-dd")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Plan Validity Date</label></td>
+							<td>@helper.inputText(rd("rdmaturityDate"), 'class -> "input-medium datepicker" , 'placeholder -> "yyyy-MM-dd")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Installment Amount per month</label></td>
+							<td>@helper.inputText(rd("installment"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Installments Paid Upto</label></td>
+							<td>@helper.inputText(rd("installmentsPaid"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Balance Installments</label></td>
+							<td>@helper.inputText(rd("installmentsBalance"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Principal Amount</label></td>
+							<td>@helper.inputText(rd("principal"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Interest Rate (%)</label></td>
+							<td>@helper.inputText(rd("interestRate"), 'class -> "input-medium", 'maxlength -> "6")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Amount Receivable on Maturity Date</label></td>
+							<td>@helper.inputText(rd("maturityAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="willSurrender">Are you planning to close your Recurring Deposit scheme for investing in a property</label></td>
+							<td>@form.horizontalRadioGroup(rd("willSurrender"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+					</table>
+				</div>	
+				<div id="willSurrenderYesDiv">
+					<h2>RD Amount Allocation For Property</h2>
+					<hr/>	
+					<table>	
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Total Recurring Deposit Amount you will be receiving from financier/Bank</label></td>
+							<td>@helper.inputText(rdwsy("amountCanAvail"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">How much amount from your R.D. would you like to use for property purpose? </label></td>
+							<td>@helper.inputText(rdwsy("allocation"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div id="willSurrenderNoDiv">
+					<hr/>	
+					<table>	
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="monthlyAmntDedctedFrmSal">Is Loan EMI Deducted from your salary?</label></td>
+							<td>@form.horizontalRadioGroup(rdwsn("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+					</table>	
+				</div>
+				<div id="rdNotCuttingFrmSalDiv">
+					<h2>More RD Details</h2>
+					<hr/>
+					<table>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Monthly Installment</label></td>
+							<td>@helper.inputText(rdncfs("monthlyInstallments"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Number of Balance Installments</label></td>
+							<td>@helper.inputText(rdncfs("balanceInstallments"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>	
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">Total Paid Installment</label></td>
+							<td>@helper.inputText(rdncfs("balanceDedAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddRD" class="btn btn-large btn-pink" align="right" value="Save" onclick="addRdDetailsToList();">
+					<input type="button" id ="buttonHideFormRD" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormRD" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>
+		<div id = "insuranceDetailsDiv">
+			<div id="viewInsuranceDetailsTable">
+				@getInsuranceDetails(appForm.insurances)					
+			</div>
+			<div id="InsuranceFormShow">
+					
+				<table id="insuranceDetails" class="fieldstable">
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Name of Insurance Holder</label></td>
+						<td>@helper.inputText(insD("nameOfHolder"), 'class -> "input-large", 'maxlength -> "100")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Name of the Insurance Company</label></td>
+						<td>@helper.inputText(insD("insurerName"), 'class -> "input-large", 'maxlength -> "100")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Insurance Opening Date</label></td>
+						<td>@helper.inputText(insD("insuStartDate"), 'class -> "input-medium datepicker" , 'placeholder -> "yyyy-MM-dd")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Date of Maturity</label></td>
+						<td>@helper.inputText(insD("insuMaturityDate"), 'class -> "input-medium datepicker" , 'placeholder -> "yyyy-MM-dd")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Sum Assured Amount</label></td>
+						<td>@helper.inputText(insD("sumAssured"), 'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Mode of premium</label></td>
+						<td>@helper.select(insD("premiumFreqency"), options = helper.options("Monthly" -> "Monthly", "Quarterly" -> "Quarterly", "Halfyearly" -> "Half Yearly", "Yearly" -> "Yearly"), 'class -> "input-small")
+						</td>
+					</tr >
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Insurance Premium Amount</label></td>
+						<td>@helper.inputText(insD("premium"), 'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Number of premiums paid</label></td>
+						<td>@helper.inputText(insD("premiumsPaid"), 'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">No of Premiums Balance</label></td>
+						<td>@helper.inputText(insD("premiumsBalance"), 'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Date of Last Payment</label></td>
+						<td>@helper.inputText(insD("insuLastPaymentDate"), 'class -> "input-medium")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Amount Receivable on Maturity Date</label></td>
+						<td>@helper.inputText(insD("maturityAmount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Is total EMI deducted from your salary?</label></td>
+						<td>@form.horizontalRadioGroup(insD("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+					<tr class="insurDetails">
+						<td style="width:250px;"><label  class="fieldname required">Will you be receiving any matured insurance amount in next two months from any insurance company ?</label></td>
+						<td>@form.horizontalRadioGroup(insD("receivingAnyMaturedAmount"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>
+				<div id="insuAmountUsageDiv">
+					<h2>Insurance Amount Allocation For Property</h2>
+					<hr/>
+					<table id="insuAmountUsage">
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required">How much amount would you like to use for searching property?</label></td>
+							<td>@helper.inputText(insAU("allocation"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddInsurance" class="btn btn-large btn-pink" align="right" value="Save" onclick="addInsuDetailsToList();">
+					<input type="button" id ="buttonHideFormInsurance" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>	
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormInsurance" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>	
+		<div id="miscellaneousBorrowingDiv">
+			<div id="viewMiscBorrowingDetailsTable">
+				@getMiscBorrowingDetails(appForm.miscBorrowings)
+			</div>
+			<div id="MiscBorrowingFormShow">
+				<h1>Miscellaneous Borrowing</h1>
+				<hr/>
+				<table id="amountTaken" class="fieldstable">	
+					<tr>
+						<td style="width:300px;"><label  class="fieldname required" for="isAmountFromFriends">Expected amount from friends/relative for buying a property?</label></td>
+						<td>@form.horizontalRadioGroup(aff("isAmountFromFriends"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>
+				<table id="amountNatureTable" class="fieldstable" style="display:none">
+					
+				</table>
+				<div id="moneyFromFriends" style="display:none">
+					<h2>Details Of The Amount</h2>
+					<hr/>
+					<table class="fieldstable">
+						<tr>
+							<td style="width:300px;"><label  class="fieldname required">Amount expected from relatives/friends for buying a property</label></td>
+							<td>
+								@form.verticalRadioGroup(aff("amountNature"), options = Seq("asLoan" -> "As Loan", "asDonation" -> "As Donation", "moneyOwed" -> "Will you be receiving any money that anybody owed you?"))
+							</td>
+						</tr>
+						<tr class="asLoanClass">
+							<td style="width:300px;"><label  class="fieldname required">How much amount of loan you can get from Relatives/Friend ?</label></td>
+							<td>@helper.inputText(affl("amount"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="asLoanClass">
+							<td style="width:300px;"><label  class="fieldname required">Interest Rate (%)</label></td>
+							<td>@helper.inputText(affl("interestRate"), 'class -> "input-medium", 'maxlength -> "6")</td>
+						</tr>
+						<tr class="asLoanClass">
+							<td style="width:300px;"><label  class="fieldname required">Monthly EMI</label></td>
+							<td>@helper.inputText(affl("emi"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="asLoanClass">
+							<td style="width:300px;"><label  class="fieldname required">For how many years ?</label></td>
+							<td>@helper.inputText(affl("numberOfYears"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						
+						<tr class="asDonationClass">
+							<td style="width:300px;"><label  class="fieldname required">Donated total amount</label></td>
+							<td>@helper.inputText(affd("donation"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="asOwedMoneyClass">
+							<td style="width:300px;"><label  class="fieldname required">Amount to be received that anybody owed you</label></td>
+							<td>@helper.inputText(affr("repayment"), 'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+					</table>
+				</div>
+				<table id="calcutedValuesTable" class="fieldstable" style="display:none">
+					<tr></tr>
+					<tr class="totalExpectedAmntSummary">
+						<td style="width:300px;"><label><b>Total Expected Amount from Friend/Relative Summary Amount</b></label></td>
+					</tr>
+					<tr class="totalExpectedAmntSummary">
+						<td style="width:300px;"><label>Total amount summary to be borrowed</label></td>
+						<td></td>
+					</tr>
+					<tr class="totalExpectedAmntSummary">
+						<td style="width:300px;"><label>Total  loan of Relatives deduction amount</label></td>
+						<td></td>
+					</tr>
+					<tr class="totalExpectedAmntSummary">
+						<td style="width:300px;"><label>Total donation amount</label></td>
+						<td></td>
+					</tr>
+					<tr class="totalExpectedAmntSummary">
+						<td style="width:300px;"><label>Total of previously given amount returned</label></td>
+						<td></td>
+					</tr>
+				</table>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddMiscBorrowing" class="btn btn-large btn-pink" align="right" value="Save" onclick="addAmntFrmFrndsToList();">
+					<input type="button" id ="buttonHideFormMiscBorrowing" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormMiscBorrowing" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>
+		<div id="IncomeFromPropertyDiv">
+			<div id="viewPropertyDetailsTable">
+				<h1>Expected Income From Sale Of Existing Property</h1>
+				<hr/>
+				@getPropertyDetails(appForm.property)					
+			</div>
+			<div id="PropDetailsFormShow">
+				<div id="propertyDetailsDiv">
+					<table id="propertyDetails" class="fieldstable">
+						<tr>
+							<td><label  class="fieldname required">Property Types</label></td>
+							<td><div id="propertyTypeDiv">@form.modifiableRadioGroup(property("type"), options = Seq("AllResidential" -> "Residential", "AllCommercial" -> "Commercial", "AllAgricultural" -> "Agricultural" , "Other" -> "Other"))</div></td>
+						</tr>
+						<tr></tr>
+						<tr id="resTR">
+							<td><label  class="fieldname required">All Residential</label></td>
+							<td>@helper.select(property("typeDetail"), options = helper.options("ChawlRoom" -> "Chawl Room",
+								"FlatOrTerraceFlat" -> "Flat/Terrace Flat",
+								"DuplexFlat" -> "Duplex Flat",
+								"PentHouse" -> "Pent House",
+								"StudioApartment" -> "Studio Apartment",
+								"HighriseApartment" -> "Highrise Apartment",
+								"IndependentBungalow" -> "Independent Bungalow",
+								"JointBanglowOrTwinBungalow" -> "Joint Banglow/Twin Bungalow",
+								"RowHouse" -> "Row House",
+								"RowHousePlot" -> "Row House Plot",
+								"IndependentBungalowPlot" -> "Independent Bungalow Plot",
+								"JointBungalowPlot" -> "Joint Bungalow Plot",
+								"FarmHouse" -> "Farm House",
+								"FarmHousePlot" -> "Farm House Plot",
+								"HolidayHome" -> "Holiday Home",
+								"ServiceApartment" -> "Service Apartment",
+								"Villa" -> "Villa",
+								"SecondHome" -> "Second Home",
+								"Other" -> "Other"
+								))
+							</td>
+						</tr>
+						<tr id="commTR">
+							<td><label  class="fieldname required">All Commercial</label></td>
+							<td>@helper.select(property("typeDetail"), options = helper.options("Shop" -> "Shop",
+								"OfficeInITParkOrSez" -> "Office in IT park/Sez",
+								"CommercialLand" -> "Commercial Land",
+								"CommercialOfficeOrSpace" -> "Commercial Office/Space",
+								"CommercialShowroom" -> "Commercial Showroom",
+								"Kiosk" -> "Kiosk",
+								"ConstructedHotelSpace" -> "Constructed Hotel Space",
+								"HotelPlot" -> "Hotel Plot",
+								"GuestHouse" -> "Guest House",
+								"BusinessCenterOrBusinessPark" -> "Business Center/Business Park",
+								"Warehouse" -> "Warehouse",
+								"IndustrialLand" -> "Industrial Land",
+								"IndustrialBuilding" -> "Industrial Building",
+								"IndustrialShed" -> "Industrial Shed",
+								"BenquetHall" -> "Benquet Hall",
+								"SpaceInRetailMall" -> "Space in Retail Mall",
+								"Godown" -> "Godown",
+								"ColdStorage" -> "Cold Storage",
+								"Factory" -> "Factory",
+								"ManufacturingUnit" -> "Manufacturing Unit"
+								))
+							</td>
+						</tr>
+						<tr id="agriTR">
+							<td><label  class="fieldname required">All Agricultural</label></td>
+							<td>@helper.select(property("typeDetail"), options = helper.options("AgriculturalLand" -> "Agricultural Land",
+								"FarmLand" -> "Farm Land",
+								"ReadyFarmHouse" -> "Ready Farm House",
+								"Other" -> "Other"
+								))
+							</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">Property Area</label></td>
+							<td>@helper.inputText(property("area"),'class -> "input-medium", 'maxlength -> "14")@helper.select(property("typeDetail"), options = helper.options("SqFt" -> "sq.ft.","SqMtrs" -> "sq.mtrs", "Guntha" -> "Guntha","Acres" -> "Acres" ),'class -> "input-small")</td>
+						</tr>
+						<tr>
+							<td><h4><label>Property Location</label><h4></td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">Line1</label></td>
+							<td>@helper.inputText(property("location.line1"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">City</label></td>
+							<td>@helper.inputText(property("location.city"),'id -> "location.city",'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">Taluka</label></td>
+							<td>@helper.inputText(property("location.taluka"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">District</label></td>
+							<td>@helper.inputText(property("location.district"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+							<tr>
+							<td><label  class="fieldname required">State</label></td>
+							<td>@helper.inputText(property("location.state"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">Country</label></td>
+							<td>@helper.inputText(property("location.country"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td><label  class="fieldname required">PIN</label></td>
+							<td>@helper.inputText(property("location.pin"),'class -> "input-medium", 'maxlength -> 100)</td>
+						</tr>
+						<tr>
+							<td>Property Description</td>
+							<td>@helper.textarea(property("propertyDesc"), args = 'rows -> 5,'class -> "span7")</td>
+						</tr>
+					</table>
+					<h2>Loan Against Property</h2>
+					<hr/>
+					<table>	
+						<tr></tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="loan">Have you taken any Loan on your existing property?</label></td>
+							<td>@form.horizontalRadioGroup(property("loan"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+						<tr></tr>
+						<tr id = "loanTaken" style="display:none">
+							<td style="width:250px;"><label  class="fieldname required" for="monthlyAmntDedctedFrmSal">Is your EMI deducted from your salary?</label></td>
+							<td>@form.horizontalRadioGroup(property("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))
+							</td>
+						</tr>
+						<tr></tr>
+					</table>
+					<div class = "amountNotCuttingFromSal">
+							<h5>Please fill details for loan against property</h5>
+					</div>
+					<table>
+						<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Name of the Financer</label></td>
+							<td>@helper.inputText(property("financer"),'class -> "input-medium", 'maxlength -> "100")</td>
+						</tr>
+						<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Loan Amount</label></td>
+							<td>@helper.inputText(property("loanAmount"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+			        	<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Monthly EMI Amount</label></td>
+							<td>@helper.inputText(property("montlyEmi"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Number of Paid Installments</label></td>
+							<td>@helper.inputText(property("installmentsPaid"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Number of Balance Installment</label></td>
+							<td>@helper.inputText(property("balanceInstallments"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class = "amountNotCuttingFromSal">
+							<td style="width:250px;"><label  class="fieldname required">Total Balance Loan Amount</label></td>
+							<td>@helper.inputText(property("balanceLoanAmount"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr></tr>
+						<tr>
+							<td style="width:250px;"><label  class="fieldname required" for="willingToSell">Are you ready to sell your existing property for investing in another property?</label></td>
+							<td>@form.horizontalRadioGroup(property("willingToSell"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+						<tr></tr>
+						<tr class="propWillingToSellClass">
+							<td style="width:250px;"><label  class="fieldname required">Total amount expected from existing property</label></td>
+							<td>@helper.inputText(property("expectedPrice"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr class="propWillingToSellClass"></tr>
+						<tr class="propWillingToSellClass">	
+							<td style="width:250px;"><label  class="fieldname required">Total amount you would like to use for a property?</label></td>
+							<td>@helper.inputText(property("allocation"),'class -> "input-medium", 'maxlength -> "9")</td>
+						</tr>
+						<tr></tr>
+						
+					</table>
+				</div>
+				<div class="form-actions">
+					<input type="button" id ="buttonAddPropDetails" class="btn btn-large btn-pink" align="right" value="Save" onclick="addProperyDetailsToList()">
+					<input type="button" id ="buttonHideFormPropDetails" class="btn btn-large btn-pink" align="right" value="Cancel">
+				</div>
+			</div>					
+			<div class="form-actions">
+				<input type="button" id ="buttonShowFormPropDetails" class="btn btn-large btn-pink" align="right" value="Add More">
+			</div>
+		</div>
+		<div class="form-actions">
+					<a href="@routes.ApplicationFormController.wholePersonalInfo" class="btn btn-large btn-pink" align="right">Back</a>
+					<input type="submit" value="Next" class="btn btn-large btn-pink" align="right" form="nxtbtnform" >
+		</div>
+	</form>
+
+
+}
+	

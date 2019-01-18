@@ -1,0 +1,34 @@
+
+<ion-view view-title="Refer Friend">
+    <ion-nav-buttons side=" right">
+    <button style="font-size: 20px;" ng-click="reset()" class="button button-clear  ion-refresh"></button>
+    </ion-nav-buttons>
+    <ion-content class="padding back-img">
+        <form name="referFriendForm" id="referFriendForm" ng-submit="signupForm(referFriendForm)"  novalidate="novalidate">
+        <div class="list content-sec2 padding">
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : referFriendForm.Name.$invalid  && referFriendForm.$submitted, 'no-errors' : referFriendForm.Name.$valid  && referFriendForm.$submitted}">
+                <span class="input-label">Full Name</span>
+                <input type="text" name="Name" ng-model="user.Name" placeholder="Enter Full Name" required ng-class="{ 'has-errors' : referFriendForm.Name.$invalid  && referFriendForm.$submitted, 'no-errors' : referFriendForm.Name.$valid  && referFriendForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : referFriendForm.MobileNo.$invalid  && referFriendForm.$submitted, 'no-errors' : referFriendForm.MobileNo.$valid  && referFriendForm.$submitted}">
+                <span class="input-label">Mobile No.</span>
+                <input type="number" name="MobileNo" ng-model="user.MobileNo" placeholder="Enter Mobile Number" ng-minlength="10" ng-maxlength="10" required ng-class="{ 'has-errors' : referFriendForm.MobileNo.$invalid  && referFriendForm.$submitted, 'no-errors' : referFriendForm.MobileNo.$valid  && referFriendForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : referFriendForm.EmaillId.$invalid  && referFriendForm.$submitted, 'no-errors' : referFriendForm.EmaillId.$valid  && referFriendForm.$submitted}">
+                <span class="input-label">Emaill Id</span>
+                <input type="email" name="EmaillId"   ng-model="user.EmaillId" placeholder="Enter Emaill Id" required ng-class="{ 'has-errors' : referFriendForm.EmaillId.$invalid  && referFriendForm.$submitted  , 'no-errors' : referFriendForm.EmaillId.$valid  && referFriendForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <br>
+            <center>
+            <button type="submit" class=" btn btn-info">
+                Submit
+            </button>
+            </center>
+        </div>
+        </form>
+    </ion-content>
+</ion-view>
+

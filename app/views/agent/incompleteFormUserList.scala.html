@@ -1,0 +1,57 @@
+@(page : com.avaje.ebean.Page[User],agent : Agent)
+@import views.helpers.FieldValue._
+@import controllers.FormStatus
+@import  com.avaje.ebean.Page
+
+@agentDashboardTemlate("Proposed Society - Agent Dashboard",Seq(),Seq(), agent){
+	<div>
+		@if(page != null && !page.getList().isEmpty()) {
+			<h2>Incompleted Form Applicants List
+				<a href="@routes.AgentDashboardController.agentDashboard" class="btn btn-medium btn-pink backBtn" style="color :white; float:right; margin:1px;">Back</a>
+			</h2>
+			<hr/>
+			<table  class="table table-striped" style="font-family: 'Roboto', Helvetica, sans-serif, Arial;">
+				<thead>
+					<tr>	
+				  		<th class="leftAlignClass">Name</th>
+				  		<th class="leftAlignClass">Mobile Number</th>
+				  		<th class="rightAlignClass">Email</th>
+					 </tr>
+				</thead>
+				<tbody>
+					@for(user <- page.getList()) {
+					  	<tr>
+					  	<td class="leftAlignClass">@fieldVal(user.name,"NA")</td>
+							<td class="leftAlignClass">@fieldVal(user.mobile,"NA")</td>
+							<td class="rightAlignClass">@fieldVal(user.email,"NA")</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		@if(page.getTotalPageCount() > 1){
+				<div class="form-sections">
+				  		<ul class="pager">
+							@if(page. hasPrev()){
+								
+						  		  <li><a href="@routes.AgentFormController.incompleteApplicantForms(page.getPageIndex() -1)">Previous</a></li>
+					 			
+							}else{
+								<li class="disabled"><a href = "#"> Previous</a></li>
+							}
+							
+							@if(page.hasNext()){
+								<li><a href="@routes.AgentFormController.incompleteApplicantForms(page.getPageIndex() + 1)">Next</a></li>
+							}else{
+								<li class="disabled"><a href = "#"> Next</a></li>
+							}
+					</ul>
+				</div>
+		}
+	}else{
+		<div>
+			<h3>No Applicant with incomplete application form</h3>
+			<hr/>
+		</div>
+	}
+	</div>
+}

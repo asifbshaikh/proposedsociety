@@ -1,0 +1,34 @@
+@(propdata: List[Property], showDeleteBtn :Boolean)
+@import views.helpers.DateFormatHelper._
+@import views.helpers.FieldValue._
+
+@if(propdata != null && !propdata.isEmpty()) {
+	<table id="viewPropDetails" class="table table-striped">
+		<thead>
+			<tr>
+				<th class="leftAlignClass">Type Detail</th>
+				<th class="rightAlignClass">Property Area</th>
+				<th class="leftAlignClass">City</th>
+				<th class="leftAlignClass">Is loan</th>
+				<th class="rightAlignClass">Expected Price</th>
+				<th class="rightAlignClass">Allocation</th>
+				<th class="rightAlignClass"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@for(prp <- propdata) {
+			  	<tr>
+					<td class="leftAlignClass">@fieldVal(prp.typeDetail,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(prp.area,"NA")</td>
+					<td class="leftAlignClass">@fieldVal(prp.location.city,"NA")</td>
+					<td class="leftAlignClass">@if(prp.loan != null && prp.loan) {	Yes } else { No }</td>
+			  		<td class="rightAlignClass">@fieldVal(prp.expectedPrice,"NA")</td>
+			  		<td class="rightAlignClass">@fieldVal(prp.allocation,"NA")</td>
+			  		@if(showDeleteBtn){
+			  		<td class="rightAlignClass"><input type="button" id="btnPropertyDelete" class="btn btn-mini btn-danger " onclick="deletePropertyFromList(@prp.id)" value="X" style="font-weight: bold;"></td>
+			  		}else{<td></td>}
+			  	</tr>
+			}
+		</tbody>
+	</table>
+}

@@ -1,0 +1,31 @@
+
+<ion-nav-bar class="" title="ProposedSociety">
+  <ion-nav-title>
+    <center> <b style="color:#ff639c">Proposed</b><b style="color:#5bc0de">Society</b></center>
+  </ion-nav-title>
+</ion-nav-bar>
+
+<!--  <div class="col-lg-12 item-image" style="margin-left: 129px; width: 30%;">
+          <img src="./img/logo.updated.png" align="center">
+      </div>
+</div> -->  
+<div>
+<ion-tabs on-swipe-right="goBack()" on-swipe-left="goForward()" animation="slide-left-right" class="tabs-striped  tabs-top tabs-text-only">
+
+  <ion-tab title="VISITOR" ui-sref="tab.login">
+    <ion-nav-view name="tab-login"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="EXISTING VISITOR"  ui-sref="tab.authentication" >
+    <ion-nav-view name="tab-authentication"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="APPLICANTS"  ui-sref="tab.applicants">
+    <ion-nav-view name="tab-applicants"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="AGENT"  ui-sref="tab.agent">
+    <ion-nav-view name="tab-agent"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>
+</div>

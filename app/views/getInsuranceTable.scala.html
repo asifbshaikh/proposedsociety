@@ -1,0 +1,35 @@
+@(insudata: List[Insurance], showDeleteBtn:Boolean)
+@import views.helpers.DateFormatHelper._
+@import views.helpers.FieldValue._
+@if(insudata != null && !insudata.isEmpty()) {	   
+    <table id="viewInsuranceDetails" class="table table-striped">
+    	<thead>
+    	<tr>
+			<th class="leftAlignClass">Insurer Name</th>
+			<th class="leftAlignClass">Maturity Date</th>
+			<th class="rightAlignClass">Sum Assured</th>
+			<th class="leftAlignClass">Premium Freqency</th>
+			<th class="rightAlignClass">Premium</th>
+			<th class="rightAlignClass">Maturity Amount</th>
+			<th class="rightAlignClass">Allocation</th>
+			<th class ="rightAlignClass">     </th>
+		</tr>
+		</thead>
+		<tbody>
+            @for(insd <- insudata) {
+                <tr>
+                    <td class="leftAlignClass">@fieldVal(insd.insurerName,"NA")</td>
+                    <td class="leftAlignClass">@if(insd.maturityDate != null){@formatDate("dd/MM/yyyy",insd.maturityDate)}else{NA}</td>
+                    <td class="rightAlignClass">@fieldVal(insd.sumAssured,"NA")</td>
+                    <td class="leftAlignClass">@fieldVal(insd.premiumFreqency,"NA")</td>
+                    <td class="rightAlignClass">@fieldVal(insd.premium,"NA")</td>
+                    <td class="rightAlignClass">@fieldVal(insd.maturityAmount,"NA")</td>
+          	        <td class="rightAlignClass">@fieldVal(insd.allocation,"NA")</td>
+                  	@if( showDeleteBtn){
+			  			<td class="rightAlignClass"><input type="button" id="btnInsuranceDelete" class="btn btn-mini btn-danger" onclick="deleteInsuDetailsFromList(@insd.id)" value="X" style="font-weight: bold;"></td>
+			  		}else{<td></td>}
+                </tr>
+            }
+       	</tbody>
+    </table>
+}

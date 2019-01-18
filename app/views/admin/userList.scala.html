@@ -1,0 +1,34 @@
+@(users: List[User])
+@import views.helpers.DateFormatHelper._
+
+@if(users != null && !users.isEmpty()){
+	<div>
+		<table class="table table-striped"  >
+			<thead>
+				<tr>	
+			  		<th class="leftAlignClass">User Name</th>
+			  		<th class="leftAlignClass">Mobile Number</th>
+			  		<th class="leftAlignClass">Email Id</th>
+			  		<th class="leftAlignClass">Role</th>
+			  		<th></th>
+				 </tr>
+			</thead>
+			<tbody>
+				@for(user <- users) {
+				  	<tr>
+				  		<td class="leftAlignClass">@user.name </td>
+				  	    <td class="leftAlignClass">@user.mobile</td>
+				  		<td class="leftAlignClass">@user.email</td>				  		
+						<td class="leftAlignClass">
+							<div >
+								<p style="text-align: center;">
+									<a href="@routes.ManagerUserController.applicantRequirement(user.id)" class="btn  btn-info " style="color:#ffffff" >Show</a>
+								</p>
+							</div>	
+						</td>			  		
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}

@@ -1,0 +1,129 @@
+@(rd: Form[OwnContributionController.RecurringDep],
+rdwsy: Form[OwnContributionController.RecurringDepWillSurrenderYes],
+rdwsn: Form[OwnContributionController.RecurringDepWillSurrenderNo],
+rdncfs: Form[OwnContributionController.RecurringDepNoCuttingFrmSal])
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant - RD Details", 5) {
+		@helper.form(action = routes.OwnContributionController.recurringDepSubmit, 'class -> "form-horizontal") {
+		<div class="Div">
+			<h1>Recurring Deposite Details</h1>
+			<!--	<table>
+						<tr>
+							<td style="width:250px;"><label class="fieldname" for="recurringDeposit">Recurring Deposit?</label></td>
+							<td>@form.horizontalRadioGroup(rd("recurringDeposit"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+						</tr>
+			-->		</table>
+			
+			<hr/>
+			<div class="RDDetailsDiv">
+				<table id="RDDetails" class="fieldstable">
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Name of Deposit Holder</label></td>
+						<td>@helper.inputText(rd("nameOfHolder"), 'class -> "input-large")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Name of the Bank/Company</label></td>
+						<td>@helper.inputText(rd("bankName"), 'class -> "input-large")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Plan Start Date</label></td>
+						<td>@helper.inputText(rd("startDate"), 'class -> "input-small datepicker")</td>
+						<!-- <td>@@helper.inputText(rd("startDate"), 'class -> "input-medium datepicker")</td> -->
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Plan Validity Date</label></td>
+						<td>@helper.inputText(rd("maturityDate"), 'class -> "input-medium datepicker")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Installment Amount per month</label></td>
+						<td>@helper.inputText(rd("installment"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Installment Paid Upto</label></td>
+						<td>@helper.inputText(rd("installmentsPaid"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Balance Installments</label></td>
+						<td>@helper.inputText(rd("installmentsBalance"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Principal Amount</label></td>
+						<td>@helper.inputText(rd("principal"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Interest Rate</label></td>
+						<td>@helper.inputText(rd("interestRate"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Amount Receivable on Maturity Date</label></td>
+						<td>@helper.inputText(rd("maturityAmount"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname" for="willSurrender">Are you planning to close your Recurring Deposit scheme for investing in a property</label></td>
+						<td>@form.horizontalRadioGroup(rd("rdwillSurrender"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>
+			</div>	
+			<div id="willSurrenderYesDiv">
+				<h2>RD Amount Allocation For Property</h2>
+				<hr/>	
+				<table>	
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Total Recurring Deposit Amount you can avail from financer/bank for property purpose</label></td>
+						<td>@helper.inputText(rdwsy("amountCanAvail"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">How much amount from your R.D. you would like to use for property purpose</label></td>
+						<td>@helper.inputText(rdwsy("allocation"), 'class -> "input-medium")</td>
+					</tr>
+				</table>
+			</div>
+			<div id="willSurrenderNoDiv">
+				<hr/>	
+				<table>	
+					<tr>
+						<td style="width:250px;"><label class="fieldname" for="monthlyAmntDedctedFrmSal">Total monthly installment amount deducted from your salary</label></td>
+						<td>@form.horizontalRadioGroup(rdwsn("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>	
+			</div>
+			<div id="rdNotCuttingFrmSalDiv">
+				<h2>More RD Details</h2>
+				<hr/>
+				<table>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Monthly Installment</label></td>
+						<td>@helper.inputText(rdncfs("monthlyInstallments"), 'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Number of Balance Installments</label></td>
+						<td>@helper.inputText(rdncfs("balanceInstallments"), 'class -> "input-medium")</td>
+					</tr>	
+					<tr>
+						<td style="width:250px;"><label class="fieldname">Total Balance Deduction Amount</label></td>
+						<td>@helper.inputText(rdncfs("balanceDedAmount"), 'class -> "input-medium")</td>
+					</tr>
+				</table>
+			</div>
+
+		<!--
+			<input type="button" id ="buttonAddRD" value="Add More" onclick="addRdDetailsToList();">
+		`-->
+
+		<div id="viewRdDetailsTable">
+				
+		</div>
+		<div class="form-actions">
+				<a href="@routes.OwnContributionController.insuranceDetails" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		<!--<div class="form-actions">
+			<button type="submit" class="btn btn-large btn-pink">Next</button>
+		</div>-->
+		</div>
+		}
+}

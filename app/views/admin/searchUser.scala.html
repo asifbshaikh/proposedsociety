@@ -1,0 +1,15 @@
+@(user : User , page : com.avaje.ebean.Page[User])
+
+@adminTemplate("Proposed Society - Admin Dashboard",user,Seq(),Seq()){
+ 	<div  class="pull-right">	
+		<form class="form-search" id="searchUserForm" method="POST"  action="@routes.AdminUserController.searchUserSubmit">
+		    <div class="input-append" align="right">
+		        <input type="text" class="input-medium search-query" name="search" placeholder="Email / Role">
+		        <button type="submit" class="btn" id="search" >Search</button>
+		    </div>
+		</form>
+	</div>		
+	<div id="showUserListPage">
+		@userDetails(page)
+	</div>
+}

@@ -1,0 +1,9 @@
+@(user : User, appList: List[ApplicationForm])
+@import views.html.manager._
+
+@managerDashboardTemplate("Proposed Society - Applicant List ",user,Seq(),Seq()){
+	<h2>Applicant List
+		<a href="@routes.ManagerUserController.dashboard" class="btn btn-pink backBtn" style="color :white;"> Back</a>
+	</h2><hr/>
+	@applicantListTable(appList)
+}

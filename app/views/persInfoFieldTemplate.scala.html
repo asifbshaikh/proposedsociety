@@ -1,0 +1,19 @@
+@(elements: helper.FieldElements)
+
+@elements.input 
+
+@if(elements.field.hasErrors) {
+	<p class="error" hasError>
+		@if(elements.field.error.get.message.equals("error.email")){
+			"Enter valid email"
+		}else{ 
+			@if(elements.field.error.get.message.equals("error.invalid")) {
+				"Enter valid value"
+			}else{
+				@elements.field.error.get.message
+			}
+		}
+	</p> 
+} else{
+	<p class="error" style="display:none" id="@elements.field.name.concat("Error")"></p> 
+}

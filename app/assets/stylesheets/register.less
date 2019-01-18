@@ -1,0 +1,121 @@
+@import "_colors.less";
+@import "_common.less";
+
+body {
+	font-family: 'Rosario', Helvetica, sans-serif, Arial;
+	margin: 0;
+	padding: 0;	
+	background-color: @overlay_background
+}
+
+div {
+	margin: 0;
+	padding: 0;
+}
+
+.logowrap {
+	margin: 15px auto;
+	margin-bottom: 20px;
+	padding: 1px;
+	text-align: center;
+}
+
+.formwrap {
+	width: 280px;
+	margin: 10px auto;
+	padding: 5px 40px;
+	.rounded-corners(10px);
+	border: 1px solid @psgreen;
+	.box_shadow_even(@psgreen, 20px);
+
+	.formheading {
+		margin: 20px 0;
+		text-align: center;
+		color: @psgrey;	
+	}
+
+	form {
+		margin: 1px;
+		padding: 1px;
+	}
+	
+	ul {
+		display: block;
+		list-style: none;
+		list-style-type: none;
+		list-style-position: outside;
+		margin: 1px;
+		padding: 1px;
+
+		li:AFTER {
+			.clearfix;
+		}
+
+		li {
+			display: block;
+			margin: 5px 1px;
+			padding: 1px;
+
+			.reqfld, input[type=text] {
+				float: left;
+			}
+
+			.reqfld {
+				padding: 4px 1px;
+				font-size: 12pt;
+				color: @error;
+				padding-left: 8px;
+			}
+	
+			input[type=text] {
+				border: 1px solid grey;
+				padding: 2px 5px;
+				font-size: 14pt;
+				.rounded-corners(3px);
+				height: 50px;
+			}
+
+			input[type=text]:FOCUS {
+				border: 1px solid @psblue;
+				.box_shadow_even(@psblue, 10px);
+			}
+			
+			.reqfld, input[type=text] {
+				height: 50px;
+				line-height: 40px;
+				vertical-align: middle;
+			}
+			
+			.error {
+				color: @error;
+				font-size: 10pt;
+				margin: 2px 0 6px 0;
+				padding: 1px 2px;
+			}
+		}
+	}
+}
+
+.submitwrap {
+	text-align: center;
+	margin: 5px;
+	padding: 1px;
+
+	input[type=submit] {
+		padding: 10px 10px;
+		background-color: @psgreen;
+		.rounded-corners(3px);
+		border: none;
+		color: white;
+		font-size: 14px;
+	}
+
+	input[type=submit]:HOVER {
+		.box_shadow_even(@psgreen, 20px);
+	}
+}
+
+.formwrap:AFTER {
+	.clearfix;
+}
+

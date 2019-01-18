@@ -1,0 +1,35 @@
+@(fddata: List[FixedDeposit], showDeleteBtn : Boolean)
+@import views.helpers.FieldValue._
+@import views.helpers.DateFormatHelper._
+		<table id="viewfd" class="table table-striped">
+			<thead>
+			<tr>
+				<th class="leftAlignClass">Bank Name</th>
+				<th class="leftAlignClass">Maturity Date</th>
+				<th class="rightAlignClass">Pricipal</th>
+				<th class="rightAlignClass">Interest Rate</th>
+				<th class="rightAlignClass">Maturity Amount</th>
+				<th class="rightAlignClass">Allocation</th>
+				<th class="rightAlignClass">Loan Amount</th>
+				<th class="rightAlignClass">Monthly Emi</th>
+				<th class="rightAlignClass"></th>
+			</tr>
+			</thead>
+			<tbody>
+				@for(fdd <- fddata) {
+				<tr>
+				  	<td class="leftAlignClass">@fieldVal(fdd.bankName,"NA")</td>
+					<td class="leftAlignClass">@if(fdd.maturityDate != null){@formatDate("dd/MM/yyyy", fdd.maturityDate)}else{NA}</td>
+					<td class="rightAlignClass">@fieldVal(fdd.pricipal,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(fdd.interestRate,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(fdd.maturityAmount,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(fdd.allocation,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(fdd.loanAmount,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(fdd.montlyEmi,"NA")</td>
+					@if(showDeleteBtn){
+			  			<td class="rightAlignClass"><input type="button" id="btnDFDelete" class="btn btn-mini btn-danger " onclick="deleteFDDetailsFromList(@fdd.id)" value="X" style="font-weight: bold;"></td>
+			  		}else{<td></td>}
+				</tr>		
+				}
+			</tbody>
+		</table>

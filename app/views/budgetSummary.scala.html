@@ -1,0 +1,141 @@
+<html>
+	<head>
+		<title>Welcome to Proposed Society</title>
+		<link href='http://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/home.css")"></link>
+		<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript">
+		    function showDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="block";
+			}
+		    function hideDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="none";
+			}
+		</script>
+	</head>
+	<body>
+		<header class="header">
+			<div class="headerwrap">
+				<img class="logo" alt="Logo" src="@routes.Assets.at("images/logo-very-small.png")"/>
+				<nav>
+					<ul class="quickmenu menu">
+						<li>More</li>
+						<li>Home</li>
+					</ul>
+					<div class="clear"></div>
+					<ul class="mainmenu menu">
+						<li><a href="#">Membership</a></li>
+						<li><a href="#">Benefits</a></li>
+						<li><a href="#">Concept</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+			<div class="formwrap">
+				<p class="formheading">Budget Summary.</p>
+				<form method="POST" action="#">
+					<label><b>Summary  As per the given information by Applicant :</b></label><br/>	
+					<ul>
+						<li>
+							<div>
+								<label><b>Addition :</b></label>
+								<label for="ApproxLoanEli">1) Approximate Loan Eligiblity(Rupees) :</label>
+								<input type="text" name="ApproxLoanEli" id="ApproxLoanEli" >
+								<label for="AllBAnkBalSmry">2)All Bank Balance Summary Amount(Rupees) :</label>
+								<input type="text" name="AllBAnkBalSmry" id="AllBAnkBalSmry">
+								<label for="CashBalWithYou">3)Cash balance with you(Rupees) :</label>
+								<input type="text" name="CashBalWithYou" id="CashBalWithYou">
+								<label for="AllFDsSumAmnt">4)All FD's Summary Amount(Rupees) :</label>
+								<input type="text" name="AllFDsSumAmnt" id="AllFDsSumAmnt">
+								<label for="AllRDsSumAmnt">5)All RD's Summary Amount(Rupees) :</label>
+								<input type="text" name="AllRDsSumAmnt" id="AllRDsSumAmnt">
+								<label for="AllInsuSumAmnt">6)All Insurances summary Amount(Rupees) :</label>
+								<input type="text" name="AllInsuSumAmnt" id="AllInsuSumAmnt">
+								<label for="AllExtPropSumAmnt">7)All Existing Properties selling  Summary Amount(Rupees) :</label>
+								<input type="text" name="AllExtPropSumAmnt" id="AllExtPropSumAmnt">
+								<label for="RelAllSumAmnt">8)All amount summary to be borrowed by Relatives/Friend(Rupees) :</label>
+								<input type="text" name="RelAllSumAmnt" id="RelAllSumAmnt">
+								<label for="DonRelAllSumAmnt">9)All donation amount by Relatives/Friend(Rupees) :</label>
+								<input type="text" name="DonRelAllSumAmnt" id="DonRelAllSumAmnt">
+								<label for="RelAllRetrndAmnt">10)All of previously given amount returned by Relatives/Friend(Rupees) :</label>
+								<input type="text" name="RelAllRetrndAmnt" id="RelAllRetrndAmnt">
+							</div>
+							<div>
+								<label for="TotlAddOfBudget">Total addition of budget :</label>
+								<input type="text" name="TotlAddOfBudget" id="TotlAddOfBudget"><br/>
+							</div>
+						</li>		
+						<li>
+							<div>
+								<label><b>Deduction :</b></label>
+								<label for="LoanAmntOfApplcnt">1)Loan amount of Applicant(Rupees) :</label>
+								<input type="text" name="LoanAmntOfApplcnt" id="LoanAmntOfApplcnt">
+								<label for="LoanAmntOfCoApplcnt">2))Loan amount of Co-Applicant(Rupees)    :</label>
+								<input type="text" name="LoanAmntOfCoApplcnt" id="LoanAmntOfCoApplcnt">
+								<label for="AllBAnkLoanDedBalSmry">3)All Bank Loan Deduction Balance Summary Amount(Rupees) :</label>
+								<input type="text" name="AllBAnkLoanDedBalSmry" id="AllBAnkLoanDedBalSmry">
+								<label for="AllFDsLoanDedBalSumAmnt">4)All FD's Loan Deduction Balance Summary Amount(Rupees) :</label>
+								<input type="text" name="AllFDsLoanDedBalSumAmnt" id="AllFDsLoanDedBalSumAmnt">
+								<label for="AllRDsDedSumAmnt">5)All RD's Deductions Summary Amount(Rupees) :</label>
+								<input type="text" name="AllRDsDedSumAmnt" id="AllRDsDedSumAmnt">
+								<label for="AllInsuLoanDedSumAmnt">6)All Insurances Loan Deduction Balance Summary Amount(Rupees)  :</label>
+								<input type="text" name="AllInsuLoanDedSumAmnt" id="AllInsuLoanDedSumAmnt">
+								<label for="AllExPropLoanDedSumAmnt">7)All Existing Property Loan Deduction Balance Summary Amount(Rupees) :</label>
+								<input type="text" name="AllExPropLoanDedSumAmnt" id="AllExPropLoanDedSumAmnt">
+								<label for="AllLoanFrmRelDedAmnt">8)All  loan from Relatives deduction amount(Rupees) :</label>
+								<input type="text" name="AllLoanFrmRelDedAmnt" id="AllLoanFrmRelDedAmnt">
+							</div>
+							<div>
+								<label for="TotlDedOfBudget">Total deduction From budget :</label>
+								<input type="text" name="TotlDedOfBudget" id="TotlDedOfBudget"><br/>
+							</div>
+						</li>
+						<li>
+							<div>
+								<label for="TotlBudgetCal1">Total budget calculated(Total addition - Total deduction) :</label>
+								<input type="text" name="TotlBudgetCal1" id="TotlBudgetCal1"><br/>
+							</div>
+						</li>
+						<li>
+							<div>
+								<label>I Accept Above Calculation :</label><br/>
+								<input type="radio" name="IAccptAbvCal" value="IAccptAbvCalNo" checked="checked">No
+								<input type="radio" name="IAccptAbvCal" value="IAccptAbvCalYes" >Yes
+								//If Selected option is No<br/>
+								<label><b>Mark the fields which you don't want to consider in the budget of Searching property :</b></label><br/>
+								<label>Summary  As per the given information by Applicant :</label><br/>
+								<label><b>Addition :</b></label><br/>
+								<input type="checkbox" name="ApproxLoanEli" value="ApproxLoanEli">1) Approximate Loan Eligiblity(Rupees): <br>
+								<input type="checkbox" name="" value="">2)All Bank Balance Summary Amount(Rupees): <br>
+								<input type="checkbox" name="" value="">3)Cash balance with you(Rupees) : <br>
+								<input type="checkbox" name="" value="">4)All FD's Summary Amount(Rupees): <br>
+								<input type="checkbox" name="" value="">5)All RD's Summary Amount(Rupees): <br>
+								<input type="checkbox" name="" value="">6)All Insurances summary Amount(Rupees): <br>
+								<input type="checkbox" name="" value="">7)All Existing Properties selling  Summary Amount(Rupees): <br>
+								<input type="checkbox" name="" value="">8)All amount summary to be borrowed by Relatives/Friend(Rupees): <br>
+								<input type="checkbox" name="" value="">9)All donation amount by Relatives/Friend(Rupees): <br>
+								<input type="checkbox" name="" value="">10)All of previously given amount returned by Relatives/Friend(Rupees): <br>
+							</div>
+						</li>
+						<li>
+							<div>
+								<label for="TotlBudgetCal2">Total budget calculated(Total addition - Total deduction) :</label>
+								<input type="text" name="TotlBudgetCal2" id="TotlBudgetCal2"><br/>
+							</div>
+						</li>
+						<p class="submitwrap">
+							<input type="submit" value="Submit" />
+						</p>
+					</ul>
+					<a href="#">Fill Up The Form</a>
+				</form>
+			</div>
+	</body>
+</html>

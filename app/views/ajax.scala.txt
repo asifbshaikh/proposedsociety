@@ -1,0 +1,29 @@
+<div class="cms dashboard">
+	<h3>Budget and No. of People Interested</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Budget</th>
+				<th>No. of People</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>10 Lacks to 50 Lacks</td>
+				<td>5</td>
+			</tr>
+			<tr>
+				<td>50 Lacks to 1 Cr.</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td>1 Cr. to 2 Cr.</td>
+				<td>15</td>
+			</tr>
+			<tr>
+				<td>Above 2 Cr.</td>
+				<td>3</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

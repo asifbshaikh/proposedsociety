@@ -1,0 +1,163 @@
+@import "_colors.less";
+@import "_common.less";
+
+.header, .footer, .content {
+	width: auto;
+	min-width: 1000px;
+}
+
+.header {
+	background-color: lighten(black, 98%);
+}
+
+.headerwrap {
+	background-color: lighten(black, 90%);
+	padding-top: 1px;
+}
+
+.headerwrap .logo {
+	float: left;
+}
+
+.headerwrap, .contentwrap, .footerwrap {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.headerwrap nav {
+	margin: 30px auto;
+	margin-bottom: 0;
+	float: right;
+}
+
+.headerwrap:after {
+	.clearfix;
+}
+
+nav:after {
+	.clearfix;
+}
+
+.menu {
+	float: right;
+	list-style: none;
+	list-style-type: none;
+	list-style-position: outside;
+	margin: 0;
+	padding: 0;
+
+	li {
+		float: right;
+		padding: 10px 20px;
+		
+		a {
+			text-decoration: none;
+			color: white;
+		}
+		
+		a:hover {
+			text-decoration: none;
+			color: white;
+		}
+	}
+}
+
+.menu:after {
+	.clearfix;
+}
+
+.quickmenu {
+	font-size: 12px;
+	margin-right: 10px;
+
+	li {
+		padding: 2px 10px;
+		border-left: 1px dotted black;
+	}
+}
+
+.quickmenu li:last-child {
+	border-left: none;
+}
+
+.quickmenu:after {
+	.clearfix;
+}
+
+.mainmenu {
+	margin-top: 4px;
+	background-color: @psblue;
+	color: white;
+	
+	border-top-left-radius: 5px;
+	
+	li {
+		border-right: 1px dotted white;
+	}
+
+	li:hover {
+		background-color: @pspink;
+	}
+}
+
+.slideshow, .upcoming-projects {
+	float: left;
+	border: 1px solid silver;
+	min-height: 300px;
+}
+
+.slideshow {
+	width: 600px;
+}
+
+.upcoming-projects {
+	width: 391px;
+	margin-left: 5px;
+}
+
+.contentwrap:after {
+	.clearfix;
+}
+
+.contentwrap {
+	margin-top: 5px;
+}
+
+.ps-message {
+	margin-top: 10px;
+	background-color: lighten(grey, 45%);
+		
+	p {
+		font-family: 'Economica';
+		text-align: center;
+		font-size: 50px;
+		font-weight: bold;
+		color: @psgrey;
+		text-shadow: 2px 2px grey; 	
+		margin: 10px 0;
+	}
+}
+
+.contentwrap section {
+	border: 1px solid lighten(black, 90%);
+}
+
+.shadow {
+	width: 100%;
+	margin-bottom: 10px;
+	top: -3px;
+	position: relative;
+	z-index: -1;
+}
+
+.vip-cust, .recent-members, .lucky-draw {
+	width: 328px;
+	min-height: 300px;
+	float: left;
+	margin-top: 5px;
+}
+
+.recent-members, .lucky-draw {
+	margin-left: 5px;
+}
+

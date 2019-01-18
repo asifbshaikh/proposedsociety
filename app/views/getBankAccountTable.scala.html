@@ -1,0 +1,31 @@
+@(badata: List[BankAccount], showDeleteBtn : Boolean)
+@import views.helpers.FieldValue._
+
+@if(badata != null && !badata.isEmpty()) {	
+	<table id="viewBankDetails" class="table table-striped">
+		<thead>
+			<tr>	
+		  		<th class="leftAlignClass">Bank Name</th>
+		  		<th class="leftAlignClass">Account Number</th>
+		  		<th class="rightAlignClass">Balance</th>
+		  		<th class="rightAlignClass">Total Monthly Deduction</th>
+		  		<th class="rightAlignClass">Allocate To Buy</th>
+		  		<th class="rightAlignClass"></th>
+			 </tr>
+		</thead>
+		<tbody>
+			@for(bnkd <- badata) {
+			  	<tr>
+			  		<td class="leftAlignClass">@fieldVal(bnkd.bankName,"NA")</td>
+					<td class="leftAlignClass">@fieldVal(bnkd.accountNumber,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(bnkd.balance,"NA")</td>
+				    <td class="rightAlignClass">@fieldVal(bnkd.totalMonthlyDeduction,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(bnkd.allocateToBuy,"NA")</td> 
+					@if(showDeleteBtn){
+						<td class="rightAlignClass"><input type="button" id="btnDelete" class="btn btn-mini btn-danger" onclick="deleteBankAccntsFromList(@bnkd.id)" value="X" style="font-weight: bold;"></td>
+					}else{<td ></td>}
+				</tr>
+			}
+		</tbody>
+	</table>
+}

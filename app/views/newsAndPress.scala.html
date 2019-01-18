@@ -1,0 +1,31 @@
+@(user: User)
+
+@mainTemplate("Proposed Society - News & Press Releases", user,routes.Assets.at("images/content/news.jpg")){
+	<h1>NEWS &amp; PRESS RELEASES</h1>
+	<hr/>
+	<div class="row-fluid">
+		<ul class="thumbnails">
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_1.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_1.jpg")" alt="" />
+			</a></li>
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_2.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_2.jpg")" alt="" />
+			</a></li>
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_3.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_3.jpg")" alt="" />
+			</a></li>
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_4.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_4.jpg")" alt="" />
+			</a></li>
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_5.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_5.jpg")" alt="" />
+			</a></li>
+			<li class="span3"><a class="thumbnail fancybox-buttons" data-fancybox-group="button" href="@routes.Assets.at("images/content/news_6.jpg")">
+				<img src="@routes.Assets.at("images/content/news_thumb_6.jpg")" alt="" />
+			</a></li>
+		</ul>
+	</div>
+	<hr/>
+}
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("js/fancyBox2/source/jquery.fancybox.css?v=2.1.5")"></link>
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("js/fancyBox2/source/helpers/jquery.fancybox-buttons.css?v=2.1.5")"></link>

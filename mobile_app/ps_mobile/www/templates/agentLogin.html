@@ -1,0 +1,68 @@
+<ion-view>
+
+  <ion-content class="padding back-img">
+    <div class="bar bar-header  " ng-show="fpassFlag">
+      <button  ng-click="backToLogin()" style="font-size: 25px; padding-left: 15px"   class="button button-clear ion-chevron-left padding-left"> </button>
+    </div>
+    <div class=" content-sec padding form-group"  ng-hide="fpassFlag">
+
+        <div class="text-info text-info-back padding" ng-show="msgFlag"  >
+          Please enter your email and password that we have sent you.
+        </div>
+        <div class="notify-error padding" ng-hide="msgFlag"  >
+          Invalid login id or password.
+        </div>
+      <br>
+      <form name="myForm" ng-submit="enterSite()" novalidate>
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input type="text" name="email" ng-model="user.email" placeholder="Email" ng-click="test()" required>
+            <span style="color:#FA5858" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+            <span ng-show="myForm.email.$error.required">Email is required.</span>
+              <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+            </span>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Code</span>
+          <input type="password" class="form-control"  id="password" name="password" placeholder="Code" ng-model="user.password" required>
+          <span style="color:#FA5858" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+          <span class="help-block" ng-show="myForm.password.$error.required">Valid password is required</span>
+          <!--<span class="help-block" ng-show="((myForm.password.$error.minlength || myForm.password.$error.maxlength) && myForm.password.$dirty) ">password should be 4 digits</span>-->
+          </span>
+        </label>
+
+        <br>
+        <center>
+          <button type="submit" ng-disabled="myForm.$invalid" ng-click="submitted=true" class=" btn btn-success" > Login</button>
+          <button type="button" class=" btn btn-success" ng-click="forgetCodeBlock()"> Forget Password</button>
+          </center>
+      </form>
+    </div>
+    <div class="list content-sec padding " ng-show="fpassFlag" style="padding-top: 40px">
+      <div class="card">
+        <div class="text-info text-info-back padding" ng-show="msgFlag"  >
+                Please enter your registered email id then click submit button to get authcode, check your email inbox for that.
+        </div>
+        <div class="text-info text-info-back padding" ng-hide="msgFlag"  >
+          Email id is invalid, please enter your registered email id.
+        </div>
+        </div>
+      <form name="forgetPassForm" ng-submit="forgetpassword()" novalidate>
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input type="email" name="email" ng-model="user.email" placeholder="Email" required>
+            <span style="color:#FA5858" ng-show="forgetPassForm.email.$dirty && forgetPassForm.email.$invalid">
+            <span ng-show="forgetPassForm.email.$error.required">Email is required.</span>
+              <span ng-show="forgetPassForm.email.$error.email">Invalid email address.</span>
+            </span>
+        </label>
+        <br>
+        <center>
+        <button type="submit" ng-disabled="forgetPassForm.$invalid" ng-click="submitted=true" class=" btn btn-success" > Submit</button>
+        </center>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+@(mbdata: List[MiscBorrowing], showDeleteBtn: Boolean)
+@import views.helpers.FieldValue._
+
+@if(mbdata != null && !mbdata.isEmpty()) {
+<table id="viewMiscDetails" class="table table-striped">
+	<thead>
+		<tr>
+			<th class="rightAlignClass">Loan amount/donation/repayment</th>
+			<th class="rightAlignClass">Interest Rate</th>
+			<th class="rightAlignClass">Number Of Years</th>
+			<th class="rightAlignClass">Total Deduction</th>
+			<th class="rightAlignClass"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@for(miscB <- mbdata) {
+		  	<tr>
+				<td class="rightAlignClass">@fieldVal(miscB.amount,"NA")</td>
+				<td class="rightAlignClass">@fieldVal(miscB.interestRate,"NA")</td>
+				<td class="rightAlignClass">@fieldVal(miscB.numberOfYears,"NA")</td>
+				<td class="rightAlignClass">@fieldVal(miscB.totalDeduction,"NA")</td>
+				@if( showDeleteBtn){
+			  			<td class="rightAlignClass"><input type="button" id="btnMiscBorrowinDelete" class="btn btn-mini btn-danger" onclick="deleteAmntFrmFrndsFromList(@miscB.id)" value="X" style="font-weight: bold;"></td>
+			  	}else{<td></td>}
+			  	</tr>
+			}
+		</tbody>
+	</table>
+}	

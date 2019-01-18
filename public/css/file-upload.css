@@ -1,0 +1,26 @@
+*[file-upload] 
+{
+
+}
+
+*[file-upload] *
+{
+	margin: 0;
+}
+
+*[file-upload] button
+{
+	margin-right: 4px;
+}
+
+*[file-upload] p 
+{
+	margin: 3px 0;
+}
+
+*[file-upload] div[progress] 
+{
+	height: 8px;
+	margin-top: 5px;
+	width: 200px;
+}

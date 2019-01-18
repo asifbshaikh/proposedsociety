@@ -1,0 +1,31 @@
+@(user: User, agents: List[AgentForm])
+	<hr/>
+	@if(agents.isEmpty()){
+		<div>
+				<h3>No agent found</h3>
+		</div>
+		}else{
+	<table id="viewBankDetails" class="table table-striped">
+			<thead>
+				<tr>	
+			  		<th class="leftAlignClass">Agent Name</th>
+			  		<th class="leftAlignClass">Email Id</th>
+			  		<th class="leftAlignClass">Mobile No</th>
+			  		<th class="leftAlignClass">Office No</th>
+			  		<th class="leftAlignClass">Office Address</th>
+				 </tr>
+			</thead>
+			<tbody>
+				@for(currentUsr <- agents) {
+				  	<tr>
+				  		<td class="leftAlignClass">@if(currentUsr.fname != null){@currentUsr.fname}else{} @if(currentUsr.lname != null){@currentUsr.lname}else{}</td>
+				  		<td class="leftAlignClass">@if(currentUsr.email != null){@currentUsr.email}else{}</td>				  		
+						<td class="leftAlignClass">@if(currentUsr.phone1 != null){@currentUsr.phone1}else{}</td>
+						<td class="leftAlignClass">@if(currentUsr.off_phone1 != null){@currentUsr.off_phone1}else{}</td>
+						<td class="leftAlignClass">@if(currentUsr.office_address.line1 != null){@currentUsr.office_address.line1}else{},@if(currentUsr.office_address.line2 != null){@currentUsr.office_address.line2}else{},
+						<br>@if(currentUsr.office_address.street != null){@currentUsr.office_address.street}else{} <br>city- @if(currentUsr.office_address.city != null){@currentUsr.office_address.city}else{},pin- @if(currentUsr.office_address.pin != null){@currentUsr.office_address.pin}else{}</td>				  		
+					</tr>
+				}
+			</tbody>
+	</table>
+}

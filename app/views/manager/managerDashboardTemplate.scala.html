@@ -1,0 +1,17 @@
+@(title : String ,user : User,scriptFiles :Seq[Call]=Seq.empty, cssFiles :Seq[Call] = Seq.empty)(body :Html)
+
+@sub_menu = {
+	<li><a href=@routes.ManagerUserController.dashboard>Manager Home</a></li>
+	<li><a href=@routes.ManagerUserController.applicantListForManager>Find Applicant</a></li>
+	
+	<!-- Not working submenu on this page, please correct it -->
+	<!-- <li><a href=/member/changePassword/Manager>Change Password</a></li> -->
+	
+	<!-- <li><a href="@@routes.ManagerUserController.searchApplicantBy">Search Applicant By Budget</a></li> -->
+	<li><a href="@routes.UserController.logout">Logout</a></li>
+}
+
+@baseDashboardTemplate(title,scriptFiles,cssFiles, user,sub_menu){
+	<h1>Manager Dashboard</h1><hr/>	
+		@body
+}

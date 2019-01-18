@@ -1,0 +1,67 @@
+@(user: User, form: Form[PaymentCode])
+
+@import helper.twitterBootstrap._
+
+<!DOCTYPE html>
+
+<html>
+@views.html.dashboard.head("New Payment Code") {
+<style>
+        #form-container {
+            width: 500px;
+            margin: 10px auto;
+            min-height: 300px;
+        }
+
+        .form-horizontal {
+            display: inline-block;
+        }
+
+        .form-horizontal input[type=submit] {
+            float: right;
+        }
+
+        .form-horizontal > div > label {
+            width: 100px;
+        }
+
+        .form-horizontal > div {
+            margin-bottom: 10px;
+        }
+
+        .form-horizontal > div > label:first-letter {
+            text-transform: capitalize;
+        }
+
+        .form-horizontal > div > label,  .form-horizontal > div > div {
+            display: inline-block;
+        }
+
+        .form-horizontal .help-inline, .form-horizontal .help-block {
+            display: none;
+        }
+
+        .error label:AFTER {
+            content: " *";
+            color: red;
+        }
+    </style>
+}
+    
+@views.html.dashboard.body(user) {
+     <div class="cms form_process">
+         <h2>New payment code</h2>
+         <hr/>
+         <div id="form-container">
+             @helper.form(action = routes.PaymentCodeController.newPaymentCodeSubmit(), 'class -> "form-horizontal") {
+                 @helper.inputText(form("name"))
+                 @helper.inputText(form("email"))
+                 @helper.inputText(form("mobile"))
+                 @helper.inputText(form("Amount"))
+                 <input type="submit" value="Generate" class="btn btn-pink"/>
+             }
+         </div>
+     </div>
+}
+</html>
+                           

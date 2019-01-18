@@ -1,0 +1,225 @@
+@(summary: Form[Summary], 
+budgetValues: BudgetValues, user : User)
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Budget - Summary", 5) {
+		@helper.form(action = routes.ApplicationFormController.summaryPageSubmit, 'class -> "form-horizontal") {
+			<div id="budgetSummaryDiv">
+			<h1>Budget Summary As Per The Information Provided By Applicant
+			 	<a href="@routes.ApplicationFormController.closingFinishDetails" class="btn btn-large btn-pink backBtn" style="color: white; "> Back</a>
+			</h1>
+			<hr/>
+				<div id="summaryDiv">
+					<h2>Addition</h2>
+					<div >
+						<table id="summaryTable" class="table table-striped">
+							<tr>
+								<td style="width:450px;"> Approximate Loan Eligiblity</td>
+								<td>Rs. @budgetValues.approx_loan_elgblty </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">Total balance of all banks</td>
+								<td>Rs. @budgetValues.all_bank_accounts_bal </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All FD's Summary Amount</td>
+								<td>Rs. @budgetValues.total_of_all_fd_amounts </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All RD's Summary Amount</td>
+								<td>Rs. @budgetValues.total_of_all_rd_amounts </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All Insurances summary Amount</td>
+								<td>Rs. @budgetValues.total_of_all_insu_amounts_maturing_in_2_months </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All Existing Properties selling Amount</td>
+								<td>Rs. @budgetValues.total_of_all_property_sell_amounts </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All amount summary to be borrowed by Relatives/Friend</td>
+								<td>Rs. @budgetValues.total_of_all_loans_from_friends </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All donation amount by Relatives/Friend</td>
+								<td>Rs. @budgetValues.total_of_all_donations_from_friends </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All of previously given amount returned by Relatives/Friend</td>
+								<td>Rs. @budgetValues.total_of_all_money_owed </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">All Of Assumed Cash With You</td>
+								<td>Rs. @budgetValues.total_of_assumed_cash_with_you </td>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<table class="table table-striped">
+							<tr>
+								<td style="width:450px;"><b>Total addition of budget</b></td>
+								<td>Rs. @budgetValues.total_addition_of_budget </td>
+							</tr>
+						</table>
+					</div>
+					<div >
+						<h2>Deduction</h2>
+						<hr/>
+						<table class="table table-striped">
+							<tr>
+								<td style="width:450px;">1)Loan amount of Applicant</td>
+								<td>Rs. @budgetValues.applicants_total_deduction_loan_amounts </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">2))Loan amount of Co-Applicant </td>
+								<td>Rs. @budgetValues.co_applicants_total_deduction_loan_amounts </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">3)All Bank Loan And Other Deduction Balance Summary Amount</td>
+								<td>Rs. @budgetValues.all_bank_accounts_deductions_in_year </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">4)All FD's Loan Deduction Balance Summary Amount</td>
+								<td>Rs. @budgetValues.total_fds_deduction_loan_amount </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">5)All RD's Deductions Summary Amount</td>
+								<td>Rs. @budgetValues.total_deduction_loan_amount_from_rds </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">6)All Insurances Loan Deduction Balance Summary Amount </td>
+								<td>Rs. @budgetValues.total_bal_insu_amnt_of_all_insurances </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">7)All Existing Property Loan Deduction Balance Summary Amount</td>
+								<td>Rs. @budgetValues.total_deduction_loan_amount_from_properties </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">8)All  loan from Relatives deduction amount</td>
+								<td>Rs. @budgetValues.total_deduction_loan_amount_from_misc_b </td>
+							</tr>
+						</table>
+						<table class="table table-striped">
+							<tr>
+								<td style="width:450px;"><b>Total deduction From budget</b></td>
+								<td>Rs. @budgetValues.total_deduction_of_budget </td>
+							</tr>
+						</table>
+					</div>
+					<hr/>
+					<div >
+						<h2>Allocation</h2>
+						</hr>
+						<table class="table table-striped">
+							<tr>
+								<td style="width:450px;">1) Approximate Loan Eligiblity</td>
+								<td>Rs. @budgetValues.approx_loan_elgblty </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">2)Total Allocation From All Bank Accounts</td>
+								<td>Rs. @budgetValues.all_bank_accounts_amnt_allocated </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">3)Total Allocation From All FDs</td>
+								<td>Rs. @budgetValues.total_allocation_from_all_fds </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">4)Total Allocation From All RDs</td>
+								<td>Rs. @budgetValues.total_allocation_from_all_rds </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">5)Total Allocation From All insurances</td>
+								<td>Rs. @budgetValues.total_allocation_from_all_insurances </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">6)Total Allocation From All Properties</td>
+								<td>Rs. @budgetValues.total_allocation_from_all_properties </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">7)Total Allocation From Friend As Loan</td>
+								<td>Rs. @budgetValues.total_of_all_allocations_from_friend_as_loan </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">8)All donation amount by Relatives/Friend</td>
+								<td>Rs. @budgetValues.total_of_all_donations_from_friends </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">9)All of previously given amount returned by Relatives/Friend</td>
+								<td>Rs. @budgetValues.total_of_all_money_owed </td>
+							</tr>
+							<tr>
+								<td style="width:450px;">10)Total Allocation Of Assumed Cash with you</td>
+								<td>Rs. @budgetValues.total_of_assumed_cash_with_you </td>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<table class="table table-striped">
+							<tr>
+								<td style="width:450px;"><b>Total Allocation For Cosideration</b></td>
+								<td>Rs. @budgetValues.total_allocation_for_budget </td>
+							</tr>
+						</table>
+					</div>
+					<hr/>
+				<div>
+					<table class="table table-striped">
+						<tr>
+							<td style="width:450px;"><b>Total Maximum Budget Possible(Total addition - Total deduction)</b></td>
+							<td>Rs. @budgetValues.total_max_budget_calculated </td>
+						</tr>
+						<tr>
+							<td style="width:450px;">I Accept Above Calculation</td>
+							<td>@form.horizontalRadioGroup(summary("iAccptAbvCal"), options = Seq("Y" -> "Yes", "N" -> "No"))</td>
+						</tr>
+					</table>
+				</div>
+				<div >
+					<hr/>
+					<b>Mark the fields which you don't want to consider in the budget of Searching property</b>
+					<table class="table table-striped">
+						<tr><td>Summary  As per the given information by Applicant</td></tr>
+						<tr><td><b>Addition</b></td></tr>
+						<tr><td>@helper.checkbox(field = summary("approxLoanEli"))1) Approximate Loan Eligiblity:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("allBankBalSummAmnt"))2)All Bank Balance Summary Amount:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("cashBalance"))3)Cash balance with you:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("allFdSummAmnt"))4)All FD's Summary Amount: </td></tr>
+						<tr><td>@helper.checkbox(field = summary("allRdSummAmnt"))5)All RD's Summary Amount:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("allInsuranceSummAmnt"))6)All Insurances summary Amount:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("sellingSummAmnt"))7)All Existing Properties selling  Summary Amount:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("borrowedSummary"))8)All amount summary to be borrowed by Relatives/Friend:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("donationSummary"))9)All donation amount by Relatives/Friend:</td></tr>
+						<tr><td>@helper.checkbox(field = summary("returnedAmount"))10)All of previously given amount returned by Relatives/Friend:</td></tr>
+					</table>
+				</div>
+				<div id="divForClearfix">
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-large btn-pink">Recalculate</button>
+				</div>
+				<!--
+					<div>
+						<table>
+							<tr>
+								<td style="width:600px;"><label for="TotlBudgetCal2"><b>Total budget calculated(Total addition - Total deduction)</b></td>
+								<td>- </td>
+							</tr>
+						</table>
+					</div>
+				-->
+				<div class="form-actions">
+					<a href="@routes.ApplicationFormController.closingFinishDetails" class="btn btn-large btn-pink" align="right">Back</a>	
+					@if(user.isCreatedByAgent()){
+						<a href="@routes.ApplicationFormController.getPaymentMode" class="btn btn-large btn-pink" align="right">Next</a>
+					}else{
+						<a href="@routes.ApplicationFormController.payment" class="btn btn-large btn-pink" align="right">Next</a>
+					}
+					
+				</div>
+			</div>
+		}
+}

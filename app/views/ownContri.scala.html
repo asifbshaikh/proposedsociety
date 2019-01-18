@@ -1,0 +1,490 @@
+<html>
+	<head>
+		<title>Welcome to Proposed Society</title>
+		<link href='http://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/home.css")"></link>
+		<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript">
+		    function ageCount() {
+		        var date1 = new Date();
+		        var  dob= document.getElementById("dob").value;
+		        var date2=new Date(dob);
+		        var pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/; //Regex to validate date format (dd/mm/yyyy)
+		        if (pattern.test(dob)) {
+		            var y1 = date1.getFullYear(); //getting current year
+		            var y2 = date2.getFullYear(); //getting dob year
+		            var age = y1 - y2;           //calculating age 
+		            document.write("Age : " + age);
+		            return true;
+		        } else {
+		            alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
+		            return false;
+		        }
+		    }
+		    function showDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="block";
+			}
+		    function hideDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="none";
+			}
+		    function generate(){
+			    var tot = document.getElementById("Dependents").value;
+			    var tbl = document.getElementById("flexibleDiv");
+			    for(var i =1;i<=tot;i++){
+				    var temp1='dependentsName';
+				    var txtid1 =temp1.concat(i);
+				    //alert(txtid1);
+				    var temp2='rltnWithAppl';
+				    var txtid2 =temp2.concat(i);
+				    //alert(txtid2);
+				      tbl.innerHTML  = tbl.innerHTML  +'Name Of The Dependent Person '+i+' :'+' <input type="text" name="dependent" id='+txtid1+'> \n'+'His/Her Relation with The Applicant :'+' <input type="text" name="relation" id='+txtid2+'> <br> \n';
+			    }
+		    }
+		</script>
+	</head>
+	<body>
+		<header class="header">
+			<div class="headerwrap">
+				<img class="logo" alt="Logo" src="@routes.Assets.at("images/logo-very-small.png")"/>
+				<nav>
+					<ul class="quickmenu menu">
+						<li>More</li>
+						<li>Home</li>
+					</ul>
+					<div class="clear"></div>
+					<ul class="mainmenu menu">
+						<li><a href="#">Membership</a></li>
+						<li><a href="#">Benefits</a></li>
+						<li><a href="#">Concept</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+			<div class="formwrap">
+				<p class="formheading">Own Contribution</p>
+				<form method="POST" action="#">
+					<label><b>My Saving :</b></label><br/>	
+					<ul>
+						<li>
+							<div class="bankBalanceDiv">
+								<label><b>1 Bank Balance:</b></label> 
+								<input type="radio" name="bankBalance" id="bankBalanceYes" value="bankBalanceYes">Yes
+								<input type="radio" name="bankBalance" id="bankBalanceYes" value="bankBalanceYes" checked="checked">No
+								//TODO: If selected radio button is Yes<br/>
+								<Div>
+									<label for="NameOfBank">Name of the Bank :</label>
+									<input type="text" name="NameOfBank" id="NameOfBank" placeholder="Name of the Bank.." label="NameOfBank" pattern="[A-Za-z]*" required>
+									<label for="accountNumber">Account Number :</label>
+									<input type="text" name="accountNumber" id="accountNumber" placeholder="Account Number.." label="accountNumber" pattern="[0-9]*" required>
+									<label for="balanceAmount">Balance Amount :</label>
+									<input type="text" name="balanceAmount" id="balanceAmount" placeholder="Balance Amount.." label="balanceAmount" pattern="[0-9]*" required>
+									<label>Any deduction directly from the Bank Account ? :</label>
+									<input type="radio" name="deduction" value="deductionYes" >Yes
+									<input type="radio" name="deduction" value="deductionNO" checked="checked">No
+									//TODO: if radio button selected is Yes<br/>
+									<div class="SelectedDeductionYes">
+										<label>Is it loan and/or other regular deduction(Light Bill,Phone Bill etc.)? :</label>
+										<input type="checkbox" name="Loan" value="Loan">Loan: <br>
+										//TODO: If Loan Option is selected<br/>
+										<div>
+											<label for="">Monthly EMI amount(Rupees) :</label>
+											<input type="text" name="MnthEMIAmnt" id="MnthEMIAmnt" placeholder="Monthly EMI amount(Rupees).." label="MnthEMIAmnt" pattern="[0-9]*" required>
+											<label for="balInstallmnets">Number of Balance Installments :</label>
+											<input type="text" name="balInstallmnets" id="balInstallmnets" placeholder="Number of Balance Installments.." label="balInstallmnets" pattern="[0-9]*" required>
+											//TODO: Total Balance Loan Amount:(Rupees) : (EMI*Balance Installments)<br/>
+											<label for="TotlBalLoanAmnt">Total Balance Loan Amount:(Rupees) :</label>
+											<input type="text" name="TotlBalLoanAmnt" id="TotlBalLoanAmnt" placeholder="Total Balance Loan Amount:(Rupees).." label="TotlBalLoanAmnt" pattern="[0-9]*" required>
+										</div>
+										<input type="checkbox" name="Other" value="Other">:Other <br>
+										<div>
+											<label for="TotlmnthAvgD">Total monthly average deduction amount(Rupees) :</label>
+											//TODO: Total monthly average deduction amount:(Rupees)((-)-*1)<br/>
+											<input type="text" name="TotlmnthAvgD" id="TotlmnthAvgD" placeholder=".." label="TotlmnthAvgD" pattern="[0-9]*" required>
+											<input type="button"  value="ADD" onclick=""/><br/>
+										</div>
+									</div>
+									<input type="button"  value="ADD" onclick=""/><br/>
+									<label for="amountToBeUsed">How much amount from your bank balance you would like use for searching property purpose?:(Rupees) :</label>
+									<input type="text" name="amountToBeUsed" id="amountToBeUsed" placeholder="amount To Be Used.." label="amountToBeUsed" pattern="[0-9]*" required>
+									//TODO: Following 2 textboxes are for calculation<br/>
+									<label for="totlBalSummary">Total Bank Balance Summary Amount(Rupees) :</label>
+									<input type="text" name="totlBalSummary" id="totlBalSummary" placeholder="Total Bank Balance Summary Amount(Rupees).." label="totlBalSummary" pattern="[0-9]*" required>
+									<label for="totlBankLoanDed">Total Bank Loan Deduction Balance Summary Amount(Rupees) :</label>
+									<input type="text" name="totlBankLoanDed" id="totlBankLoanDed" placeholder="Total Bank Loan Deduction Balance Summary Amount(Rupees).." label="totlBankLoanDed" pattern="[0-9]*" required>
+								</div>
+							</div>
+						</li>		
+						<li>
+							<div class="cashBalanceDiv">
+								<label><b>2 Cash Balance:</b></label> 
+								<input type="radio" name="cashBalance" id="cashBalanceYes" value="cashBalanceYes">Yes
+								<input type="radio" name="cashBalance" id="cashBalanceYes" value="cashBalanceYes" checked="checked">No
+								//TODO: If selected radio button(cashBalanceDiv) is Yes<br/>
+								<div class="cashInHandDiv">
+									<label for="cashInHand">Cash in Hand(Rupees) :</label>
+									<input type="text" name="cashInHand" id="cashInHand" placeholder="Cash in Hand(Rupees).." label="cashInHand" pattern="[0-9]*" required>
+									<label for="cashToBeUsed">How much amount from above cash you would like use for searching property purpose?(Rupees) :</label>
+									<input type="text" name="cashToBeUsed" id="cashToBeUsed" placeholder="Cash to be used(Rupees).." label="cashToBeUsed" pattern="[0-9]*" required>
+								</div>
+							</div>
+						</li><br/>
+						<li>
+							<div class="fixedDepositDiv">
+								<label><b>3 Fixed Deposit :</b></label> 
+								<input type="radio" name="fixedDeposit" id="fixedDepositYes" value="fixedDepositYes">Yes
+								<input type="radio" name="fixedDeposit" id="fixedDepositNo" value="fixedDepositNo" checked="checked">No
+								//TODO:  If selected radio button(Fixed Deposite) is Yes<br/>
+								<div>
+									<label><b>FD Details :</b></label><br/>
+									<label for="NameOfDpstHldr">Name of Deposit Holder :</label>
+									<input type="text" name="NameOfDpstHldr" id="NameOfDpstHldr" placeholder="Name of Deposit Holder.." label="NameOfDpstHldr" pattern="[A-Za-z]*" required>
+									<label for="NameOfBnkOrCmpny">Name of the Bank/Company :</label>
+									<input type="text" name="NameOfBnkOrCmpny" id="NameOfBnkOrCmpny" placeholder="Name of the Bank/Company.." label="NameOfBnkOrCmpny" pattern="[A-Za-z]*" required>
+									//TODO: "Date of Deposit: (dd/mm/yyyy) calendar" and "Date of Maturity: (dd/mm/yyyy) calendar" are remaining to be added.<br/> 
+									<label for="PrincipalAmount">Principal Amount(Rupees) :</label>
+									<input type="text" name="PrincipalAmount" id="PrincipalAmount" placeholder="Principal Amount.." label="PrincipalAmount" pattern="[0-9]*" required>
+									<label for="InterestRate">Interest Rate(%) :</label>
+									<input type="text" name="InterestRate" id="InterestRate" placeholder="Interest Rate(%).." label="InterestRate" pattern="[0-9]*" required>
+									<label for="AmntRcvble">Amount receivable on maturity date(Rupees) :</label>
+									<input type="text" name="AmntRcvble" id="AmntRcvble" placeholder="Amount receivable on maturity date(Rupees).." label="AmntRcvble" pattern="[0-9]*" required>
+									<label>Have you taken any Loan on FD? :</label>
+									<input type="radio" name="TaknLoanOnFD" value="TaknLoanOnFDYes" >Yes
+									<input type="radio" name="TaknLoanOnFD" value="TaknLoanOnFDNo" checked="checked">No
+									//TODO: If selected radio button(Have you taken any Loan on FD?) is Yes<br/>
+									<div>
+										<label for="TotlMnthlyDedctnFrSal">Total monthly installment amount deducted from your salary :</label>
+										<input type="text" name="TotlMnthlyDedctnFrSal" id="TotlMnthlyDedctnFrSal" placeholder="Total monthly installment amount deducted from your salary.." label="TotlMnthlyDedctnFrSal" pattern="[0-9]*" required>
+									</div>
+									//TODO: If selected radio button(Have you taken any Loan on FD?) is No<br/>
+									<div>
+										<label for="loanAmount">Loan Amount :</label>
+										<input type="text" name="loanAmount" id="loanAmount" placeholder="Loan Amount.." label="loanAmount" pattern="[0-9]*" required>
+										<label for="mntlyEMI">Monthly EMI Amount :</label>
+										<input type="text" name="mntlyEMI" id="mntlyEMI" placeholder="Monthly EMI Amount.." label="mntlyEMI" pattern="[0-9]*" required>
+										<label for="NoOfPaidInstl">Number of Paid Installments :</label>
+										<input type="text" name="NoOfPaidInstl" id="NoOfPaidInstl" placeholder="Number of Paid Installments.." label="NoOfPaidInstl" pattern="[0-9]*" required>
+										<label for="NoOfBalInstl">Number of Balance Installments :</label>
+										<input type="text" name="NoOfBalInstl" id="NoOfBalInstl" placeholder="Number of Balance Installments.." label="NoOfBalInstl" pattern="[0-9]*" required>
+										<label> Are you willing to use your fixed deposit for searching property purpose?:</label>
+										<input type="radio" name="useYourFd" value="useYourFdYes" >Yes
+										<input type="radio" name="useYourFd" value="useYourFdNo" checked="checked">No
+										//TODO: If selected radio button(Are you willing to use your fixed deposit for searching property purpose?) is Yes<br/>
+										<div>
+											<label for="availFrmFncr">Total Fixed Deposit Amount you can avail from financer/bank? :</label>
+											<input type="text" name="availFrmFncr" id="availFrmFncr" placeholder=".." label="availFrmFncr" pattern="[0-9]*" required>
+											<label for="amntOfFD">How much amount from your FD would you like to use for searching property purpose?(Rupees) :</label>
+											<input type="text" name="amntOfFD" id="amntOfFD" placeholder="FD to be used.." label="amntOfFD" pattern="[0-9]*" required>
+										</div>
+										//TODO: If selected radio button(Are you willing to use your fixed deposit for searching property purpose?) is Yes<br/>
+										<div>
+											<label for="AmntDedctd">Amount deducted:(Rupees) :</label>
+											<input type="text" name="AmntDedctd" id="AmntDedctd" placeholder="Amount deducted:(Rupees).." label="AmntDedctd" pattern="[0-9]*" required>
+										</div>
+										//TODO: Following 2 textboxes are for calculation<br/> 
+										<label for="TotlFDSmmryAmnt">Total FD Summary Amount(Rupees) :</label>
+										<input type="text" name="TotlFDSmmryAmnt" id="TotlFDSmmryAmnt" placeholder="Total FD Summary Amount(Rupees).." label="TotlFDSmmryAmnt" pattern="[0-9]*" required>
+										<label for="totlLoanDBSA">Total FD Loan Deduction Balance Summary Amount(Rupees) :</label>
+										<input type="text" name="totlLoanDBSA" id="totlLoanDBSA" placeholder="Total FD Loan Deduction Balance Summary Amount(Rupees).." label="totlLoanDBSA" pattern="[0-9]*" required>
+									</div>
+								</div>
+								<input type="button"  value="ADD" onclick=""/><br/>
+							</div>
+						</li><br/>
+						<li>
+							<div class="ReccuringDepositeDiv">
+								<label><b>4 Reccuring Deposite:</b></label> 
+								<input type="radio" name="ReccuringDeposite" id="ReccuringDepositeYes" value="ReccuringDepositeYes">Yes
+								<input type="radio" name="ReccuringDeposite" id="ReccuringDepositeNo" value="ReccuringDepositeNo" checked="checked">No
+								//TODO:  If selected radio button(Reccuring Deposite) is Yes<br/>
+								<div>
+									<label><b>RD Details :</b></label><br/>
+									<label for="NmOfDepstHldr">Name of Deposit Holder :</label>
+									<input type="text" name="NmOfDepstHldr" id="NmOfDepstHldr" placeholder="Name of Deposit Holder.." label="NmOfDepstHldr" pattern="[A-Za-z]*" required>
+									<label for="NmOfBnk">Name of the Bank/Company :</label>
+									<input type="text" name="NmOfBnk" id="NmOfBnk" placeholder="Name of the Bank/Company.." label="NmOfBnk" pattern="[A-Za-z]*" required>
+									//TODO: "Plan Start Date: (dd/mm/yyyy) calendar" and "Plan Validity Date: (dd/mm/yyyy) calendar" are remaining to be added.<br/>
+									<label for="instlmntPerMnth">Installment Amount per month: (Rupees) :</label>
+									<input type="text" name="instlmntPerMnth" id="instlmntPerMnth" placeholder="Installment Amount per month(Rupees).." label="instlmntPerMnth" pattern="[0-9]*" required>
+									<label for="instlmntPaidUpt">Installment Paid Upto(Months) :</label>
+									<input type="text" name="instlmntPaidUpt" id="instlmntPaidUpt" placeholder="Installment Paid Upto(Months).." label="instlmntPaidUpt" pattern="[A-Za-z0-9]*" required>
+									<label for="balInstllmnts">Balance Installments(Months) :</label>
+									<input type="text" name="balInstllmnts" id="balInstllmnts" placeholder="Balance Installments(Months).." label="balInstllmnts" pattern="[A-Za-z0-9]*" required>
+									<label for="PrinAmou">Principal Amount(Rupees) :</label>
+									<input type="text" name="PrinAmou" id="PrinAmou" placeholder="Principal Amount(Rupees).." label="PrinAmou" pattern="[0-9]*" required>
+									<label for="InterestRate">Interest Rate(%) :</label>
+									<input type="text" name="InterestRate" id="InterestRate" placeholder="Interest Rate(%).." label="InterestRate" pattern="[0-9]*" required>
+									<label for="rcvblOnMaturt">Amount Receivable on Maturity Date(Rupees) :</label>
+									<input type="text" name="rcvblOnMaturt" id="rcvblOnMaturt" placeholder="Amount Receivable on Maturity Date(Rupees).." label="rcvblOnMaturt" pattern="[0-9]*" required>
+									<label> Are you planning to close your Recurring Deposit scheme for investing in a property?:</label>
+										<input type="radio" name="useYourRd" value="useYourRdYes" >Yes
+										<input type="radio" name="useYourRd" value="useYourRdNo" checked="checked">No
+										//TODO: If selected radio button(Are you planning to close your Recurring Deposit scheme for investing in a property?) is Yes<br/>
+										<div>
+											<label for="TotlRDAmnt">Total Recurring Deposit Amount you can avail from financer/bank for property purpose(Rupees) :</label>
+											<input type="text" name="TotlRDAmnt" id="TotlRDAmnt" placeholder="RdCanBeAvailed.." label="" pattern="[0-9]*" required>
+											<label for="RdToBeUsed">How much amount from your R.D. you would like to use for property purpose?(Rupees) :</label>
+											<input type="text" name="RdToBeUsed" id="RdToBeUsed" placeholder="RdToBeUsed.." label="RdToBeUsed" pattern="[0-9]*" required>
+										</div>	
+								</div>
+								<input type="button"  value="AddMoreRD" onclick=""/><br/>
+							</div>
+						</li><br/>			
+						<li>
+							<div class="InsuranceDetailsDiv">
+								<label><b>5 Insurance Details:</b></label> 
+								<input type="radio" name="InsuranceDetails" id="InsuranceDetailsYes" value="InsuranceDetailsYes">Yes
+								<input type="radio" name="InsuranceDetails" id="InsuranceDetailsNo" value="InsuranceDetailsNo" checked="checked">No
+								//TODO:  If selected radio button(Reccuring Deposite) is Yes<br/>
+								<div>
+									<label>Name of Insurance Holder :</label>
+									<input type="text" name="" id="" placeholder="Name of Insurance Holder.." label="" pattern="[A-Za-z]*" required>
+									<label for="">Name of the Insurance Company :</label>
+									<input type="text" name="" id="" placeholder="Name of the Insurance Company.." label="" pattern="[A-Za-z]*" required>
+									<label for="">Sum Assured Amount(Rupees) :</label>
+									//TODO: "Insurance Opening Date: (dd/mm/yyyy) calendar" and "Date of Maturity: (dd/mm/yyyy) calendar" are remaining to be added.<br/>
+									<input type="text" name="" id="" placeholder="Sum Assured Amount(Rupees).." label="" pattern="[A-Za-z]*" required>
+									<label for="dtsWhnPrmPayable">Dates When Premium Payable :</label>
+									<select name="dtsWhnPrmPayable" id="dtsWhnPrmPayable">
+									  <option value="Monthly">Monthly</option>
+									  <option value="Quarterly">Quarterly</option>
+									  <option value="Half yearly">Half yearly</option>
+									  <option value="Yearly">Yearly</option>
+									</select>
+									<label for="">Insurance Premium Amount(Rupees) :</label>
+									<input type="text" name="" id="" placeholder="Insurance Premium Amount(Rupees).." label="" pattern="[A-Za-z]*" required>
+									<label for="">Number of Premiums Paid :</label>
+									<input type="text" name="" id="" placeholder="Number of Premiums Paid.." label="" pattern="[A-Za-z]*" required>
+									<label for="">Premium Balance :</label>
+									<input type="text" name="" id="" placeholder="Premium Balance.." label="" pattern="[A-Za-z]*" required>
+									<label for="">Amount Receivable on Maturity Date(Rupees) :</label>
+									<input type="text" name="" id="" placeholder="Amount Receivable on Maturity Date(Rupees).." label="" pattern="[A-Za-z]*" required>
+									<label>Total monthly installment amount deducted from your salary :</label>
+									<input type="radio" name="deductnFrmSal" value="deductnFrmSalYes" >Yes
+									<input type="radio" name="deductnFrmSal" value="deductnFrmSalNo" checked="checked">No
+									//TODO: If selected radio button(deduction From Salary) is No<br/>
+									<div>
+										<label for="dtsWhnPrmPble">Dates When Premium Payable :</label>
+										<select name="dtsWhnPrmPble" id="dtsWhnPrmPble">
+										  <option value="Monthly">Monthly</option>
+										  <option value="Quarterly">Quarterly</option>
+										  <option value="Half yearly">Half yearly</option>
+										  <option value="Yearly">Yearly</option>
+										</select>
+										<label for="insrncPrmumAmnt">Insurance Premium Amount(Rupees) :</label>
+										<input type="text" name="insrncPrmumAmnt" id="insrncPrmumAmnt" placeholder="Insurance Premium Amount(Rupees).." label="insrncPrmumAmnt" pattern="[0-9]*" required>
+										<label for="NoOfBalPrmum">Number of balance premium :</label>
+										<input type="text" name="NoOfBalPrmum" id="NoOfBalPrmum" placeholder="Number of balance premium.." label="NoOfBalPrmum" pattern="[0-9]*" required>
+                                        //TODO: Total Balance Insurance Amount:(Rupees)(Balance premium no.*Insurance premium amount)<br/>
+										<label for="ttlBalInsuAmnt">Total Balance Insurance Amount :</label>
+										<input type="text" name="ttlBalInsuAmnt" id="ttlBalInsuAmnt" placeholder="Total Balance Insurance Amount.." label="ttlBalInsuAmnt" pattern="[0-9]*" required>
+									</div>
+									<label>Will you be receiving any matured insurance amount in next two months from any insurance company?(Rupees) :</label>
+									<input type="radio" name="anyMtrdInsrnc" value="anyMtrdInsrncYes" >Yes
+									<input type="radio" name="anyMtrdInsrnc" value="anyMtrdInsrncNo" checked="checked">No
+									// TODO: If selected radio button(deduction From Salary) is Yes<br/>
+									<div>
+										<label for="AmntToBeUsed">How much amount would you like to use for property?(Rupees) :</label>
+										<input type="text" name="AmntToBeUsed" id="AmntToBeUsed" placeholder="How much amount would you like to use for property?(Rupees).." label="AmntToBeUsed" pattern="[0-9]*" required>
+									</div>
+									<label for="TotlInsuSumAmou">Total Insurances summary Amount(Rupees) :</label>
+									<input type="text" name="TotlInsuSumAmou" id="TotlInsuSumAmou" placeholder="Total Insurances summary Amount(Rupees).." label="TotlInsuSumAmou" pattern="[0-9]*" required>
+									<label for="LoanDedctn">Total Insurances Loan Deduction Balance Summary Amount(Rupees) :</label>
+									<input type="text" name="LoanDedctn" id="LoanDedctn" placeholder="Total Insurances Loan Deduction Balance Summary.." label="LoanDedctn" pattern="[0-9]*" required>
+								</div>
+								// TODO: Delete Insurence Details Button :<br/>
+								<input type="button"  value="Delete" onclick=""/><br/>
+							</div>
+						</li>
+						<li>
+							<div class="IncmExstngPrprtyDiv">
+								<label><b>6 Income from sale of existing property:</b></label> 
+								<input type="radio" name="IncmExstngPrprty" id="IncmExstngPrprtyYes" value="IncmExstngPrprtyYes">Yes
+								<input type="radio" name="IncmExstngPrprty" id="IncmExstngPrprtyNo" value="IncmExstngPrprtyNo" checked="checked">No
+								//TODO:  If selected radio button(Income from sale of existing property) is Yes<br/>
+								<div>
+									<label><b>Property Details :</b></label>
+									<div>
+										<label>Property Types :</label>
+										<input type="radio" name="PropertyTypes" value="AllResidential" checked="checked">All Residential
+										<input type="radio" name="PropertyTypes" value="AllCommercial" >All Commercial
+										<input type="radio" name="PropertyTypes" value="AllAgricultural" >All Agricultural<br/>
+										<label for="AllResidentialDrp">All Residential:</label>
+										<select name="AllResidentialDrp" id="AllResidentialDrp">
+											<option>Chawl Room</option>
+											<option>Flat/Terrace Flat</option>
+											<option>Duplex Flat</option>
+											<option>Pent House</option>
+											<option>Studio Apartment</option>
+											<option>Highrise Apartment</option>
+											<option>Independent Bungalow</option>
+											<option>Joint Banglow/Twin Bungalow</option>
+											<option>Row House</option>
+											<option>Row House Plot</option>
+											<option>Independent Bungalow Plot</option>
+											<option>Joint Bungalow Polt</option>
+											<option>Farm House</option>
+											<option>Farm House Plot</option>
+											<option>Holiday Home</option>
+											<option>Service Apartment</option>
+											<option>Villa</option>
+											<option>Second Home</option>
+											<option>Other</option>
+										</select>
+										<label for="AllCommercialDrp">All Commercial:</label>
+										<select name="AllCommercialDrp" id="AllCommercialDrp">
+											<option>Shop</option>
+											<option>Office in IT park/Sez</option>
+											<option>Commercial Land</option>
+											<option>Commercial Office/Space</option>
+											<option>Commercial Showroom</option>
+											<option>Kiosk</option>
+											<option>Constructed Hotel Space</option>
+											<option>Hotel Plot</option>
+											<option>Guest House</option>
+											<option>Business Center/Business Park</option>
+											<option>Warehouse</option>
+											<option>Industrial Land</option>
+											<option>Industrial Building</option>
+											<option>Industrial Shed</option>
+											<option>Benquet Hall</option>
+											<option>Space in Retail Mall</option>
+											<option>Godown</option>
+											<option>Cold Storage</option>
+											<option>Factory</option>
+											<option>Manufacturing Unit</option>
+										</select>
+										<label for="AllAgriculturalDrp">All Agricultural:</label>
+										<select name="AllAgriculturalDrp" id="AllAgriculturalDrp">
+											<option>Agricultural Land</option>
+											<option>Farm Land</option>
+											<option>Ready Farm House</option>
+											<option>Other</option>
+										</select>
+									</div>
+									<label for="">Property Area :</label>
+									<input type="text" name="PropertyArea" id="PropertyArea" placeholder="Property Area.." label="PropertyArea" pattern="[0-9]*" required>
+									<select name="PropertyAreaUnit" id="PropertyAreaUnit">
+										<option>sq.ft.</option>
+										<option>Acres</option>
+										<option>Guntha</option>
+									</select>
+									<label for="">Property Location :</label>
+									<label for="City">City :</label>
+									<input type="text" name="City" id="City" placeholder="City.." label="City" pattern="[A-Za-z]*" required>
+									<label for="">Taluka :</label>
+									<input type="text" name="Taluka" id="Taluka" placeholder="Taluka.." label="Taluka" pattern="[A-Za-z]*" required>
+									<label for="">District :</label>
+									<input type="text" name="District" id="District" placeholder="District.." label="District" pattern="[A-Za-z]*" required>
+									<label for="">State :</label>
+									<input type="text" name="State" id="State" placeholder="State.." label="State" pattern="[A-Za-z]*" required>
+									<label for="Country">Country :</label>
+									<input type="text" name="Country" id="Country" placeholder="Country.." label="Country" pattern="[A-Za-z]*" required>
+								</div>
+								<label>Have you taken any Loan on your existing property? :</label>
+								<input type="radio" name="TknLoanOnExstProp" value="Yes" checked="checked">Yes
+								<input type="radio" name="TknLoanOnExstProp" value="No" >No
+								//TODO:  If selected radio button(Have you taken any Loan on your existing property?) is Yes<br/>
+								<label>Your monthly installment amount deducted from your salary/Total Amount? :</label>
+								<input type="radio" name="mnthlySaldeductn" value="Yes" >Yes
+								<input type="radio" name="mnthlySaldeductn" value="No" checked="checked">No
+								//TODO:  If selected radio button(Your monthly installment amount deducted from your salary/Total Amount?) is No<br/>
+								<div>
+									<label>Please fill all taken loan details except shown in salary :</label>
+									<label for="NmOfFinancer">Name of the Financer:</label>
+									<input type="text" name="NmOfFinancer" id="NmOfFinancer" placeholder="Name of the Financer.." label="NmOfFinancer" pattern="[A-Za-z]*" required>
+									<label for="LoanAmnt">Loan Amount(Rupees) :</label>
+									<input type="text" name="LoanAmnt" id="LoanAmnt" placeholder="Loan Amount(Rupees).." label="LoanAmnt" pattern="[0-9]*" required>
+									<label for="mnthEMIAmnt">Monthly EMI Amount(Rupees) :</label>
+									<input type="text" name="mnthEMIAmnt" id="mnthEMIAmnt" placeholder="Monthly EMI Amount(Rupees).." label="mnthEMIAmnt" pattern="[0-9]*" required>
+									<label for="NoOfPaidInst">Number of Paid Installments :</label>
+									<input type="text" name="NoOfPaidInst" id="NoOfPaidInst" placeholder="Number of Paid Installments.." label="NoOfPaidInst" pattern="[0-9]*" required>
+									<label for="NoOfBalInst">Number of Balance Installments :</label>
+									<input type="text" name="NoOfBalInst" id="NoOfBalInst" placeholder="Number of Balance Installments.." label="NoOfBalInst" pattern="[0-9]*" required>
+									<label for="TotlLoanAmnt">Total Loan Balance Amount(Rupees)(EMI*Balance Installments) :</label>
+									<input type="text" name="TotlLoanAmnt" id="TotlLoanAmnt" placeholder="Total Loan Balance Amount(Rupees).." label="TotlLoanAmnt" pattern="[0-9]*" required>
+								</div>
+								<label>Are you ready to sell your existing property for investing in another property? :</label>
+								<input type="radio" name="sellYourExstProp" value="Yes" checked="checked">Yes
+								<input type="radio" name="sellYourExstProp" value="No" >No
+								//TODO:  If selected radio button(ready to sell your existing property for investing in another property?) is Yes<br/>
+								<div>
+									<label for="ExpctedLoanAmnt">Total amount expected from existing property(Rupees) :</label>
+									<input type="text" name="ExpctedLoanAmnt" id="ExpctedLoanAmnt" placeholder="Total amount expected from existing property(Rupees).." label="ExpctedLoanAmnt" pattern="[0-9]*" required>
+									<label for="totlAmntYouWouldUse">Total amount you would like to use for a property?(Rupees) :</label>
+									<input type="text" name="totlAmntYouWouldUse" id="totlAmntYouWouldUse" placeholder="Total amount you would like to use for a property?(Rupees).." label="totlAmntYouWouldUse" pattern="[0-9]*" required>
+								</div>
+								<label for="TotlPropSumAmou">Total Existing Property Summary Amount(Rupees) :</label>
+								<input type="text" name="TotlPropSumAmou" id="TotlPropSumAmou" placeholder="Total Existing Property Summary Amount(Rupees).." label="TotlpProSumAmou" pattern="[0-9]*" required>
+								<label for="PropLoanDedctn">Total Existing Property Loan Deduction Balance Summary Amount(Rupees) :</label>
+								<input type="text" name="PropLoanDedctn" id="PropLoanDedctn" placeholder="Total Existing Property Loan Deduction Balance Summary Amount.." label="PropLoanDedctn" pattern="[0-9]*" required>
+							</div>
+						<li>
+							<div class="ExpAmntFrmFrnds">
+								<label><b>7 Expected amount from friends/relative for buying a property:</b></label> 
+								<input type="radio" name="ExpAmntFrmFrnds" id="ExpAmntFrmFrndsYes" value="ExpAmntFrmFrndsYes" checked="checked">Yes
+								<input type="radio" name="ExpAmntFrmFrnds" id="ExpAmntFrmFrndsNo" value="ExpAmntFrmFrndsNo" >No
+								//TODO:  If selected radio button(Expected amount from friends/relative for buying a property) is Yes<br/>
+								<div>
+									<label><b>Amount expected from relatives/friends for buying a property :</b></label><br/>
+									<input type="checkbox" name="AsLoan" value="AsLoan">As Loan : <br>
+									<input type="checkbox" name="AsDonation" value="AsDonation">As Donation: <br>
+									<input type="checkbox" name="MoneyFrmOthers" value="MoneyFrmOthers">Will you be receiving any money that anybody owed you: <br>
+									//TODO:  If selected chechbox(As Loan) is ticked<br/>
+									<label for="HwMuchAmntFrmFrnds">How much amount of loan you can get from Relatives/Friend ?(Rupees) :</label>
+									<input type="text" name="HwMuchAmntFrmFrnds" id="HwMuchAmntFrmFrnds" placeholder="amount of loan you can get from Relatives/Friend ?.." label="HwMuchAmntFrmFrnds" pattern="[0-9]*" required>
+									<label for="intRate">Interest Rate(%) :</label>
+									<input type="text" name="intRate" id="intRate" placeholder="Interest Rate(%).." label="intRate" pattern="[A-Za-z0-9]*" required>
+									<label for="MonthlyEMI">Monthly EMI(Rupees) :</label>
+									<input type="text" name="MonthlyEMI" id="MonthlyEMI" placeholder="Monthly EMI.." label="MonthlyEMI" pattern="[0-9]*" required>
+									<label for="forHowManyYears">for How many years: :</label>
+									<input type="text" name="forHowManyYears" id="forHowManyYears" placeholder="for How Many Years.." label="forHowManyYears" pattern="[0-9]*" required>
+									<label for="DeductionAmnt">Total Loan Deduction Amount(Rupees) :</label>
+									<input type="text" name="DeductionAmnt" id="DeductionAmnt" placeholder="Total Loan Deduction Amount(Rupees).." label="DeductionAmnt" pattern="[0-9]*" required>
+									//TODO:  If selected chechbox(As Donation) is ticked<br/>
+									<label for="TotalamountRupees">Total amount(Rupees ) :</label>
+									<input type="text" name="TotalamountRupees" id="TotalamountRupees" placeholder="Total amount Rupees.." label="TotalamountRupees" pattern="[0-9]*" required>
+									//TODO:  If selected chechbox(Will you be receiving any money that anybody owed you) is ticked<br/>
+									<label for="HowMuchRupees">If yes, how much(Rupees ) :</label>
+									<input type="text" name="HowMuchRupees" id="HowMuchRupees" placeholder="Will you be receiving any money that anybody owed you.." label="HowMuchRupees" pattern="[0-9]*" required>
+								</div>
+								//TODO:  (Keep add button to add next/more Expected Details)<br/>
+								<label><b>Total Expected Amount from Friend/Relative Summary Amount :</b></label>
+								<label for="BorrowedMoney">Total amount summary to be borrowed(Rupees) :</label>
+								<input type="text" name="BorrowedMoney" id="BorrowedMoney" placeholder="Total amount summary to be borrowed(Rupees).." label="BorrowedMoney" pattern="[0-9]*" required>
+								<label for="RelDedAmnt">Total  loan of Relatives deduction amount(Rupees) :</label>
+								<input type="text" name="RelDedAmnt" id="RelDedAmnt" placeholder="Total  loan of Relatives deduction amount(Rupees).." label="RelDedAmnt" pattern="[0-9]*" required>
+								<label for="TotlDonationAmnt">Total donation amount(Rupees) :</label>
+								<input type="text" name="TotlDonationAmnt" id="TotlDonationAmnt" placeholder="Total donation amount(Rupees).." label="TotlDonationAmnt" pattern="[0-9]*" required>
+								<label for="returnedAmnt">Total of previously given amount returned(Rupees) :</label>
+								<input type="text" name="returnedAmnt" id="returnedAmnt" placeholder="Total of previously given amount returned(Rupees).." label="returnedAmnt" pattern="[0-9]*" required>
+							</div>
+						</li>
+						<li>
+							<div class="TotlAmntFrmRegNOwnContri">
+								<label><b>Total amount from regular & own contribution :</b></label>
+								<label for="LoanEligibility">Loan eligibility from regular income(Amount) :</label>
+								<input type="text" name="LoanEligibility" id="LoanEligibility" placeholder="Loan eligibility from regular income(Amount).." label="LoanEligibility" pattern="[0-9]*" required>
+								<label for="OwnContriAmnt">Own Contribution Amount :</label>
+								<input type="text" name="OwnContriAmnt" id="OwnContriAmnt" placeholder="Own Contribution Amount.." label="OwnContriAmnt" pattern="[0-9]*" required>
+								<label for="TotlLoanTknBfrThis">Total loan taken before this :</label>
+								<input type="text" name="TotlLoanTknBfrThis" id="TotlLoanTknBfrThis" placeholder="Total loan taken before this.." label="TotlLoanTknBfrThis" pattern="[0-9]*" required>
+								<label for="ActBudgetSuggestion">Your actual budget amount suggestion :</label>
+								<input type="text" name="ActBudgetSuggestion" id="ActBudgetSuggestion" placeholder="Your actual budget amount suggestion.." label="ActBudgetSuggestion" pattern="[0-9]*" required>
+							</div>
+						</li>			
+						<p class="submitwrap">
+							<input type="submit" value="Submit" />
+						</p>
+					</ul>
+					<a href=#>Fill Up The Form</a>
+				</form>
+			</div>
+	</body>
+</html>

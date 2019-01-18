@@ -1,0 +1,154 @@
+@(user: User)
+@import controllers.FormStatus
+@sub_menu = {
+	<li><a href="@routes.ApplicantController.changeApplicantPassword("admin")"> Change Password</a></li>
+	<li><a href="@routes.Application.logout"> Logout</a></li>
+}
+@baseApplicantDashboardTemplate("Proposed Society - Applicant Dashboard",Seq(),Seq(), user,sub_menu){
+
+	<style>
+		.txtBlinker {
+			 height: 1em;
+			 font-size: 120%;
+			-webkit-animation-name: blinker;
+			-webkit-animation-duration: 1s;
+			-webkit-animation-timing-function: linear;
+			-webkit-animation-iteration-count: infinite;
+			
+			-moz-animation-name: blinker;
+			-moz-animation-duration: 1s;
+			-moz-animation-timing-function: linear;
+			-moz-animation-iteration-count: infinite;
+			
+			animation-name: blinker;
+			animation-duration: 1s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+		
+		@@-moz-keyframes blinker {
+			0% { opacity: 1.0; }
+			50% { opacity: 0.0; }
+			100% { opacity: 1.0; }
+		}
+		
+		@@-webkit-keyframes blinker {
+			0% { opacity: 1.0; }
+			50% { opacity: 0.0; }
+			100% { opacity: 1.0; }
+		}
+		
+		@@keyframes blinker {
+			0% { opacity: 1.0; }
+			50% { opacity: 0.0; }
+			100% { opacity: 1.0; }
+		}
+	</style>
+   			<div id="app_status" class="row-fluid">
+                        @if(!user.form.status.equalsIgnoreCase(FormStatus.COMPLETED)){
+                            <div class="alert alert-error">
+	 							<span class="txtBlinker alert alert-warning"><strong>Warning !</strong></span> <b> Your form is incomplete. Please </b><a  href=@routes.ApplicationFormController.wholePersonalInfo> Click here</a> <strong>to complete. </b>
+							</div>
+                          }else{
+                          	<br>
+                          } 
+      		</div>
+            <div class="row-fluid">
+            		<div class="span4">
+            			@if(user.form.applicant.photograph != null){
+            				<a href="#"><img src='@routes.AttachmentsController.getApplicantImage(user.form.applicant.photograph.id)' class="p"></a>
+            			}else{
+            				<a href="#"><img src="@routes.Assets.at("images/unavailablePhoto.jpg")"  class="p"></a>
+            			}
+            		</div>
+            		<div class="span8">
+            			<table class="applicantInfo">
+	            			<tr class="applicantInfoTr">
+	            				<td class="firstCol">Applicant Name</td>
+	            				<td class="secCol">@user.name</td>
+	            			</tr>
+	            			<tr class="applicantInfoTr">
+	            				<td class="firstCol">Application No.</td>
+	            				<td class="secCol">@user.form.formNumber</td>
+	            			</tr>
+		            		@if(user.form.agent != null){
+		            			<tr class="applicantInfoTr">
+		            				<td class="firstCol">Agent Name</td>
+		            				<td class="secCol">@user.form.agent.user.name</td>
+		            			</tr>
+		            			<tr class="applicantInfoTr">
+		            				<td class="firstCol">Agent Code</td>
+		            				<td class="secCol">@user.form.agent.agentCode</td>
+		            			</tr>
+		            		}
+		            		@if(user.form.invoice != null && user.form.invoice.payments.size() > 0){
+		            			<tr>
+		            				<td colspan="2"><h3><a href="@routes.ApplicantController.downloadPaymentReceipt()">Click Here To Download Payment Receipt</a></h3></td>
+		            			</tr>
+	            			}
+            			</table>
+            		</div>
+            </div><hr>
+             <div class="row-fluid">
+            		<div class="span12">
+            				 <div class="form-group">
+            				 	   <!-- <select name ="subject" id="subject" class="form-control" />
+							      	  <option selected disabled>Choose Query Subject</option>
+								      <option value="Requirements">Requirements</option>
+								      <option value="Location">Location</option>
+								      <option value="Contact">Contact</option>
+								      <option value="Other">Other</option>
+								  </select> 
+                                  <input type="text" class="form-control" id="subject" placeholder="Enter subject of query(Optional)" required/> -->
+                             </div>
+                                  <textarea type="text" class="form-control" id="queryText" rows="5" placeholder="Enter your query here." required/></textarea>
+                                  <span id="queryEmptyError" class="alert alert-danger">Query cant be empty.</span>
+                                  <span id="querySent" class="alert alert-info">Query has been successfully sent.</span>
+                             <div class="form-group">
+                                  <INPUT type="submit" id="sendQueryButton" class="btn btn-sm btn-pink pull-right" value="Send Query" onclick="sendQuerySubmit()" />
+                             </div>
+            		</div>
+            </div><hr>
+            <div id="dynamicReferTableDiv">
+	        	<table id ="dynamicReferTable"  class="table table-striped" >
+	        		<thead>
+	        			<tr>
+	        				<th style="width: 122px;">Name</th>
+	        				<th style="width: 122px;">Mobile No.</th>
+	        				<th style="width: 122px;">Emaill Id</th>
+	        				<th></th>
+	        				<th></th>
+	        			</tr>
+	        		</thead>
+	        		<tbody id="dynamicReferTableBody">
+	        		</tbody>
+	        	</table>
+	        	<INPUT type="submit" id="submitButton" class="btn btn-sm btn-pink pull-right" value="Send Invitation" onclick="submitReferData('dynamicReferTable')" />
+	        </div><br><br>
+	        <div id="dynamicReferInputDiv">
+	        	<table id ="dynamicReferInput" >
+	        			<tr>
+	        				<td><input type="text" id="name" value="" maxlength="45" placeholder="Enter name" /></td>
+	        				<td><input type="text" id="mobile" maxlength="10" value="" placeholder="Enter mobile number" /></td>
+	        				<td><input type="email" id="email" value="" maxlength="45" placeholder="Enter email id" /></td>
+	        			</tr>
+	        			<tr>
+	        				<td colspan="2"><span id="showInputError" class="alert alert-danger"></span></td>
+	        			</tr>
+	        			<tr>
+	        				<td colspan="3">
+	        					<INPUT type="button" id="cancelButton" class="btn btn-sm btn-pink pull-right" value="Cancel" onclick="cancelInputRow()" />
+	        					<INPUT type="button" id="saveButton" class="btn btn-sm btn-pink pull-right" value="Save" onclick="saveRow()" />
+								<INPUT type="button" id="updateButton" class="btn btn-sm btn-pink pull-right" value="Update" onclick="updateRow()" />
+	        				</td>
+	        			</tr>
+	        	</table>
+	        </div>
+	        <INPUT type="button" id="addMoreButton" class="btn btn-sm btn-pink pull-right" value="Add More" onclick="addMoreRow()" />
+            <div class="row-fluid">
+            		<div class="span12">
+            			<a href="https://www.facebook.com/BaviskarGroup?ref=br_rs&fref=browse_search"><img src="@routes.Assets.at("images/facebook.png")"  hspace="5" width="20" height="30"></a>
+            			<a class="pull-right" id="referFriendLink" onclick="getReferDiv();">Refer a Friend</a>
+            		</div>
+            </div>
+ }

@@ -1,0 +1,12 @@
+@(rddata: List[RecurringDeposit])
+<div id="rdDatatDiv">
+	<h2>Recurring Deposit Details</h2>
+	<hr/>
+	@if(rddata != null && !rddata.isEmpty()) {
+		@getRdTable(rddata,true)
+	}else{
+		<div id="rdNoDataParaDiv">
+			<p id="rdNoDataPara">Click on Add More button to add details</p>
+		</div>
+	}
+</div>

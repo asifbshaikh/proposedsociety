@@ -1,0 +1,93 @@
+@(bAForm: Form[OwnContributionController.BankAccountDetails],
+bad: Form[OwnContributionController.BankAccountDeduction],
+bald: Form[OwnContributionController.BankAccountLoanDeduction])
+
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant's Bank Balance Details", 3) {
+		@helper.form(action = routes.OwnContributionController.bankAccountDetailsSubmit, 'class -> "form-horizontal") {
+		<h1>Bank Balance Details</h1>
+		<hr/
+		<div id="bankDetailsDiv">	
+			<table id="bankDetails" class="fieldstable">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Name Of The Bank</label></td>
+					<td>@helper.inputText(bAForm("bankName"),'class -> "input-large")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Account Number</label></td>
+					<td>@helper.inputText(bAForm("accountNumber"), 'class -> "input-large")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Current Balance Amount</label></td>
+					<td>@helper.inputText(bAForm("balance"), 'class -> "input-large")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname" for="anyDedFromBankAccount">Any deduction directly from the Bank Account ?</label></td>
+					<td>@form.horizontalRadioGroup(bAForm("anyDedFromBankAccount"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+				</tr>
+			</table>
+		</div>
+		<div id="deductionsFromBankDiv">
+			<h2>Details Of Deductions From Bank</h2>
+			<hr/>
+			<table>
+				<tr category="LoanTaken">
+					<td style="width:250px;"><label class="fieldname" for="loan">Is it loan </label></td>
+					<td>@helper.checkbox(field = bad("loan"))Loan</td> 
+				</tr>
+				<tr class="loanTakenTr"><td><h4>Enter Loan Details</h4></td></tr>
+				<tr class="loanTakenTr">
+					<td style="width:250px;"><label class="fieldname">Monthly EMI amount</label></td>
+					<td>@helper.inputText(bald("loanEmi"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="loanTakenTr">
+					<td style="width:250px;"><label class="fieldname">Number of Balance Installments</label></td>
+					<td>@helper.inputText(bald("balanceInstallments"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="loanTakenTr">
+					<td style="width:250px;"><label class="fieldname">Total Balance Loan Amount</label></td>
+					<td>@helper.inputText(bald("balanceLoanAmount"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+			<hr/>
+			<table>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">If any other regular deduction(Light Bill,Phone Bill etc.)</label></td>
+					<td>@helper.inputText(bad("otherMonthlyDeduction"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Total monthly average deduction amount</label></td>
+					<td>@helper.inputText(bad("totalMonthlyDeduction"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+		<div id="usageOfAmountFromBankDiv">
+			<h2>Allocation Of Amount For Searching Property Purpose</h2>
+			<hr/>
+			<table>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">How much amount from your bank balance you would like use for searching property purpose</label></td>
+					<td>@helper.inputText(bAForm("allocateToBuy"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+		<!--  	<div>
+					<input type="button" id ="buttonAddBankAccnt" value="Add More" onclick="addBankAccntsToList();">
+				</div>
+		 -->
+		<div id="viewBankAccntTable">
+				
+		</div>
+		<div class="form-actions">
+				<a href="@routes.OwnContributionController.fixedDepositDetails" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		<!-- <div class="form-actions">
+			<button type="submit" class="btn btn-large btn-pink" align="right">Next</button>
+		</div> -->
+		}
+}

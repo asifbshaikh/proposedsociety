@@ -1,0 +1,449 @@
+<html>
+	<head>
+		<title>Welcome to Proposed Society</title>
+		<link href='http://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/home.css")"></link>
+		<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript">
+		    function ageCount() {
+		        var date1 = new Date();
+		        var  dob= document.getElementById("dob").value;
+		        var date2=new Date(dob);
+		        var pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/; //Regex to validate date format (dd/mm/yyyy)
+		        if (pattern.test(dob)) {
+		            var y1 = date1.getFullYear(); //getting current year
+		            var y2 = date2.getFullYear(); //getting dob year
+		            var age = y1 - y2;           //calculating age 
+		            document.write("Age : " + age);
+		            return true;
+		        } else {
+		            alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
+		            return false;
+		        }
+		    }
+		    function showDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="block";
+			}
+		    function hideDiv(obj){
+				var a = document.getElementById(obj)
+				a.style.display="none";
+			}
+		    function generate(){
+			    var tot = document.getElementById("Dependents").value;
+			    var tbl = document.getElementById("flexibleDiv");
+			    for(var i =1;i<=tot;i++){
+				    var temp1='dependentsName';
+				    var txtid1 =temp1.concat(i);
+				    //alert(txtid1);
+				    var temp2='rltnWithAppl';
+				    var txtid2 =temp2.concat(i);
+				    //alert(txtid2);
+				      tbl.innerHTML  = tbl.innerHTML  +'Name Of The Dependent Person '+i+' :'+' <input type="text" name="dependent" id='+txtid1+'> \n'+'His/Her Relation with The Applicant :'+' <input type="text" name="relation" id='+txtid2+'> <br> \n';
+			    }
+		    }
+		</script>
+	</head>
+	<body>
+		<header class="header">
+			<div class="headerwrap">
+				<img class="logo" alt="Logo" src="@routes.Assets.at("images/logo-very-small.png")"/>
+				<nav>
+					<ul class="quickmenu menu">
+						<li>More</li>
+						<li>Home</li>
+					</ul>
+					<div class="clear"></div>
+					<ul class="mainmenu menu">
+						<li><a href="#">Membership</a></li>
+						<li><a href="#">Benefits</a></li>
+						<li><a href="#">Concept</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+			<div class="formwrap">
+				<p class="formheading">Applicant Income Details.</p>
+				<form method="POST" action="#">
+					<ul>
+						<li>
+							<label>Occupation/Profession :</label> 
+							<br/>
+							<input type="radio" name="incomeDetails" id="Employed" value="Employed" checked="checked">Employed
+							<input type="radio" name="incomeDetails" id="SelfEmployed" value="SelfEmployed">Self Employed<br/>
+							<div class="employedDiv">
+								<label for="NameOfOrg">Name of Current Organisation :</label>
+								<input type="text" name="NameOfOrg" id="NameOfOrg" placeholder="Name of Current Organisation.." label="NameOfOrg" pattern="[A-Za-z]*" required>
+								<label for="CurDesignation">Current Designation :</label>
+								<input type="text" name="CurDesignation" id="CurDesignation" placeholder="Current Designation.." label="CurDesignation" pattern="[A-Za-z]*" required>
+								<label for="GrossSalary">Gross Salary :</label>
+								<input type="text" name="GrossSalary" id="" placeholder="Gross Salary.." label="GrossSalary" pattern="[0-9]*" required>
+								<label for="SalDeductions">Total Salary Deductions :</label>
+								<input type="text" name="SalDeductions" id="SalDeductions" placeholder="Total Salary Deductions.." label="SalDeductions" pattern="[0-9]*" required>
+								<label for="NetSalary">Net Salary :</label>
+								<input type="text" name="NetSalary" id="NetSalary" placeholder="Net Salary.." label="NetSalary" pattern="[0-9]*" required>
+								<label for="yearlyBonus">Yearly Bonus, if any? :</label>
+								<input type="text" name="yearlyBonus" id="yearlyBonus" placeholder="Yearly Bonus, if any?.." label="yearlyBonus" pattern="[0-9]*" required>
+								<label for="yearsOfWork">Working with Current Organisation since :</label>
+								<input type="text" name="yearsOfWork" id="yearsOfWork" placeholder="Working with Current Organisation since.." label="yearsOfWork" pattern="[A-Za-z]*" required>
+								<label for="experience">Total Work Experience :</label>
+								<input type="text" name="experience" id="experience" placeholder="Total Work Experience.." label="experience" pattern="[A-Za-z]*" required>
+								<label for="remYears">Number of Remaining Years of Service :</label>
+								<input type="text" name="remYears" id="remYears" placeholder="Number of Remaining Years of Service.." label="remYears" pattern="[A-Za-z]*" required>
+								<label>Have you taken any other loan? :</label> <br/>
+								<input type="radio" name="Yes" id="Yes" value="Yes">Yes
+								<input type="radio" name="Yes" id="No" value="No" checked="checked">No
+							</div>
+						</li>
+						<br/>
+						<li>
+							<input type="checkbox" name="vehicle" value="CoApplicant">Would you like to add a co-applicant: <br>
+							<label for="RelWithCoApplcnt">Relationship with Co-applicant</label>
+							<select name="RelWithCoApplcnt" id="RelWithCoApplcnt">
+								  <option value="Father">Father</option>
+								  <option value="Son">Son</option>
+								  <option value="Wife">Wife</option>
+								  <option value="Mother">Mother</option>
+								  <option value="Brother">Brother</option>
+								  <option value="Unmarried Sister">Unmarried Sister</option>
+							</select>
+							<Div>
+								<ul>
+									<label for="RelWithCoApplcnt">Co-applicant information :</label>
+									<li>
+										<label>Co-Applicant Name :</label> 
+										<br/>
+										<div class="CoApplName">
+											<label for="titleForCoApplicant">Title :</label>
+											<select name="titleForCoApplicant" id="titleForCoApplicant">
+											  <option value="mr">Mr.</option>
+											  <option value="ms">Ms.</option>
+											  <option value="mrs">Mrs.</option>
+											  <option value="dr">Dr.</option>
+											</select>
+											<label for="CoApfirstName">First Name :</label>
+											<input type="text" name="CoApfirstName" id="CoApfirstName" placeholder="first name.." label="CoApfirstName" pattern="[A-Za-z]*" required>
+											<label for="CoApmiddleName">Middle Name :</label>
+											<input type="text" name="CoApmiddleName" id="CoApmiddleName" placeholder="middle name.." label="CoApmiddleName" pattern="[A-Za-z]*" required>
+											<label for="CoAplastName">Last Name :</label>
+											<input type="text" name="CoAplastName" id="CoAplastName" placeholder="last name.." label="CoAplastName" pattern="[A-Za-z]*" required>
+										</div>
+									</li>
+									<br/>
+									<li>
+										<label>Father's/Husband's Name :</label> <br/>
+										<input type="radio" name="FatherOrHusband" value="Father" checked="checked">Father<br>
+										<input type="radio" name="FatherOrHusband" value="Husband">Husband<br>		
+										<div class="CoApFHName">
+											<label for="CoAptitleForFather" >Title :</label>
+											<select name="CoAptitleForFather" id="CoAptitleForFather">
+											  <option value="mr">Mr.</option>
+											  <option value="dr">Dr.</option>
+											</select>
+											<label>First Name :</label>
+											<input type="text" name="CoApfathersFName" placeholder="first name.." label="CoApfathersFName" pattern="[A-Za-z]*" required>
+											<label>Middle Name :</label>
+											<input type="text" name="CoApfathersMName" placeholder="middle name.." label="CoApfathersMName" pattern="[A-Za-z]*" required>
+											<label>Last Name :</label>
+											<input type="text" name="CoApfathersLName" placeholder="last name.." label="CoApfathersLName" pattern="[A-Za-z]*" required>
+										</div>
+									</li><br/>
+									<li>
+										<label>Place of Birth :</label> <br/>
+										<input type="radio" name="POB" value="SameAsResidentialAddress" >Same as Residential Address<br>
+										<input type="radio" name="POB" value="SameAsVillageOrPermanentAddress" checked="checked">Same As Village/Permanent Address<br>
+										<input type="radio" name="POB" value="Other">Other<br/>
+										<div class="placeOfBirth">
+											<label for="Location">Location :</label>
+											<input type="text" name="Location" id="Location" placeholder="Location.." label="Location" pattern="[A-Za-z]*" required>
+											<label for="townOrCity">Town/City :</label>
+											<input type="text" name="townOrCity" id="townOrCity" placeholder="Town/City.." label="townOrCity" pattern="[A-Za-z]*" required>
+											<label for="Taluka">Taluka :</label>
+											<input type="text" name="Taluka" id="Taluka" placeholder="Taluka.." label="Taluka" pattern="[A-Za-z]*" required>
+											<label for="District">District :</label>
+											<select name="District" id="District">
+											  <option value="1">yetToBeAdded1</option>
+											  <option value="2">yetToBeAdded2</option>
+											</select>
+											<label for="State">State :</label>
+											<select name="State" id="State">
+											    <option value="AndamanandNicobarIslands">Andaman and Nicobar Islands</option>
+											    <option value="AndhraPradesh">Andhra Pradesh</option>
+											    <option value="ArunachalPradesh">Arunachal Pradesh</option>
+												<option value="Assam">Assam</option>
+												<option value="Bihar">Bihar</option>
+												<option value="Chandigarh">Chandigarh</option>
+												<option value="Chhattisgarh">Chhattisgarh</option>
+												<option value="DadarAndNagarHaveli">Dadar and Nagar Haveli</option>
+												<option value="DamanAndDiu">Daman and Diu</option>
+												<option value="NationalCapitalTerritoryOfDelhi">National Capital Territory of Delhi</option>
+												<option value="Goa">Goa</option>
+												<option value="Gujarat">Gujarat</option>
+												<option value="Haryana">Haryana</option>
+												<option value="HimachalPradesh">Himachal Pradesh</option>
+												<option value="JammuAndKashmir">Jammu and Kashmir</option>
+												<option value="Jharkhand">Jharkhand</option>
+												<option value="Karnataka">Karnataka</option>
+												<option value="Kerala">Kerala</option>
+												<option value="Lakshadweep">Lakshadweep</option>
+												<option value="MadhyaPradesh">Madhya Pradesh</option>
+												<option value="Maharashtra">Maharashtra</option>
+												<option value="Manipur">Manipur</option>
+												<option value="Meghalaya">Meghalaya</option>
+												<option value="Mizoram">Mizoram</option>
+												<option value="Nagaland">Nagaland</option>
+												<option value="Odisha">Odisha</option>
+												<option value="Puducherry">Puducherry</option>
+												<option value="Punjab">Punjab</option>
+												<option value="Rajasthan">Rajasthan</option>
+												<option value="Sikkim">Sikkim</option>
+												<option value="TamilNadu">Tamil Nadu</option>
+												<option value="Tripura">Tripura</option>
+												<option value="UttarPradesh">Uttar Pradesh</option>
+												<option value="Uttarakhand">Uttarakhand</option>
+												<option value="WestBengal">West Bengal</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<label for="Gender" >Gender :</label>
+										<select name="Gender" id="Gender">
+										  <option value="Male">Male</option>
+										  <option value="Female">Female</option>
+										</select>
+									</li><br/>
+									<li>
+										<label for="Nationality" >Nationality :</label>
+										<input type="radio" name="Nationality" id="Indian" value="Indian" checked="checked" onclick="hideDiv('NRIAdd')"/>Indian
+										<input type="radio" name="Nationality" id="NRI" value="NRI" onclick="showDiv('NRIAdd')"/>NRI 
+										<br/>
+										<label><b>Postal Address:</b></label> 
+										<input type="radio" name="SmASAbove" id="SmASAbove" value="SmASAbove" />Same As Above
+										<div class="NRIAddressDetails" id="NRIAdd" hidden>
+											<label for="NRIFlat">Flat/Door/Block No/Floor No :</label>
+											<input type="text" name="NRIFlat" id="NRIFlat" placeholder="Flat/Door/Block No/Floor No.." label="NRIFlat" pattern="[A-Za-z0-9]*" required>
+											<label for="NRIPremises">Name of Premises/Building/Village :</label>
+											<input type="text" name="NRIPremises" id="NRIPremises" placeholder="Name of Premises/Building/Village.." label="NRIPremises" pattern="[A-Za-z0-9]*" required>
+											<label for="NRIRoadOrStreet">Road/Street/Lane/Post Office :</label>
+											<input type="text" name="NRIRoadOrStreet" id="NRIRoadOrStreet" placeholder="Road/Street/Lane/Post Office.." label="NRIRoadOrStreet" pattern="[A-Za-z0-9]*" required>
+											<label for="NRIAreaOrLocality">Area/Locality/Sub-Division :</label>
+											<input type="text" name="NRIAreaOrLocality" id="NRIAreaOrLocality" placeholder="Area/Locality/Sub-Division.." label="NRIAreaOrLocality" pattern="[A-Za-z0-9]*" required>
+											<label for="NRITaluka">Taluka :</label>
+											<input type="text" name="NRITaluka" id="NRITaluka" placeholder="Taluka.." label="NRITaluka" pattern="[A-Za-z]*" required>
+											<label for="NRItownOrCity">Town/City :</label>
+											<input type="text" name="NRItownOrCity" id="NRItownOrCity" placeholder="Town/City.." label="NRItownOrCity" pattern="[A-Za-z]*" required>
+											<label for="NRIDistrict">District :</label>
+											<select name="NRIDistrict" id="NRIDistrict">
+											  <option value="1">yetToBeAdded1</option>
+											  <option value="2">yetToBeAdded2</option>
+											</select>
+											<label for="NRIState">State :</label>
+											<select name="NRIState" id="NRIState">
+											    <option value="A">A</option>
+											    <option value="B">B</option>
+											</select>
+											<label for="NRIPinCode">Pin Code :</label>
+											<input type="text" name="NRIPinCode" id="NRIPinCode" placeholder="Pin Code.." label="NRIPinCode" pattern="[0-9]*" required>
+											<label for="NRICountry">Country :</label>
+											<select name="NRICountry" id="NRICountry">
+											    <option value="A">A</option>
+											    <option value="B">B</option>
+											</select>
+										</div>
+									</li><br/>
+									<li>
+										<label>Marital Status :</label> <br/>
+										<input type="radio" name="MaritalStatus" value="Married" checked="checked" onclick="showDiv('MarriedD')"/>Married
+										<input type="radio" name="MaritalStatus" value="Single" onclick="hideDiv('MarriedD')"/>Single
+										<input type="radio" name="MaritalStatus" value="Divorcee" onclick="hideDiv('MarriedD')"/>Divorcee<br/>
+										<div class="MarriedDetails" id="MarriedD">	
+											<br/>
+											<label>Spouse Name :</label> 
+											<div class="SpouseNameDetails" id="SpouseND">
+												<label for="titleForSpouse">Title :</label>
+												<select name="titleForSpouse" id="titleForSpouse">
+												  <option value="mr">Mr.</option>
+												  <option value="ms">Ms.</option>
+												  <option value="mrs">Mrs.</option>
+												  <option value="dr">Dr.</option>
+												</select>
+												<label for="spouseFirstName">First Name :</label>
+												<input type="text" name="spouseFirstName" id="spouseFirstName" placeholder="first name.." label="spouseFirstName" pattern="[A-Za-z]*" required>
+												<label for="spouseMiddleName">Middle Name :</label>
+												<input type="text" name="spouseMiddleName" id="spouseMiddleName" placeholder="middle name.." label="spouseMiddleName" pattern="[A-Za-z]*" required>
+												<label for="spouseLastName">Last Name :</label>
+												<input type="text" name="spouseLastName" id="spouseLastName" placeholder="last name.." label="spouseLastName" pattern="[A-Za-z]*" required>
+											</div>
+											<label for="Profession">Profession of Spouse :</label>
+											<input type="text" name="Profession" id="Profession" placeholder="Profession of Spouse.." label="Profession" pattern="[A-Za-z]*" required>
+											
+											
+											<label for="children">No. of children :</label>
+											<input type="text" name="children" id="children" placeholder="No. of children.." label="children" pattern="[0-9]*" required>
+										</div>
+									</li><br/>
+									<li>
+										<label for="Dependents">Number of Members Dependent :</label>
+										<input type="text" name="Dependents" id="Dependents" placeholder="Number of Members Dependent.." label="Dependents" pattern="[0-9]*" required>
+									    <input type="button"  value="ADD" onclick="generate()"/><br/>
+										<div id="flexibleDiv">
+										</div>
+									</li><br/>
+									<li>
+										<div class="ResAddressDetails" id="ResAdd">
+											<label>Residential Address :</label> <br/>
+											<label for="ResFlat">Flat/Door/Block No/Floor No :</label>
+											<input type="text" name="ResFlat" id="ResFlat" placeholder="Flat/Door/Block No/Floor No.." label="ResFlat" pattern="[A-Za-z0-9]*" required>
+											<label for="ResPremises">Name of Premises/Building/Village :</label>
+											<input type="text" name="ResPremises" id="ResPremises" placeholder="Name of Premises/Building/Village.." label="ResPremises" pattern="[A-Za-z0-9]*" required>
+											<label for="ResRoadOrStreet">Road/Street/Lane/Post Office :</label>
+											<input type="text" name="ResRoadOrStreet" id="ResRoadOrStreet" placeholder="Road/Street/Lane/Post Office.." label="ResRoadOrStreet" pattern="[A-Za-z0-9]*" required>
+											<label for="ResAreaOrLocality">Area/Locality/Sub-Division :</label>
+											<input type="text" name="ResAreaOrLocality" id="ResAreaOrLocality" placeholder="Area/Locality/Sub-Division.." label="ResAreaOrLocality" pattern="[A-Za-z0-9]*" required>
+											<label for="ResTaluka">Taluka :</label>
+											<input type="text" name="ResTaluka" id="ResTaluka" placeholder="Taluka.." label="ResTaluka" pattern="[A-Za-z]*" required>
+											<label for="RestownOrCity">Town/City :</label>
+											<input type="text" name="RestownOrCity" id="RestownOrCity" placeholder="Town/City.." label="RestownOrCity" pattern="[A-Za-z]*" required>
+											<label for="ResDistrict">District :</label>
+											<select name="ResDistrict" id="ResDistrict">
+											  <option value="1">yetToBeAdded1</option>
+											  <option value="2">yetToBeAdded2</option>
+											</select>
+											<label for="ResState">State :</label>
+											<select name="ResState" id="ResState">
+												<option value="A">A</option>
+												<option value="B">B</option>
+											</select>
+											<label for="ResPinCode">Pin Code :</label>
+											<input type="text" name="ResPinCode" id="ResPinCode" placeholder="Pin Code.." label="ResPinCode" pattern="[0-9]*" required>
+											<label for="ResCountry">Country :</label>
+											<select name="ResCountry" id="ResCountry">
+												<option value="A">A</option>
+												<option value="B">B</option>
+											</select>
+										</div>
+									</li><br/>
+									<li>
+										<label>Residential Status :</label> <br/>
+										<input type="radio" name="ResidentialStatus" id="Owenership" value="Owenership" checked="checked" />Owenership
+										<input type="radio" name="ResidentialStatus" id="Rently" value="Rently" />Rently
+										<input type="radio" name="ResidentialStatus" id="Other" value="Other" />Other<br/>
+										<label for="NoOfyears">Number of years residing at residential address :</label>
+										<input type="text" name="NoOfyears" id="NoOfyears" placeholder="Number of years residing at residential address.." label="NoOfyears" pattern="[0-9]{2}" required>
+										<label for="NoOfyears">Number of years residing in the city :</label>
+										<input type="text" name="NoOfyearsCity" id="NoOfyearsCity" placeholder="Number of years residing at residential address.." label="NoOfyearsCity" pattern="[0-9]{2}" required>
+									</li><br/>
+									<li>
+										<label for="ResEmailId">Email ID :</label>
+										<!-- TODO:  need to provide validation for email id here -->
+										<input type="text" name="ResEmailId" id="ResEmailId" placeholder="Email ID.." label="ResEmailId" required><br/>
+									</li><br/>
+									<li>
+										<label for="ResTelNo">Telephone No :</label><br />
+											<label for="ResCountryCode">Country Code :</label>
+											<select name="ResCountryCode" id="ResCountryCode">
+													<option value="India(+91)">India(+91)</option>
+													<option value="B">B</option>
+													<option value="C">C</option>
+											</select>
+											<input type="radio" name="ResMobileNo" id="ResMobileNo" value="ResMobileNo" checked="checked" />Mobile No :
+											<input type="radio" name="ResLandlineNo" id="ResLandlineNo" value="ResLandlineNo" />Landline No :<br/>
+											<!-- TODO: following textbox should appear only when above radio button of Landline No is selected -->
+											<label for="ResAreaOrSTDCode">Area/STD code :</label>
+											<input type="text" name="ResAreaOrSTDCode" id="ResAreaOrSTDCode" placeholder="Area/STD code.." label="ResAreaOrSTDCode" required>
+											<label for="ResTelNo">Phone :</label>
+											<input type="text" name="ResTelNo" id="ResTelNo" placeholder="Phone No.." label="ResTelNo" required><br/>
+											<input type="button" name="ResAddAnother" id="ResAddAnother" value="AddAnother">
+									</li><br/>	
+									<li>
+										<div class="OffcAddOffcsDetails" id="OffcAdd">
+											<label>Office Address :</label> <br/>
+											<label for="OffcFlat">Flat/Door/Block No/Floor No :</label>
+											<input type="text" name="OffcFlat" id="OffcFlat" placeholder="Flat/Door/Block No/Floor No.." label="OffcFlat" pattern="[A-Za-z0-9]*" required>
+											<label for="OffcPremises">Name of Premises/Building/Village :</label>
+											<input type="text" name="OffcPremises" id="OffcPremises" placeholder="Name of Premises/Building/Village.." label="OffcPremises" pattern="[A-Za-z0-9]*" required>
+											<label for="OffcRoadOrStreet">Road/Street/Lane/Post Office :</label>
+											<input type="text" name="OffcRoadOrStreet" id="OffcRoadOrStreet" placeholder="Road/Street/Lane/Post Office.." label="OffcRoadOrStreet" pattern="[A-Za-z0-9]*" required>
+											<label for="OffcAreaOrLocality">Area/Locality/Sub-Division :</label>
+											<input type="text" name="OffcAreaOrLocality" id="OffcAreaOrLocality" placeholder="Area/Locality/Sub-Division.." label="OffcAreaOrLocality" pattern="[A-Za-z0-9]*" required>
+											<label for="OffcTaluka">Taluka :</label>
+											<input type="text" name="OffcTaluka" id="OffcTaluka" placeholder="Taluka.." label="OffcTaluka" pattern="[A-Za-z]*" required>
+											<label for="OffctownOrCity">Town/City :</label>
+											<input type="text" name="OffctownOrCity" id="OffctownOrCity" placeholder="Town/City.." label="OffctownOrCity" pattern="[A-Za-z]*" required>
+											<label for="OffcDistrict">District :</label>
+											<select name="OffcDistrict" id="OffcDistrict">
+											  <option value="1">yetToBeAdded1</option>
+											  <option value="2">yetToBeAdded2</option>
+											</select>
+											<label for="OffcState">State :</label>
+											<select name="OffcState" id="OffcState">
+												<option value="A">A</option>
+												<option value="B">B</option>
+											</select>
+											<label for="OffcPinCode">Pin Code :</label>
+											<input type="text" name="OffcPinCode" id="OffcPinCode" placeholder="Pin Code.." label="OffcPinCode" pattern="[0-9]*" required>
+											<label for="OffcCountry">Country :</label>
+											<select name="OffcCountry" id="OffcCountry">
+												<option value="A">A</option>
+												<option value="B">B</option>
+											</select><br />
+											<label for="OffcTelNo">Telephone No :</label>
+											<label for="OffcAreaOrSTDCode">Area/STD code :</label>
+											<input type="text" name="OffcAreaOrSTDCode" id="OffcAreaOrSTDCode" placeholder="Area/STD code.." label="OffcAreaOrSTDCode" required>
+											<label for="OffcLandline">Landline No :</label>
+											<input type="text" name="OffcLandline" id="OffcLandline" placeholder="OffcLandline No.." label="OffcLandline" required>
+											<input type="button" name="OffcAddAnother" id="OffcAddAnother" value="AddAnother"><br/>
+											<label for="Fax">FAX :</label>
+											<input type="text" name="Fax" id="Fax" placeholder="FAX.." label="Fax" required>
+											<label for="OffcEmailId">Email ID :</label>
+											<!-- TODO:  need to provide validation for email id here -->
+											<input type="text" name="OffcEmailId" id="OffcEmailId" placeholder="Email ID.." label="OffcEmailId" required><br/>
+											<label for="WebsiteAddress">Website Address :</label>
+											<!-- TODO:  need to provide validation for email id here -->
+											<input type="text" name="WebsiteAddress" id="WebsiteAddress" placeholder="Website Address.." label="WebsiteAddress" required><br/>
+										</div>
+									</li><br/>
+									<li>
+										<label>Occupation/Profession :</label> 
+										<br/>
+										<input type="radio" name="incomeDetails" id="Employed" value="Employed" checked="checked">Employed
+										<input type="radio" name="incomeDetails" id="SelfEmployed" value="SelfEmployed">Self Employed<br/>
+										<div class="employedDiv">
+											<label for="NameOfOrg">Name of Current Organisation :</label>
+											<input type="text" name="NameOfOrg" id="NameOfOrg" placeholder="Name of Current Organisation.." label="NameOfOrg" pattern="[A-Za-z]*" required>
+											<label for="CurDesignation">Current Designation :</label>
+											<input type="text" name="CurDesignation" id="CurDesignation" placeholder="Current Designation.." label="CurDesignation" pattern="[A-Za-z]*" required>
+											<label for="GrossSalary">Gross Salary :</label>
+											<input type="text" name="GrossSalary" id="" placeholder="Gross Salary.." label="GrossSalary" pattern="[0-9]*" required>
+											<label for="SalDeductions">Total Salary Deductions :</label>
+											<input type="text" name="SalDeductions" id="SalDeductions" placeholder="Total Salary Deductions.." label="SalDeductions" pattern="[0-9]*" required>
+											<label for="NetSalary">Net Salary :</label>
+											<input type="text" name="NetSalary" id="NetSalary" placeholder="Net Salary.." label="NetSalary" pattern="[0-9]*" required>
+											<label for="yearlyBonus">Yearly Bonus, if any? :</label>
+											<input type="text" name="yearlyBonus" id="yearlyBonus" placeholder="Yearly Bonus, if any?.." label="yearlyBonus" pattern="[0-9]*" required>
+											<label for="yearsOfWork">Working with Current Organisation since :</label>
+											<input type="text" name="yearsOfWork" id="yearsOfWork" placeholder="Working with Current Organisation since.." label="yearsOfWork" pattern="[A-Za-z]*" required>
+											<label for="experience">Total Work Experience :</label>
+											<input type="text" name="experience" id="experience" placeholder="Total Work Experience.." label="experience" pattern="[A-Za-z]*" required>
+											<label for="remYears">Number of Remaining Years of Service :</label>
+											<input type="text" name="remYears" id="remYears" placeholder="Number of Remaining Years of Service.." label="remYears" pattern="[A-Za-z]*" required>
+											<label>Have you taken any other loan? :</label> <br/>
+											<input type="radio" name="Yes" id="Yes" value="Yes">Yes
+											<input type="radio" name="Yes" id="No" value="No" checked="checked">No
+										</div>
+									</li>
+								</ul>
+						<p class="submitwrap">
+							<input type="submit" value="Submit" />
+						</p>
+					</ul>
+					<a href="#">Fill Up The Form</a>
+				</form>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+@(waca : Form[ApplicationFormController.WantToAddCoAppliacnt])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Add Co-Applicant Choice", 3) {
+	@helper.form(action = routes.ApplicationFormController.wantToAddCoApplicantSubmit, 'class -> "form-horizontal") {
+		<div id="wantToAddCoApplicantDiv">
+			<h1>Add CoApplicant Choice</h1>
+			<hr/>
+			<table id="addCoApplicantChoiceTable" class="fieldstable">
+				 <tr>
+					<td><label class="fieldname">Do you want to add Co-applicant?</label></td>
+					<td>@form.horizontalRadioGroup(waca("coApplicantExists"), options = Seq("true" -> "Yes", "false" -> "No"))
+					</td>
+				</tr>
+			</table>
+			<!--
+				<div class="form-actions">
+					<a href="@@routes.ApplicationFormController.loanAndDependents" class="btn btn-large btn-pink" align="right">Back</a>
+					<button type="submit" class="btn btn-large btn-pink">Next</button>
+				</div> 
+			-->
+		</div>
+	}
+}

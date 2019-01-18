@@ -1,0 +1,18 @@
+@(field: play.api.data.Field, options: Seq[(String, String)], checkedItem: String =null)
+
+	@options.map { option => 
+		<label class="radio inline input-mini">
+			<input type="radio" value="@option._1" name="@field.name" 
+				@if(option._1.equals(field.value.getOrElse("")) || option._1.equals(checkedItem)) {checked="checked"}
+			/> 
+			@option._2
+		</label>
+	}
+
+	@if(field.hasErrors) {
+		<p class="error">
+			@field.error.get.message
+		</p> 
+	}else{
+		<p class="error" style="display:none" id="@field.name.concat("Error")"></p> 
+	}

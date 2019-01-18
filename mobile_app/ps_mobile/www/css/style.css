@@ -1,0 +1,320 @@
+/* Empty. Add your own CSS if you like */
+
+#mydiv {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color:grey;
+    opacity: .8;
+}
+.message {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 50px 20px;
+}
+
+div.spinner {
+    margin: auto;
+    position: absolute;
+    top: 220%; left: 0; bottom: 0; right: 0;
+    height: 85px;
+    text-align: center;
+}
+.spinner svg {
+    width: 19% !important;
+    height: 85px !important;
+}
+
+.manditoryField {
+    color: #FA5858;
+}
+.cms {
+    font-size: 15px;
+    color: #ff6699;
+    line-height: 1.3em;
+}
+.cms h1 {
+    font-size: 22px;
+    color: #ff6699;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: #4e5559;
+}
+
+
+/* validation */
+
+form i.icon.error {
+    color: #ef4e3a; }
+
+form input + i.icon.error {
+    display: none;
+    margin-left: 8px; }
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+    display: block; }
+
+form .has-error {
+    border-left: 5px solid #cc2511;
+
+}
+
+form .has-success {
+    border-left: 5px solid #3d8b3d; }
+
+form.ng-submitted input.ng-valid + i.icon.error {
+    display: none; }
+.error-container {
+    margin: 5px 0;
+}
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+
+.error {
+    padding: 10px 16px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #555;
+    vertical-align: middle;
+}
+
+.error i {
+    font-size: 24px;
+    color: #B83E2C;
+    vertical-align: middle;
+}
+
+.last-error-container > .error {
+    padding: 10px 16px 0;
+}
+
+.has-errors {
+    border-bottom: 2px solid #B83E2C;
+}
+
+.no-errors {
+    border-bottom: 2px solid green;
+
+}
+
+/*background image*/
+.back-img{
+    background-image:url("../img/bg_img-01.jpg");
+}
+
+/* content Section */
+.content-sec{
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.6);
+    background: #f6f6f6;
+    margin-left: 0;
+    /*padding-top: 65px;*/
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #4c4c4c;
+}
+
+/* content section for some forms */
+.content-sec2{
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.6);
+    background: #FFFFFF;
+    margin-left: 0;
+    /*padding-top: 65px;*/
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #4c4c4c;
+}
+
+/*button*/
+
+.btn-pink {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #f4528f;
+    background-image: -moz-linear-gradient(top, #ff639c, #e13c79);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff639c), to(#e13c79));
+    background-image: -webkit-linear-gradient(top, #ff639c, #e13c79);
+    background-image: -o-linear-gradient(top, #ff639c, #e13c79);
+    background-image: linear-gradient(to bottom, #ff639c, #e13c79);
+    background-repeat: repeat-x;
+    border-color: #e13c79 #e13c79 #a63b62;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff639c', endColorstr='#ffe13c79', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-large {
+    padding: 5px 50px;
+    font-size: 17.5px;
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+
+.btn-info {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #49afcd;
+    background-image: -moz-linear-gradient(top,#5bc0de,#2f96b4);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#5bc0de),to(#2f96b4));
+    background-image: -webkit-linear-gradient(top,#5bc0de,#2f96b4);
+    background-image: -o-linear-gradient(top,#5bc0de,#2f96b4);
+    background-image: linear-gradient(to bottom,#5bc0de,#2f96b4);
+    background-repeat: repeat-x;
+    border-color: #2f96b4 #2f96b4 #1f6377;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de',endColorstr='#ff2f96b4',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+
+}
+
+.btn-success {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #5bb75b;
+    background-image: -moz-linear-gradient(top,#62c462,#51a351);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#62c462),to(#51a351));
+    background-image: -webkit-linear-gradient(top,#62c462,#51a351);
+    background-image: -o-linear-gradient(top,#62c462,#51a351);
+    background-image: linear-gradient(to bottom,#62c462,#51a351);
+    background-repeat: repeat-x;
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462',endColorstr='#ff51a351',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.text-info {
+    color: #3a87ad;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Lato', "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.3em;
+}
+
+ .text-info-back {
+    background: #cde3f3;
+    border: solid 1px #8bc2ea;
+    color: #646464;
+}
+.notify-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #b94a48;
+}
+
+#infoDiv {
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Lato', "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.5em;
+}
+
+#rcorners1 {
+    border-radius: 12px;
+}
+
+.bar .title{
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 0 2px;
+}
+.sideMenuContent{
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 0 2px;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #fff;
+    border-bottom-color: #d8d8d8;
+}
+
+
+.item-select select {
+    -moz-appearance: none;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    padding: 0px 45px 0px 0px;
+    max-width: 100%;
+    border: medium none;
+    background: #FFF none repeat scroll 0% 0%;
+    color: #333;
+    text-indent: 0.01px;
+    text-overflow: "";
+    white-space: nowrap;
+    font-size: 14px;
+    cursor: pointer;
+    direction: rtl;
+}
+
+.input-label {
+    color: #4c4c4c;
+    font-size: 14px;
+}
+.item {
+    font-family: 'Roboto', Helvetica, sans-serif, Arial;
+    font-size: 14px;
+}
+
+/*for ng-bind-html */
+ol {padding: 1px 10px 1px 20px;list-style-type: decimal;}
+
+.tab-item {
+    font-size: 11px;
+}
+
+
+
+
+
+

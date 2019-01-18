@@ -1,0 +1,13 @@
+@(file: AgentFeedbackFormFile, user : User)
+@bueroDashboardTemplate("Proposed Society - Agent Feedback Form Download",user,Seq(),Seq()){
+	<div>
+		<h2>Agent Feedback Form Download</h2>
+		<hr/>
+		<div >
+			@if(file != null) {
+				<span>Last updated on: @file.uploadTime </span>
+				<a href="@routes.AttachmentsController.download(file.feedbackFormFile.filePath)" class="btn btn-default">Download</a>
+			}
+		</div>
+	</div>
+}

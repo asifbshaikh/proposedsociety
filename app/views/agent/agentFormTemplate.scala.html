@@ -1,0 +1,73 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" width="device-width" initial-scale="1.0">
+        <meta charset="UTF-8">
+        <title>@title</title>
+
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <!-- InstanceEndEditable -->
+
+        <link rel="shortcut icon" href="@routes.Assets.at("images/favicon.ico")" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("css/file-upload.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")"></link>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("css/nanoscroller.css")"></link>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/global.css")"></link> 
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap_datepicker/css/datepicker.css")">
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>-->
+        <!-- <script src="../../public/js/jquery-1.7.2.js" type="text/javascript"></script> -->
+        <script src="@routes.Assets.at("js/script.js")" type="text/javascript"></script>
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/forms.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/getJsonData.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/personalInfo.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/addresses.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/menuLinkPositioning.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/closingFinishDetails.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css")" />
+        <script src="@routes.Assets.at("jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/agentForm.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/file-upload.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/dateFormat.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("bootstrap_datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+    </head>
+<!-- HEADER -->
+    <div id="header" class="gradient">
+        <div class="container">
+            <h1 id="logo"><a href="@routes.Application.index">Proposed Society.com</a></h1>
+        </div>
+    </div><!-- end header -->
+    
+    <!-- PG_CONTNET -->
+    <div id="pg_content">
+        <div class="container"><!-- InstanceBeginEditable name="content_area" -->
+        	<div id="positioning_at_right">
+	        	@submenu(null)
+			</div>	
+            <div class="wrapper">
+                <!-- content area -->
+                <div id="content_area">
+                    <div class="row">
+                        <div class="span12">
+                          
+                            <div class="cms form_process">
+                                @content
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- ends contnet area -->
+            </div>
+        <!-- InstanceEndEditable --></div>
+    </div><!-- end page content -->
+
+    <!-- COPYRIGHT -->
+    @copyright()
+    <!-- end copyright -->
+    
+</body>
+<!-- InstanceEnd --></html>

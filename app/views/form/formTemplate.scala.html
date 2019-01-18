@@ -1,0 +1,112 @@
+@(title: String, step: Int = 1, cssFiles: Seq[Call] = Seq.empty, jsFiles: Seq[Call] = Seq.empty)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" width="device-width" initial-scale="1.0">
+        <meta charset="UTF-8">
+        <title>@title</title>
+
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <!-- InstanceEndEditable -->
+
+        <link rel="shortcut icon" href="@routes.Assets.at("images/favicon.ico")" />
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>-->
+        <link rel="stylesheet" href="@routes.Assets.at("jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css")" />
+
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")"></link>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("css/nanoscroller.css")"></link>
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/global.css")"></link> 
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>-->
+        <script src="@routes.Assets.at("js/jquery-1.9.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/script.js")" type="text/javascript"></script>
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/CCAvenueBillingDetails.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/forms.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/getJsonData.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/menuLinkPositioning.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/closingFinishDetails.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap_datepicker/css/datepicker.css")">
+		
+        @cssFiles.map { css =>
+            <link rel="stylesheet" media="screen" href="@css"/>
+        }
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="@routes.Assets.at("jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js")" type="text/javascript"></script>
+
+		<script src="@routes.Assets.at("js/closingFinish.js")" type="text/javascript"></script>
+		<script src="@routes.Assets.at("bootstrap_datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+		<script src="@routes.Assets.at("js/dateFormat.js")" type="text/javascript"></script>
+        @jsFiles.map { js =>
+            <script src="@js" type="text/javascript"></script>
+        }
+        
+		<style media="screen">
+			.noPrint{ display: block; }
+			.yesPrint{ display: block !important; }
+		</style> 
+		<style media="print">
+			#positioning_at_right > div, #form_steps {
+				display : none;
+			}
+			.noPrint{ display: none; }
+			.yesPrint{ display: block !important; }
+		</style>
+    </head>
+<!-- HEADER -->
+    <div id="header" class="gradient">
+        <div class="container">
+            <h1 id="logo"><a href="@routes.Application.index">Proposed Society.com</a></h1>
+        </div>
+    </div><!-- end header -->
+    
+    <!-- PG_CONTNET -->
+    <div id="pg_content">
+        <div class="container"><!-- InstanceBeginEditable name="content_area" -->
+        	<div id="positioning_at_right">
+        		@submenu(null)
+			</div>	
+            <div class="wrapper">
+                <!-- content area -->
+                <div id="content_area">
+                    <div class="row">
+                        <div class="span12">
+                            <!-- form process -->
+	                            <ul id="form_steps" class="clearfix">
+	                                <li class="step-1">
+	                                    <a @if(step == 1) {class="active"} data-toggle="popover" data-placement="right" data-content="Personal Information of the Applicant along with CoApplicant." title="" data-original-title="Applicant Personal Information">Step-1</a>
+	                                </li>
+	                                <li class="step-2">
+	                                    <a @if(step == 2) {class="active"} data-toggle="popover" data-placement="bottom" data-content="Details of entire own contribution to be considered for budget calculation." title="" data-original-title="Entire Own Contribution">Step-2</a>
+	                                </li>
+	                                <li class="step-3">
+	                                    <a @if(step == 3) {class="active"} data-toggle="popover" data-placement="bottom" data-content="Details of the requirement and property you are looking for" title="" data-original-title="Requirement Details">Step-3</a>
+	                                </li>
+	                                <li class="step-4">
+	                                    <a @if(step == 4) {class="active"} data-toggle="popover" data-placement="bottom" data-content="Review the form that has been filled up." title="" data-original-title="Review">Step-4</a>
+	                                </li>
+	                                <li class="step-5">
+	                                    <a @if(step == 5) {class="active"} data-toggle="popover" data-placement="bottom" data-content="Details of total budget calculation for property search/purchase." title="" data-original-title="Budget Calculation">Step-5</a>
+	                                </li>
+	                                <li class="step-6">
+	                                    <a @if(step == 6) {class="active"} data-toggle="popover" data-placement="left" data-content="Payment for the requirements posted" title="" data-original-title="Payment">Step-6</a>
+	                                </li>
+	                            </ul>
+                            <div class="cms form_process">
+                               	@content
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- ends contnet area -->
+            </div>
+        <!-- InstanceEndEditable --></div>
+    </div><!-- end page content -->
+    <!-- COPYRIGHT -->
+    @footer()
+   <!-- end copyright -->
+    
+</body>
+<!-- InstanceEnd --></html>

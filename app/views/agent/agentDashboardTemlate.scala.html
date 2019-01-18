@@ -1,0 +1,69 @@
+@(title: String, scriptFiles :Seq[Call]=Seq.empty, cssFiles :Seq[Call] = Seq.empty, agent :Agent)(body: Html)
+@import common.Roles
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<!-- InstanceBegin template="../../Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" width="device-width" initial-scale="1.0">
+	<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/forms.css")">
+	<link rel="stylesheet" type="text/css" media="screen" href="/assets/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" media="screen" href="/assets/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/assets/css/nanoscroller.css"></link>
+	<link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/global_responsive.css"></link>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+	<script src="/assets/js/script.js" type="text/javascript"></script>
+	<title>@title</title>
+	@head(title, true) {
+	
+	}
+	@cssFiles.map{ csspath =>
+		<link rel="stylesheet" type="text/css" media="screen" href="@csspath"></link>
+	}
+	@scriptFiles.map{ scriptpath =>
+		<script src="@scriptpath" type="text/javascript"></script>
+	}
+</head>
+
+<body>
+	<div id="header">
+		<div class="container">
+			<h1 id="logo"><a href="/">Proposed Society.com</a> </h1>
+			<div id="my_account_menu" class="dropdown">
+				<strong>Welcome</strong> @agent.user.name! &nbsp;<a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="#">My Account <span class="caret"></span></a>
+				<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
+								<li><a href="@routes.AgentDashboardController.agentDashboard">Agent Home</a></li>
+								 @if(agent.user.hasRole(Roles.AGENT)){
+								 	<li><a href="@routes.AgentFormController.rechargeAVC">Recharge AVC</a></li>
+								 	<li><a href="@routes.UserController.changePassword">Change Password</a></li>
+								 	<li><a href="@routes.AgentFormController.incompleteApplicantForms(0)">Applicant's Incomplete Forms List</a></li>
+								 	<li><a href="@routes.Application.becomeAnAgent">Become An Agent</a></li>
+								 	<li><a href="@routes.Application.logout">Logout</a></li>
+								 }else{
+								 	<li><a href="/logout">Logout</a></li>
+								 }
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+	<!-- PG_CONTNET -->
+	<div id="pg_content">
+	  <div class="container">
+		<!-- InstanceBeginEditable name="content_area" -->
+		<div class="wrapper clearfix cms" style="min-height:500px;">
+			<!-- content area -->
+				@body
+			<!-- ends contnet area -->
+		</div>
+		  <!-- InstanceEndEditable -->
+	  </div>
+	</div>
+	<!-- end page content -->
+	<!-- FOOTER -->
+	<!-- COPYRIGHT -->
+	@footer()
+	<!-- end copyright -->
+</body>
+</html>

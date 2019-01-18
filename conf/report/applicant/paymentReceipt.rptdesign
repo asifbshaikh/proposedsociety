@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.2.v20140211-1400 Build &lt;4.3.2.v20140218-1056></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <script-data-source name="paymentReceiptDataSource" id="240"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="paymentReceiptDataSet" id="241">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">T</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">T</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">T</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">paymentReceiptDataSource</property>
+            <method name="open"><![CDATA[count = 0;
+appContext = reportContext.getAppContext();
+object = appContext.get("object");
+]]></method>
+            <method name="fetch"><![CDATA[if(count < 1){
+	vars["applicant_name"] = object.getApplicantName();
+	vars["application_no"] = object.getApplicationNumber();
+	vars["receipt_no"] = object.getReceiptNumber();
+	vars["payment_date"] = object.getPaymentDate();
+	vars["payment_mode"] = object.getModeOfPayment();
+	vars["auth_no"] = object.getAuthorizationNumber();
+	vars["amount"] = object.getAmount();
+	vars["amount_word"] = object.getAmountInWord();
+	vars["description"] = object.getDescription();
+	count++;
+	return true;
+}
+return false;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">0.23958333333333334in</property>
+            <property name="leftMargin">1.2604166666666667in</property>
+            <property name="rightMargin">0.78125in</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <data id="268">
+            <property name="resultSetColumn">T</property>
+        </data>
+        <table id="19">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="fontFamily">"Bitstream Charter"</property>
+            <property name="borderBottomColor">black</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">5.875in</property>
+            <property name="dataSet">paymentReceiptDataSet</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">T</property>
+                    <expression name="expression" type="javascript">dataSetRow["T"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <structure name="toc"/>
+            <column id="26">
+                <property name="width">5.875in</property>
+            </column>
+            <header>
+                <row id="20">
+                    <property name="borderBottomColor">#4D4D4D</property>
+                    <property name="height">0.3958333333333333in</property>
+                    <cell id="21">
+                        <property name="borderBottomStyle">outset</property>
+                        <label id="32">
+                            <property name="fontSize">2em</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Bhawani Vikasak India Pvt. Ltd. </text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="27">
+                    <property name="borderBottomColor">#4D4D4D</property>
+                    <property name="height">0.4479166666666667in</property>
+                    <cell id="28">
+                        <property name="borderBottomStyle">outset</property>
+                        <label id="34">
+                            <property name="fontSize">2em</property>
+                            <property name="color">#FF0D00</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">www.proposedsociety.com</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="22">
+                    <property name="height">4.125in</property>
+                    <cell id="23">
+                        <property name="backgroundColor">#F1EEE7</property>
+                        <property name="marginTop">1em</property>
+                        <property name="textAlign">center</property>
+                        <label id="82">
+                            <property name="paddingTop">8pt</property>
+                            <property name="paddingBottom">6pt</property>
+                            <text-property name="text">410/411, Hilton Center, Plot No.66, Sector-11, C.B.D.-Belapur, Navi Mumbai- 400 614.</text-property>
+                        </label>
+                        <table id="83">
+                            <property name="width">5.21875in</property>
+                            <column id="108">
+                                <property name="width">2.28125in</property>
+                            </column>
+                            <column id="109">
+                                <property name="width">2.9375in</property>
+                            </column>
+                            <header>
+                                <row id="84">
+                                    <cell id="85"/>
+                                    <cell id="86"/>
+                                </row>
+                            </header>
+                            <detail>
+                                <row id="87">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.28125in</property>
+                                    <cell id="88">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="186">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Appliciant Name</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="89">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="271">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">applicant_name</property>
+                                                    <text-property name="displayName">applicant_name</text-property>
+                                                    <expression name="expression" type="javascript">vars["applicant_name"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">applicant_name</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="152">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.25in</property>
+                                    <cell id="153">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="187">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Application No.</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="154">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="272">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">application_no</property>
+                                                    <text-property name="displayName">application_no</text-property>
+                                                    <expression name="expression" type="javascript">vars["application_no"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">application_no</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="155">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.22916666666666666in</property>
+                                    <cell id="156">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="188">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Receipt No.</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="157">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="paddingRight">0px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="274">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">receipt_no</property>
+                                                    <text-property name="displayName">receipt_no</text-property>
+                                                    <expression name="expression" type="javascript">vars["receipt_no"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">receipt_no</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="158">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.25in</property>
+                                    <cell id="159">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="189">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Payment Date</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="160">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="275">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">payment_date</property>
+                                                    <text-property name="displayName">payment_date</text-property>
+                                                    <expression name="expression" type="javascript">vars["payment_date"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">payment_date</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="161">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.28125in</property>
+                                    <cell id="162">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="190">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Mode of Payment</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="163">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="276">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">payment_mode</property>
+                                                    <text-property name="displayName">payment_mode</text-property>
+                                                    <expression name="expression" type="javascript">vars["payment_mode"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">payment_mode</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="170">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.23958333333333334in</property>
+                                    <cell id="171">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                        <label id="191">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Authorization No.</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="172">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="277">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">auth_no</property>
+                                                    <text-property name="displayName">auth_no</text-property>
+                                                    <expression name="expression" type="javascript">vars["auth_no"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">auth_no</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="173">
+                                    <property name="borderBottomColor">#4D4D4D</property>
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#4D4D4D</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#4D4D4D</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#4D4D4D</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="marginLeft">auto</property>
+                                    <property name="height">0.3229166666666667in</property>
+                                    <cell id="174">
+                                        <property name="backgroundColor">#EDEDED</property>
+                                        <property name="borderBottomColor">#4D4D4D</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#4D4D4D</property>
+                                        <property name="borderLeftStyle">ridge</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#4D4D4D</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#4D4D4D</property>
+                                    </cell>
+                                    <cell id="175">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                    </cell>
+                                </row>
+                            </detail>
+                            <footer>
+                                <row id="105">
+                                    <property name="height">0.010416666666666666in</property>
+                                    <cell id="106"/>
+                                    <cell id="107"/>
+                                </row>
+                            </footer>
+                        </table>
+                        <table id="129">
+                            <property name="width">5.260416666666667in</property>
+                            <column id="145">
+                                <property name="width">2.3020833333333335in</property>
+                            </column>
+                            <column id="146">
+                                <property name="width">2.9583333333333335in</property>
+                            </column>
+                            <header>
+                                <row id="130">
+                                    <property name="height">0.17708333333333334in</property>
+                                    <cell id="131"/>
+                                    <cell id="132"/>
+                                </row>
+                            </header>
+                            <detail>
+                                <row id="133">
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="height">0.25in</property>
+                                    <cell id="134">
+                                        <property name="backgroundColor">#E5E5E5</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <label id="201">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Amount</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="135">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="278">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">amount</property>
+                                                    <text-property name="displayName">amount</text-property>
+                                                    <expression name="expression" type="javascript">vars["amount"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">amount</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="179">
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="height">0.25in</property>
+                                    <cell id="180">
+                                        <property name="backgroundColor">#E5E5E5</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <label id="202">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Amount in Words</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="181">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="279">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">amount_word</property>
+                                                    <text-property name="displayName">amount_word</text-property>
+                                                    <expression name="expression" type="javascript">vars["amount_word"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">amount_word</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="176">
+                                    <property name="borderBottomStyle">ridge</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">ridge</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">ridge</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">ridge</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="height">0.23958333333333334in</property>
+                                    <cell id="177">
+                                        <property name="backgroundColor">#E5E5E5</property>
+                                        <property name="borderRightStyle">ridge</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <label id="203">
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Description</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="178">
+                                        <property name="backgroundColor">#FFFFFF</property>
+                                        <property name="paddingLeft">20px</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="280">
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">description</property>
+                                                    <text-property name="displayName">description</text-property>
+                                                    <expression name="expression" type="javascript">vars["description"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="resultSetColumn">description</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                            <footer>
+                                <row id="142">
+                                    <property name="height">0.10416666666666667in</property>
+                                    <cell id="143"/>
+                                    <cell id="144"/>
+                                </row>
+                            </footer>
+                        </table>
+                        <label id="150">
+                            <property name="fontSize">10pt</property>
+                            <property name="color">#4D4D4D</property>
+                            <text-property name="text">Thank you</text-property>
+                        </label>
+                        <label id="151">
+                            <property name="color">#4D4D4D</property>
+                            <property name="paddingBottom">0pt</property>
+                            <text-property name="text">This is a Computer Generated Receipt. No Signature Required</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="applicant_name">
+            <expression name="value" type="javascript">map.get("applicant_name")</expression>
+            <property name="type">page</property>
+        </variable-element>
+        <variable-element name="application_no">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="payment_date">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="payment_mode">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="auth_no">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="amount">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="amount_word">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="description">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="receipt_no">
+            <property name="type">report</property>
+        </variable-element>
+    </property>
+</report>

@@ -1,0 +1,12 @@
+@(fddata: List[FixedDeposit])
+<div id="fdDatatDiv">
+	<h2>Fixed Deposit Details </h2>
+	<hr/>
+	@if(fddata != null && !fddata.isEmpty()) {
+		@getFdTable(fddata,true)
+	}else{
+		<div id="fdNoDataParaDiv">
+			<p id="fdNoDataPara">Click on Add More button to add details</p>
+		</div>
+	}
+</div>

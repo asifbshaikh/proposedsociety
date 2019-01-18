@@ -1,0 +1,56 @@
+@(payment: Payment)
+
+@import views.helpers.DateFormatHelper._
+
+@pageTemplate("Applicant - Payment Result",Seq(routes.Assets.at("stylesheets/applicant/form/payment-result.css"))) {
+	<h1>Payment Status</h1>
+	<hr/>
+	<table id="payment-result">
+		@if(payment.completionTime != null) {
+			<tr>
+				<td>Time</td>
+				<td>@formatDate("dd/MM/yyyy HH:mm a", payment.completionTime)</td>
+			<tr>
+		}
+		<tr>
+			<td>Name</td>
+			<td>@payment.invoice.user.name</td>
+		<tr>
+		<tr>
+			<td>Email</td>
+			<td>@payment.invoice.user.email</td>
+		<tr>
+		<tr>
+			<td>Transaction Id</td>
+			<td>@payment.transactionId</td>
+		<tr>
+		<tr>
+			<td>Invoice Number</td>
+			<td>@payment.invoice.invoiceNumber</td>
+		<tr>
+		<tr>
+			<td>Amount</td>
+			<td>@payment.invoice.amount</td>
+		<tr>
+		<tr>
+			<td>Status</td>
+			@if(payment.success != null && payment.success) {
+				<td class="status success">Successful</td>
+			} else {
+				<td class="status failure">Failure</td>
+			}
+		<tr>
+	</table>
+
+	@if(payment.success != null && payment.success) {
+		<p class="message">Your payment was successfully processed. </p>
+		<div class="buttons">
+			<a href="@routes.AgentDashboardController.agentDashboard" class="btn btn-large btn-pink">Finish</a>
+		</div>
+	} else {
+		<p class="message">Your payment was rejcted by the payment gatyeway. You can re-attempt making a payment by clicking on the following button.</p>
+		<div class="buttons">
+			<a href="@routes.AgentFormController.paymentSubmit" class="btn btn-large btn-pink">Retry Payment</a>
+		</div>
+	}	
+}

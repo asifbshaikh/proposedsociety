@@ -1,0 +1,110 @@
+@(dd : Form[ApplicationFormController.DependentDetails],
+data : Form[ApplicationFormController.DependentAndLoanForm], 
+isApplcnt: Boolean,
+prefix : String,
+dependentsData: List[Dependent])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+	@if(isApplcnt == true){
+		
+		<div id="addDepenedentOnAppDiv">
+			<h1>Do you have any dependents?</h1>
+			<table class="fieldstable">
+				 <tr>
+					<td>@form.horizontalRadioGroup(data("hasDependentOnApplicant"), options = Seq("true" -> "Yes", "false" -> "No"))
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="showDependentDivForApplicant">
+	}else{
+		<div id="addDepenedentOnCoAppDiv">
+			<h1>Co-Applicant have any Dependent?</h1>
+			<table class="fieldstable">
+				 <tr>
+					<td></td>
+					<td>@form.horizontalRadioGroup(data("hasDependentOnCoApplicant"), options = Seq("true" -> "Yes", "false" -> "No"))
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="showDependentDivForCoApplicant">
+	}
+			<div id="dependentsDiv">
+				<!--
+					<h1>@@if(isApplcnt == true){Dependent And Loan Details of Applicant}else{Dependent And Loan Details of Co-Applicant}</h1>
+					<hr/>
+				-->
+				
+				<hr/>
+			@if(prefix == "applicant"){
+				@if(dependentsData != null){
+					<div id="viewDependentsTableDivOnLoad">
+						@dependents(dependentsData,isApplcnt)
+					</div>
+				}
+				<div id="viewDependentsTableDiv">
+
+				</div>
+				<table id="applicant_addDependent" class="fieldstable">
+			}else{
+				@if(dependentsData != null){
+					<div id="viewCoappDependentsTableDivOnLoad">
+						@dependents(dependentsData,isApplcnt)
+					</div>
+				}
+				<div id="viewCoappDependentsTableDiv">
+					
+				</div>
+				<table id="co_applicant_addDependent" class="fieldstable">
+				}
+					<tbody>
+						<tr>
+							<td><label class="fieldname">Dependents Name</label></td>
+							<td>
+								<ul class="fieldsul">
+								<li>@helper.select(dd(prefix + "_dep_title"), 
+										options = helper.options("Mr" -> "Mr.", "Ms" -> "Ms.", "Mrs" -> "Mrs." ,"Smt"->"Smt."), 
+										'class -> "input-mini")
+								</li>
+								
+								<li>@helper.inputText(dd(prefix + "_dep_fname"), 
+										'placeholder -> "First Name", 
+										'class -> "input-medium")
+								</li>
+								<li>@helper.inputText(dd(prefix + "_dep_mname"), 
+										'placeholder -> "Middle Name", 
+										'class -> "input-medium")
+								</li>
+								<li>@helper.inputText(dd(prefix + "_dep_lname"), 
+										'placeholder -> "Last Name", 
+										'class -> "input-medium")
+								</li>
+							</ul>
+							</td>
+						</tr>
+						<tr>
+								<td><label class="fieldname">Relation With Applicant</label></td>
+								<td class="fieldname">@helper.inputText(dd(prefix + "_dep_relation"), 
+										'placeholder -> "Relation", 
+										'class -> "input-medium")
+								</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-actions" id="formButton">
+						<!--<input type="button" id ="buttonAtPageLoad" value="Add Dependent" style="display:none">-->
+					@if(isApplcnt == true){
+						<input type="button" id ="buttonAfterAddMore"  class="btn btn-large btn-pink" align="right" value="Add More" onclick="addMoreBottonClick(true);">
+						<input type="button" id ="buttonAfterSave"  class="btn btn-large btn-pink" align="right" value="Save" onclick="addDependentToList(true);">
+						<input type="button" id ="buttonAfterCancel"  class="btn btn-large btn-pink" align="right" value="Cancel" onclick="afterCancelButton(true);">
+					}else{
+						<input type="button" id ="buttonAfterAddMore1"  class="btn btn-large btn-pink" align="right" value="Add More" onclick="addMoreBottonClick(false);">
+						<input type="button" id ="buttonAfterSave1"  class="btn btn-large btn-pink" align="right" value="Save" onclick="addDependentToList(false);">
+						<input type="button" id ="buttonAfterCancel1"  class="btn btn-large btn-pink" align="right" value="Cancel" onclick="afterCancelButton(false);">
+					}
+				</div>
+			</div>
+		</div>

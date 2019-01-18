@@ -1,0 +1,158 @@
+
+
+
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+
+@form.formTemplate("Applicant - Payment Details", 6) {
+	
+	<form class="form-horizontal">
+		<h1>Payment Details</h1>
+		<hr>
+			<div class="form-section">
+				<table class="fieldstable">
+					<tr>
+						<td><lebel class="fieldname required" for="Merchant_Id" >Merchant Id </lebel></td>
+						<td><input type="text" name="Merchant_Id"   maxlength="50"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname required" >Order Id </lebel></td>
+						<td><input type="text" name="Order_Id" class="input-medium"  maxlength="15"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname required" >Amount </lebel></td>
+						<td><input type="text" name="Amount" class="input-medium"  maxlength="9"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname required" >Redirect Url</lebel></td>
+						<td><input type="text" name="Redirect_Url"  maxlength="200"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname required" >Checksum </lebel></td>
+						<td><input type="text" name="Checksum" class="input-medium"  maxlength="10"></td>
+					</tr>
+				</table>
+			</div >
+			<hr>
+			<div class="form-section" >
+				<table class="fieldstable">
+					<tr>	
+							<td>
+								<table class="fieldstable">
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer Name </lebel></td>
+										<td><input type="text" name="billing_cust_name" class="input-medium"  maxlength="50"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer Address </lebel></td>
+										<td><input type="text" name="billing_cust_address"  maxlength="200"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer Country </lebel></td>
+										<td><input type="text" name="billing_cust_country" class="input-medium" maxlength="50"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer Telephone </lebel></td>
+										<td><input type="text" name="billing_cust_tel" class="input-medium" maxlength="50"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer Email </lebel></td>
+										<td><input type="text" name="billing_cust_email" class="input-medium" maxlength="50"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer State </lebel></td>
+										<td><input type="text" name="billing_cust_state " class="input-medium" maxlength="30"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Billing Customer City </lebel></td>
+										<td><input type="text" name="billing_cust_city  " class="input-medium" maxlength="30"></td>
+									</tr>
+									<tr>
+										<td><lebel class="fieldname required" >Zip Code</lebel></td>
+										<td><input type="text" name="billing_zip_code" class="input-medium" maxlength="10"></td>
+									</tr>
+									
+								</table>
+							</td>
+							<td>
+								<table class="fieldstable">
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer Name </lebel></td>
+									<td><input type="text" name="delivery_cust_name" class="input-medium" maxlength="50"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer Telephone </lebel></td>
+									<td><input type="text" name="delivery_cust_tel" class="input-medium" maxlength="50"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer Address </lebel></td>
+									<td><input type="text" name="delivery_cust_address"  maxlength="200"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer Country </lebel></td>
+									<td><input type="text" name="delivery_cust_country" class="input-medium" maxlength="50"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer Telephone </lebel></td>
+									<td><input type="text" name="delivery_cust_country" class="input-medium" maxlength="50"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer State </lebel></td>
+									<td><input type="text" name="delivery_cust_state" class="input-medium" maxlength="30"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Delivery Customer City </lebel></td>
+									<td><input type="text" name="delivery_cust_city" class="input-medium" maxlength="30"></td>
+								</tr>
+								<tr>
+									<td><lebel class="fieldname" >Zip Code </lebel></td>
+									<td><input type="text" name="delivery_zip_code" class="input-medium" maxlength="10"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<hr>
+			<div>
+				<table class="fieldstable">
+					<tr>
+						<td><lebel class="fieldname" >Merchant Param </lebel></td>
+						<td><input type="text" name="Merchant_Param"  maxlength="100"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >AuthDesc</lebel></td>
+						<td><input type="text" name="AuthDesc" class="input-medium" maxlength="10"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >nb_order_no</lebel></td>
+						<td><input type="text" name="nb_order_no" class="input-medium" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >nb_bid (Bank Reference No)</lebel></td>
+						<td><input type="text" name="nb_bid" class="input-medium" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >Card Category</lebel></td>
+						<td><input type="text" name="card_category" class="input-medium" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >Bank Name</lebel></td>
+						<td><input type="text" name="bank_name" class="input-medium" maxlength="20"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >payType</lebel></td>
+						<td><input type="text" name="payType" class="input-medium" maxlength="10"></td>
+					</tr>
+					<tr>
+						<td><lebel class="fieldname" >Billing Page Heading</lebel></td>
+						<td><input type="text" name="billingPageHeading"  maxlength="100"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="form-actions">
+				<input type="submit" class="btn btn-large btn-pink" align="right" value="Submit"/>
+			</div>
+	</form>
+}

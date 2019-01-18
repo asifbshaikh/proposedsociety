@@ -1,0 +1,30 @@
+@(agentStatistics : AgentStatistics, user: User)
+
+@adminTemplate("Proposed Society - Admin Dashboard",user,Seq(),Seq()){
+		<div>
+	        <br>
+	        <h2>Agent Statistics </h2>
+	      	<hr>
+		        <ul class="fnt-li">
+				 	 <li><span style="font-size: 1em;"> Total Applications Filled </span><span class="label label-info status"  >@agentStatistics.totalApplication</span><hr></li>
+				   	<li>
+				 	  	<span class="label label-info status"  >@agentStatistics.totalApprovedApplication</span>
+				  	 	<span style="font-size: 1em;"> Applications are approved</span><hr>
+				   	</li>
+				   	<li>
+					   	<span class="label label-info status"  >@agentStatistics.totalRejectedApplication</span>
+					   	<span style="font-size: 1em;"> Applications are rejected</span><hr>
+				   	</li>
+				   	<li>
+					   	<span class="label label-info status"  >@agentStatistics.totalPendingApplication</span>
+					   	<span style="font-size: 1em;"> Applications are pending</span><hr>
+				   	</li>
+				   	<li>
+				   		<span style="font-size: 1em;"> Total active agent</span>
+				   		<span class="label label-info status"  >@agentStatistics.totalActiveAgent</span>
+				   		
+				   		<hr>
+				   	</li>
+					 </ul>
+		</div>
+}

@@ -1,0 +1,14 @@
+@(user: User)
+<div id="header">
+	<div class="container">
+		<h1 id="logo"><a href="@routes.Application.index">Proposed Society.com</a></h1>
+		<div id="main_menu">
+			<ul class="nav">
+				<li><a href="@routes.Pages.show("concept")">Concept</a></li>
+				<li><a href="@routes.Pages.show("benefits")">Benefits</a></li>
+				<li><a href="@routes.ApplicationFormController.shortForm">Apply</a></li>
+			</ul>
+		</div><!-- end main_menu -->
+		@submenu(user)
+	</div>
+</div><!-- end header -->

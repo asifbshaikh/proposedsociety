@@ -1,0 +1,50 @@
+@(user: User)
+@mainTemplate("Proposed Society - Contact", user ,routes.Assets.at("images/content/contact_us.jpg")){
+	<!-- PG_CONTNET -->
+
+				<!-- content area -->
+				<div id="content_area">
+					<div class="row">
+						<div class="span12 cms" style="padding-bottom:0;">
+							<h1>Contact Us</h1>
+							<p style="margin-bottom: 2cm;" class="subtitle">Proposed Society - A Bhavani Vikasak (I) Pvt. Ltd. Initiative.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span12">
+							<div class="row">
+								<form  method="POST"  action=@routes.ApplicationFormController.enquiryMessage class="well span9" style="padding:25px 30px;" >
+								  <div class="row">
+										<div class="span3">
+											<label>Subject</label>
+											<select id="subject" name="subject" class="span3">
+												<option value="User query: General Enquiry">General Enquiry</option>
+												<option value="User query: Suggestions">Suggestions</option>
+												<option value="User query: Agency Enquiry">Agency Enquiry</option>
+												<option value="User query: Sell Land / Plot">Sell your Land / Plot</option>
+											</select>
+										</div>
+										<div class="span11">
+											<label>Message</label>
+											<textarea name="message" id="message" placeholder="Enter your message here.." class="input-xlarge span9" rows="9" required></textarea>
+										</div>
+										<button type="submit" id="submit_enquiry"class="btn btn-blue pull-right">Send</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="span4 cms">
+							<h3>Head Office Address -</h3>
+							<address>
+								<strong>Bhawani Vikasak (I) Pvt. Ltd.</strong><br>
+								D-505,3rd Floor,<br/>
+								Vashi Plaza, Sector-17,<br/>
+								Vashi, Navi Mumbai-400705.<br/>
+								<abbr title="Contact Number">P:</abbr> 022-41275777<br>
+							</address>
+							
+						</div>
+					</div>
+				</div><!-- ends contnet area -->
+	
+}

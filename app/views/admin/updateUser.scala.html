@@ -1,0 +1,45 @@
+@(userToUpdate: User,user: User)
+@import common.Roles
+
+@adminTemplate("Proposed Society - Create User",user,Seq(routes.Assets.at("js/user.js"),routes.Assets.at("js/multi-select.js")),Seq(routes.Assets.at("css/multi-select.css"),routes.Assets.at("stylesheets/createUser.css"))){
+		<form class="fields form-horizontal" method="POST" action="@routes.AdminUserController.updateUserSubmit(userToUpdate.encryptEmail())">
+			<h2>Update User</h2><hr>
+			<table class="fieldstable">
+				<tr>
+					<td><label class="fieldname required">Name</label></td>
+					<td><input type="text" name = "name" value=@userToUpdate.name /> </td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required"> Phone Number </label></td>
+					<td><label>@userToUpdate.mobile</label></td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required"> Email </label></td>
+					<td><label >@userToUpdate.email</label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><label class="fieldname required"> Assign roles to user </label></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						 @if(Roles.roles != null && !Roles.roles.isEmpty()){
+							<select id='custom-headers' multiple='multiple' name="multiselect">
+							   @for(roles <- Roles.roles){
+									@if(Roles.containsCaseInsensitive(roles,userToUpdate.roles)){
+										<option value=@roles selected>@roles</option>
+									}else{
+										<option value=@roles >@roles</option>
+									}
+							   }
+							</select>
+						}
+                    </td>
+				</tr>
+			</table>
+			<hr>
+			 <div align="center">
+			 	<a href="@routes.AdminUserController.showSearchedUserPage(0)" class="btn  btn-info" style="color:#ffffff" >Cancel</a>
+             	<button type="submit" class="btn btn-info ">UPdate Role</button>
+			 </div>
+		</form>
+}

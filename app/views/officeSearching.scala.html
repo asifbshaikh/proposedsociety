@@ -1,0 +1,107 @@
+@(req : Form[Requirement])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+<div id="officeRequirement">
+	<table id="officeTable" class="fieldstable">
+	    <tr>
+	        <td style="width:300px;"><h4>If Office in IT park/SEZ/Warehouse /Commercial Office/Space/Constructed Hotel Space/Benquet Hall/Industrial Building</h4></td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Carpet Area required(sq.ft.)</label></td>
+	        <td>@helper.inputText(req("carpetArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Built up area required(sq.ft.)</label></td>
+	        <td>@helper.inputText(req("builtupArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Terrace carpet area if required</label></td>
+	        <td class="ReqVerticalRad">@form.verticalRadioGroupTool(req("terraceChoice"), options = Seq("AsPerPlan" -> "No Extra Requirement, as per planning only", "Required" -> "Required"), checkedItem = "AsPerPlan")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Specify Area(sq.ft.)</label></td>
+	        <td>@helper.inputText(req("terraceArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Specify Numbers of Toilet/WC/Bath</label></td>
+	        <td class="ReqVerticalRad">@form.verticalRadioGroupTool(req("toiletWcBathRequirements"), options = Seq("AsPerPlan" -> "No Extra Requirement, as per planning only", "Required" -> "Required"), checkedItem = "AsPerPlan")</td>
+	    </tr>
+	    <tr class="hideItClass office_toiletWcBath">
+	        <td style="width:300px;"><label>common toilets</label></td>
+	        <td>@helper.select(req("noOfCommonToilets"), options = helper.options("0" -> "0",
+	        	"1" -> "1",
+	            "2" -> "2",
+	            "3" -> "3",
+	            "4" -> "4",
+	            "5" -> "5",
+	            "6" -> "6",
+	            "7" -> "7",
+	            "8" -> "8",
+	            "9" -> "9",
+	            "10" -> "10"
+	            ), 'class -> "input-small")
+	        </td>
+	    </tr>
+	    <tr class="hideItClass office_toiletWcBath">
+	        <td style="width:300px;"><label>separate WC</label></td>
+	        <td>@helper.select(req("noOfSeparateWc"), options = helper.options("0" -> "0",
+	        	"1" -> "1",
+	            "2" -> "2",
+	            "3" -> "3",
+	            "4" -> "4",
+	            "5" -> "5",
+	            "6" -> "6",
+	            "7" -> "7",
+	            "8" -> "8",
+	            "9" -> "9",
+	            "10" -> "10"
+	            ), 'class -> "input-smnall")
+	        </td>
+	    </tr>
+	    <tr class="hideItClass office_toiletWcBath">
+	        <td style="width:300px;"><label>separate Bathroom</label></td>
+	        <td>@helper.select(req("noOfSeparateBathroom"), options = helper.options("0" -> "0",
+	        	"1" -> "1",
+	            "2" -> "2",
+	            "3" -> "3",
+	            "4" -> "4",
+	            "5" -> "5",
+	            "6" -> "6",
+	            "7" -> "7",
+	            "8" -> "8",
+	            "9" -> "9",
+	            "10" -> "10"
+	            ), 'class -> "input-small")
+	        </td>
+	    </tr>
+		<tr>
+	        <td style="width:300px;"><label>Plot Area</label></td>
+	        <td>@helper.inputText(req("plotArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	        <td>@helper.select(req("plotAreaMeasure"), options = helper.options("Square Feet"->"Square Feet",
+	            "Square Yard"->"Square Yard",
+	            "Square Miles"->"Square Miles",
+	            "Square Meter"->"Square Meter",
+	            "Square ML"->"Square ML",
+	            "Square CM"->"Square CM",
+	            "Square KM"->"Square KM",
+	            "Acres"->"Acres",
+	            "Ares"->"Ares",
+	            "Hectares"->"Hectares",
+	            "Guntha"->"Guntha",
+	            "Bigha"->"Bigha",
+	            "Cent"->"Cent"
+	            ), 'class -> "input-medium")
+	        </td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Other Details(If required)</label></td>
+	        <td>@helper.inputText(req("otherDetails"), 'class -> "input-medium", 'maxlength -> "50")</td>
+	    </tr>
+	</table>
+	<script>
+        	$(document).ready(hideShowBathRequirementClass('hideItClass'));
+	</script>
+</div>

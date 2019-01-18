@@ -1,0 +1,60 @@
+@(payment: Payment,form : ApplicationForm)
+
+@import views.helpers.DateFormatHelper._
+
+@pageTemplate("Applicant - Payment Result",Seq(routes.Assets.at("stylesheets/applicant/form/payment-result.css"))) {
+	<h1>Payment Status</h1>
+	<hr/>
+	<table id="payment-result">
+		@if(payment.completionTime != null) {
+			<tr>
+				<td>Time</td>
+				<td>@formatDate("dd/MM/yyyy HH:mm a", payment.completionTime)</td>
+			<tr>
+		}
+		<tr>
+			<td>Name</td>
+			<td>@form.applicant.fname</td>
+		<tr>
+		<tr>
+			<td>Email</td>
+			<td>@form.applicant.email</td>
+		<tr>
+		<tr>
+			<td>Transaction Id</td>
+			<td>@payment.transactionId</td>
+		<tr>
+		<tr>
+			<td>Invoice Number</td>
+			<td>@form.invoice.invoiceNumber</td>
+		<tr>
+		<tr>
+			<td>Amount</td>
+			<td>@form.invoice.amount</td>
+		<tr>
+		<tr>
+			<td>Status</td>
+			@if(payment.isSuccessful()) {
+				<td class="status success">Successful</td>
+			} else {
+				<td class="status failure">Failure</td>
+			}
+		<tr>
+	</table>
+
+	@if(payment.success != null && payment.success) {
+			<p class="message">Your payment was successfully processed. A password has been generated which is emailed to you. You can use the password to login to the applicant dashboard to communicate to find out status of your applications and other upates about ProposedSociety.</p>
+			<div class="buttons">
+				<a href="@routes.Application.index" class="btn btn-large btn-pink">Finish</a>
+			</div>
+	} else {
+		<form action="@routes.ApplicationFormController.shortFormPaymentSubmit" >
+			<input type="hidden" value="@form.encryptId()" name="form_id">
+			<p class="message">Your payment was rejected by the payment gateway. You can re-attempt making a payment by clicking on the following button.</p>
+			<div class="buttons">
+				<input type="submit" class="btn btn-pink btn-large" value="Retry Payment">
+			</div>
+		</form>
+	}	
+	
+}

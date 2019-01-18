@@ -1,0 +1,6 @@
+@form.formTemplate("Applicant - Fees Already Paid!", 6, Seq(routes.Assets.at("stylesheets/applicant/form/payment-result.css"))) {
+	<h1>Already Paid!<a href="@routes.ApplicationFormController.summaryPage" class="btn btn-large btn-pink backBtn" style="color: white; "> Back</a></h1>
+	<hr/>
+	<p class="message">You have already paid form fees. You may login to applicant dashboard using password which was sent to you at the time of payment was successfully processed.</p>
+	<div class="buttons"><a href="@routes.Application.index" class="btn btn-large btn-pink">Go to Home</a></div>
+}

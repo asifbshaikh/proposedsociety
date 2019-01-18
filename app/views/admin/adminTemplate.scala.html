@@ -1,0 +1,24 @@
+@(title:String, user: User, scriptFiles :Seq[Call]=Seq.empty, cssFiles :Seq[Call] = Seq.empty)(content : Html)
+
+@import views.html._
+@sub_menu = {
+	<li><a href="@routes.AdminUserController.dashboard">Administrator Home</a></li>
+	<li><a href="@routes.AdminUserController.displayAgentsList(0)">Agent List to Assign Buero</a></li>
+	<li><a href="@routes.AdminUserController.approvedAgentList(0)">Agent Review List</a></li>
+	<li><a href="@routes.AdminUserController.createNewUserPage">Create New User</a></li>
+	<li><a href="@routes.AdminUserController.searchUser">Search User</a></li>
+	<li><a href="@routes.AdminUserController.cmsPageList">Content Management System</a></li>
+	<li class="dropdown-submenu">
+	    <a href="#">Report</a>
+	    <ul class="dropdown-menu">
+	    	<li><a href="@routes.AdminUserController.recentVisitor()">Recent Visitor</a></li>
+	      	<li><a href="@routes.AdminUserController.getUserInterestedInBecomeAnAgent(0)">Interested Agents</a></li>
+			<li><a href="@routes.AdminUserController.reportFilter()">Search Applicant</a></li>	      	
+	    </ul>
+	</li>
+	<li><a href="@routes.UserController.logout">Logout</a></li>
+}
+
+@baseDashboardTemplate(title,scriptFiles,cssFiles,user,sub_menu){
+		@content
+}

@@ -1,0 +1,65 @@
+@(page : com.avaje.ebean.Page[User],user: User)
+@import views.helpers.FieldValue._
+@import views.html.admin._
+@import controllers.FormStatus
+@import com.avaje.ebean.Page
+@import utils._
+
+@adminTemplate("Proposed Society -Interested In Agent",user,Seq(),Seq()){
+	<div>
+		@if(page != null && !page.getList().isEmpty()) {
+			<h2>User List</h2>
+			<hr/>
+			<style>
+				table.table {
+					font-family: 'Roboto', Helvetica, sans-serif, Arial;
+				}
+			</style>
+			<table  class="table table-striped" >
+				<thead>
+					<tr>	
+				  		<th class="leftAlignClass">Name</th>
+				  		<th class="leftAlignClass">Email</th>
+				  		<th class="leftAlignClass">Mobile No.</th>
+				  		<th class="leftAlignClass">Joining Date</th>
+					 </tr>
+				</thead>
+				<tbody>
+					@for(user <- page.getList()) {
+					  	<tr>
+					  		<td class="leftAlignClass">@fieldVal(user.name,"NA")</td>
+					  		<td class="leftAlignClass">@fieldVal(user.email,"NA")</td>
+					  		<td class="leftAlignClass">@fieldVal(user.mobile,"NA")</td>
+					  		<td class="leftAlignClass">@fieldVal(DateFormatHelper.format(user.joiningDate,"dd-MM-yyyy"),"NA")</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			@if(page.getTotalPageCount() > 1){
+				<div class="form-sections">
+				  		<ul class="pager">
+							@if(page. hasPrev()){
+								
+						  		  <li><a href="@routes.AdminUserController.getUserInterestedInBecomeAnAgent(page.getPageIndex() -1)">Previous</a></li>
+					 			
+							}else{
+								<li class="disabled"><a href = "#"> Previous</a></li>
+							}
+							
+							@if(page.hasNext()){
+								<li><a href="@routes.AdminUserController.getUserInterestedInBecomeAnAgent(page.getPageIndex() + 1)">Next</a></li>
+							}else{
+								<li class="disabled"><a href = "#"> Next</a></li>
+							}
+					</ul>
+				</div>
+			}
+		}else{
+			<div>
+				<h2>There is no user account, which is interested in agent. </h2>
+				<hr/>
+					
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,12 @@
+@(propdata: List[Property])
+<div id="propdatatDiv">
+	<h2>Existing Property Details</h2>
+	<hr/>
+	@if(propdata != null && !propdata.isEmpty()) {
+		@getPropertyTable(propdata,true)
+	}else{
+		<div id="PropNoDataParaDiv">
+			<p id="PropNoDataPara">Click on Add More button to add details</p>
+		</div>	
+	}
+</div>

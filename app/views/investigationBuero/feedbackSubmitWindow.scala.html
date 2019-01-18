@@ -1,0 +1,13 @@
+@(user : User)
+@bueroDashboardTemplate("Proposed Society - Feedback to Buero",user,Seq(),Seq()){
+	<div>
+	  	<p class="message" style="text-align: center;font-size: 14px;font-weight: bold;padding: 10px;"> Your feedback has been successfully submitted!<br/>
+				Your opinions and comments are very important to Proposedsociety and we read every message that we receive.
+				Our goal is to improve our service any way we can, and we appreciate your taking the time to upload feedback form.  </p>
+		<hr/>
+		<div class="buttons">
+			<!--After back it should redirect to buros agent list template -->
+			<a href="@routes.BueroController.bueroDashboard" class="btn btn-large btn-pink" style="color:white">Back</a>
+		</div>
+	</div>
+}

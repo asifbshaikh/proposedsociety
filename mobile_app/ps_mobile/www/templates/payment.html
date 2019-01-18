@@ -1,0 +1,51 @@
+<ion-view view-title="PAYMENT">
+    <ion-content class="padding back-img">
+        <form name=paymentForm" id="paymentForm" ng-submit="paymentForm(applyForm)"  novalidate="novalidate">
+        <div class="content-sec padding">
+            <center>
+                <p class="message">Please pay the application fees to proceed with submission of your application. After the payment is confirmed, a password will be generated and emailed to you, which you can then use to login to the applicant dashboard and check status of your application.</p>
+                <table class="payment-table">
+                    <tr>
+                        <td class="name">Name</td>
+                        <td>{{invoice.user.name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="name">Invoice Number</td>
+                        <td>{{invoice.invoiceNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="name">Details</td>
+                        <td>Proposed Society Form Fee</td>
+                    </tr>
+                    <tr>
+                        <td class="name">Amount</td>
+                        <td class="amount">&#8377; 500</td>
+                    </tr>
+                </table>
+                   <br>
+                        <button type="submit" class="btn-large btn-pink">
+                            Proceed Payment
+                        </button>
+                    </center>
+            </h1>
+        </div>
+        </form>
+    </ion-content>
+</ion-view>
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+td {
+			border-collapse: border-collapse;
+			border: 1px solid silver;
+			padding: 5px;
+		}
+</style>

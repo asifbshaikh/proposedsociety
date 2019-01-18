@@ -1,0 +1,192 @@
+@(apptype : Form[ApplicationForm],req: Form[Requirement],prefix : String,errorMsg : String)
+
+@import common.PSError
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@pageTemplate("Proposed Society - Application Form",
+					Seq(
+						routes.Assets.at("stylesheets/personalInfo.css"),
+						routes.Assets.at("bootstrap_datepicker/css/datepicker.css"),
+						routes.Assets.at("stylesheets/newTagSystem.css"),
+						routes.Assets.at("stylesheets/requirement.css")
+					),
+					Seq(
+						routes.Assets.at("js/personalInfo.js"),
+						routes.Assets.at("js/dateFormat.js"),
+						routes.Assets.at("js/pincode.js"),
+						routes.Assets.at("js/personalShorteInfo.js"),
+						routes.Assets.at("bootstrap_datepicker/js/bootstrap-datepicker.js"),
+						routes.Assets.at("js/newTagSystem.js"),
+						routes.Assets.at("js/requirement.js")
+					)
+) {
+	@if(errorMsg.equals(PSError.USER_EXIST)) {
+              <div class="alert alert-error">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <p>Either user with given email id or phone number exist , please make sure that you have not already filled form .</p>
+              </div> 
+	}
+	@if(errorMsg.equals(PSError.AGENT_NOT_EXIST)){
+	       <div class="alert alert-error">
+                 <button type="button" class="close" data-dismiss="alert">&times;</button>
+                 <p>Agent does not exist with given agent code !</p>
+           </div> 
+	}
+	@helper.form(action = routes.ApplicationFormController.shortFormSubmit, 'class -> "form-horizontal",'id -> "shortForm") {
+	 <div id="personal-info">
+		<h1>Personal Information</h1>
+		<hr/>
+		<div class="form-sections">
+			<table id="appdetails" class="fieldstable">
+				<tr>
+					<td><label class="fieldname required" for="fname">Applicant's Name</label></td>
+					<td>
+						<ul class="fieldsul">
+							<li>
+								@helper.select(apptype(prefix+".title"), 
+								options = helper.options("Mr" -> "Mr.", "Ms" -> "Ms.", "Mrs" -> "Mrs.", "Smt" -> "Smt."), 
+								'class -> "input-mini " ,'required ->"required")
+							</li>
+							<li>@helper.inputText(apptype(prefix+".fname"), 
+									'placeholder -> "First Name", 
+									'class -> "input-medium capitalize", 'maxlength -> 50,'required ->"required")
+							</li>
+							<li>@helper.inputText(apptype(prefix+".mname"), 
+									'placeholder -> "Middle Name", 
+									'class -> "input-medium capitalize", 'maxlength -> 50,'required ->"required" )
+							</li>
+							<li>@helper.inputText(apptype(prefix+".lname"), 
+									'placeholder -> "Last Name", 
+									'class -> "input-medium capitalize", 'maxlength -> 50,'required ->"required" )
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="dob">Date of Birth (yyyy-MM-dd)</label></td>
+					<td>@helper.inputText(apptype(prefix+".dob"), 'class -> "input-small datepicker", 'placeholder -> "yyyy-MM-dd",'required ->"required" )</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required " for="email">Email</label></td>
+					<td>@helper.inputText(apptype(prefix+".email"), 
+							'placeholder -> "Email",
+							'class -> "input-medium", 'maxlength -> 100,'required ->"required" )
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="mobileNumber">Mobile Number</label></td>
+					<td>
+						@helper.inputText(apptype(prefix + ".phone1"), 
+							'placeholder -> "Phone Number",
+							'class -> "input-medium", 'maxlength -> 20,'required ->"required")
+					</td>	
+				</tr>
+				<tr>
+					<td><label class="fieldname " for="landlineNumber">Landline</label></td>
+					<td>
+							@helper.inputText(apptype(prefix+".phone2"), 
+									'placeholder -> "Phone Number",
+									'class -> "input-medium", 'maxlength -> 20 )
+					</td>	
+				</tr>
+			</table>
+		</div>
+		<div class="form-sections">
+			 <table  class="fieldstable">
+				<tr>
+					<td><label class="fieldname required" for="applicantIncome">Applicant's Income</label></td>
+					<td>
+						<ul class="fieldsul">
+							<li>@form.horizontalRadioGroup(apptype("shortFormApplicantIncomePer"), options = Seq("Monthly" -> "Monthly", "Yearly" -> "Yearly"),checkedItem = "Monthly") </li>
+							<li>@helper.inputText(apptype("applicantIncomeShortForm"), 
+									'placeholder -> "Income",
+									'class -> "input-medium", 'maxlength -> 30,'required ->"required" )
+							</li>
+							<li> <span id="applicantError" style="color:red; display: none">Please Enter Your Income in Numeric</span></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname " for="coApplicantIncome">Co-Applicant's Income</label></td>
+					<td>
+						<ul class="fieldsul">
+							<li>@form.horizontalRadioGroup(apptype("shortFormCoApplicantIncomePer"), options = Seq("Monthly" -> "Monthly", "Yearly" -> "Yearly"),checkedItem = "Monthly") </li>
+							<li>@helper.inputText(apptype("coApplicantIncomeShortForm"), 
+									'placeholder -> "Income",
+									'class -> "input-medium", 'maxlength -> 30)
+							</li>
+							<li> <span id="coapplicantError" style="color:red; display: none">Please Enter Income in Numeric</span></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname" for="approxLoanAmount">Approx Max Loan Eligibility </label></td>
+					<td >
+						<ul class="fieldsul" >
+							<li style="padding-right: 1em;">&#8377;</li>
+							<li> <span id="approxLoanAmount" >0</span></li>
+						</ul>
+							
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="loanAmountRequired">Required Loan Amount</label></td>
+					<td>
+							@helper.inputText(apptype("requiredLoan"), 
+									'placeholder -> "Loan Amount",
+									'class -> "input-medium", 'maxlength -> 20,'required ->"required" )
+					</td>	
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="totalBudget">Total Budget</label></td>
+					<td>
+						@helper.select(apptype("totalBudget"), 
+							options = helper.options(
+							"" -> "Select Budget","1000000" -> "5-10 Lacs", "1500000" -> "10-15 Lacs", "2000000" -> "15-20 Lacs",
+							"2500000" -> "20-25 Lacs","3000000"->"25-30 Lacs","3500000"->"30-35 Lacs","4000000"->"35-40 Lacs","4500000"->"40-45 Lacs","5000000"->"45-50 Lacs","5500000"->"50-55 Lacs","6000000"->"55-60 Lacs","6500000"->"60-65 Lacs",
+							"7000000"->"65-70 Lacs","7500000"->"70-75 Lacs","8000000"->"75-80 Lacs","8500000"->"80-85 Lacs","9000000"->"85-90 Lacs","9500000"->"90-95 Lacs",
+							"10000000" -> ".95-1.00 Cores","11000000" -> "1.00-1.10 Cores","12000000" -> "1.10-1.20 Cores","13000000" -> "1.20-1.30 Cores","14000000" -> "1.30-1.40 Cores","15000000" -> "1.40-1.50 Cores","16000000" -> "1.50-1.60 Cores",
+							"17000000" -> "1.60-1.70 Cores","18000000" -> "1.70-1.80 Cores","19000000" -> "1.80-1.90 Cores","20000000 " -> "1.90-2.00 Cores",
+							"22500000" -> "2.00-2.25 Cores ","25000000" -> "2.25-2.50 Cores ","27500000" -> "2.50-2.75 Cores","30000000" -> "2.75-3.00 Cores","32500000" -> "3.00-3.25 Cores ","35000000" -> "3.25-3.50 Cores",
+							"37500000" -> "3.50-3.75 Cores","40000000" -> "3.75-4.00 Cores","42500000" -> "4.00-4.25 Cores","45000000" -> "4.25-4.50 Cores","47500000" -> "4.50-4.75 Cores","50000000" -> "4.75-5.00 Cores","52500000" -> "Above 5 Cores",
+							"0" -> "Other"), 
+							'class -> "input-medium " ,'required ->"required")
+				<!--If budget is out of range then dispay other option -->		
+							<input type="number" step="50000"  placeholder="Total Budget" class="input-medium" id="otherTotalBudget" style="display: none" maxlength="20">
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname" for="pesonalContributionAmount">Personal Contribution Amount</label></td>
+					<td >
+						<ul class="fieldsul" >
+							<li style="padding-right: 1em;">&#8377;</li>
+							<li> <span id="personalContribution" >0</span></li>
+						</ul>
+							
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required " for="registredBy">Registration by</label></td>
+					<td>@form.horizontalRadioGroup(apptype("registrationBy"), options = Seq("Self" -> "Self","Agent" -> "Agent" , "Authorized Person" -> "Officer" ),checkedItem = "Self")</td>
+				</tr>
+				<tr>
+					<td class="hideAgentid "><label class="fieldname required" for="agentIdentity">Agent ID</label></td>
+					<td>
+						@helper.inputText(apptype("agentCode"), 
+								'placeholder -> " Agent Id",
+								'id -> "agentId", 
+								'class -> "input-medium hideAgentid", 'maxlength -> 20  )
+					</td>	
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div>
+		@requirementForShortForm(req)
+	</div>
+	<div class="form-actions">
+		<input type="submit" class="btn btn-large btn-pink" id="submitShortForm" align="right" value="Make Payment">
+	</div>
+	}
+}

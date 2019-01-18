@@ -1,0 +1,808 @@
+@(agent : Form[AgentForm],formStatus:String, user: User)
+
+@import controllers.FormStatus 
+@import views.html.form._
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@agentFormTemplate("Proposed Society - Agent Application Form") {
+@helper.form(action = routes.AgentFormController.agentFormSubmit, 'class -> "form-horizontal") {
+
+
+
+	@if(formStatus.equals(FormStatus.REJECTED)){
+	
+		<div class="alert alert-error">
+	 		 <button type="button" class="close" data-dismiss="alert">&times;</button>
+	 		 <strong>Warning!</strong> Your form has been rejected . Please check your email and refill required correct documents  .
+		</div>
+	}
+<div id="personal-info" class="form-section">
+    <h1>Agent Application Form</h1>
+    <hr/>
+    <table id="appdetails" class="fieldstable">
+		        <tr>
+		            <td><label class="fieldname required">Applicant Name</label></td>
+		            <td>
+		                <ul class="fieldsul">
+		                    <li>@helper.select(agent("title"), 
+		                        options = helper.options("Mr" -> "Mr.", "Ms" -> "Ms.", "Mrs" -> "Mrs.","Smt" -> "Smt."), 
+		                        'class -> "input-mini")
+		                    </li>
+		                    <li>@helper.inputText(agent("fname"), 
+		                        'placeholder -> "First Name", 
+		                        'class -> "input-medium capitalize")
+		                    </li>
+		                    <li>@helper.inputText(agent("mname"), 
+		                        'placeholder -> "Middle Name", 
+		                        'class -> "input-medium capitalize")
+		                    </li>
+		                    <li>@helper.inputText(agent("lname"), 
+		                        'placeholder -> "Last Name", 
+		                        'class -> "input-medium capitalize")
+		                    </li>
+		                </ul>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td><label class="fieldname required">Father's / Husband's Name</label></td>
+		            <td>
+		                <ul class="fieldsul">
+		                    <li>@helper.select(agent("fh_relation"),
+		                       options = helper.options("F" -> "Father","H" -> "Husband"),
+		                       'class -> "input-small")
+		                   </li>
+		                   <li>@helper.select(agent("fh_title"), 
+		                    options = helper.options("Mr" -> "Mr.","Shri" -> "Shri."),
+		                    'class -> "input-mini")
+		                </li>
+		                <li>@helper.inputText(agent("fh_fname"), 'placeholder -> "First Name",
+		                    'class -> "input-medium capitalize")
+		                </li>
+		                <li>@helper.inputText(agent("fh_mname"), 'placeholder -> "Middle Name",
+		                    'class -> "input-medium capitalize")
+		                </li>
+		                <li>@helper.inputText(agent("fh_lname"), 'placeholder -> "Last Name",
+		                    'class -> "input-medium capitalize")
+		                </li>
+		            </ul>
+		        </td>
+		    </tr>
+		    <tr>
+		        <td><label class="fieldname required" for="dob">Date of Birth</label></td>
+		        <td>
+		           <ul class="fieldsul">
+		           <li>@helper.inputText(agent("dob"), 'class -> "input-small datepicker", 'placeholder -> "yyyy-MM-dd")</li>
+		            <li>
+		                <input type="text" readonly="readonly" id="calage" class="input-mini" value="32 Years old" style="display: none;">
+		            </li>
+		        </ul>
+		    </td>
+		</tr>
+		<tr>
+			<td><label class="fieldname required" for="birth_place_line1">Birth Place</label></td>
+			<td ><fieldset id ="birthAddFieldSet" class="span3">		
+					@address(agent,"birth_place")
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+		    <td><label class="fieldname required" for="sex">Gender</label></td>
+		    <td>@form.horizontalRadioGroup(agent("sex"), options = Seq("M" -> "Male", "F" -> "Female"))</td>
+		</tr>   
+		<tr>
+		    <td><label class="fieldname required" for="nationality">Nationality</label></td>
+		    <td>@form.horizontalRadioGroup(agent("nationality"), options = Seq("I" -> "Indian", "N" -> "NRI"),checkedItem = "I")</td>
+		   
+		</tr>       
+		<tr>
+			<td></td>
+			 <td>
+		    	<div id="nriAddField" style="display: none;" > 
+					<fieldset class="span3" style="padding-left:90px;">
+						@address(agent,"nri_address")
+					</fieldset>
+				</div>
+			</td>
+		</tr>
+		<tr>
+		    <td><label class="fieldname required" for="marital_status">Marital Status</label></td>
+		    <td>@form.horizontalRadioGroup(agent("marital_status"), options = Seq("M" -> "Married", "U" -> "Unmarried"  ,"D" -> "Divorcee"))</td>
+		</tr> 
+		<tr>
+			<td><label class="fieldname required" >Residential Address</label></td>
+			<td >
+					<fieldset class="span3" id ="agentResiAdd">
+						<span>Same as :</span>
+						@form.verticalRadioGroup(agent("residential_address_same_as"), 
+							options = Seq("birth_place" -> "Birth Place", 
+						  	"other" -> "Other"), 
+							checkedItem = "other")
+							
+				
+							<div id="resAddFieldSet" style="padding-left:20px;">
+								@address(agent,"residential_address")
+							</div>
+					</fieldset>
+			</td>		
+		</tr>
+		</table>
+</div>
+<div id="residentialStatus" class="form-section">
+    <h2>Agent - Residential Status </h2>
+    <hr>
+	    <table id="residence_info" class="fieldstable">
+		    <tr>
+		          <td><label class="fieldname required" for="resi_status">Status</label></td>
+		          <td>@form.horizontalRadioGroup(agent("resi_status"), 
+		           options = Seq("ownership" -> "Ownership",
+		           "rented" -> "Rented",
+		           "other" -> "Other"
+		           ))
+		      	 </td>
+		   </tr>
+		   <tr>
+		      <td><label class="fieldname required" for="residence_yrs_residing">No of years residing at Residence</label></td>
+		      <td>@helper.inputText(agent("residence_yrs_residing"), 'class -> "input-mini", 'maxlength -> "2")</td>
+		  </tr>
+		  <tr>
+		      <td><label class="fieldname required" for="city_yrs_residing">No of years residing in City</label></td>
+		      <td>@helper.inputText(agent("city_yrs_residing"), 'class -> "input-mini", 'maxlength -> "2")</td>
+		  </tr>
+		  <tr>
+		  <td><label class="fieldname required" for="phone1">Phone - 1</label></td>
+		  <td>
+		     <ul class="fieldsul">
+		        <li>@helper.select(agent("phone1_type"), 
+		          options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		          'class -> "input-small")
+		      </li>
+		      <li>@helper.inputText(agent("phone1"), 
+		          'placeholder -> "+91-22-212333",
+		          'class -> "input-medium")
+		      </li>
+		  </ul>
+		</td>	
+		</tr>
+		<tr>
+		  <td><label class="fieldname" for="phone2">Phone - 2</label></td>
+		  <td>
+		     <ul class="fieldsul">
+		        <li>@helper.select(agent("phone2_type"),
+		         options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		         'class -> "input-small")
+		     </li>
+		     <li>@helper.inputText(agent("phone2"), 
+		      'placeholder -> "+91-22-212333",
+		      'class -> "input-medium")
+		  </li>
+		</ul>
+		</td>
+		</tr>
+		<tr>
+		 <td><label class="fieldname" for="phone3">Phone - 3</label></td>
+		 <td>
+		    <ul class="fieldsul">
+		       <li>@helper.select(agent("phone3_type"),
+		        options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		        'class -> "input-small")
+		    </li>
+		    <li>@helper.inputText(agent("phone3"), 
+		     'placeholder -> "+91-22-212333",
+		     'class -> "input-medium")
+		 	</li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+		   <td><label class="fieldname required" for="email">Email</label></td>
+		   <td>@helper.inputText(agent("email"), 
+		     'placeholder -> "Email",
+		     'class -> "input-large")
+		   </td>
+		</tr>
+	</table>
+</div>
+<div id="work_details" class="form-section">
+    <h2>Agent - Office Address </h2>
+    <hr/>
+    
+    <table class="fieldstable" > 
+	<tr>
+	    <td>
+			<table>
+				<tr>
+					<td><label class="fieldname required" for="office_address" >Office
+							Address</label></td>
+					<td>
+						<fieldset class="span3" id = "officeRadio">
+							<span>Same as :</span>
+							@form.verticalRadioGroup(agent("office_address_same_as"), 
+								options = Seq("residential_address" -> "Residential Address", "notHave" -> " Not Available",
+							  	"other" -> "Other"), 
+								checkedItem = "other")
+							<div id="office_details" style="padding-left:20px;display:  none;">@address(agent,"office_address")</div>
+						</fieldset>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+          	<div id="optnfor_add" style="padding-left:20px; display: none;">
+		          	 <table>
+		                  <tr>
+		                      <td><label class="fieldname" for="off_mail">Office Email</label></td>
+		                      <td>@helper.inputText(agent("off_mail"), 
+		                          'size -> 30, 
+		                          'placeholder -> "Email",
+		                          'class -> "input-large")
+		                      </td>
+		                  </tr>
+		                  <tr>
+		                      <td><label class="fieldname" for="website_addres">Website Address</label></td>
+		                      <td>@helper.inputText(agent("website_addres"), 
+		                          'size -> 30, 
+		                          'placeholder -> "http://",
+		                          'class -> "input-medium")
+		                      </td>
+		                  </tr>
+		                  <tr>
+		                      <td><label class="fieldname" for="off_fax">Website Address</label></td>
+		                      <td>@helper.inputText(agent("off_fax"), 
+		                          'size -> 30, 
+		                          'placeholder -> "Fax",
+		                          'class -> "input-medium")
+		                      </td>
+		                  </tr>
+		                  <tr>
+		                      <td><label class="fieldname " for="off_phone1">Office Phone 1</label></td>
+		                      <td>
+		                          <table>
+		                              <tr>
+		                                  <td>@helper.select(agent("off_phone1_type"), options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		                                      'class -> "input-small")
+		                                  </td>
+		                                  <td>@helper.inputText(agent("off_phone1"), 'placeholder -> "+91-22-212333",
+		                                      'class -> "input-medium")
+		                                  </td>
+		                              </tr>
+		                          </table>
+		                      </td>
+		                  </tr>
+		                  <tr>
+		                      <td><label class="fieldname" for="off_phone2">Office Phone 2</label></td>
+		                      <td>
+		                          <table>
+		                              <tr>
+		                                  <td>@helper.select(agent("off_phone2_type"), options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		                                      'class -> "input-small")
+		                                  </td>
+		                                  <td>@helper.inputText(agent("off_phone2"), 'placeholder -> "+91-22-212333",
+		                                      'class -> "input-medium")
+		                                  </td>
+		                              </tr>
+		                          </table>
+		                      </td>
+		                  </tr>
+		                  <tr>
+		                      <td><label class="fieldname" for="off_phone1">Office Phone 3</label></td>
+		                      <td>
+		                          <table>
+		                              <tr>
+		                                  <td>@helper.select(agent("off_phone3_type"), options = helper.options("M" -> "Mobile","L" -> "Landline"),
+		                                      'class -> "input-small")
+		                                  </td>
+		                                  <td>@helper.inputText(agent("off_phone3"), 'placeholder -> "+91-22-212333",
+		                                      'class -> "input-medium")
+		                                  </td>
+		                              </tr>
+		                          </table>
+		                      </td>
+		                  </tr>
+		              </table>
+          	</div>
+	    </td>
+	   </tr>
+     </table>    
+ </div>
+ <div id="address-details" class="form-section">
+	<h1>Agent - Address Details</h1>
+	<hr/>
+	<fieldset class="span3" id = "agentAddRadio">
+		<h4 class="required">Permanent Address</h4>
+		<span>Same as :</span>
+		@form.verticalRadioGroup(agent("permanent_address_same_as"),
+			options = Seq("birth_place" -> "Birth Place", 
+						  "other" -> "Other"), 
+			checkedItem = "other")
+	
+			<div  id="perAddFieldSet" style="padding-left:20px;">
+				@address(agent,"permanent_address")
+			</div>
+	</fieldset>
+	
+	<fieldset class="span3" id = "commAddRadio" >
+		<h4 class="required">Address Of Communication</h4>
+		<span>Same as :</span>
+		@form.verticalRadioGroup(agent("communication_address_same_as"),
+			options = Seq("birth_place" -> "Birth Place", 
+			              "permanent_address" -> "Permanent Address",
+			              "residential_address" -> "Residential Address",
+			              "office_address" -> "Office Address",
+			               "other" -> "Other"),
+			checkedItem = "other")
+		
+			<div id="comAddFieldSet" style="padding-left:20px;">
+				@address(agent,"communication_address")
+			</div>
+	</fieldset>
+</div>
+<div class="clear"></div>
+<hr>
+<div class="form-section">
+	<table class="fieldstable">
+		<tr>
+		   <td><label class="fieldname required" for="language">Language</label></td>
+		   <td>
+			      <table class=" table table-bordered" style="width:290px;">
+				          <tr>	
+				            <td> </td>
+				            <td>Read</td>
+				            <td>Write</td>
+				            <td>Speak</td>
+				        </tr>
+				        <tr>
+				           <td><label>Marathi</label></td>
+				           <td > <input type="checkbox"  id="mread"></td>
+				           <td  ><input type="checkbox" id="mwrite" ></td>
+				           <td  ><input type="checkbox" id="mspeak"></td>
+				       </tr>
+				       <tr>
+				           <td><label>Hindi</label></td>
+				           <td > <input type="checkbox"  id="hread"></td>
+				           <td  ><input type="checkbox" id="hwrite" ></td>
+				           <td  ><input type="checkbox" id="hspeak"></td>
+				       </tr>
+				       <tr>
+				           <td><label>English</label></td>
+				           <td > <input type="checkbox"  id="eread"></td>
+				           <td  ><input type="checkbox" id="ewrite" ></td>
+				           <td  ><input type="checkbox" id="espeak"></td>
+				       </tr>
+			   	</table>
+				</td>
+			</tr>
+			<tr>
+					<td><label class="fieldname " for="birthCertifate">Highest Qualification</label></td>
+					<td>
+						<ul class="fieldsul">
+							<li>
+								@helper.select(agent("qualification"),
+						        options = helper.options("other" ->"Other","ssc" -> "SSC","diploma" -> "DIPLOMA","hsc" -> "HSC","graduate" ->"GRADUATE","post graduate" -> "POST GRADUATE"), 
+						        'class -> "input-medium")
+				        	</li>
+				        	<li>	<div id="otherQualificationDiv" style="display: none;">
+				        			@helper.inputText(agent("otherQualification"), 
+				     				 'placeholder -> "Qualification ",
+				      					'class -> "input-medium")
+				      				</div>
+				        	</li>
+				        </ul>
+					</td>
+					
+				</tr>
+				<tr>
+					<td><label class="fieldname " for="occupation"> If any Occupation other than Agent </label></td>
+					<td>
+						@helper.inputText(agent("occupation"), 
+				     				 'placeholder -> "Occupation ",
+				      					'class -> "input-medium")
+					</td>
+				</tr>
+			
+				<tr>
+					<td><label class="fieldname required" for="agentType"> Status of Applicant </label></td>
+					<td>
+					  <ul class="fieldsul">
+							<li>
+								@helper.select(agent("agentType"),
+								options=helper.options("Individual" ->"Individual","Firm" ->"Firm","Company" ->"Company","Cooperative Society" -> "Cooperative Society"),
+								'class -> "input-medium")
+							</li>
+							<li>
+								@helper.inputText(agent("companyName"),
+								'placeholder -> "Company Name",
+								'class -> "input-medium")
+							</li>
+						</ul>	
+					</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="isIncomeTaxPayee">Is Applicant IncomeTax Payee </label></td>
+					 <td>@form.horizontalRadioGroup(agent("isIncomeTaxPayee"), options = Seq("true" -> "Yes","false" -> "No"))</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="panCardNumber"> PAN Number </label></td>
+					<td>@helper.inputText(agent("panCardNumber"),'placeholder ->"PAN Number",'class ->"input-medium")
+					</td>
+				</tr>
+					<tr>
+					<td><label class="fieldname required" for="onlineMonatoryTransactionFacility">Online Monetary Transaction Facility</label></td>
+					 <td>@form.horizontalRadioGroup(agent("onlineMonatoryTransactionFacility"), options = Seq("true" -> "Yes","false" -> "No"))</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required" for="bankName"> Bank Account Particulars </label></td>
+					<td>
+						<ul class="fieldsul">
+							<li>@helper.inputText(agent("bankName"), 
+				     				 'placeholder -> "Bank Name ",
+				      					'class -> "input-medium")
+				      		</li>
+				      		<li>@helper.inputText(agent("branchName"), 
+				     				 'placeholder -> "Branch Name ",
+				      					'class -> "input-medium")
+				      		</li>
+				      		<li>
+								@helper.inputText(agent("bankAccount"),
+								'placeholder -> "Bank A/C Number",
+								'class -> "input-medium")
+							</li>
+						</ul>
+					</td>
+				</tr>
+	</table>
+</div>
+ 
+ <div class="form-section">
+          		    <table id="residence_info" class="fieldstable">
+				       <tr>
+				          <td><label class="fieldname required" for="temp" style="padding-right:40px ">Do you understand the AVC recharge system</label></td>
+				          <td>
+				          	<label class="radio inline">
+  								<input type="radio" name="avc" id="yes" value="yes" checked>
+  								Yes
+							</label>
+							<label class="radio inline">
+							  <input type="radio" name="avc" id="no" value="no">
+							  No
+							</label>
+				       	 </td>
+					</tr>
+				</table><br>
+				<div id="intro_box"  style="display:none; ">
+		          <div class="intro_txt">
+		          	<div class="row-fluid">
+				         <div class="content cms">
+				         	<div class="text-info">
+							          <font size="3em">AVC<strong> means application validity credit</strong>, to obtained credit of Rs. 500/- per unit which you can use as an alternate option while applying on behalf of the applicant for member ship to the online credit card, debit card payment facility. 
+							          But the company shall not be liable for the cash transaction made by you with the applicants. 
+							          By using AVC recharge system agent can validate the application of the applicant for proposed society.
+							          Cash transaction is allowed only for the purpose of recharge of AVC unit. 
+							          No cash transaction allowed for the application of the applicant for proposed society. 
+							          If you understand AVC recharge select YES option  and proceed the form.</font>
+				          	</div>
+				          </div>   
+			          </div>   
+		          </div>     
+	          </div> 
+          </div> 
+          <br>         
+		<pre style="overflow-y:scroll;height:10em;">
+I, <span id="agentTitle"></span> <span id="agentName"></span>  do hereby state on solemn affirmation on oath that
+	<br>I am the law abiding citizen and not convicted by any Court for any offence and I have already read all the terms, conditions etc. of this company and applying to become the authorised agent of this company only for the purpose of sending the application and supporting to the applicant for Concept ‘Builder Society’s Promoter’ on proposedsociety.com website. 
+	<br>I have filled up the required informations and details in the above application form about myself which contents are true and correct and the respective documentary proofs uploaded by me are the original document's scan result and not a forged documents and all the contact numbers are in my name. These documents are original, true and correct to the best of my knowledge, belief and understanding.
+	<br>I do hereby take on oath that I shall abide by all the terms and conditions laid down by the company and also shall abide in the future, the terms and conditions which will be decided from time to time.
+	<br>I shall not make any kind of transaction with the applicant on behalf of the company. I am not any agent of other real estate company.
+	<br>I accept all the terms and conditions which are currently in force and any alterations therein likely to be made in respect of percentage of commission by the company in future. I accept and authorises the Company that, the company can deduct all the concerned taxes (10%TDS etc.,) imposed by the government of india and state government and will likely to be imposed from time to time and also 
+	<br>I AUTHORISED THE COMPANY TO DEDUCT THE 5% SECURITY DEPOSIT, AVC recharge amount etc.,  from my commission amount. 
+	<br>I shall be liable for the criminal proceedings for such offence under IPC and any other Law for time being in force if, the information, details filled by me in the agent form and documentary proofs uploaded by me are found false.
+	</pre><pre>
+What ever stated here in above is true and correct to the best of my knowledge belief and undestanding.
+        Solemnly affirmed at   <input type="text" id="formPlace" class="input-medium" style="background-color: inherit;border : 0px;border-style:solid;border-bottom-width:1px;height: 1em;"> on this <input type="text" id="formDay" class="input-medium" style="border : 0px;border-style:solid;border-bottom-width:1px;height: 1em;background-color: inherit;"> day of <input type="text" id="formYear" class="input-medium" placeholder="year" style="border : 0px;border-style:solid;border-bottom-width:1px;height: 1em;background-color: inherit;">
+       <br> I hereby verify the above statements which are true and correct. <br>
+       <!-- <br> After clicking on accept tab, You will get the verification code on your mobile or email ID enter the same then your application will be sent to the company.
+         <span  >
+         Enter the code here   <input type="text" placeholder="verification Code" class="input-medium" >
+         </span> -->
+         </pre>
+         <p style="text-align: center;">
+				<style type="text/css"> 
+	   				input[type="radio"]{margin-left:50px; }; 
+				</style>
+				<input type="radio" name="accept" value="accept" > <span class="label " style=" margin-left: 10px ;padding:8px; ">Accept </span>
+				<input type="radio" name="accept" value="ntaccept" ><span class="label " style=" margin-left: 10px ;padding:8px; ">Do Not Accept</span>
+				<p style="display:none; color: #c10000; "id="redioerror" >Select Button Then Approve</p>		
+		 </p>   
+       
+<div class="form-section">
+    <div id="idUpload">  
+    <h2>Identity Uploads</h2>
+    <hr>
+		<table class="fieldstable">
+			<tr>
+				<td><label class="fieldname required" for="identity_number1">Identity 1</label></td>
+				<td>
+					<ul class="fieldsul">	
+						<li>@helper.select(agent("identity_number1_type"), 
+								options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+								'class -> "input-medium")
+						</li>
+						<li>@helper.inputText(agent("identity_number1"), 
+								'placeholder -> "Identity / Card Number",
+								'class -> "input-medium", 'maxlength -> 50)
+						</li>
+						<li>
+							<input type="hidden" id="agent_identity1_id" name="identity1_id" 
+								   target-element="agent_identity1-upload" ps-file-upload
+								   @populateAttachmentAttributes(agent, agent("identity1_id"), 
+								   	{ agent => Option(agent.identity1)},user)
+							/>
+						</li>
+						<li>
+							<div id="agent_identity1-upload" file-upload="true"></div>
+							@if(agent("identity1_id").hasErrors) {
+								<p class="error">Attachment is mandatory</p> 		
+							}
+						</li>
+					</ul>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label class="fieldname " for="identity_number2">Identity 2</label></td>
+				<td>
+					<ul class="fieldsul">	
+						<li>@helper.select(agent("identity_number2_type"), 
+								options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+								'class -> "input-medium")
+						</li>
+						<li>@helper.inputText(agent("identity_number2"), 
+								'placeholder -> "Identity / Card Number",
+								'class -> "input-medium", 'maxlength -> 50)
+						</li>
+						<li>
+							<input type="hidden" id="agent_identity2_id" name="identity2_id" 
+								   target-element="agent_identity2-upload" ps-file-upload
+								   @populateAttachmentAttributes(agent, agent("identity2_id"), 
+								   	{ agent => Option(agent.identity2)},user)
+							/>
+						</li>
+						<li>
+							<div id="agent_identity2-upload" file-upload="true"></div>
+							@if(agent("identity2_id").hasErrors) {
+								<p class="error">Attachment is mandatory</p> 		
+							}
+						</li>
+					</ul>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label class="fieldname " for="identity_number3">Identity 3</label></td>
+				<td>
+					<ul class="fieldsul">	
+						<li>@helper.select(agent("identity_number3_type"), 
+								options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+								'class -> "input-medium")
+						</li>
+						<li>@helper.inputText(agent("identity_number3"), 
+								'placeholder -> "Identity / Card Number",
+								'class -> "input-medium", 'maxlength -> 50)
+						</li>
+						<li>
+							<input type="hidden" id="agent_identity3_id" name="identity3_id" 
+								   target-element="agent_identity3-upload" ps-file-upload
+								   @populateAttachmentAttributes(agent, agent("identity3_id"), 
+								   	{ agent => Option(agent.identity3)},user)
+							/>
+						</li>
+						<li>
+							<div id="agent_identity3-upload" file-upload="true"></div>
+							@if(agent("identity3_id").hasErrors) {
+								<p class="error">Attachment is mandatory</p> 		
+							}
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class="fieldname required">Photograph</label>
+					<input type="hidden" id="agent_photograph_id" name="photograph_id" 
+						   target-element="agent_photograph-upload" ps-file-upload
+						   @populateAttachmentAttributes(agent, agent("photograph_id"), 
+						    { agent => Option(agent.photograph)},user)
+					/>
+				</td>
+				<td>
+					<div id="agent_photograph-upload" file-upload="true"></div>
+					@if(agent("photograph_id").hasErrors) {
+						<p class="error">Attachment is mandatory</p> 		
+					}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class="fieldname required">Birth Certificate</label>
+					<input type="hidden" id="agent_birthCertificate_id" name="birthCertificate_id" 
+						   target-element="agent_birthCertificate-upload" ps-file-upload
+						   @populateAttachmentAttributes(agent, agent("birthCertificate_id"), 
+						    { agent => Option(agent.birthCertificate)},user)
+					/>
+				</td>
+				<td>
+					<div id="agent_birthCertificate-upload" file-upload="true"></div>
+					@if(agent("birthCertificate_id").hasErrors) {
+						<p class="error">Attachment is mandatory</p> 		
+					}
+				</td>
+			</tr>
+		</table>
+	<br>
+	<h2>Residential Address Proof</h2>
+		<hr>
+	<table class="fieldstable">
+		
+		<tr>
+			<td>
+				<label class="fieldname required">Registered Agreement</label>
+				<input type="hidden" id="agent_addressproof_id" name="addressproof_id" 
+					   target-element="agent_addressproof-upload" ps-file-upload
+					   @populateAttachmentAttributes(agent, agent("addressproof_id"), 
+					    { agent => Option(agent.addressproof)},user)
+				/>
+			</td>
+			<td>
+				<div id="agent_addressproof-upload" file-upload="true"></div>
+				@if(agent("addressproof_id").hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="fieldname required">Light Bill</label>
+				<input type="hidden" id="agent_resi_light_bill_id" name="resi_light_bill_id" 
+					   target-element="agent_resi_light_bill-upload" ps-file-upload
+					   @populateAttachmentAttributes(agent, agent("resi_light_bill_id"), 
+					    { agent => Option(agent.resi_light_bill)},user)
+				/>
+			</td>
+			<td>
+				<div id="agent_resi_light_bill-upload" file-upload="true"></div>
+				@if(agent("resi_light_bill_id").hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="fieldname required">Tax Receipt</label>
+				<input type="hidden" id="agent_resi_tax_receipt_id" name="resi_tax_receipt_id" 
+					   target-element="agent_resi_tax_receipt-upload" ps-file-upload
+					   @populateAttachmentAttributes(agent, agent("resi_tax_receipt_id"), 
+					    { agent => Option(agent.resi_tax_receipt)},user)
+				/>
+			</td>
+			<td>
+				<div id="agent_resi_tax_receipt-upload" file-upload="true"></div>
+				@if(agent("resi_tax_receipt_id").hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+	</table>
+
+
+<div class="form-section" id = "office_add_proof">
+<h2>Office Address Proof</h2>
+<hr>
+	<table class="fieldstable">
+			<tr>
+			<td>
+				<label class="fieldname required" id = "officeproof">Registered / Leave and License Agreement </label>
+				<input type="hidden" id="agent_office_addressproof_id" name="office_addressproof_id" 
+					   target-element="agent_office_addressproof-upload" ps-file-upload
+					   @populateAttachmentAttributes(agent, agent("office_addressproof_id"), 
+					    { agent => Option(agent.office_addressproof)},user)
+				/>
+			</td>
+			<td>
+				<div id="agent_office_addressproof-upload" file-upload="true"></div>
+				@if(agent("office_addressproof_id").hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="fieldname required">Light Bill</label>
+				<input type="hidden" id="agent_office_light_bill_id" name="office_light_bill_id" 
+					   target-element="agent_office_light_bill-upload" ps-file-upload
+					   @populateAttachmentAttributes(agent, agent("office_light_bill_id"), 
+					    { agent => Option(agent.office_light_bill)},user)
+				/>
+			</td>
+			<td>
+				<div id="agent_office_light_bill-upload" file-upload="true"></div>
+				@if(agent("office_light_bill_id").hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		
+	</table>
+	</div>
+</div>
+</div>
+
+<div class="form-actions" id="btnsbmit">
+              <button type="submit" class="btn btn-large btn-pink">Next</button>
+</div>                             
+ <!-- Language Name -->
+ <div style="display: none;">
+    @helper.inputText(agent("marathi.name"), 
+    'value -> "Marathi")
+    @helper.inputText(agent("hindi.name"), 
+    'value -> "Hindi")
+    @helper.inputText(agent("english.name"), 
+    'value -> "English")
+    
+     @helper.inputText(agent("hindi.canRead"))
+     @helper.inputText(agent("hindi.canSpeak"))
+     @helper.inputText(agent("hindi.canWrite"))
+    
+    @helper.inputText(agent("marathi.canRead"))
+     @helper.inputText(agent("marathi.canSpeak"))
+     @helper.inputText(agent("marathi.canWrite"))
+    
+    @helper.inputText(agent("english.canRead"))
+     @helper.inputText(agent("english.canSpeak"))
+     @helper.inputText(agent("english.canWrite"))
+    
+    <!-- For Day And Place  -->
+      @helper.inputText(agent("formFilledPlace"))
+   	  @helper.inputText(agent("formFilledDay"))
+   	  @helper.inputText(agent("formFilledYear"))
+</div>
+	}
+}
+
+@populateAttachmentAttributes(form:Form[AgentForm], field: Field, f: (AgentForm) => Option[FileAttachment],user:User) = {
+			@field.value match { 
+				case Some(value) => { 
+					@if(value.trim().length() > 0) {
+						value="@value" attachment-name="@findAttachmentName(value,user)"
+					} 
+				}
+				case None => { @extractFileAttributesFromForm(form, f) }
+			}
+}
+		
+@extractFileAttributesFromForm(form:Form[AgentForm],f: (AgentForm) => Option[FileAttachment]) = {
+			@if(form.value.isDefined()) {
+				@if(form != null) {
+					@outputAttachmentAttributes(f(form.get()))
+				}
+			}
+}
+		
+@outputAttachmentAttributes(file: Option[FileAttachment]) = {
+			@file match { 
+				case Some(file) => { value="@file.id" attachment-name="@file.fileName" }
+				case None => { "" }
+			}
+}
+		
+@findAttachmentName(value: String, user: User) = @{
+			try {
+				
+				Option(new models.dao.ebean.EbeanFileAttachmentDao().findByFilePath(value,user)) match {
+					case Some(file) => { file.fileName }
+					case None => { "" }
+				}
+			} catch {
+				case _ => ""
+			}
+}       
+ 

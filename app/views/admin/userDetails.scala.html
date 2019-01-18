@@ -1,0 +1,57 @@
+@(page : com.avaje.ebean.Page[User])
+@import common.Roles
+
+@if(page != null && !page.getList().isEmpty()) {
+	<div>
+		<table class="table table-striped"  >
+			<thead>
+				<tr>	
+			  		<th class="leftAlignClass">User Name</th>
+			  		<th class="leftAlignClass">Mobile Number</th>
+			  		<th class="leftAlignClass">Email Id</th>
+			  		<th class="leftAlignClass">Roles</th>
+			  		<th class="leftAlignClass">Update/Delete User</th>
+				 </tr>
+			</thead>
+			<tbody>
+				@for(user <- page.getList()) {
+				  	<tr>
+				  		<td class="leftAlignClass">@user.name </td>
+				  	    <td class="leftAlignClass">@user.mobile</td>
+				  		<td class="leftAlignClass">@user.email</td>	
+				  		<td>
+					  		@user.showRoles(user.roles)
+						</td>
+						<td class="leftAlignClass">
+							<a href="@routes.AdminUserController.updateUser(user.encryptEmail())" class="btn  btn-info" style="color:#ffffff">Updare User</a>
+							<a href="@routes.AdminUserController.deleteUser(user.encryptEmail())" class="btn  btn-info" style="color:#ffffff">Delete User</a>
+						</td>	  		
+					</tr>
+				}
+			</tbody>
+		</table>	
+	 @if(page.getTotalPageCount() > 1){
+		<div class="form-sections">
+		
+		  		<ul class="pager">
+					@if(page. hasPrev()){
+				  		  <li><a href="@routes.AdminUserController.showSearchedUserPage(page.getPageIndex() -1)">Previous</a></li>
+					}else{
+						<li class="disabled"><a href = "#"> Previous</a></li>
+					}
+					
+					@if(page.hasNext()){
+						<li><a href="@routes.AdminUserController.showSearchedUserPage(page.getPageIndex() + 1)">Next</a></li>
+					}else{
+						<li class="disabled"><a href = "#"> Next</a></li>
+					}
+			</ul>
+		</div>
+	}
+	}else{
+		<div id="notFoundMessage">
+			<h3>No user found </h3>
+			<hr/>
+		</div>
+	}
+</div>

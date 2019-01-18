@@ -1,0 +1,38 @@
+
+@pageTemplate("AVC recharge -Details") {
+	<div class = "form-section">
+		<!-- Caculating Total amount -->
+		
+	
+	<h2>AVC recharge system</h2>
+	<hr>
+		<form action="@routes.AgentFormController.rechargeAVCPayment" class="form-horizontal" method="post">
+		<br>
+			<table class="fieldstable">
+				<tr>
+					<td><label class="fieldname required" for="formCount" style="padding-right:2em;">Select number of forms credit</label></td>
+					<td>
+						<select class="input-small" id = "formCount" name = "formCount">
+							<option>0</option>
+							<option>5</option>
+							<option>10</option>
+							<option>15</option>
+							<option>20</option>
+						</select>
+					</td>
+					<td style="padding-left:2em;font-size: 30px; ">
+						&#8377; <span id="amount"  >0</span>
+					</td>
+				</tr>
+				
+			</table>
+			<br>
+			<div class="form-actions">
+				<input type="submit" class="btn btn-pink " value="Make payment">
+			</div>
+		</form>
+		
+	</div>
+	
+	
+}

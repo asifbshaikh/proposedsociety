@@ -1,0 +1,34 @@
+
+<ion-view view-title="Change Password">
+    <ion-nav-buttons side=" right">
+    <button style="font-size: 20px;" ng-click="reset()" class="button button-clear  ion-refresh"></button>
+    </ion-nav-buttons>
+    <ion-content class="padding back-img">
+        <form name="changePassForm" id="changePassForm" ng-submit="signupForm(changePassForm)"  novalidate="novalidate">
+        <div class="list content-sec2 padding">
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : changePassForm.oldPassword.$invalid  && changePassForm.$submitted, 'no-errors' : changePassForm.oldPassword.$valid  && changePassForm.$submitted}">
+                <span class="input-label">Old Password</span>
+                <input type="password" name="oldPassword" ng-model="user.oldPassword" placeholder="Enter Old Password" required ng-class="{ 'has-errors' : changePassForm.oldPassword.$invalid  && changePassForm.$submitted, 'no-errors' : changePassForm.oldPassword.$valid  && changePassForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : changePassForm.newPassword.$invalid  && changePassForm.$submitted, 'no-errors' : changePassForm.newPassword.$valid  && changePassForm.$submitted}">
+                <span class="input-label">New Password</span>
+                <input type="password" name="newPassword" ng-model="user.newPassword" placeholder="Enter New Password" required ng-class="{ 'has-errors' : changePassForm.newPassword.$invalid  && changePassForm.$submitted, 'no-errors' : changePassForm.newPassword.$valid  && changePassForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : changePassForm.confirmPassword.$invalid  && changePassForm.$submitted, 'no-errors' : changePassForm.confirmPassword.$valid  && changePassForm.$submitted}">
+                <span class="input-label">Confirm Password</span>
+                <input type="password" name="confirmPassword"   ng-model="user.confirmPassword" placeholder="Confirm Your Password" required ng-class="{ 'has-errors' : changePassForm.confirmPassword.$invalid  && changePassForm.$submitted  , 'no-errors' : changePassForm.confirmPassword.$valid  && changePassForm.$submitted}">
+                <i class="icon ion-alert-circled error"> Required</i>
+            </label>
+            <br>
+            <center>
+            <button type="submit" class=" btn btn-info btn-large">
+                Submit
+            </button>
+            </center>
+        </div>
+        </form>
+    </ion-content>
+</ion-view>
+

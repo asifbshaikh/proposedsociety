@@ -1,0 +1,41 @@
+@(check :Integer)
+@form.formTemplate("Applicant - Payment Details", 6) {
+
+	@helper.form(action = routes.ApplicationFormController.payment, 'class -> "form-horizontal") {
+			
+			<h1>Applicant - Payment Details</h1>
+			<hr/>
+			<br>
+			@if(check == 0){
+				<table id="appdetails" class="fieldstable">
+			 	<tr>
+					<td><h2>Wrong Payment Code</h2> <td>
+					
+				</tr>
+				</table>
+				<div class="form-actions">
+					<input type="submit" class="btn btn-large btn-pink" align="right" value="Try Again"/>
+				</div>
+			}
+			@if(check == 1){
+				<table id="appdetails" class="fieldstable">
+			 	<tr>
+					<td><h2>Used Payment Code</h2> <td>
+					
+				</tr>
+				</table>
+				<div class="form-actions">
+					<input type="submit" class="btn btn-large btn-pink" align="right" value="Try Again"/>
+				</div>
+			}
+			@if(check == 2){
+				<table id="appdetails" class="fieldstable">
+			 	<tr>
+					<td><h2>Your Payment has completed</h2> <td>
+				</tr>
+				</table>
+			}
+			
+			
+	}
+}

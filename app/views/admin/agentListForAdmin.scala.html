@@ -1,0 +1,103 @@
+@(page : com.avaje.ebean.Page[Agent],user : User, ibList :List[Buero])
+@import views.helpers.FieldValue._
+@import views.html.admin._
+@import controllers.FormStatus
+@import com.avaje.ebean.Page
+
+@adminTemplate("Proposed Society - Agent List",user,Seq(routes.Assets.at("js/buero.js")),Seq()){
+	<div>
+		@if(page != null && !page.getList().isEmpty()) {
+			<h2>Agent's List</h2>
+			<hr/>
+			<style>
+				table.table {
+					font-family: 'Roboto', Helvetica, sans-serif, Arial;
+				}
+			</style>
+			<table  class="table table-striped" >
+				<thead>
+					<tr>	
+				  		<th class="leftAlignClass">First Name</th>
+				  		<th class="leftAlignClass">Middle Name</th>
+				  		<th class="leftAlignClass">Last Name</th>
+				  		<th class="rightAlignClass">Email</th>
+				  		<th class="rightAlignClass">Satus</th>
+			  			<th class="rightAlignClass">Investigate By</th>
+			  			<th class="rightAlignClass"></th>
+				  		<th class="rightAlignClass"></th>
+					 </tr>
+				</thead>
+				<tbody>
+					@for(agentdata <- page.getList()) {
+					  	<tr>
+					  		<td class="leftAlignClass">@fieldVal(agentdata.form.fname,"NA")</td>
+							<td class="leftAlignClass">@fieldVal(agentdata.form.mname,"NA")</td>
+							<td class="leftAlignClass">@fieldVal(agentdata.form.lname,"NA")</td>
+							<td class="rightAlignClass">@fieldVal(agentdata.form.email,"NA")</td>
+							<td class="rightAlignClass">@fieldVal(agentdata.form.status,"NA")</td>
+							@if(!ibList.isEmpty()){
+								<td class="rightAlignClass">
+										<select class="selectpicker input-medium" id="ibId@agentdata.id">
+										   @for(ibLs <- ibList){
+										        @if(ibLs.user !=null){
+										        	@if(agentdata.ib != null && agentdata.ib.id == ibLs.id){
+										        		<option value="@ibLs.id" selected="selected">@ibLs.user.name</option>
+										        	}else{
+										        		<option value="@ibLs.id">@ibLs.user.name</option>
+										        	}
+										   		}
+										   }
+										   @if(agentdata.ib == null ){
+										   	<option value="NA" selected="selected">--Select--</option>
+										   }
+										</select>
+								</td>
+							}else{
+								<td class="rightAlignClass">No buero available</td>
+							}
+							<td class="rightAlignClass">
+									@if(agentdata.ib != null ){
+										<p style="text-align: center;">
+											<input type="button" id="assign@agentdata.id" Value="Re-Assign" class="btn  btn-info" style="color:#ffffff" onclick="assignBuero(@agentdata.id);"/>
+										</p>
+									}else{
+										<p style="text-align: center;">
+											<input type="button" id="assign@agentdata.id" Value="Assign" class="btn  btn-info" style="color:#ffffff" onclick="assignBuero(@agentdata.id);"/>
+										</p>
+									}
+							</td>
+							<td class="rightAlignClass">
+									<a href="@routes.AdminUserController.displayAgentInfo(agentdata.id)" class="btn  btn-info " style="color:#ffffff" target="_blank">Feedback</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			@if(page.getTotalPageCount() > 1){
+				<div class="form-sections">
+				  		<ul class="pager">
+							@if(page. hasPrev()){
+								
+						  		  <li><a href="@routes.AdminUserController.displayAgentsList(page.getPageIndex() -1)">Previous</a></li>
+					 			
+							}else{
+								<li class="disabled"><a href = "#"> Previous</a></li>
+							}
+							
+							@if(page.hasNext()){
+								<li><a href="@routes.AdminUserController.displayAgentsList(page.getPageIndex() + 1)">Next</a></li>
+							}else{
+								<li class="disabled"><a href = "#"> Next</a></li>
+							}
+					</ul>
+				</div>
+			}
+		}else{
+			<div>
+				<h2>No Agent is registered</h2>
+				<hr/>
+					
+			</div>
+		}
+	</div>
+}

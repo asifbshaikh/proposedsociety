@@ -1,0 +1,56 @@
+/* -------------------------------------------
+project:	proposedsociety.com
+Version : 1.01 :: 16 May 2013
+Created By Bhanu Pratap singh
+Author : www.bhanubais.com
+------------------------------------------- */
+
+$(document).ready(function(){
+	// Global js path/url
+	var jsPath = '../../public/js/';
+	
+	// Scroller
+	$.getScript(jsPath+'jquery.nanoscroller.min.js', function(){
+		$('.nano').nanoScroller({scroll: 'top', preventPageScrolling: true });
+		$('.nano_member').nanoScroller({scroll: 'top', preventPageScrolling: true });
+	});
+	
+	// Dropdown
+	$.getScript(jsPath+'bootstrap-dropdown.js', function(){
+		$('.dropdown-toggle').dropdown();
+	});
+	
+	// Tabs
+	$.getScript(jsPath+'bootstrap-tab.js', function(){
+		$('#vTab a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		})
+	});
+	
+	// Alerts
+	$.getScript(jsPath+'bootstrap-alert.js', function(){
+		$(".alert").alert();
+	});
+
+	// Temprary member form actions
+	$(document).on('click', '.btn-success', function(e){
+		e.preventDefault();
+		$('#block_screen').fadeOut('slow');
+	});
+
+	
+	// Intro Text
+	$(document).on('click', 'a.know_more', function(e){
+		e.preventDefault();
+		$(this).prev('.content').slideDown('slow');
+		$(this).text('hide').addClass('hide_this');
+	});
+	$(document).on('click', 'a.hide_this', function(e){
+		e.preventDefault();
+		$(this).prev('.content').slideUp('slow');
+		$(this).text('Know More').removeClass('hide_this');
+	});
+	
+	
+});

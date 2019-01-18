@@ -1,0 +1,364 @@
+@(applicant : Applicant,
+isApplicant: Boolean)
+@import views.helpers.DateFormatHelper._
+<div>		
+	@if(isApplicant ==true){
+		<h2>Applicant Personal Information <a href="@routes.ApplicationFormController.wholePersonalInfo" class="lkEditing"> (Edit)</a></h2>
+		 <hr/>
+	}else{	
+		<h2>Co-Applicant Personal Information  <a href="@routes.ApplicationFormController.wholePersonalInfo#showEntireDivForCoapplicant" class="lkEditing"> (Edit)</a> </h2>
+		<hr/>
+	}
+	
+	@if(isApplicant == true){
+		@personalShortInfo(applicant,true)
+	}else{
+		@personalShortInfo(applicant,false)
+	}
+	
+	@if(applicant.spouse_details != null ){
+		<div class="span12">
+			<h2>Spouse Details <a href="@routes.ApplicationFormController.wholePersonalInfo#applicant_spouse-details" class="lkEditing">(Edit)</a></h2>
+			<hr/>
+			<table class="table table-striped" class="span6">
+				<tr>
+					<td style="width:250px;">Spouse Name</td>
+					<td>
+							@defaultIfNull(applicant.spouse_details.sp_title,"NA")
+							@defaultIfNull(applicant.spouse_details.sp_fname,"NA")
+							@defaultIfNull(applicant.spouse_details.sp_mname,"NA")
+							@defaultIfNull(applicant.spouse_details.sp_lname,"NA")
+					</td>
+				</tr>
+			</table>
+		</div>	
+		<div class="span6">
+			<table class="table table-striped">
+				<tr>
+					<td>Date of birth of spouse</td>
+					<td>@if(applicant.spouse_details.sp_dob != null){@formatDate("dd/MM/yyyy", applicant.spouse_details.sp_dob)}else{NA}</td>
+				</tr>
+				<tr>
+					<td>Date of Marriage Anniversary</td>
+					<td>@if(applicant.spouse_details.anniversary != null){@formatDate("dd/MM/yyyy",applicant.spouse_details.anniversary)}else{NA}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="span6">
+			<table class="table table-striped">
+				<tr>
+					<td>Profession of Spouse</td>
+					<td>@professionVal(applicant.spouse_details.sp_profession,"NA")</td>
+				</tr>
+				<tr>
+					<td>No of Children</td>
+					<td>@defaultIfNull(applicant.spouse_details.children,"NA")</td>
+				</tr>
+			</table>
+		</div>
+	}
+	<div class="span12">
+		@if(isApplicant ==true){
+			<h2>Applicant - Address Details <a href="@routes.ApplicationFormController.wholePersonalInfo#address-details" class="lkEditing">(Edit)</a></h2>
+			<hr/>
+		}else{	
+			<h2>Co-Applicant - Address Details <a href="@routes.ApplicationFormController.wholePersonalInfo#co_applicant_birth_place_line1" class="lkEditing">(Edit)</a></h2>
+			<hr/>
+		}
+		
+	</div>	
+	<div class="span3">
+		<table class="table table-striped">
+			<thead><th colspan="1">Birth Place</th></thead>
+			<tbody>
+				@if(applicant.birth_place != null){
+					<tr><td>
+							<p>@formatAddress(applicant.birth_place)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Permanent Address</th></thead>
+			<tbody>
+				@if(applicant.permanent_address != null){
+					<tr> 
+						<td>
+							<p> @formatAddress(applicant.permanent_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Residential Address</th></thead>
+			<tbody>
+				@if(applicant.residential_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(applicant.residential_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<table class="table table-striped">	
+			<thead><th colspan="2">Address Of Communication</th></thead>
+			<tbody>
+				@if(applicant.communication_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(applicant.communication_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="span12">
+		<table class="table table-striped" class="span12">
+			<tr>
+				<td class="span6">No of years residing at Residence</td>
+				<td class="span6" align="left">@defaultIfNull(applicant.residence_yrs_residing,"NA")</td>
+			</tr>
+			<tr>
+				<td class="span6">No of years residing in City</td>
+				<td class="span6" align="left">@defaultIfNull(applicant.city_yrs_residing,"NA")</td>
+			</tr>
+		</table>
+	</div>
+	<div class="span12">
+		@if(isApplicant ==true){
+			<h2>Applicant - Income Details <a href="@routes.ApplicationFormController.wholePersonalInfo#work_details" class="lkEditing">(Edit)</a> </h2>
+		}else{	
+			<h2>Co-Applicant - Income Details<a href="@routes.ApplicationFormController.wholePersonalInfo#co_applicant_occupation" class="lkEditing">(Edit)</a> </h2>
+		}
+		<hr/>
+		
+	</div>
+	<div class="span6">
+		<table class="table table-striped" class="span6">
+			<thead><th colspan="2">Occupation Information</th></thead>
+			<tbody>
+				<tr>
+					<td style="padding-right: 25px;">Occupation</td>
+					<td>
+						@professionVal(applicant.occupation,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Email</td>
+					<td>@defaultIfNull(applicant.off_mail,"NA")</td>
+				</tr>
+				<tr>
+					<td>Office Phone 1</td>
+					<td>
+						@phonetype(applicant.off_phone1_type, applicant.off_phone1,"NA")
+						@defaultIfNull(applicant.off_phone1,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Phone 2</td>
+					<td>
+						@phonetype(applicant.off_phone2_type, applicant.off_phone2,"NA")
+						@defaultIfNull(applicant.off_phone2,"NA")
+					</td>
+				</tr>
+				<tr>
+					<td>Office Phone 3</td>
+					<td>
+						@phonetype(applicant.off_phone3_type, applicant.off_phone3,"NA")
+						@defaultIfNull(applicant.off_phone3,"NA")
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="span6">
+		<table class="table table-striped" class="span6">	
+			<thead><th colspan="2">Office Address</th></thead>
+			<tbody>
+				@if(applicant.office_address != null){
+					<tr> 
+						<td>
+							<p>@formatAddress(applicant.office_address)</p>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>				
+	@if(applicant.employedIncome != null){
+		<div class="span12">
+		@if(isApplicant ==true){
+			<h2>Applicant - Income Details Employed) <a href="@routes.ApplicationFormController.wholePersonalInfo#applicant_employedTable" class="lkEditing">(Edit)</a> </h2>
+		}else{	
+			<h2>Co-Applicant - Income Details (Employed)<a href="@routes.ApplicationFormController.wholePersonalInfo#co_applicant_employedTable" class="lkEditing">(Edit)</a> </h2>
+		}
+		<hr/>
+		</div>
+		<div class="span6">	
+			<table class="table table-striped" class="span6">
+				<tr>
+					<td>Name of Current Organisation</td>
+					<td>@defaultIfNull(applicant.employedIncome.employer,"NA")</td>
+				</tr>
+				<tr>
+					<td>Current Designation</td>
+					<td>@defaultIfNull(applicant.employedIncome.designation,"NA")</td>
+				</tr>
+				<tr>
+					<td>Gross Salary</td>
+					<td>@defaultIfNull(applicant.employedIncome.gross_sal,"NA")</td>
+				</tr>
+				<tr>
+					<td>Total Salary Deductions</td>
+					<td>@defaultIfNull(applicant.employedIncome.deductions,"NA")</td>
+				</tr>
+			</table>
+		</div>	
+		<div class="span6">	
+			<table class="table table-striped" class="span6" style="width:460px;">
+				<tr>
+					<td>Net Salary</td>
+					<td>@defaultIfNull(applicant.employedIncome.net_sal,"NA")</td>
+				</tr>
+				<tr>
+					<td>Yearly Bonus, if any?</td>
+					<td>@defaultIfNull(applicant.employedIncome.yrly_bonus,"NA")</td>
+				</tr>
+				<tr>
+					<td>Working with Current Organisation since</td>
+					<td>@if(applicant.employedIncome.yrs_with_employer_d != null){@formatDate("dd/MM/yyyy",applicant.employedIncome.yrs_with_employer_d)}else{NA}</td>
+				</tr>
+				<tr>
+					<td>Total Work Experience</td>
+					<td>@defaultIfNull(applicant.employedIncome.experience_year,"NA")Years
+						@defaultIfNull(applicant.employedIncome.experience_month,"NA")Months&nbsp&nbsp
+					</td>
+				</tr>
+				<tr>
+					<td>Number of Remaining Years of Service</td>
+					<td>@defaultIfNull(applicant.employedIncome.yrs_service_remn,"NA")</td>
+				</tr>
+			</table>
+		</div>
+	}
+	@if(applicant.selfEmployedIncome != null){
+		<div class="span12">
+			@if(isApplicant ==true){
+				<h2>Applicant - Income Details Employed) <a href="@routes.ApplicationFormController.wholePersonalInfo#applicant_selfEmployedTable" class="lkEditing">(Edit)</a> </h2>
+			}else{	
+				<h2>Co-Applicant - Income Details (Employed)<a href="@routes.ApplicationFormController.wholePersonalInfo#co_applicant_selfEmployedTable" class="lkEditing">(Edit)</a> </h2>
+			}
+		</div>
+		<div class="span6">	
+			<table class="table table-striped" class="span6">
+				<tr>
+					<td>Type of Business</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.business_type,"NA")</td>
+					</tr>
+				<tr>
+					<td>Latest Year's Profit After Tax</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr1_pat,"NA")</td>
+				</tr>
+				<tr>
+					<td>Latest Year's Depreciation</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr1_depr,"NA")</td>
+				</tr>
+			</table>
+		</div>
+		<div class="span6">	
+			<table class="table table-striped" class="span6">	
+				<tr>
+					<td>Pervious Year's Profit After Tax</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr2_pat,"NA")</td>
+				</tr>
+				<tr>
+					<td>Pervious Year's Depreciation</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr2_depr,"NA")</td>
+				</tr>
+				<tr>
+					<td>Second Last Year's Profit After Tax</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr3_pat,"NA")</td>
+				</tr>
+				<tr>
+					<td>Second Last Year's Depreciation</td>
+					<td>@defaultIfNull(applicant.selfEmployedIncome.yr3_depr,"NA")</td>
+				</tr>	
+			</table>
+	</div>
+	}
+	<div class="span12" style="float: none;">
+		<table class="table table-striped" class="span6">	
+			<tr>
+				<td class="span6">
+					 Have you taken any other loan?
+				</td>
+				<td class="span6" align="left">
+					@if(applicant.loan.equals("true")){Yes}else{No}
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+@defaultIfNull(field: Object,defaultVal: String) = {
+	@if(field != null) {
+		@field	
+	}else{
+		@defaultVal
+	}
+}
+
+@phonetype(phonefield: String, phoneNumber: String, defaultVal: String) = {
+	@if((phoneNumber != null && !phoneNumber.isEmpty()) && phonefield != null){
+		@if(phonefield.equals("M")){Mob.}
+		@if(phonefield.equals("L")){Landline}
+	}else{
+		@defaultVal
+	}
+}
+
+@professionVal(occupationSymbol: String,defaultVal: String) = {
+	@if(occupationSymbol != null) {
+		@if(occupationSymbol.equals("HW")){Unemployed}
+		@if(occupationSymbol.equals("E")){Employed}
+		@if(occupationSymbol.equals("SE") || occupationSymbol.equals("S")){Self Employed}
+		@if(occupationSymbol.equals("RT")){Retired}	
+	}else{
+		@defaultVal
+	}
+}
+
+@formatAddress(address: Address) = {
+	@if(!isTrivial(address.line1)) { @address.line1,</br> }
+	
+	@if(!isTrivial(address.line2)) { @address.line2,</br> }
+
+	@if(!isTrivial(address.street)) { @address.street, } 
+	@if(!isTrivial(address.area)) { @address.area, }
+	@if(!isTrivial(address.city)) { @address.city, }
+
+	</br>
+
+	@if(!isTrivial(address.taluka)) { Tal: @address.taluka, } 
+	@if(!isTrivial(address.district)) { Dist: @address.district, }
+	@if(!isTrivial(address.state)) { @address.state, }
+
+	</br>
+
+	@if(!isTrivial(address.country)) {@address.country, }
+	@if(!isTrivial(address.pin)) { @address.pin }
+}
+
+@isTrivial(value: String) = @{
+	if(value != null && value.trim().length > 0) { false } else { true }
+}

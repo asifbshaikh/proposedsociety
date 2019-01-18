@@ -1,0 +1,12 @@
+@(insudata: List[Insurance])
+<div id="inSudatatDiv">
+    <h1>Insurance Details</h1>
+	<hr/>
+    @if(insudata != null && !insudata.isEmpty()) {
+	   @getInsuranceTable(insudata,true)
+	}else{
+		<div id="insuNoDataParaDiv">
+				<p id="bankNoDataPara">Click on Add More button to add details</p>
+		</div>
+	}
+</div>

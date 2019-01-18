@@ -1,0 +1,36 @@
+@(form: ApplicationForm)
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@pageTemplate("Applicant - Payment Details",Seq(routes.Assets.at("stylesheets/applicant/form/payment.css"))) {
+	<h1>Payment</h2>
+	<hr/>
+	<p class="message">Please pay the application fees to proceed with submission of your application. After the payment is confirmed, a password will be generated and emailed to you, which you can then use to login .</p>
+	<table class="payment-table">
+		<tr>
+			<td class="name">Name</td>
+			<td>@form.applicant.fname</td>
+		</tr>
+		<tr>
+			<td class="name">Invoice Number</td>
+			<td>@form.invoice.invoiceNumber</td>
+		</tr>
+		<tr>
+			<td class="name">Details</td>
+			<td>@form.invoice.description</td>
+		</tr>
+		<tr>
+			<td class="name">Amount</td>
+			<td class="amount">&#8377; @form.invoice.amount</td>
+		</tr>
+	</table>
+	<form action="@routes.ApplicationFormController.shortFormPaymentSubmit" >
+			<input type="hidden" value="@form.encryptId()" name="form_id">
+			<div class="buttons"><input type="submit" class="btn btn-pink btn-large" value="Proceed to payment"></div>
+	</form>
+	
+	
+	
+
+}

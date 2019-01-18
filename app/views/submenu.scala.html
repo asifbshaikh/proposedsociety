@@ -1,0 +1,51 @@
+@(user: User)
+@import views.html._
+@import common.Roles 
+<div id="sub_menu">
+	@if(user != null) {
+		<div id="user-welcome">
+			<span>Welcome @user.name | </spam>
+			<a href="@routes.Application.logout">Logout</a>
+ 		</div>
+	}
+
+	<div id="language">
+		<a href="#">Hindi</a> | <a href="#">Marathi</a>
+	</div>
+	<div id="menu" class="dropdown">
+		<a href="@routes.Application.index">Home</a> | 
+			 @if(user != null && user.roles != null && user.hasRole(Roles.APPLICANT)) {  
+		 	 		<a href= "@routes.ApplicantController.dashboard">Dashboard</a>
+		 	 }  |
+		 	 <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span>&raquo;</span></a>
+		<div class="dropdown-menu pull-right" role="menu"
+			aria-labelledby="dropdownMenu">
+			<div class="row-fluid">
+				<div class="span6">
+					<h4>Become a Applicant</h4>
+					<ul class="nav">
+						<li><a href="@routes.Pages.show("rules")">Rules &amp; Regulations</a></li>
+						<li><a href="@routes.Pages.show("terms_and_conditions")">Applicant's terms & conditions</a></li>		
+						<li><a href="@routes.Application.faq">FAQs</a></li>
+					</ul>
+				</div>
+				<div class="span6">
+					<h4>About the Company</h4>
+					<ul class="nav">
+						<li><a href="@routes.Application.awards">Awards</a></li>
+						<li><a href="@routes.Pages.show("success_story")">Success
+								Story</a></li>
+						<li><a href="@routes.Application.newsAndPress">News /
+								Press Release</a></li>
+						<li><a href="@routes.Application.inauguration">Website Inauguration</a></li>		
+						<li><a href="@routes.Application.videos">Videos</a></li>
+						<li><a href="@routes.Pages.show("history")">History</a></li>
+						<li><a href="@routes.Application.contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- end dropdown menu -->
+	</div>
+</div>
+<!-- end sub_menu -->

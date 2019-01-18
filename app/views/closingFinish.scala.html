@@ -1,0 +1,63 @@
+@(clFinish: Form[ApplicationFormController.ClosingFinish])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Closing - Finish", 5) {
+		<form class= "form-horizontal">
+			<div id="closingFinishDiv">
+			<h1>Closing Finish</h1>
+			<hr/>
+				<div id="ClosingDiv">	
+					<table id="ClosingTable" class="fieldstable">
+						<tr>
+							<td style="width:350px;"><label>Applicant Name:</label></td>
+							<td><label>Mr. Jayesh Sudhakar Ranade</label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Required Property Type:</label></td>
+							<td><label></label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Own Contribution:</label></td>
+							<td><label></label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Loan Eligibility:</label></td>
+							<td><label></label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Budget Suggested</label></td>
+							<td><label></label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Budget Calculated:</label></td>
+							<td><label></label></td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Verify Agreement</label></td>
+							<td>@helper.checkbox(field = clFinish("agreementAccept"))Accept</td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>How did you come to know about this site?</label></td>
+							<td>@helper.select(clFinish("howSiteWasKnown"), 
+									options = helper.options("fromFriends" -> "From Friends", "newspaper" -> "Newspaper", "Mail" -> "Mail", "adverisement" -> "Adverisement"), 
+									'class -> "input-medium")
+							</td>
+						</tr>
+						<tr>
+							<td style="width:350px;"><label>Feedback</label></td>
+							<td>
+								@helper.inputText(clFinish("Feedback"), 'class -> "input-medium")
+							</td>
+						</tr>
+					</table>
+				</div>		
+				
+				<div class="form-actions">
+						<input type="button" id ="buttonAddBankAccnt" class="btn btn-large btn-pink" align="right" value="Submit & Continue">
+				</div>
+			</div>		
+		</form>
+}

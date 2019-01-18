@@ -1,0 +1,73 @@
+@(req : Form[Requirement])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+<div id="hotelPlotRequirement">
+	<table id="HotelPlotTable" class="fieldstable">
+	    <tr>
+	        <td style="width:300px;"><h4>Hotel Plot/Industrial Land/Hotel Space/Hospital Space/School Space/Bank Space</h4></td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Plot Area</label></td>
+	        <td>@helper.inputText(req("plotArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	        <td>@helper.select(req("plotAreaMeasure"), options = helper.options("Square Feet"->"Square Feet",
+	            "Square Yard"->"Square Yard",
+	            "Square Miles"->"Square Miles",
+	            "Square Meter"->"Square Meter",
+	            "Square ML"->"Square ML",
+	            "Square CM"->"Square CM",
+	            "Square KM"->"Square KM",
+	            "Acres"->"Acres",
+	            "Ares"->"Ares",
+	            "Hectares"->"Hectares",
+	            "Guntha"->"Guntha",
+	            "Bigha"->"Bigha",
+	            "Cent"->"Cent"
+	            ), 'class -> "input-medium")
+	        </td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Builtup area required(sq.ft.)</label></td>
+	        <td>@helper.inputText(req("builtupArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Required Numbers of Rooms</label></td>
+	        <td>@helper.select(req("noOfRoomsRequired"), options = helper.options("1" -> "1",
+	            "2" -> "2",
+	            "3" -> "3",
+	            "4" -> "4",
+	            "5" -> "5",
+	            "6" -> "6",
+	            "7" -> "7",
+	            "8" -> "8",
+	            "9" -> "9",
+	            "10" -> "10",
+	            "11" -> "11",
+	            "12" -> "12",
+	            "13" -> "13",
+	            "14" -> "14",
+	            "15" -> "15",
+	            "16" -> "16",
+	            "17" -> "17",
+	            "18" -> "18",
+	            "19" -> "19",
+	            "20" -> "20"
+	            ), 'class -> "input-small")
+	        </td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Specify Area For Each Room(Sq.ft.)</label></td>
+	        <td>@helper.inputText(req("areaForEachRoom"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Use of the Land/Plot</label></td>
+	        <td>@helper.inputText(req("useOfLand"), 'class -> "input-medium", 'maxlength -> "100")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Other Details(If required)</label></td>
+	        <td>@helper.inputText(req("otherDetails"), 'class -> "input-medium", 'maxlength -> "50")</td>
+	    </tr>
+	</table>
+</div>

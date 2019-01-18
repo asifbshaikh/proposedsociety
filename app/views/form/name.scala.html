@@ -1,0 +1,36 @@
+@(prefix: String)
+
+<table>
+  <tr>
+    <td><label for="@prefix.concat("tl")">Title :</label></td>
+    <td>
+    	<label for="@prefix.concat("fn")">First Name</label>
+    </td>
+    <td>
+    	<label for="@prefix.concat("mn")">Middle Name</label>
+    </td>
+    <td>
+    	<label for="@prefix.concat("ln")">Last Name</label>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    	<select name="@prefix.concat("tl")" id="@prefix.concat("tl")">
+		  <option value="Mr">Mr.</option>
+		  <option value="Ms">Ms.</option>
+		  <option value="Mrs">Mrs.</option>
+		  <option value="Dr">Dr.</option>
+		</select>
+    </td>
+    <td>
+    	<input type="text" name="@prefix.concat("fn")" id="@prefix.concat("fn")" pattern="[A-Za-z]*" required>
+    </td>
+    <td>
+    	<input type="text" name="@prefix.concat("mn")" id="@prefix.concat("mn")" pattern="[A-Za-z]*" required>
+    </td>
+    <td>
+    	<input type="text" name="@prefix.concat("ln")" id="@prefix.concat("ln")" pattern="[A-Za-z]*" required>
+    </td>
+  </tr>
+</table>
+<tr>

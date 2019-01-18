@@ -1,0 +1,35 @@
+@(user: User)
+
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@pageTemplate("Proposed Society - A Concept",
+					Seq(),
+					Seq(
+						routes.Assets.at("js/locator.js")
+					)
+
+) {
+<div class="form-horizontal" >
+	<h1>Locate our agent</h1>
+	<div id= "show_error" class="alert alert-error" style=" display: none;"><p id = "error_msg"></p></div>
+	<hr/>
+	        <div id="locationDiv">
+		      <div id="requirementLocationTable">
+					<table class="fieldstable">
+					       <tr> 
+						       <td><select style="width: 165px;" name="state" id="State" placeholder="Select States"></select></td>
+							   <td><select style="width: 130px;" name="district" id="District"></select></td>
+							   <td><select style="width: 130px;" name="taluka" id="Taluka"></select></td>
+							   <td><input type="text" style="width: 130px;" name="city" id="City" placeholder="Enter city"></td>
+					   	   </tr>
+					</table>
+		      </div>
+		      <div class="form-actions">
+					<input id="get_location" type="submit"  class="btn btn-large btn-pink" align="right" value="search">
+			  </div>
+			</div>
+</div>
+<div id="search_response">
+</div>
+}

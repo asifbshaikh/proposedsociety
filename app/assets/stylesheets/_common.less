@@ -1,0 +1,56 @@
+body {
+	font-family: 'Roboto', Helvetica, sans-serif, Arial;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	/*min-width: 1080px;*/
+}
+
+div {
+	margin: 0;
+	padding: 0;
+}
+
+.clearfix() {
+	content: ".";
+	clear: both;
+	display: block;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.box_shadow_even(@color: grey, @pixels: 10px) {
+	box-shadow: 0 0 @pixels lighten(@color, 20%);
+	-webkit-box-shadow: 0 0 @pixels lighten(@color, 20%);
+	-moz-box-shadow: 0 0 @pixels lighten(@color, 20%);
+}
+
+.rounded-corners(@radius: 5px) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.clear {
+	clear: both;
+}
+
+.psblue {
+	color: @psblue;
+}
+
+.psgreen {
+	color: @psgreen;
+}
+
+.pspink {
+	color: @pspink;
+}
+
+.error {
+	color: @error;
+	font-size: 10pt;
+	margin: 2px 0 6px 0;
+	padding: 1px 2px;
+}

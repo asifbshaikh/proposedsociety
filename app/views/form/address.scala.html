@@ -1,0 +1,16 @@
+@(form: Form[AgentForm], name: String)
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@helper.inputText(form(name + ".line1"), 'placeholder -> "Line 1", 'maxlength -> 100, 'class -> "required")
+@helper.inputText(form(name + ".line2"), 'placeholder -> "Line 2 (optional)", 'maxlength -> 100)
+@helper.inputText(form(name + ".street"), 'placeholder -> "Street (optional)", 'maxlength -> 100)
+@helper.inputText(form(name + ".area"), 'placeholder -> "Area", 'maxlength -> 100)
+@helper.inputText(form(name + ".city"), 'placeholder -> "City", 'maxlength -> 100)
+@helper.inputText(form(name + ".taluka"), 'placeholder -> "Taluka (optional)", 'maxlength -> 100)
+@helper.inputText(form(name + ".district"), 'placeholder -> "District (optional)", 'maxlength -> 100)
+@helper.inputText(form(name + ".state"), 'placeholder -> "State", 'maxlength -> 100)
+@helper.inputText(form(name + ".country"), 'placeholder -> "Country", 'maxlength -> 100)
+@helper.inputText(form(name + ".pin"), 'placeholder -> "PIN", 'maxlength -> 100)

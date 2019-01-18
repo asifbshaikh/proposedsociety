@@ -1,0 +1,37 @@
+@(rddata: List[RecurringDeposit],showDeleteBtn :Boolean)
+@import views.helpers.DateFormatHelper._
+@import views.helpers.FieldValue._
+
+@if(rddata != null && !rddata.isEmpty()) {
+	<table id="viewRdDetails" class="table table-striped">
+		<thead>
+			<tr>
+		  		<th class="leftAlignClass">Bank Name</th>
+		  		<th class="leftAlignClass">Maturity Date</th>
+		  		<th class="rightAlignClass">Installment</th>
+		  		<th class="rightAlignClass">Principal</th>
+		  		<th class="rightAlignClass">Interest Rate</th>
+		  		<th class="rightAlignClass">Maturity Amount</th>
+		  		<th class="rightAlignClass">Allocation</th>
+		  		<th class="rightAlignClass"></th>
+		  	</tr>
+		 </thead>
+		 <tbody>
+			@for(rdd <- rddata) {
+			  	<tr>
+					<td class="leftAlignClass">@fieldVal(rdd.bankName,"NA")</td>
+					<td class="leftAlignClass">@if(rdd.maturityDate != null){@formatDate("dd/MM/yyyy",rdd.maturityDate)}else{NA}</td>
+					<td class="rightAlignClass">@fieldVal(rdd.installment,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(rdd.principal,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(rdd.interestRate,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(rdd.maturityAmount,"NA")</td>
+					<td class="rightAlignClass">@fieldVal(rdd.allocation,"NA")</td>
+					@if(showDeleteBtn){
+			  			<td class="rightAlignClass"><input type="button" id="btnRDDelete" class="btn btn-mini btn-danger " onclick="deleteRDDetailsFromList(@rdd.id)" value="X" style="font-weight: bold;"></td></td>
+			  		}else{<td></td>}
+					
+			</tr>
+			}
+		</tbody>
+	</table>
+}

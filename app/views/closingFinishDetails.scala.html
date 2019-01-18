@@ -1,0 +1,91 @@
+@(appForm: ApplicationForm)
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Application Form Preview", 4) {
+	<div id="ApplicantsDataDiv">
+		<h1>Application Form Preview 
+			 <a href="@routes.OwnContributionController.entireOwnContribution" class="btn btn-large btn-pink backBtn" style="color :white;"> Back</a>
+		</h1>	
+				<hr/>
+				<div>
+					@if(appForm.applicant != null){
+						@commonInfo(appForm.applicant,true)
+					}
+				</div>
+				<div>
+					@if(appForm.co_applicant != null){
+						@commonInfo(appForm.co_applicant,false)
+					}
+				</div>
+			
+		@if(appForm.applicant != null) {
+				<div id="AllOwnContributionDiv">
+					<div>		
+						<h1>Own Contribution Details
+							<a href="@routes.OwnContributionController.entireOwnContribution" class="lkEditing">(Edit)</a>
+						</h1>
+					</div>
+					<hr/>		
+					<div id="viewBankAccntTable">
+						@if(appForm.bankAccounts != null && !appForm.bankAccounts.isEmpty()){
+							<h2>Bank Account Details <a href="@routes.OwnContributionController.entireOwnContribution#bankBalanceDetailsDiv" id="linkBnk" class="lkEditing"> (Edit)</a></h2>
+							<hr/>
+							@getBankAccountTable(appForm.bankAccounts,false)
+						}
+					</div>
+					<div id="viewfdTable">
+						@if(appForm.fixedDeposits != null && !appForm.fixedDeposits.isEmpty()){
+							<h2>Fixed Deposit Details  <a href="@routes.OwnContributionController.entireOwnContribution#fixedDepositeDetailsDiv" id="linkFd"class="lkEditing"> (Edit)</a></h2>
+							<hr/>	
+							@getFdTable(appForm.fixedDeposits,false)
+						}					
+					</div>
+					<div id="viewRdDetailsTable">
+						@if(appForm.recurringDeposits != null && !appForm.recurringDeposits.isEmpty()){
+							<h2>Recurring Deposit Details  <a href="@routes.OwnContributionController.entireOwnContribution#recurringDepositDetailsDiv" class="lkEditing"> (Edit)</a></h2>
+							<hr/>
+							@getRdTable(appForm.recurringDeposits,false)
+						}			
+					</div>
+					<div id="viewInsuranceDetailsTable">
+						@if(appForm.insurances != null && !appForm.insurances.isEmpty()){
+							<h2>Insurance Details <a href="@routes.OwnContributionController.entireOwnContribution#insuranceDetailsDiv" class="lkEditing"> (Edit)</a></h2>
+							<hr/>
+							@getInsuranceTable(appForm.insurances,false)
+						}					
+					</div>
+					<div id="viewMiscBorrowingDetailsTable">
+						@if(appForm.miscBorrowings != null && !appForm.miscBorrowings.isEmpty()){
+							<h2>Miscellaneous Borrowings Details  <a href="@routes.OwnContributionController.entireOwnContribution#miscellaneousBorrowingDiv" class="lkEditing"> (Edit)</a></h2>
+							<hr/>
+							@getMiscBorrowingTable(appForm.miscBorrowings,false)
+						}
+					</div>
+					<div id="viewPropertyDetailsTable">
+						@if(appForm.property != null && !appForm.property.isEmpty()){
+							<h2>Existing Property Details <a href="@routes.OwnContributionController.entireOwnContribution#viewPropertyDetailsTable" class="lkEditing"> (Edit)</a></h2>
+							<hr/>
+							@getPropertyTable(appForm.property,false)
+						}					
+					</div>
+				</div>
+				<div id="viewRequirementsTable">
+					@if(appForm.requirements != null && !appForm.requirements.isEmpty()){
+						<h2>Applicants Property Requirements <a href="@routes.ApplicationFormController.shortForm" class="lkEditing"> (Edit)</a></h2><hr/>
+							@getRequirements(appForm.requirements)
+					}					
+				</div>
+				
+		}else{
+			<p>No Entries Found</p>
+		}	
+			<div id="divForClearfix">
+			</div>
+			<div id="buttonForClosingFinishDiv" class="noPrint">
+				<button id="printClosingFinish" class="btn btn-large btn-pink" style="display: none;">Print</button>
+				<a href="@routes.OwnContributionController.entireOwnContribution" class="btn btn-large btn-pink" align="right">Back</a>
+				<a href="@routes.ApplicationFormController.summaryPage" class="btn btn-large btn-pink" align="right">Next</a>
+			</div>
+	</div>
+}

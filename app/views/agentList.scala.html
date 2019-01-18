@@ -1,0 +1,75 @@
+@(page : com.avaje.ebean.Page[Agent],user : User)
+@import views.helpers.FieldValue._
+@import views.html.investigationBuero._
+@import controllers.FormStatus
+@import  com.avaje.ebean.Page
+
+@bueroDashboardTemplate("Proposed Society - Agent List",user,Seq(),Seq()){
+	<div>
+		@if(page != null && !page.getList().isEmpty()) {
+			<h2>Agent's List</h2>
+			<hr/>
+			<table  class="table table-striped" style="font-family: 'Roboto', Helvetica, sans-serif, Arial;">
+				<thead>
+					<tr>	
+				  		<th class="leftAlignClass">First Name</th>
+				  		<th class="leftAlignClass">Middle Name</th>
+				  		<th class="leftAlignClass">Last Name</th>
+				  		<th class="rightAlignClass">Email</th>
+				  		<th class="rightAlignClass">Satus</th>
+				  		<th class="rightAlignClass">      </th>
+				  		
+					 </tr>
+				</thead>
+				<tbody>
+					@for(agentdata <- page.getList()) {
+					  	<tr>
+					  		<td class="leftAlignClass">@fieldVal(agentdata.form.fname,"NA")</td>
+							<td class="leftAlignClass">@fieldVal(agentdata.form.mname,"NA")</td>
+							<td class="leftAlignClass">@fieldVal(agentdata.form.lname,"NA")</td>
+							<td class="rightAlignClass">@fieldVal(agentdata.form.email,"NA")</td>
+							<td class="rightAlignClass">@fieldVal(agentdata.form.status,"NA")</td>
+							<td class="rightAlignClass">
+								<div >
+									@if(agentdata.form.status.equals(FormStatus.PENDING) || agentdata.form.status.equals(FormStatus.PAID)){
+										<p style="text-align: center;">
+											<a href="@routes.BueroController.displayAgentInfoToBuero(agentdata.id)" class="btn  btn-info " style="color:#ffffff" target="_blank">Feedback</a>
+										</p>
+									}
+								</div>
+									
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			
+			@if(page.getTotalPageCount() > 1){
+				<div class="form-sections">
+				
+				  		<ul class="pager">
+							@if(page. hasPrev()){
+								
+						  		  <li><a href="@routes.BueroController.searchIbsAgent(page.getPageIndex() -1)">Previous</a></li>
+					 			
+							}else{
+								<li class="disabled"><a href = "#"> Previous</a></li>
+							}
+							
+							@if(page.hasNext()){
+								<li><a href="@routes.BueroController.searchIbsAgent(page.getPageIndex() + 1)">Next</a></li>
+							}else{
+								<li class="disabled"><a href = "#"> Next</a></li>
+							}
+					</ul>
+				</div>
+			}
+		}else{
+			<div>
+				<h2>No Agent is assigned to you</h2>
+				<hr/>
+					
+			</div>
+		}
+	</div>
+}

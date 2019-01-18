@@ -1,0 +1,15 @@
+@(title : String ,user : User,scriptFiles :Seq[Call]=Seq.empty, cssFiles :Seq[Call] = Seq.empty)(body :Html)
+
+@sub_menu = {
+	<li><a href="@routes.BueroController.bueroDashboard">Buero Home</a></li>
+	<li><a href="@routes.BueroController.searchIbsAgent(0)">Agents to investigate</a></li><!--0 is page number-->
+	<!-- <li><a href="@routes.BueroController.bueroDashboard">Find all Agents</a></li> -->
+	<li><a href="@routes.BueroController.downloadAgentFeedbackForm">Download Feedback Form</a></li>
+	<li><a href="@routes.UserController.resetPassword">Reset Password</a></li>
+	<li><a href="@routes.UserController.logout">Logout</a></li>	
+}
+
+@baseDashboardTemplate(title,scriptFiles,cssFiles,user,sub_menu){
+	<h1>Investigation Buero Dashboard</h1><hr/>	
+		@body
+}

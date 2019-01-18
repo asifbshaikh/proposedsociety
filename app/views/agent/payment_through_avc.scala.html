@@ -1,0 +1,38 @@
+@(msg : String)
+
+@import views.html.form._
+@form.formTemplate("Applicant - Payment ", 6) {
+	 <style type="text/css">
+    	.fields {
+    		margin: 40px auto;
+    		border: 1px solid silver;
+    		padding: 30px;
+    		width: 400px;
+    		border-radius: 10px;
+    	
+    	}
+
+    </style>
+			
+		<form class="fields form-horizontal" method="post" action="@routes.ApplicationFormController.paymentThroughAVCcredit">
+			<h2>Agent Authentication</h2><hr>
+			@if(msg != null){
+				  <div class="alert alert-error">
+                   	 		<button type="button" class="close" data-dismiss="alert">&times;</button>
+                   	 		<p>@msg</p>
+               	 </div> 
+			}
+			<table class="fieldstable">
+				
+				<tr>
+					<td><label class="fieldname required"> Password </label></td>
+					<td><input type="password" name = "password"  required="required" placeholder="Password"/></td>
+				</tr>
+			</table>
+			<hr>
+			 <div align="center">
+             	<button type="submit" class="btn btn-info ">Submit</button>
+			 </div>
+		</form>
+	
+}

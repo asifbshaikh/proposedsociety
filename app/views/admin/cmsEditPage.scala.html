@@ -1,0 +1,34 @@
+@(page: Page, user: User, flash: play.mvc.Http.Flash)
+@adminTemplate("Proposed Society - CMS - Edit Page", user, Seq(routes.Assets.at("ckeditor/ckeditor.js")), Seq()) {
+	<div>
+		<h2>CMS - Edit Page</h2>
+		<hr/>
+		@Option(flash.get("success")).map { message =>
+			<div class="alert alert-success" role="alert">@message</div> 
+		}
+		@Option(flash.get("error")).map { message =>
+			<div class="alert alert-danger" role="alert">@message</div> 
+		}
+		
+			<form action="@routes.AdminUserController.cmsEditPageSubmit" method="post">
+				<div class="form-group title">
+					<label><b> Page Title</b> </label>
+					<input type="text" name="title" id="page-title" class="input-medium" value="@page.title" style="width: 99%;" required />
+				</div>
+				<div class="form-group">
+					<textarea name="content" id="page-content">@page.content</textarea>
+				</div>
+				<input type="hidden" value="@page.id" name="id"/>
+				<input type="hidden" value="@page.formattedTitle" name="formattedTitle"/>
+				<div style="padding: 10px 0px;" class="backBtn">
+					<button type="submit" class="btn btn-medium btn-pink"> Save </button> 
+					<a href="/admin/cms/list" class="btn btn-medium btn-pink" style="color :white;"> Cancel</a>
+				</div> 
+			</form>		
+	</div>
+
+	<script>
+	
+		CKEDITOR.replace("page-content",{height: 250});
+	</script>	
+}

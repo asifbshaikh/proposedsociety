@@ -1,0 +1,629 @@
+@(apptype : Form[ApplicationForm],
+isApplicant: Boolean,
+isPaid : Boolean,
+prefix : String)
+
+@import helper.FieldConstructor
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+ <div id="personal-info">
+	@if(isApplicant == true){
+		<h1>Personal Information</h1>
+	}else {
+		<h1>Co-Applicant's - Information</h1>	
+	}
+	<hr/>
+	<table id="appdetails" class="fieldstable">
+		@if(!isPaid){
+				<tr>
+				<td><label class="fieldname required">@if(isApplicant == true){Applicant's Name}else{Co-Applicant's Name}</label></td>
+				<td>
+					<ul class="fieldsul">
+						<li>
+							@helper.select(apptype(prefix + ".title"), 
+							options = helper.options("Mr" -> "Mr.", "Ms" -> "Ms.", "Mrs" -> "Mrs.", "Smt" -> "Smt."), 
+							'class -> "input-mini ")
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".fname"), 
+								'placeholder -> "First Name", 
+								'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".mname"), 
+								'placeholder -> "Middle Name", 
+								'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".lname"), 
+								'placeholder -> "Last Name", 
+								'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+					</ul>
+				</td>
+			</tr>
+		}else{
+				<tr>
+				<td><label class="fieldname ">@if(isApplicant == true){Applicant's Name}else{Co-Applicant's Name}</label></td>
+				<td>@apptype(prefix + ".title").value()&nbsp;@apptype(prefix + ".fname").value()&nbsp;@apptype(prefix + ".mname").value()&nbsp;@apptype(prefix + ".lname").value()</td>
+			</tr>
+		}
+		<tr>
+			<td><label class="fieldname required">Father's / Husband's Name</label></td>
+			<td>
+				<ul class="fieldsul">
+					<li>@helper.select(apptype(prefix + ".fh_relation"),
+							 options = helper.options("F" -> "Father","H" -> "Husband"),
+							'class -> "input-small")
+					</li>
+					<li>@helper.select(apptype(prefix + ".fh_title"), 
+							options = helper.options("Mr" -> "Mr."),
+							'class -> "input-mini")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".fh_fname"), 'placeholder -> "First Name",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".fh_mname"), 'placeholder -> "Middle Name",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".fh_lname"), 'placeholder -> "Last Name",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+					</li>
+				</ul>
+			</td>
+		</tr>
+
+		@if(!isApplicant){
+			<tr>
+				<td>
+					<label class="fieldname required">Relationship with Applicant</label>
+				</td>
+				<td>
+					@helper.inputText(apptype(prefix + ".relationship_with_applicant"), 'placeholder -> "Relation",
+							'class -> "input-medium", 'maxlength -> 50)
+				</td>
+			</tr>
+		}
+		@if(!isPaid){
+			<tr>
+				<td><label class="fieldname required" for="dob">Date of Birth (yyyy-MM-dd)</label></td>
+				<td>@helper.inputText(apptype(prefix + ".dob"), 'class -> "input-small datepicker", 'placeholder -> "yyyy-MM-dd")</td>
+			</tr>
+		}else{
+			<tr>
+				<td><label class="fieldname required" for="dob">Date of Birth (yyyy-MM-dd)</label></td>
+				<td>
+					@apptype(prefix + ".dob").value()
+				</td>
+			</tr>
+		}
+		<tr>
+			<td><label class="fieldname required" for="sex">Sex</label></td>
+			<td>@form.horizontalRadioGroup(apptype(prefix + ".sex"), options = Seq("M" -> "Male", "F" -> "Female"))</td>
+		</tr>	
+		<tr>
+			<td><label class="fieldname required" for="resi_status">Residential Status</label></td>
+			<td>@form.horizontalRadioGroup(apptype(prefix + ".resi_status"), options = Seq("I" -> "Indian", "N" -> "NRI"))</td>
+		</tr>
+
+		<tr>
+			<td><label class="fieldname required " for="email">Email</label></td>
+			<td>@helper.inputText(apptype(prefix + ".email"), 
+					'placeholder -> "Email",
+					'class -> "input-large", 'maxlength -> 100)
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname required" for="phone1">Phone - 1</label></td>
+			<td>
+				<ul class="fieldsul">
+					<li>@helper.select(apptype(prefix + ".phone1_type"), 
+							options = helper.options("M" -> "Mobile","L" -> "Landline"),
+							'class -> "input-small")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".phone1"), 
+							'placeholder -> "Phone Number",
+							'class -> "input-medium", 'maxlength -> 20)
+					</li>
+				</ul>
+			</td>	
+		</tr>
+		<tr>
+			<td><label class="fieldname" for="phone2">Phone - 2</label></td>
+			<td>
+				<ul class="fieldsul">
+					<li>@helper.select(apptype(prefix + ".phone2_type"),
+							 options = helper.options("M" -> "Mobile","L" -> "Landline"),
+							 'class -> "input-small")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".phone2"), 
+							'placeholder -> "Phone Number",
+							'class -> "input-medium", 'maxlength -> 20)
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname" for="phone3">Phone - 3</label></td>
+			<td>
+				<ul class="fieldsul">
+					<li>@helper.select(apptype(prefix + ".phone3_type"),
+							 options = helper.options("L" -> "Landline","M" -> "Mobile"),
+							 'class -> "input-small")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".phone3"), 
+							'placeholder -> "Phone Number",
+							'class -> "input-medium", 'maxlength -> 20)
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="fieldna @if(isPaid){required}">Photograph</label>
+				<input type="hidden" id="@prefix.concat("_photograph_id")" name="@prefix.concat(".photograph_id")" 
+					   target-element="@prefix.concat("_photograph-upload")" ps-file-upload
+					   @populateAttachmentAttributes(apptype, apptype(prefix.concat(".photograph_id")), 
+					   		isApplicant, { applicant => Option(applicant.photograph)})
+				/>
+			</td>
+			<td>
+				<div id="@prefix.concat("_photograph-upload")" file-upload="true"></div>
+				@if(apptype(prefix.concat(".photograph_id")).hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="fieldname @if(isPaid){required}">Address Proof</label>
+				<input type="hidden" id="@prefix.concat("_addressproof_id")" name="@prefix.concat(".addressproof_id")" 
+					   target-element="@prefix.concat("_addressproof-upload")" ps-file-upload
+					   @populateAttachmentAttributes(apptype, apptype(prefix.concat(".addressproof_id")), 
+					   		isApplicant, { applicant => Option(applicant.addressproof)})
+				/>
+			</td>
+			<td>
+				<div id="@prefix.concat("_addressproof-upload")" file-upload="true"></div>
+				@if(apptype(prefix.concat(".addressproof_id")).hasErrors) {
+					<p class="error">Attachment is mandatory</p> 		
+				}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname @if(isPaid){required}" for="identity_number1">Identity 1</label></td>
+			<td>
+				<ul class="fieldsul">	
+					<li>@helper.select(apptype(prefix + ".identity_number1_type"), 
+							options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+							'class -> "input-medium")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".identity_number1"), 
+							'placeholder -> "Identity / Card Number",
+							'class -> "input-medium", 'maxlength -> 50)
+					</li>
+					<li>
+						<input type="hidden" id="@prefix.concat("_identity1_id")" name="@prefix.concat(".identity1_id")" 
+							   target-element="@prefix.concat("_identity1-upload")" ps-file-upload
+							   @populateAttachmentAttributes(apptype, apptype(prefix.concat(".identity1_id")), 
+							   		isApplicant, { applicant => Option(applicant.identity1)})
+						/>
+					</li>
+					<li>
+						<div id="@prefix.concat("_identity1-upload")" file-upload="true"></div>
+						@if(apptype(prefix.concat(".identity1_id")).hasErrors) {
+							<p class="error">Attachment is mandatory</p> 		
+						}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname" for="identity_number2">Identity 2</label></td>
+			<td>
+				<ul class="fieldsul">	
+					<li>@helper.select(apptype(prefix + ".identity_number2_type"), 
+							options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+							'class -> "input-medium")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".identity_number2"), 
+							'placeholder -> "Identity / Card Number",
+							'class -> "input-medium", 'maxlength -> 50)
+					</li>
+					<li>
+						<input type="hidden" id="@prefix.concat("_identity2_id")" name="@prefix.concat(".identity2_id")" 
+							   target-element="@prefix.concat("_identity2-upload")" ps-file-upload
+							   @populateAttachmentAttributes(apptype, apptype(prefix.concat(".identity2_id")), 
+							   		isApplicant, { applicant => Option(applicant.identity2)})
+						/>
+					</li>
+					<li>
+						<div id="@prefix.concat("_identity2-upload")" file-upload="true"></div>
+						@if(apptype(prefix.concat(".identity2_id")).hasErrors) {
+							<p class="error">Attachment is mandatory</p> 		
+						}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname" for="identity_number3">Identity 3</label></td>
+			<td>
+				<ul class="fieldsul">	
+					<li>@helper.select(apptype(prefix + ".identity_number3_type"), 
+							options = helper.options("Passport" -> "Passport","PanCard" -> "PAN Card","AadharCard" -> "Aadhar Card","VoterID" -> "Voter ID","DrivingLicense" -> "Driving License","DinNumber" -> "Din Number","TinNumber" -> "Tin Number","OtherAnyGovtIdentity" -> "Other any GOVT Identity"),
+							'class -> "input-medium")
+					</li>
+					<li>@helper.inputText(apptype(prefix + ".identity_number3"), 
+							'placeholder -> "Identity / Card Number",
+							'class -> "input-medium", 'maxlength -> 50)
+					</li>
+					<li>
+						<input type="hidden" id="@prefix.concat("_identity3_id")" name="@prefix.concat(".identity3_id")" 
+							   target-element="@prefix.concat("_identity3-upload")" ps-file-upload
+							   @populateAttachmentAttributes(apptype, apptype(prefix.concat(".identity3_id")), 
+							   		isApplicant, { applicant => Option(applicant.identity3)})
+						/>
+					</li>
+					<li>
+						<div id="@prefix.concat("_identity3-upload")" file-upload="true"></div>
+						@if(apptype(prefix.concat(".identity3_id")).hasErrors) {
+							<p class="error">Attachment is mandatory</p> 		
+						}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname required" for="marital_status">Marital Status</label></td>
+			<td>@form.horizontalRadioGroup(apptype(prefix + ".marital_status"), options = Seq("M" -> "Married", "U" -> "Unmarried","O" -> "Other"))</td>
+		</tr>
+	</table>
+</div>
+@if(isApplicant){
+	<div id="applicant_spouse-details" class="form-section spouse">
+		<h1>@if(isApplicant) { Applicant's }Spouse Details</h1>
+		<hr/>
+		<table class="fieldstable">
+			<tr>
+				<td><label class="fieldname ">Spouse Name</label></td>
+				<td>
+					<ul class="fieldsul">
+						<li>@helper.select(apptype(prefix + ".spouse_details.sp_title"), 
+							options = helper.options("Mr" -> "Mr.", "Mrs" -> "Mrs."),
+							'class -> "input-mini")
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".spouse_details.sp_fname"), 
+							'placeholder -> "First Name",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".spouse_details.sp_mname"), 
+							'placeholder -> "Middle Name",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+						<li>@helper.inputText(apptype(prefix + ".spouse_details.sp_lname"), 
+							'placeholder -> "Last Name ",
+							'class -> "input-medium capitalize", 'maxlength -> 50)
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname " for="spouse_details.sp_profession">Profession of Spouse</label></td>
+				<td>@helper.select(apptype(prefix + ".spouse_details.sp_profession"), 
+								options = helper.options(
+									"HW" -> "Unemployed",
+									"E" -> "Employed",
+									"SE" -> "Self Employed",
+									 "RT" -> "Retired"),
+								'class -> "input-medium")
+				</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname " for="spouse_details.sp_dob">Date of birth of spouse (yyyy-MM-dd)</label></td>
+				<td>@helper.inputText(apptype(prefix + ".spouse_details.sp_dob"), 'class -> "input-small datepicker", 'placeholder -> "yyyy-MM-dd")</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname " for="spouse_details.anniversary">Date of Anniversary (yyyy-MM-dd)</label></td>
+				<td>@helper.inputText(apptype(prefix + ".spouse_details.anniversary"), 'class -> "input-small datepicker" , 'placeholder -> "yyyy-MM-dd")</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname " for="spouse_details.children">Number Of Children</label></td>
+				<td>@helper.inputText(apptype(prefix + ".spouse_details.children"), 'maxlength -> 2,'class -> "input-mini", 'maxlength -> 2)</td>
+			</tr>
+		</table>
+	</div>
+}
+<div id="address-details" class="form-section">
+	<h1>@if(isApplicant == true) { Applicant's } else { Co-Applicant's } Address Details</h1>
+	<hr/>
+	<fieldset id ="birthAddFieldSet" class="span3">		
+		<h4 class="@if(isPaid){required}">Birth Place</h4>
+		@views.html.address(apptype, prefix + ".birth_place")
+	</fieldset>
+	<fieldset class="span3">
+		<h4 class="@if(isPaid){required}">Permanent Address</h4>
+		<span>Same as :</span>
+		@form.verticalRadioGroup(apptype(prefix + ".permanent_address_same_as"),
+			options = Seq("birth_place" -> "Birth Place", 
+						  "other" -> "Other"), 
+			checkedItem = "other")
+		@if(isApplicant){
+			<div  id="applicant_perAddFieldSet">
+		}else {
+			<div  id="co_applicant_perAddFieldSet">
+		}
+				@views.html.address(apptype, prefix + ".permanent_address")
+			</div>
+	</fieldset>
+
+	<fieldset class="span3">
+		<h4 class="required">Residential Address</h4>	
+		<span>Same as :</span>
+		@form.verticalRadioGroup(apptype(prefix + ".residential_address_same_as"), 
+			options = Seq("birth_place" -> "Birth Place",
+						  "permanent_address" -> "Permanent Address", 
+						  "other" -> "Other"), 
+			checkedItem = "other")
+		@if(isApplicant){
+			<div id="applicant_resAddFieldSet">
+		}else {
+			<div id="co_applicant_resAddFieldSet">
+		}
+				@views.html.address(apptype, prefix + ".residential_address")
+			</div>
+	</fieldset>
+	
+	<fieldset class="span3" >
+		<h4 class="@if(isPaid){required}">Address Of Communication</h4>
+		<span>Same as :</span>
+		@form.verticalRadioGroup(apptype(prefix + ".communication_address_same_as"),
+			options = Seq("birth_place" -> "Birth Place", 
+			              "permanent_address" -> "Permanent Address",
+			              "residential_address" -> "Residential Address",
+			               "other" -> "Other"),
+			checkedItem = "other")
+		@if(prefix == "applicant"){
+			<div id="applicant_comAddFieldSet">
+		}else {
+			<div id="co_applicant_comAddFieldSet">
+		}
+				@views.html.address(apptype, prefix + ".communication_address")
+			</div>
+	</fieldset>
+	<div class="clear"></div>
+	<table id="residence_info" class="fieldstable">
+		<tr>
+			<td><label class="fieldname @if(isPaid){required}" for="residence_yrs_residing">No. of year residing at current residence</label></td>
+			<td>@helper.inputText(apptype(prefix + ".residence_yrs_residing"), 'class -> "input-mini", 'maxlength -> 3)</td>
+		</tr>
+		<tr>
+			<td><label class="fieldname @if(isPaid){required}" for="city_yrs_residing">No. of years residing in the City/District</label></td>
+			<td>@helper.inputText(apptype(prefix + ".city_yrs_residing"), 'class -> "input-mini", 'maxlength -> 3)</td>
+		</tr>
+	</table>
+</div>
+<div id="work_details" class="form-section">
+	<h1>@if(isApplicant == true){Income Details}else{Co-Applicant's - Income Details}</h1>
+	<hr/>
+	<table id="office_details" class="fieldstable">	
+		<tr>
+			<td>
+				<table>	
+					<tr>
+						<td style="padding-right: 25px;"><label class="fieldname @if(isPaid){required}" for="occupation">Occupation</label></td>
+						<td>
+							<ul id="occupationTable" class="ulvertical">
+								<li>
+									@helper.select(apptype(prefix + ".occupation"), 
+										options = helper.options("select_" -> "--Select--","E" -> "Employed", "S" -> "Self Employed"),
+										'class -> "input-medium")
+								</li>
+							</ul>	
+						</td>
+					</tr>
+					<tr>
+						<td><label class="fieldname @if(isPaid){required}" for="office_address">Office Address</label>
+						</td>
+						<td>
+							<fieldset class="span3" style="margin-left: 0;">
+								@views.html.address(apptype, prefix + ".office_address")
+							</fieldset>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr>
+						<td><label class="fieldname @if(isPaid){required}" for="off_mail">Office Email</label></td>
+						<td>@helper.inputText(apptype(prefix + ".off_mail"), 
+							'size -> 30, 
+							'placeholder -> "Email",
+							'class -> "input-large",
+							'maxlength -> 100)
+						</td>
+					</tr>
+					<tr>
+						<td><label class="fieldname @if(isPaid){required}" for="off_phone1">Office Phone 1</label></td>
+						<td>
+							<table>
+								<tr>
+									<td>@helper.select(apptype(prefix + ".off_phone1_type"), options = helper.options("L" -> "Landline","M" -> "Mobile"),
+										'class -> "input-small")
+									</td>
+									<td>@helper.inputText(apptype(prefix + ".off_phone1"), 'placeholder -> "Phone Number..",
+										'class -> "input-medium", 'maxlength -> 20)
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><label class="fieldname" for="off_phone2">Office Phone 2</label></td>
+						<td>
+							<table>
+								<tr>
+									<td>@helper.select(apptype(prefix + ".off_phone2_type"), options = helper.options("L" -> "Landline","M" -> "Mobile"),
+										'class -> "input-small")
+									</td>
+									<td>@helper.inputText(apptype(prefix + ".off_phone2"), 'placeholder -> "Phone Number..",
+										'class -> "input-medium", 'maxlength -> 20)
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><label class="fieldname" for="off_phone1">Office Phone 3</label></td>
+						<td>
+							<table>
+								<tr>
+									<td>@helper.select(apptype(prefix + ".off_phone3_type"), options = helper.options("M" -> "Mobile","L" -> "Landline"),
+										'class -> "input-small")
+									</td>
+									<td>@helper.inputText(apptype(prefix + ".off_phone3"), 'placeholder -> "Phone Number..",
+										'class -> "input-medium", 'maxlength -> 20)
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>	
+
+@if(prefix == "applicant"){
+	<div id="applicant_employedTable" style="display:none">
+}else {
+	<div id="co_applicant_employedTable" style="display:none">
+}
+		<h1>Income Details (Employed)</h1>
+		<hr/>
+		<table class="fieldstable">
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Name of Current Organisation</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.employer"),'class -> "input-medium", 'maxlength -> 100)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Current Designation</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.designation"),'class -> "input-medium", 'maxlength -> 50)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Gross Salary</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.gross_sal"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Total Deductions</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.deductions"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Net Salary</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.net_sal"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Yearly Bonus, if any?</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.yrly_bonus"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}" id="yrs_with_employer">Working with Current Organisation since (yyyy-MM-dd)</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.yrs_with_employer_d"), 'class -> "input-small datepicker", 'placeholder -> "yyyy-MM-dd")</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Total Work Experience</label></td>
+				<td>
+					@helper.inputText(apptype(prefix + ".employedIncome.experience_year"),'class -> "input-mini", 'placeholder -> "Years", 'maxlength -> 2)
+					@helper.inputText(apptype(prefix + ".employedIncome.experience_month"),'class -> "input-mini", 'placeholder -> "Months", 'maxlength -> 2)
+				</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Number of Remaining Years of Service. (Approx)</label></td>
+				<td>@helper.inputText(apptype(prefix + ".employedIncome.yrs_service_remn"),'class -> "input-mini", 'maxlength -> 2)</td>
+			</tr>
+		</table>
+	</div>
+@if(isApplicant){
+	<div id="applicant_selfEmployedTable" style="display:none">
+}else {
+	<div id="co_applicant_selfEmployedTable" style="display:none">
+}
+		<h1>Income Details (Self-Employed)</h1>
+		<hr/>
+		<span><b>Note : Please mention Zero if no information available</b></span>
+		<br/>
+		<br/>
+		<table class="fieldstable">
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Type of Business</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.business_type"), 'class -> "input-medium", 'maxlength -> 50)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Latest Year's Profit After Tax</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr1_pat"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Latest Year's Depreciation</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr1_depr"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Pervious Year's Profit After Tax</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr2_pat"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Pervious Year's Depreciation</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr2_depr"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Second Last Year's Profit After Tax</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr3_pat"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>
+			<tr>
+				<td><label class="fieldname @if(isPaid){required}">Second Last Year's Depreciation</label></td>
+				<td>@helper.inputText(apptype(prefix + ".selfEmployedIncome.yr3_depr"),'class -> "input-medium", 'maxlength -> 9)</td>
+			</tr>	
+		</table>
+	</div>
+</div>
+	<div id="dependentsTable">
+		
+	</div>
+		
+
+@populateAttachmentAttributes(form: Form[ApplicationForm], field: Field, isApplicant: Boolean, f: (Applicant) => Option[FileAttachment]) = {
+	@field.value match { 
+		case Some(value) => { 
+			@if(value.trim().length() > 0) {
+				value="@value" attachment-name="@findAttachmentName(value)"
+			} 
+		}
+		case None => { @extractFileAttributesFromForm(form, isApplicant, f) }
+	}
+}
+
+@extractFileAttributesFromForm(form: Form[ApplicationForm], isApplicant: Boolean, f: (Applicant) => Option[FileAttachment]) = {
+	@if(form.value.isDefined()) {
+		@if(isApplicant && form.get().applicant != null) {
+			@outputAttachmentAttributes(f(form.get().applicant))
+		}
+
+		@if(!isApplicant && form.get().co_applicant != null) {
+			@outputAttachmentAttributes(f(form.get().co_applicant))
+		}
+	}
+}
+
+@outputAttachmentAttributes(file: Option[FileAttachment]) = {
+	@file match { 
+		case Some(file) => { value="@file.id" attachment-name="@file.fileName" }
+		case None => { "" }
+	}
+}
+
+@findAttachmentName(value: String) = @{
+	try {
+		Option(new models.dao.ebean.EbeanFileAttachmentDao().findByFilePath(value)) match {
+			case Some(file) => { file.fileName }
+			case None => { "" }
+		}
+	} catch {
+		case _ => ""
+	}
+}
+

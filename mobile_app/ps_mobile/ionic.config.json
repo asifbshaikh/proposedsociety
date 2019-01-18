@@ -1,0 +1,12 @@
+{
+  "name": "ps_mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
+}

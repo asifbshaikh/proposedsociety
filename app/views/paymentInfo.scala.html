@@ -1,0 +1,108 @@
+@(payment:Form[PaymentInfo])
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant - Payment Details", 6) {
+
+	@helper.form(action = routes.ApplicationFormController.paymentSubmit, 'class -> "form-horizontal") {
+	
+			<h1>Applicant - Payment Details</h1>
+			<hr/>
+			<table id="appdetails" class="fieldstable">
+			 	<tr>
+					<td><label class="fieldname" >Mode Of Payment </label></td>
+					<td>
+								@helper.select(payment("paymentMode"), 
+								options = helper.options("byCheque" -> "Cheque","ByNetBanking" -> "NetBanking","ByCreditOrDebitCards" -> "Credit/Debit Cards","ByDeposit" -> "Deposit (Cash)"), 
+								'class -> "input-medium")
+					</td>
+				</tr>
+				<tr>
+						<td><label class="fieldname">Bank Name</label></td>
+						<td>
+							@helper.inputText(payment("bankName"), 
+									'placeholder -> "Bank Name", 
+									'class -> "input-medium")
+						</td>
+				</tr>
+				<tr>
+						<td><label class="fieldname">Branch Name</label></td>
+						<td>
+							@helper.inputText(payment("branchName"), 
+									'placeholder -> "Branch Name", 
+									'class -> "input-medium")
+						</td>
+				</tr>
+				<tr>
+						<td><label class="fieldname">Date</label></td>
+						<td>
+							@helper.inputText(payment("paymentDate"), 'id -> "date2",
+								'placeholder -> "dd/mm/yyyy",
+								'size -> 10, 
+								'class -> "input-small datepicker", 
+								'pattern -> "[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}")
+						</td>
+				</tr>
+			</table>
+		<hr>
+		<div id="chequeTable" style="display: none;" >
+		<h1>Chque Details</h1>
+		<hr>
+			<table  class="fieldstable">
+					<tr>
+						<td><label class="fieldname">Cheque Number</label></td>
+						<td>
+							@helper.inputText(payment("chequeNumber"), 
+									'placeholder -> "Cheque Number", 
+									'class -> "input-medium")
+						</td>
+					</tr>
+					
+			</table>
+		</div>
+		<div id="cardsTable" style="display: none;" >
+			<h1>Transaction Details</h1><hr>
+			<table  class="fieldstable">
+					
+					
+					<tr>
+						<td><label class="fieldname">Account Number</label></td>
+						<td>
+							@helper.inputText(payment("accountNumber"), 
+									'placeholder -> "Account Number", 
+									'class -> "input-medium")
+						</td>
+					</tr>
+					
+					<tr>
+						<td><label class="fieldname">Transaction Id</label></td>
+						<td>
+							@helper.inputText(payment("transactionId"), 
+									'placeholder -> "Transaction Id", 
+									'class -> "input-medium")
+						</td>
+					</tr>
+			</table>
+		</div>
+		<div id="depositeTable" style="display: none" >
+			<h1>Deposit(cash) Details</h1><hr>
+			<table  class="fieldstable">
+				
+				<tr>
+						<td><label class="fieldname">Receipt Nuber</label></td>
+						<td>
+							@helper.inputText(payment("receiptNumber"), 
+									'placeholder -> "Receipt Number", 
+									'class -> "input-medium")
+						</td>
+					</tr>
+			</table>
+		</div>
+		<div class="form-actions">
+			<input type="submit" class="btn btn-large btn-pink" align="right" value="Ok"/>
+		</div>
+	
+	}	
+	
+}

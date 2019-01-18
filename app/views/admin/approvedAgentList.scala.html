@@ -1,0 +1,71 @@
+@(page : com.avaje.ebean.Page[Agent],user : User)
+
+@import views.helpers.FieldValue._
+@import views.html.admin._
+@import controllers.FormStatus
+@import com.avaje.ebean.Page
+
+@adminTemplate("Proposed Society - Approved Agents",user,Seq(),Seq()){
+	<div>
+		@if(page != null && !page.getList().isEmpty()) {
+			
+			<h2>Agent's List</h2>
+			<hr/>
+			<table  class="table table-striped" >
+				<thead>
+					<tr>	
+				  		<th class="leftAlignClass">First Name</th>
+				  		<th class="leftAlignClass">Middle Name</th>
+				  		<th class="leftAlignClass">Last Name</th>
+				  		<th class="rightAlignClass">Email</th>
+				  		<th class="rightAlignClass">Satus</th>
+				  		<th class="rightAlignClass">Investigate By</th>
+					  	<th class="rightAlignClass"></th>
+					 </tr>
+				</thead>
+				<tbody>
+					@for(agentdata <- page.getList()) {
+						  	<tr>
+						  		<td class="leftAlignClass">@fieldVal(agentdata.form.fname,"NA")</td>
+								<td class="leftAlignClass">@fieldVal(agentdata.form.mname,"NA")</td>
+								<td class="leftAlignClass">@fieldVal(agentdata.form.lname,"NA")</td>
+								<td class="rightAlignClass">@fieldVal(agentdata.form.email,"NA")</td>
+								<td class="rightAlignClass">@fieldVal(agentdata.form.status,"NA")</td>
+								@if(agentdata.ib != null){
+									<td class="rightAlignClass">@fieldVal(agentdata.ib.user.name,"NA")</td>
+								}else{<td class="rightAlignClass">No buero assigned</td>}
+								<td class="rightAlignClass">
+										<a href="@routes.AdminUserController.displayAgentInfo(agentdata.id)" class="btn  btn-info " style="color:#ffffff" target="_blank">Show</a>
+								</td>
+							</tr>
+					}
+				</tbody>
+			</table>
+			@if(page.getTotalPageCount() > 1){
+				<div class="form-sections">
+				  		<ul class="pager">
+							@if(page.hasPrev()){
+								
+						  		  <li><a href="@routes.AdminUserController.displayAgentsList(page.getPageIndex() -1)">Previous</a></li>
+					 			
+							}else{
+								<li class="disabled"><a href = "#"> Previous</a></li>
+							}
+							
+							@if(page.hasNext()){
+								<li><a href="@routes.AdminUserController.displayAgentsList(page.getPageIndex() + 1)">Next</a></li>
+							}else{
+								<li class="disabled"><a href = "#"> Next</a></li>
+							}
+					</ul>
+				</div>
+			}
+		}else{
+			<div>
+				<h2>No Agent is Approved/ rejected</h2>
+				<hr/>
+					
+			</div>
+		}
+	</div>
+}

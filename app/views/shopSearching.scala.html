@@ -1,0 +1,102 @@
+@(req : Form[Requirement])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+<div id="shopRequirement">
+        <table id="shopTable" class="fieldstable">
+            <tr>
+                <td style="width:300px;"><h4>If Shop</h4></td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Carpet Area required: (sq.ft.)</label></td>
+                <td>@helper.inputText(req("carpetArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Built-up area required: (sq.ft.)</label></td>
+                <td>@helper.inputText(req("builtupArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Required Loft Area</label></td>
+                <td>@form.horizontalRadioGroup(req("loftRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Area:(sq.ft.)</label></td>
+                <td>@helper.inputText(req("loftArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Required Otla area</label></td>
+                <td>@form.horizontalRadioGroup(req("otlaRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Area:(sq.ft.)</label></td>
+                <td>@helper.inputText(req("otlaArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Required Height</label></td>
+                <td>@form.horizontalRadioGroup(req("specifyHeightRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Height:(ft.)</label></td>
+                <td>@helper.inputText(req("height"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Required Open Space</label></td>
+                <td>@form.horizontalRadioGroup(req("openSpaceRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Area:(sq.ft.)</label></td>
+                <td>@helper.inputText(req("openSpace"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Required Terrace</label></td>
+                <td>@form.horizontalRadioGroup(req("terraceRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Area:(sq.ft.)</label></td>
+                <td>@helper.inputText(req("terraceArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Toilet</label></td>
+                <td>@form.horizontalRadioGroup(req("toiletType"), options = Seq("common" -> "Common(In building area)", "attached" -> "Attached:(Private toilets in your commercial area)"))</td>
+            </tr>
+            <tr class="shop_toiletTypeClass">
+                <td style="width:300px;"><label>Required number of attached toilets</label></td>
+                <td>@helper.inputText(req("noOfAttachedToilets"), 'class -> "input-medium",'maxlength -> "3")</td>
+            </tr>
+            <tr class="shop_toiletTypeClass">
+                <td style="width:300px;"><label>Required number of attached urinals</label></td>
+                <td>@helper.inputText(req("noOfAttachedUrinals"), 'class -> "input-medium", 'maxlength -> "3")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Separate Water Connection</label></td>
+                <td>@form.horizontalRadioGroup(req("isSeparateWaterConnectionRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>How much Diameter of Water Pipe:(Inch)</label></td>
+                <td>@helper.inputText(req("waterPipeSize"), 'class -> "input-medium", 'maxlength -> "9")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Required Separate Electrical Connection</label></td>
+                <td>@form.horizontalRadioGroup(req("isSeparatePowerConnectionRequired"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Specify Phase</label></td>
+                <td>@helper.select(req("powerConnectionType"), options = helper.options("SinglePhase" -> "Single Phase",
+                    "DoublePhase" -> "Double Phase",
+                    "ThreePhase" -> "Three Phase",
+                    "Other" -> "Other"
+                    ), 'class -> "input-medium")
+                </td>
+            </tr>
+            <tr id="shop_ifConnectionTypeOtherTR">
+                <td style="width:300px;"><label>Specify Preferred Phase</label></td>
+                <td>@helper.inputText(req("ifConnectionTypeOther"), 'class -> "input-medium", 'maxlength -> "20")</td>
+            </tr>
+            <tr>
+                <td style="width:300px;"><label>Other Details:(If required)</label></td>
+                <td>@helper.inputText(req("otherDetails"), 'class -> "input-medium", 'maxlength -> "50")</td>
+            </tr>
+        </table>
+</div>

@@ -1,0 +1,583 @@
+
+<ion-view view-title="Apply">
+    <ion-nav-buttons side=" right">
+        <button style="font-size: 20px;" ng-click="reset()" class="button button-clear  ion-refresh"></button>
+    </ion-nav-buttons>
+    <ion-content class="padding back-img">
+
+        <form name="applyForm" id="applyForm" ng-submit="signupForm(applyForm)"  novalidate="novalidate">
+
+            <div class="list list-inset content-sec2 padding" >
+                <b class="cms">PERSONAL INFORMATION</b>
+                <hr>
+                <div class="item item-divider">
+                    Applicant's Name <b class="manditoryField">*</b>
+                </div>
+                <label class="item item-input  ">
+                <select ng-model="user.applicant.title" >
+                    <option value="Mr" >Mr.</option>
+                    <option value="Ms">Ms.</option>
+                    <option value="Mrs">Mrs.</option>
+                    <option value="Smt">Smt.</option>
+                </select>
+                    </label>
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.fname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.fname.$valid  && applyForm.$submitted}">
+                    <input type="text" name="fname" ng-model="user.applicant.fname" placeholder="First Name"  required ng-class="{ 'has-errors' : applyForm.fname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.fname.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.mname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.mname.$valid  && applyForm.$submitted}">
+                    <input type="text" name="mname" ng-model="user.applicant.mname" placeholder="Middle Name" required ng-class="{ 'has-errors' : applyForm.fname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.fname.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.lname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.lname.$valid  && applyForm.$submitted}">
+                    <input type="text" name="lname" ng-model="user.applicant.lname" placeholder="Last Name" required ng-class="{ 'has-errors' : applyForm.lname.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.lname.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.dob.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.dob.$valid  && applyForm.$submitted}">
+                    <span class="input-label">Date of Birth <b class="manditoryField">*</b></span>
+                    <input placeholder="Select Date" name="dob" ng-model="user.applicant.dob"  type="text" onfocus="(this.type='date')"  id="dob" required ng-class="{ 'has-errors' : applyForm.dob.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.dob.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.email.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.email.$valid  && applyForm.$submitted}">
+                    <input type="email" name="email" ng-model="user.applicant.email" placeholder="Email" required ng-class="{ 'has-errors' : applyForm.email.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.email.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+                <label class="item item-input" ng-if="applyForm.email.$dirty && applyForm.email.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.email.$dirty && applyForm.email.$invalid">
+                <span ng-show="applyForm.email.$error.required">Email is required.</span>
+                <span ng-show="applyForm.email.$error.email">Invalid email address.</span>
+                 </span>
+                </label>
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.number.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.number.$valid  && applyForm.$submitted}">
+                    <input type="number" name="number" ng-model="user.applicant.phone1" placeholder="Phone Number" minlength="10" maxlength="10" required ng-class="{ 'has-errors' : applyForm.number.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.number.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.number.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.number.$valid  && applyForm.$submitted}">
+                    <input type="number" name="number" ng-model="user.applicant.phone2" placeholder="Landline Number" minlength="10" maxlength="10" required ng-class="{ 'has-errors' : applyForm.number.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.number.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-if="applyForm.number.$dirty && applyForm.number.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.number.$dirty && applyForm.number.$invalid">
+                <span class="help-block" ng-show="applyForm.number.$error.required || applyForm.number.$error.number">Valid phone number is required</span>
+                <span class="help-block" ng-show="((applyForm.number.$error.minlength || applyForm.number.$error.maxlength) && applyForm.number.$dirty) ">number number should be 10 digits</span>
+                </span>
+                </label>
+                <div class="item item-divider">
+                    Applicant Income <b class="manditoryField">*</b>
+                </div>
+                <label class="item " >
+                    Monthly : <input type="radio" name="groupIncome" value="monthly" ng-model="user.shortFormApplicantIncomePer" checked="checked">
+
+                </label>
+
+                <label class="item  ">
+                    Yearly :  <input type="radio" name="groupIncome" value='yearly' ng-model="user.shortFormApplicantIncomePer">
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.income.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.income.$valid  && applyForm.$submitted}">
+                    <input type="number" name="income" ng-model="user.applicantIncomeShortForm" placeholder="Income(₹)" required ng-class="{ 'has-errors' : applyForm.income.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.income.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+                <label class="item item-input" ng-if="applyForm.income.$dirty && applyForm.income.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.income.$dirty && applyForm.income.$invalid">
+                <span class="help-block" ng-show="applyForm.income.$error.required || applyForm.income.$error.number">Please Enter Your Income in Numeric</span>
+                </span>
+                </label>
+
+                <div class="item item-divider">
+                    Co-Applicant's Income <b class="manditoryField">*</b>
+                </div>
+                <label class="item  ">
+                    Monthly : <input type="radio" name="groupCoIncome" value="monthly" ng-model="user.shortFormCoApplicantIncomePer" checked="checked">
+
+                </label>
+
+                <label class="item  ">
+                    Yearly :  <input type="radio" name="groupCoIncome" value='yearly' ng-model="user.shortFormCoApplicantIncomePer">
+
+                </label>
+
+                <label class="item item-input">
+                    <input type="number" name="coIncome" ng-model="user.coApplicantIncomeShortForm" placeholder="Income(₹)">
+                </label>
+                <label class="item item-input" ng-if="applyForm.coIncome.$dirty && applyForm.coIncome.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.coIncome.$dirty && applyForm.coIncome.$invalid">
+                <span class="help-block" ng-show="applyForm.coIncome.$error.required || applyForm.coIncome.$error.number">Please Enter Income in Numeric</span>
+                </span>
+                </label>
+
+                <div class="item item-divider">
+                    Required Loan Amount <b class="manditoryField">*</b>
+                </div>
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.loanAmount.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.loanAmount.$valid  && applyForm.$submitted}">
+                    <input type="number" name="loanAmount" ng-model="user.requiredLoan" placeholder="Loan Amount(₹)" required ng-class="{ 'has-errors' : applyForm.loanAmount.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.loanAmount.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+                <label class="item item-input" ng-if="applyForm.loanAmount.$dirty && applyForm.loanAmount.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.loanAmount.$dirty && applyForm.loanAmount.$invalid">
+                <span class="help-block" ng-show="applyForm.loanAmount.$error.required || applyForm.loanAmount.$error.number">Please Enter Valid Amount!</span>
+                </span>
+                </label>
+
+                <label class="item item-input item-select" ng-class="{ 'has-errors' : applyForm.totalBudget.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.totalBudget.$valid  && applyForm.$submitted}">
+                    <div class="input-label">
+                        Total Budget <b class="manditoryField">*</b>
+                    </div>
+
+                    <select id="totalBudget" ng-model="user.totalBudget" name="totalBudget"  required ng-class="{ 'has-errors' : applyForm.totalBudget.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.totalBudget.$valid  && applyForm.$submitted}">
+
+
+                        <option value="" selected="selected">Select Budget</option>
+
+                        <option value="1000000">5-10 Lacs</option>
+
+                        <option value="1500000">10-15 Lacs</option>
+
+                        <option value="2000000">15-20 Lacs</option>
+
+                        <option value="2500000">20-25 Lacs</option>
+
+                        <option value="3000000">25-30 Lacs</option>
+
+                        <option value="3500000">30-35 Lacs</option>
+
+                        <option value="4000000">35-40 Lacs</option>
+
+                        <option value="4500000">40-45 Lacs</option>
+
+                        <option value="5000000">45-50 Lacs</option>
+
+                        <option value="5500000">50-55 Lacs</option>
+
+                        <option value="6000000">55-60 Lacs</option>
+
+                        <option value="6500000">60-65 Lacs</option>
+
+                        <option value="7000000">65-70 Lacs</option>
+
+                        <option value="7500000">70-75 Lacs</option>
+
+                        <option value="8000000">75-80 Lacs</option>
+
+                        <option value="8500000">80-85 Lacs</option>
+
+                        <option value="9000000">85-90 Lacs</option>
+
+                        <option value="9500000">90-95 Lacs</option>
+
+                        <option value="10000000">.95-1.00 Cores</option>
+
+                        <option value="11000000">1.00-1.10 Cores</option>
+
+                        <option value="12000000">1.10-1.20 Cores</option>
+
+                        <option value="13000000">1.20-1.30 Cores</option>
+
+                        <option value="14000000">1.30-1.40 Cores</option>
+
+                        <option value="15000000">1.40-1.50 Cores</option>
+
+                        <option value="16000000">1.50-1.60 Cores</option>
+
+                        <option value="17000000">1.60-1.70 Cores</option>
+
+                        <option value="18000000">1.70-1.80 Cores</option>
+
+                        <option value="19000000">1.80-1.90 Cores</option>
+
+                        <option value="20000000 ">1.90-2.00 Cores</option>
+
+                        <option value="22500000">2.00-2.25 Cores </option>
+
+                        <option value="25000000">2.25-2.50 Cores </option>
+
+                        <option value="27500000">2.50-2.75 Cores</option>
+
+                        <option value="30000000">2.75-3.00 Cores</option>
+
+                        <option value="32500000">3.00-3.25 Cores </option>
+
+                        <option value="35000000">3.25-3.50 Cores</option>
+
+                        <option value="37500000">3.50-3.75 Cores</option>
+
+                        <option value="40000000">3.75-4.00 Cores</option>
+
+                        <option value="42500000">4.00-4.25 Cores</option>
+
+                        <option value="45000000">4.25-4.50 Cores</option>
+
+                        <option value="47500000">4.50-4.75 Cores</option>
+
+                        <option value="50000000">4.75-5.00 Cores</option>
+
+                        <option value="52500000">Above 5 Cores</option>
+
+                        <option value="0">Other</option>
+
+                    </select>
+
+                </label>
+
+                <div class="item item-divider">
+                    Registration by <b class="manditoryField">*</b>
+                </div>
+                <label class="item  ">
+                    Self : <input type="radio" name="groupReg" value="self" ng-model="user.registrationBy" checked="checked">
+
+                </label>
+
+                <label class="item  ">
+                    Agent : <input type="radio" name="groupReg" value='agent' ng-model="user.registrationBy">
+
+                </label>
+                <label class="item  ">
+                    Officer : <input type="radio" name="groupReg" value='officer' ng-model="user.registrationBy">
+
+                </label>
+
+                <label class="item item-input" ng-show="user.registrationBy == 'agent'" ng-if="user.registrationBy == 'agent'" ng-class="{ 'has-errors' : applyForm.agentCode.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.agentCode.$valid  && applyForm.$submitted}">
+                    <span class="input-label">Agent ID <b class="manditoryField">*</b></span>
+                    <input type="text" name="agentCode" ng-model="user.agentCode" placeholder="Agent Id" required />
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <br>
+                <b class="cms">SEARCHING PROPERTY DETAILS</b>
+                <hr>
+
+                <div class="item item-divider">
+                    Select Requirement
+                </div>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        &nbsp;
+                    </div>
+
+                    <select id="dummyRequirementSubType" ng-model="user.requirement.requirementSubType">
+                        <optgroup label="Residential" id="residentialTypeDetail">
+
+                            <option value="FlatOrTerraceFlat" selected="selected">
+                                Flat/ Terrace Flat
+                            </option>
+
+
+                            <option value="ChawlRoom">
+                                Chawl Room
+                            </option>
+
+
+                            <option value="DuplexFlat">
+                                Duplex Flat
+                            </option>
+
+
+                            <option value="PentHouse">
+                                Pent House
+                            </option>
+
+
+                            <option value="StudioApartment">
+                                Studio Apartment
+                            </option>
+
+
+                            <option value="HighriseApartment">
+                                Highrise Apartment
+                            </option>
+
+
+                            <option value="IndependentBungalow">
+                                Independent Bungalow
+                            </option>
+
+
+                            <option value="JointBanglowOrTwinBungalow">
+                                Joint Banglow/ Twin Bungalow
+                            </option>
+
+
+                            <option value="RowHouse">
+                                Row House
+                            </option>
+
+
+                            <option value="RowHousePlot">
+                                Row House Plot
+                            </option>
+
+
+                            <option value="IndependentBungalowPlot">
+                                Independent Bungalow Plot
+                            </option>
+
+
+                            <option value="JointBungalowPlot">
+                                Joint Bungalow Plot
+                            </option>
+
+
+                            <option value="FarmHouse">
+                                Farm House
+                            </option>
+
+
+                            <option value="FarmHousePlot">
+                                Farm House Plot
+                            </option>
+
+
+                            <option value="HolidayHome">
+                                Holiday Home
+                            </option>
+
+
+                            <option value="ServiceApartment">
+                                Service Apartment
+                            </option>
+
+
+                            <option value="Villa">
+                                Villa
+                            </option>
+
+
+                            <option value="SecondHome">
+                                Second Home
+                            </option>
+
+
+                            <option value="Other1">
+                                Other
+                            </option>
+
+                        </optgroup>
+                        <optgroup label="Commercial" id="commercialTypeDetail">
+
+                            <option value="Shop">
+                                Shop
+                            </option>
+
+
+                            <option value="OfficeInITParkOrSez">
+                                Office In IT Park/ Sez
+                            </option>
+
+
+                            <option value="CommercialLand">
+                                Commercial Land
+                            </option>
+
+
+                            <option value="CommercialOfficeOrSpace">
+                                Commercial Office/ Space
+                            </option>
+
+
+                            <option value="CommercialShowroom">
+                                Commercial Showroom
+                            </option>
+
+
+                            <option value="Kiosk">
+                                Kiosk
+                            </option>
+
+
+                            <option value="ConstructedHotelSpace">
+                                Constructed Hotel Space
+                            </option>
+
+
+                            <option value="HotelPlot">
+                                Hotel Plot
+                            </option>
+
+
+                            <option value="GuestHouse">
+                                Guest House
+                            </option>
+
+
+                            <option value="BusinessCenterOrBusinessPark">
+                                Business Center/ Business Park
+                            </option>
+
+
+                            <option value="Warehouse">
+                                Warehouse
+                            </option>
+
+
+                            <option value="IndustrialLand">
+                                Industrial Land
+                            </option>
+
+
+                            <option value="IndustrialBuilding">
+                                Industrial Building
+                            </option>
+
+
+                            <option value="IndustrialShed">
+                                Industrial Shed
+                            </option>
+
+
+                            <option value="BenquetHall">
+                                Benquet Hall
+                            </option>
+
+
+                            <option value="SpaceInRetailMall">
+                                Space In Retail Mall
+                            </option>
+
+
+                            <option value="Godown">
+                                Godown
+                            </option>
+
+
+                            <option value="ColdStorage">
+                                Cold Storage
+                            </option>
+
+
+                            <option value="Factory">
+                                Factory
+                            </option>
+
+
+                            <option value="ManufacturingUnit">
+                                Manufacturing Unit
+                            </option>
+
+
+                            <option value="HotelSpace">
+                                Hotel Space
+                            </option>
+
+
+                            <option value="HospitalSpace">
+                                Hospital Space
+                            </option>
+
+
+                            <option value="SchoolSpace">
+                                School Space
+                            </option>
+
+
+                            <option value="BankSpace">
+                                Bank Space
+                            </option>
+
+
+                            <option value="Other2">
+                                Other
+                            </option>
+
+                        </optgroup>
+                        <optgroup label="Agricultural" id="agriculturalTypeDetail">
+
+                            <option value="AgriculturalLand">
+                                Agricultural Land
+                            </option>
+
+
+                            <option value="FarmLand">
+                                Farm Land
+                            </option>
+
+
+                            <option value="Other3">
+                                Other
+                            </option>
+
+                        </optgroup>
+                    </select>
+                </label>
+
+                <br>
+                <div id="templateDiv">
+                    <section data-ng-include="templatePath"></section>
+                </div>
+
+                <br>
+                <b class="cms">DESIRED LOCATION OF PROPERTY </b><b class="manditoryField">*</b>
+                <hr>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.state.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.state.$valid  && applyForm.$submitted}">
+                    <input type="text" name="state" ng-model="user.locationsHiddenField[0].state" placeholder="State"  required ng-class="{ 'has-errors' : applyForm.state.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.state.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.district.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.district.$valid  && applyForm.$submitted}">
+                    <input type="text" name="district" ng-model="user.locationsHiddenField[0].district" placeholder="District"  required ng-class="{ 'has-errors' : applyForm.district.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.district.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.taluka.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.taluka.$valid  && applyForm.$submitted}">
+                    <input type="text" name="taluka" ng-model="user.locationsHiddenField[0].taluka" placeholder="Taluka"  required ng-class="{ 'has-errors' : applyForm.taluka.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.taluka.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+                <label class="item item-input" ng-class="{ 'has-errors' : applyForm.pincode.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.pincode.$valid  && applyForm.$submitted}">
+                    <input type="number" name="pincode" ng-model="user.locationsHiddenField[0].pincode" placeholder="Pincode"  required  ng-class="{ 'has-errors' : applyForm.pincode.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.pincode.$valid  && applyForm.$submitted}">
+                    <i class="icon ion-alert-circled error"> Required</i>
+                </label>
+
+
+                <!--<label class="item item-input item-select padding" ng-class="{ 'has-errors' : applyForm.state.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.state.$valid  && applyForm.$submitted}">-->
+                    <!--<div class="input-label">-->
+                    <!--</div>-->
+                    <!--<select ng-model="user.locationsHiddenField[0].state" name="state" ng-options="states as states for states in states" ng-change="changeState()" required >-->
+                        <!--<option value="" selected="selected">Select State</option>-->
+                    <!--</select>-->
+                <!--</label>-->
+
+                <!--<label class="item item-input item-select padding " ng-class="{ 'has-errors' : applyForm.district.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.district.$valid  && applyForm.$submitted}">-->
+                    <!--<div class="input-label">-->
+                    <!--</div>-->
+                    <!--<select ng-model="user.locationsHiddenField[0].district" name="district" ng-options="distict as distict for distict in Districts" ng-change="changeDistrict()" required  >-->
+                        <!--<option value="" selected="selected">Select District</option>-->
+                    <!--</select>-->
+                <!--</label>-->
+
+                <!--<label class="item item-input item-select padding" ng-class="{ 'has-errors' : applyForm.taluka.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.taluka.$valid  && applyForm.$submitted}">-->
+                    <!--<div class="input-label">-->
+                    <!--</div>-->
+                    <!--<select ng-model="user.locationsHiddenField[0].taluka" name="taluka" ng-options="taluka as taluka for taluka in Talukas" ng-change="changeTaluka()" required  >-->
+                        <!--<option value="" selected="selected">Select Taluka</option>-->
+                    <!--</select>-->
+                <!--</label>-->
+
+                <!--<label class="item item-input item-select padding" ng-class="{ 'has-errors' : applyForm.pincode.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.pincode.$valid  && applyForm.$submitted}">-->
+                    <!--<div class="input-label">-->
+                    <!--</div>-->
+                    <!--<select ng-model="user.locationsHiddenField[0].pincode" name="pincode" ng-options="pincode as pincode for pincode in Pincodes" ng-change="changePincode()" required  >-->
+                        <!--<option value="" selected="selected">Select Pincode</option>-->
+                    <!--</select>-->
+                <!--</label>-->
+
+                <label class="item item-input">
+                    <input type="text" ng-model="user.locationsHiddenField[0].locality" placeholder="Enter Sub Locality" >
+                </label>
+                <br>
+                <center>
+                <button type="submit" class=" btn-large btn-pink" >
+                    Submit
+                </button>
+                </center>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

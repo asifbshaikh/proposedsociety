@@ -1,0 +1,98 @@
+@(insD: Form[OwnContributionController.InsuranceDetails],
+insAU: Form[OwnContributionController.InsuranceDetailsAmountUsage])
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant - Insurance Details", 6) {
+		@helper.form(action = routes.OwnContributionController.insuranceDetailsSubmit, 'class -> "form-horizontal") {
+		<h1>Insurance Details</h1>
+		<hr/>	
+		<table id="insuranceDetails" class="fieldstable">
+			<!--
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Insurance?</label></td>
+					<td>@form.horizontalRadioGroup(insD("haveInsurance"), options = Seq("Y" -> "YES", "N" -> "NO"))</td>
+				</tr>
+			-->
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Name of Insurance Holder</label></td>
+				<td>@helper.inputText(insD("nameOfHolder"), 'class -> "input-large")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Name of the Insurance Company</label></td>
+				<td>@helper.inputText(insD("insurerName"), 'class -> "input-large")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Insurance Opening Date</label></td>
+				<td>@helper.inputText(insD("insuStartDate"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Date of Maturity</label></td>
+				<td>@helper.inputText(insD("insuMaturityDate"), 'class -> "input-medium datepicker")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Sum Assured Amount</label></td>
+				<td>@helper.inputText(insD("sumAssured"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Dates when premium payable</label></td>
+				<td>@helper.select(insD("premiumFreqency"), options = helper.options("Monthly" -> "Monthly", "Quarterly" -> "Quarterly", "Halfyearly" -> "Half Yearly", "Yearly" -> "Yearly"), 'class -> "input-small")
+				</td>
+			</tr >
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Insurance Premium Amount</label></td>
+				<td>@helper.inputText(insD("premium"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Number of premiums paid</label></td>
+				<td>@helper.inputText(insD("premiumsPaid"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Premium Balance</label></td>
+				<td>@helper.inputText(insD("premiumsBalance"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Date of Last Payment</label></td>
+				<td>@helper.inputText(insD("insuLastPaymentDate"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Amount Receivable on Maturity Date</label></td>
+				<td>@helper.inputText(insD("maturityAmount"), 'class -> "input-medium")</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Total monthly installment amount deducted from your salary</label></td>
+				<td>@form.horizontalRadioGroup(insD("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+			</tr>
+			<tr class="insurDetails">
+				<td style="width:250px;"><label class="fieldname">Will you be receiving any matured insurance amount in next two months from any insurance company</label></td>
+				<td>@form.horizontalRadioGroup(insD("receivingAnyMaturedAmount"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+			</tr>
+		</table>
+		<div id="insuAmountUsageDiv">
+			<h2>Insurance Amount Allocation For Property</h2>
+			<hr/>
+			<table id="insuAmountUsage">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">How much amount would you like to use for property</label></td>
+					<td>@helper.inputText(insAU("allocation"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+		<!--
+				<input type="button" id ="buttonAddInsurance" value="Add More" onclick="addInsuDetailsToList();">
+		-->
+		
+		<div id="viewInsuranceDetailsTable">
+				
+		</div>
+		<div class="form-actions">
+				<a href="@routes.OwnContributionController.amountFromFriends" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		<!--<div class="form-actions">
+			<button type="submit" class="btn btn-large btn-pink">Next</button>
+		</div>-->
+		}
+}

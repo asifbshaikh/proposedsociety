@@ -1,0 +1,199 @@
+@(sEP: Form[OwnContributionController.PropertyDetails],
+ptd: Form[OwnContributionController.PropertyTypeDetails],
+hifp: Form[OwnContributionController.HaveIncomeFromeProperty],
+propDedctn: Form[OwnContributionController.PropertyLoanMnthlyDedFrmSal],
+pstba: Form[OwnContributionController.PropertySellToBuyAnother],
+propAdd : Form[OwnContributionController.PropertyAddresses],
+lnDtls: Form[OwnContributionController.GenLoanDetails])
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Income from sale of existing property", 8) {
+		@helper.form(action = routes.OwnContributionController.propertyDetailsSubmit, 'class -> "form-horizontal") {
+		<div class="IncomeFromPropertyDiv">
+			<h1>Income From Sale Of Existing Property</h1>
+			<hr/>
+			<label class="propertyLable" for="IncomeFrmExistingProperty">Have Income From Existing Property?</label>
+			@form.horizontalRadioGroup(hifp("IncomeFrmExistingProperty"), options = Seq("true" -> "YES", "false" -> "NO"))
+			<div class="propertyDetailsDiv">
+				<h2>Property Details</h2>
+				<hr/>
+				<table id="propertyDetails" class="fieldstable">
+					<tr>
+						<td><label class="propertyLable">Property Types</label></td>
+						<td><div id="propertyTypeDiv">@form.modifiableRadioGroup(ptd("type"), options = Seq("AllResidential" -> "Residential", "AllCommercial" -> "Commercial", "AllAgricultural" -> "Agricultural"))</div></td>
+					</tr>
+					<tr></tr>
+					<tr id="resTR">
+						<td><label class="propertyLable">Residential</label></td>
+						<td>@helper.select(sEP("typeDetail"), options = helper.options("ChawlRoom" -> "Chawl Room",
+							"FlatOrTerraceFlat" -> "Flat/Terrace Flat",
+							"DuplexFlat" -> "Duplex Flat",
+							"PentHouse" -> "Pent House",
+							"StudioApartment" -> "Studio Apartment",
+							"HighriseApartment" -> "Highrise Apartment",
+							"IndependentBungalow" -> "Independent Bungalow",
+							"JointBanglowOrTwinBungalow" -> "Joint Banglow/Twin Bungalow",
+							"RowHouse" -> "Row House",
+							"RowHousePlot" -> "Row House Plot",
+							"IndependentBungalowPlot" -> "Independent Bungalow Plot",
+							"JointBungalowPlot" -> "Joint Bungalow Plot",
+							"FarmHouse" -> "Farm House",
+							"FarmHousePlot" -> "Farm House Plot",
+							"HolidayHome" -> "Holiday Home",
+							"ServiceApartment" -> "Service Apartment",
+							"Villa" -> "Villa",
+							"SecondHome" -> "Second Home",
+							"Other" -> "Other"
+							))
+						</td>
+					</tr>
+					<tr id="commTR">
+						<td><label class="propertyLable">Commercial</label></td>
+						<td>@helper.select(sEP("typeDetail"), options = helper.options("Shop" -> "Shop",
+							"OfficeInITParkOrSez" -> "Office in IT park/Sez",
+							"CommercialLand" -> "Commercial Land",
+							"CommercialOfficeOrSpace" -> "Commercial Office/Space",
+							"CommercialShowroom" -> "Commercial Showroom",
+							"Kiosk" -> "Kiosk",
+							"ConstructedHotelSpace" -> "Constructed Hotel Space",
+							"HotelPlot" -> "Hotel Plot",
+							"GuestHouse" -> "Guest House",
+							"BusinessCenterOrBusinessPark" -> "Business Center/Business Park",
+							"Warehouse" -> "Warehouse",
+							"IndustrialLand" -> "Industrial Land",
+							"IndustrialBuilding" -> "Industrial Building",
+							"IndustrialShed" -> "Industrial Shed",
+							"BenquetHall" -> "Benquet Hall",
+							"SpaceInRetailMall" -> "Space in Retail Mall",
+							"Godown" -> "Godown",
+							"ColdStorage" -> "Cold Storage",
+							"Factory" -> "Factory",
+							"ManufacturingUnit" -> "Manufacturing Unit"
+							))
+						</td>
+					</tr>
+					<tr id="agriTR">
+						<td><label class="propertyLable">Agricultural</label></td>
+						<td>@helper.select(sEP("typeDetail"), options = helper.options("AgriculturalLand" -> "Agricultural Land",
+							"FarmLand" -> "Farm Land",
+							"ReadyFarmHouse" -> "Ready Farm House",
+							"Other" -> "Other"
+							))
+						</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">Property Area</label></td>
+						<td>@helper.inputText(sEP("area"),'class -> "input-medium")@helper.select(sEP("typeDetail"), options = helper.options("SqFt" -> "sq.ft.", "Acres" -> "Acres", "Guntha" -> "Guntha"),'class -> "input-small")</td>
+					</tr>
+					<tr>
+						<td><h4><label>Property Location</label><h4></td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">City</label></td>
+						<td>@helper.inputText(propAdd("city"),'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">Taluka</label></td>
+						<td>@helper.inputText(propAdd("taluka"),'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">District</label></td>
+						<td>@helper.inputText(propAdd("district"),'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">State</label></td>
+						<td>@helper.inputText(propAdd("state"),'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">Country</label></td>
+						<td>@helper.inputText(propAdd("country"),'class -> "input-medium")</td>
+					</tr>
+					<tr>
+						<td><label class="propertyLable">PIN</label></td>
+						<td>@helper.inputText(propAdd("pin"),'class -> "input-medium")</td>
+					</tr>
+				</table>
+				<h2>Loan Against Property</h2>
+				<hr/>
+				<table>	
+					<tr></tr>
+					<tr>
+						<td style="width:250px;"><label class="propertyLable" for="loan">Have you taken any Loan on your existing property?</label></td>
+						<td>@form.horizontalRadioGroup(sEP("loan"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+					<tr></tr>
+					<tr category = "loanTaken">
+						<td style="width:250px;"><label class="propertyLable" for="monthlyAmntDedctedFrmSal">Your monthly installment amount deducted from your salary/Total Amount?</label></td>
+						<td>@form.horizontalRadioGroup(propDedctn("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))
+						</td>
+					</tr>
+					<tr></tr>
+				</table>
+				<div category = "amountNotCuttingFromSal">
+						<h5>Please fill details for loan against property</h5>
+				</div>
+				<table>
+					<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Name of the Financer</label></td>
+						<td>@helper.inputText(lnDtls("financer"),'class -> "input-medium")</td>
+					</tr>
+					<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Loan Amount</label></td>
+						<td>@helper.inputText(lnDtls("loanAmount"),'class -> "input-medium")</td>
+					</tr>
+		        	<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Monthly EMI Amount</label></td>
+						<td>@helper.inputText(lnDtls("montlyEmi"),'class -> "input-medium")</td>
+					</tr>
+					<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Number of Paid Installments</label></td>
+						<td>@helper.inputText(lnDtls("installmentsPaid"),'class -> "input-medium")</td>
+					</tr>
+					<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Number of Balance Installment</label></td>
+						<td>@helper.inputText(lnDtls("balanceInstallments"),'class -> "input-medium")</td>
+					</tr>
+					<tr category = "amountNotCuttingFromSal">
+						<td style="width:250px;"><label class="propertyLable">Total Balance Loan Amount</label></td>
+						<td>@helper.inputText(lnDtls("balanceLoanAmount"),'class -> "input-medium")</td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td style="width:250px;"><label class="propertyLable" for="willingToSell">Are you ready to sell your existing property for investing in another property?</label></td>
+						<td>@form.horizontalRadioGroup(sEP("willingToSell"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td style="width:250px;"><label class="propertyLable">Total amount expected from existing property</label></td>
+						<td>@helper.inputText(pstba("expectedPrice"),'class -> "input-medium")</td>
+					</tr>
+					<tr></tr>
+					<tr>	
+						<td style="width:250px;"><label class="propertyLable">Total amount you would like to use for a property?</label></td>
+						<td>@helper.inputText(pstba("allocation"),'class -> "input-medium")</td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td style="width:250px;"><label class="propertyLable">Total Existing Property Summary Amount:</label></td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td style="width:250px;"><label class="propertyLable">Total Existing Property Loan Deduction Balance Summary Amount: </label></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="form-actions">
+				<a href="@routes.ApplicationFormController.closingFinishDetails()" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		
+		<!--<div class="form-actions">
+			<button type="submit" class="btn btn-large btn-pink">Next</button>
+		</div>-->
+		}
+}

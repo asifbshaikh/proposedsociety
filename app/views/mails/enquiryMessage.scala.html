@@ -1,0 +1,23 @@
+@(user: User,message:String)
+<div style=" border: 3px; border-color: black;">
+	<table style="border-collapse:collapse;">
+		<tr>
+			<td> Name&nbsp; &nbsp; &nbsp; -&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;@user.name</td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<td> Email_Id &nbsp;&nbsp;- &nbsp; &nbsp; &nbsp; &nbsp; @user.email</td>
+		</tr>
+		<tr>
+			<td> Mobile No -&nbsp; &nbsp; &nbsp; &nbsp;@user.mobile</td><td></td><td></td>		
+		</tr>
+		<tr> <hr/> </tr>
+		<tr>
+			<td>	
+					<pre style="margin-left: 0px;margin-top: 0px;margin-bottom: 0px;width: 100px;height: 50px; font-family: arial, sans-serif;font-size: 13px;font-style: normal;font-variant: normal;font-weight: normal;">
+							@message
+					</pre>
+			</td>
+		</tr>
+	</table>
+	
+</div>

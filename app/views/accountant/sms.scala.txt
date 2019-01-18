@@ -1,0 +1,2 @@
+@(code: PaymentCode)
+Thanks for making the payment of Rs. @code.amount to ProposedSociety. Your code is @code.code. You can use this code as an alternative to payment while filling application on the site.

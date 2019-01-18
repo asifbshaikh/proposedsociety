@@ -1,0 +1,282 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET    /                                                      @controllers.Application.index
+#GET    /benefits                                              @controllers.Application.benefits
+GET    /apply                                                 @controllers.Application.apply
+#GET    /concept                                               @controllers.Application.concept
+#GET    /rules                                                 @controllers.Application.rules
+GET    /videos                                                @controllers.Application.videos
+GET    /awards                                                @controllers.Application.awards
+GET    /faq                                                   @controllers.Application.faq
+#GET    /success-stories                                       @controllers.Application.successStories
+GET    /news-and-press                                        @controllers.Application.newsAndPress
+GET    /inauguration                                          @controllers.Application.inauguration
+#GET    /history                                               @controllers.Application.history
+GET    /draw                                                  @controllers.Application.draw
+#GET    /termsCondition                                        @controllers.Application.applicantsTerms
+GET    /contact                                               @controllers.Application.contact
+POST   /send/enquiry                                          @controllers.ApplicationFormController.enquiryMessage
+#Get   /success                             @controllers.ApplicationFormController.successMessage
+GET    /become-an-agent                                       @controllers.Application.becomeAnAgent
+
+GET    /logout                                                @controllers.Application.logout
+POST   /agent/login                                           @controllers.Application.agentLogin
+GET    /agentLocator                                          @controllers.Application.locateAgent
+POST   /agentLocator                                          @controllers.Application.locateAgentSubmit
+# New Pages by Bhanu
+GET    /applicant/dashboard                                   @controllers.ApplicantController.dashboard
+POST   /applicant/dashboard/referAFriend                      @controllers.ApplicantController.referFriend
+POST   /applicant/dashboard/sendQuery                         @controllers.ApplicantController.sendQuery
+GET    /applicant/payment-receipt/download                    @controllers.ApplicantController.downloadPaymentReceipt
+
+GET    /member/changePassword/:accessRole                     @controllers.ApplicantController.changePassword(accessRole)
+POST   /member/changePassword/changePassword                  @controllers.ApplicantController.changePwd
+GET    /member/changeApplicantPassword/:accessRole            @controllers.ApplicantController.changeApplicantPassword(accessRole)
+POST   /member/changeApplicantPassword/changePassword         @controllers.ApplicantController.changeApplicantPasswordSubmit
+
+GET    /agent/dashboard                                       @controllers.AgentDashboardController.agentDashboard
+GET    /investigationBuero/agentList/:page                    @controllers.BueroController.searchIbsAgent(page: Int)
+GET    /agent_dashboard/incompleteApplicantform/:pageNumber   @controllers.AgentFormController.incompleteApplicantForms(pageNumber : Int)
+
+# Payments related routes
+POST   /payments/confirm/                                     @controllers.PaymentController.processPayment
+POST   /payments/redirect                                     @controllers.PaymentController.redirectToBank
+# GET  /payment/:id                           		@controllers.ApplicationFormController.showPayment(id: Long)
+POST   /payment/authentication                                @controllers.ApplicationFormController.intermediate
+GET    /payment/payment_mode                                  @controllers.ApplicationFormController.getPaymentMode
+POST   /paymnent/avc_credit                                   @controllers.ApplicationFormController.paymentThroughAVCcredit
+
+# Application Form related
+GET    /application/form                                      @controllers.Application.membershipForm
+
+GET    /application/fill/short_personal_info                  @controllers.ApplicationFormController.shortForm
+POST   /application/fill/short_personal_info/submit           @controllers.ApplicationFormController.shortFormSubmit
+
+GET    /application/fill/wholePersonalInfo                    @controllers.ApplicationFormController.wholePersonalInfo
+POST   /application/fill/wholePersonalInfo                    @controllers.ApplicationFormController.wholePersonalInfoSubmit
+
+GET    /application/fill/wantToAddCoApplicant                 @controllers.ApplicationFormController.wantToAddCoApplicant
+POST   /application/fill/wantToAddCoApplicant                 @controllers.ApplicationFormController.wantToAddCoApplicantSubmit
+
+
+#GET		/application/fill/addressInfo		        controllers.ApplicationFormController.applicantsAddresses
+#POST	/application/fill/addressInfo		            controllers.ApplicationFormController.applicantsAddressesSubmit
+POST   /application/fill/dependent                            @controllers.ApplicationFormController.addDep
+GET    /application/fill/dependent                            @controllers.ApplicationFormController.dependents
+POST   /application/fill/CoApplicantsDep                      @controllers.ApplicationFormController.addCoApplicantsDep
+GET    /application/fill/CoApplicantsDep                      @controllers.ApplicationFormController.getCoApplicantsDep
+
+
+POST   /application/fill/loan                                 @controllers.ApplicationFormController.addLoan
+GET    /application/fill/loan                                 @controllers.ApplicationFormController.getLoan
+
+POST   /application/fill/CoApplicantsLoan                     @controllers.ApplicationFormController.addCoApplicantsLoan
+GET    /application/fill/CoApplicantsLoan                     @controllers.ApplicationFormController.getCoApplicantsLoan
+
+#GET		/application/fill/incomeDetails		    controllers.ApplicationFormController.incomeDetails
+#POST	/application/fill/incomeDetails		        controllers.ApplicationFormController.incomeDetailsSubmit
+GET    /application/fill/propertyDetails                      @controllers.OwnContributionController.propertyDetails
+POST   /application/fill/propertyDetails                      @controllers.OwnContributionController.propertyDetailsSubmit
+GET    /application/fill/amountFromFriends                    @controllers.OwnContributionController.amountFromFriends
+POST   /application/fill/amountFromFriends                    @controllers.OwnContributionController.amountFromFriendsSubmit
+
+POST   /application/fill/personalContribution                 @controllers.OwnContributionController.personalContribution
+
+
+GET    /api/applicant/form/requirement/:requirementSubType    @controllers.ApplicationFormController.renderSubReq(requirementSubType)
+
+
+GET    /application/fill/savedProperly                        @controllers.ApplicationFormController.savedProperly
+GET    /application/fill/summaryPage                          @controllers.ApplicationFormController.summaryPage
+POST   /application/fill/summaryPage                          @controllers.ApplicationFormController.summaryPageSubmit
+GET    /application/fill/closingFinish                        @controllers.ApplicationFormController.closingFinish
+GET    /application/fill/closingFinishDetails                 @controllers.ApplicationFormController.closingFinishDetails
+GET    /application/fill/payment                              @controllers.ApplicationFormController.payment
+GET    /application/fill/payment/submit                       @controllers.ApplicationFormController.paymentSubmit
+GET    /application/fill/paymentInfo                          @controllers.ApplicationFormController.paymentInfo
+POST   /application/fill/payment/complete                     @controllers.ApplicationFormController.paymentComplete
+
+GET    /application/fill/entireOwnContribution                @controllers.OwnContributionController.entireOwnContribution
+#GET		/application/fill/entireOwnContributionWithoutCoApplicant		@controllers.OwnContributionController.entireOwnContributionWithoutCoApplicant
+	
+
+POST   /application/fill/fd                                   @controllers.OwnContributionController.addFDDetails
+GET    /application/fill/fd                                   @controllers.OwnContributionController.getFDDetails
+POST   /application/fill/bankaccount                          @controllers.OwnContributionController.addSavingAccount
+GET    /application/fill/bankaccount                          @controllers.OwnContributionController.getBankAccountDetails
+POST   /application/fill/rd_details                           @controllers.OwnContributionController.addRD
+GET    /application/fill/rd_details                           @controllers.OwnContributionController.getRDDetails
+POST   /application/fill/insurance                            @controllers.OwnContributionController.addInsurance
+GET    /application/fill/insurance                            @controllers.OwnContributionController.getInsuranceDetails
+POST   /application/fill/miscBorrowing                        @controllers.OwnContributionController.addMiscBorrowingDetails
+GET    /application/fill/miscBorrowing                        @controllers.OwnContributionController.getMiscBorrowingDetails
+POST   /application/fill/property_Details                     @controllers.OwnContributionController.addPropertyDetails
+GET    /application/fill/property_Details                     @controllers.OwnContributionController.getPropertyDetails
+
+#Delete Option In entireOwnContribution
+
+POST   /application/fill/bankAccountDelete/:id                @controllers.OwnContributionController.deleteBankAccount(id:Long)
+GET    /application/fixed_deposit/delete/:id                  @controllers.OwnContributionController.deleteFDDetail(id:Long)
+GET    /application/recurring_deposit/delete/:id              @controllers.OwnContributionController.deleteRDDetail(id:Long)
+GET    /application/insurance/delete/:id                      @controllers.OwnContributionController.deleteInsuranceDetail(id:Long)
+GET    /application/miscellaneous_borrowings/delete/:id       @controllers.OwnContributionController.deleteMiscBDetails(id:Long)
+GET    /application/property/delete/:id                       @controllers.OwnContributionController.deletePropertyDetails(id:Long)
+
+
+POST   /application/dependents/delete/:id                     @controllers.ApplicationFormController.deleteDependent(id:Long)
+POST   /application/loanDetails/delete/:id                    @controllers.ApplicationFormController.deleteLoanDetails(id:Long)
+
+
+GET    /application/fill/getRequirements                      @controllers.ApplicationFormController.getRequirements
+
+
+GET    /application/fill/bankAccount                          @controllers.OwnContributionController.bankAccountDetails
+POST   /application/fill/bankAccount                          @controllers.OwnContributionController.bankAccountDetailsSubmit
+GET    /application/fill/fixedDeposit                         @controllers.OwnContributionController.fixedDepositDetails
+POST   /application/fill/fixedDeposit                         @controllers.OwnContributionController.fixedDepositDetailsSubmit
+GET    /application/fill/recurringDeposit                     @controllers.OwnContributionController.recurringDep
+POST   /application/fill/recurringDeposit                     @controllers.OwnContributionController.recurringDepSubmit
+GET    /application/fill/insuranceDetails                     @controllers.OwnContributionController.insuranceDetails
+POST   /application/fill/insuranceDetails                     @controllers.OwnContributionController.insuranceDetailsSubmit
+
+
+# RESTful
+POST   /api/visitor/authcode/generate                         @controllers.Application.generateAuthCode
+POST   /api/visitor/forget/authcode                           @controllers.Application.sendAuthcodeToVisitor
+POST   /api/visitor/authenticate                              @controllers.Application.authenticateVisitor
+POST   /api/member/authenticate                               @controllers.Application.authenticateMember
+POST   /api/member/forget/password                            @controllers.Application.sendPasswordToApplicant
+POST   /api/agent/forget/password                             @controllers.Application.sendPasswordToAgent
+
+# UserController
+GET    /user/login                                            @controllers.UserController.login
+POST   /user/login                                            @controllers.UserController.loginSubmit
+GET    /user/logout                                           @controllers.UserController.logout
+GET    /user/reset/password                                   @controllers.UserController.resetPassword
+POST   /user/reset/password                                   @controllers.UserController.resetPasswordSubmit
+GET    /user/enter-reset-password/:password                   @controllers.UserController.enterPasswordToReset(password: String)
+POST   /user/enter-reset-password/:password                   @controllers.UserController.enterPasswordToResetSubmit(password: String)
+GET    /user/dashboard/                                       @controllers.UserController.goToDashboard
+# Admin Pages
+GET    /admin/newuser                                         @controllers.AdminUserController.createNewUserPage
+POST   /admin/newuser                                         @controllers.AdminUserController.createNewUser
+GET    /admin/dashboard                                       @controllers.AdminUserController.dashboard
+GET    /recentVisitor                                         @controllers.AdminUserController.recentVisitor
+GET    /admin/report-filter                                   @controllers.AdminUserController.reportFilter
+POST   /admin/report/generate                                 @controllers.AdminUserController.generateReport
+GET    /admin/interested-agent/:pageNumber                    @controllers.AdminUserController.getUserInterestedInBecomeAnAgent(pageNumber: Int)
+GET    /admin/cms/list                                        @controllers.AdminUserController.cmsPageList
+GET    /admin/cms/edit/:id                                    @controllers.AdminUserController.cmsEditPage(id: Long)
+POST   /admin/cms/edit                                        @controllers.AdminUserController.cmsEditPageSubmit
+GET    /page/:title                                           @controllers.Pages.show(title)
+# GET    /admin/createPage                                      @controllers.AdminUserController.createPage()
+GET    /d/:ids                                                @controllers.AdminUserController.downloadReport(ids: String)
+GET    /admin/assignAgentToIb/:id/:ibId                       @controllers.AdminUserController.assignAgentToBuero(id : Long, ibId : Long)
+GET    /admin/assignAgentToIb/:page                           @controllers.AdminUserController.displayAgentsList(page : Int)
+GET    /admin/agentinfo/:id                                   @controllers.AdminUserController.displayAgentInfo(id : Long)
+POST   /admin/approvedOrRejectedAgent/:id                     @controllers.AdminUserController.approveOrRejectAgentForm(id:Long)
+GET    /admin/agent/confirmation/:page                        @controllers.AdminUserController.approvedAgentList(page : Int)
+GET    /admin/agent/investigation-form-upload                 @controllers.AdminUserController.investigationFormUpload
+POST   /admin/agent/investigation-form-upload                 @controllers.AdminUserController.investigationFormUploadSubmit
+#search update delete User
+
+GET    /admin/user-search                                     @controllers.AdminUserController.searchUser
+POST   /admin/user-search                                     @controllers.AdminUserController.searchUserSubmit
+GET    /admin/user-search/:pageNumber                         @controllers.AdminUserController.showSearchedUserPage(pageNumber: Int)
+GET    /admin/update/user/:id                                 @controllers.AdminUserController.updateUser(id:String)
+POST   /admin/update-user-submit/:email                       @controllers.AdminUserController.updateUserSubmit(email :String)
+GET    /admin/delete-user/:email                              @controllers.AdminUserController.deleteUser(email:String)
+
+# Manager Pages
+GET    /manager                                               @controllers.ManagerUserController.dashboard
+GET    /manager/applicantListForManager                       @controllers.ManagerUserController.applicantListForManager
+GET    /manager/applicantRequirement/:id                      @controllers.ManagerUserController.applicantRequirement(id:Long)
+GET    /manager/searchApplicant                               @controllers.ManagerUserController.searchApplicantBy
+POST   /manager/searchApplicant                               @controllers.ManagerUserController.submitToSearch
+
+# Accountant Pages
+GET    /accountant/paymentcode/new                            @controllers.PaymentCodeController.newPaymentCode
+POST   /accountant/paymentcode/new                            @controllers.PaymentCodeController.newPaymentCodeSubmit
+GET    /accountant/paymentcode/view/:id                       @controllers.PaymentCodeController.view(id: Long)
+GET    /accountant/dashboard                                  @controllers.AccountantUserController.dashboard
+
+#Agent Pages
+#GET 	/agent/dashboard				@controllers.AgentUserController.dashboard
+
+#GET /personal_info                     @controllers.Application.personalInfo()
+GET    /apply/new_application                                 @controllers.ApplicationFormController.createNewApplicantPage()
+POST   /apply/new_application                                 @controllers.ApplicationFormController.createNewApplicant()
+
+#GET /agentInfo
+GET    /application/agent/form                                @controllers.AgentFormController.agentForm()
+POST   /application/agent/form/submit                         @controllers.AgentFormController.agentFormSubmit()
+#GET 	/agent/agentList					@controllers.AgentFormController.displayAgentList()
+GET    /agent/agentInfo/:id                                   @controllers.AgentFormController.displayAgentInfo(id: Long)
+
+# Attachment related pages.
+POST   /files/upload                                          @controllers.AttachmentsController.upload
+GET    /files/download/:id                                    @controllers.AttachmentsController.download(id: String)
+GET    /files/appLicantImage/:id                              @controllers.AttachmentsController.getApplicantImage(id: Long)
+POST   /files/delete/:file                                    @controllers.AttachmentsController.delete(file: String)
+
+GET    /api/staticdata/pincodes/                              @controllers.PincodeController.getStates()
+GET    /api/staticdata/pincodes/:state                        @controllers.PincodeController.getDistricts(state: String)
+GET    /api/staticdata/pincodes/:state/:district              @controllers.PincodeController.getTalukas(state :String ,district :String)
+GET    /api/staticdata/pincodes/:state/:district/:taluka      @controllers.PincodeController.getPincodes(state :String ,district :String,taluka :String)
+#GET     /api/staticdata/pincodes/:state/:district/:taluka/:pincode		@controllers.PincodeController.getAreas(state :String ,district :String,taluka :String, pincode :String)
+
+#agent Payment
+GET    /agent/payment                                         @controllers.AgentFormController.payment
+GET    /agent/form/payment                                    @controllers.AgentFormController.formPayment
+GET    /agent/payment/submit                                  @controllers.AgentFormController.paymentSubmit
+GET    /agent/fill/paymentInfo                                @controllers.AgentFormController.paymentInfo
+POST   /agent/fill/payment/complete                           @controllers.AgentFormController.paymentComplete
+GET    /agent/recharge_avc                                    @controllers.AgentFormController.rechargeAVC
+POST   /agent/recharge_avc/payment                            @controllers.AgentFormController.rechargeAVCPayment
+
+#user Controller
+GET    /user/change_password                                  @controllers.UserController.changePassword
+POST   /user/change_password                                  @controllers.UserController.changePasswordSubmit
+
+#Investgation Buero Pages
+GET    /investigationBuero/dashboard                          @controllers.BueroController.bueroDashboard
+GET    /investigationBuero/agentList/:page                    @controllers.BueroController.searchIbsAgent(page: Int)
+GET    /investigationBuero/agentInfo/:id                      @controllers.BueroController.displayAgentInfoToBuero(id: Long)
+POST   /investigationBuero/agent/feedback/:id                 @controllers.BueroController.uploadFeedbackFile(id:Long)
+GET    /investigationBuero/agent-feedback-form-download       @controllers.BueroController.downloadAgentFeedbackForm                         
+
+#Short form payment 
+GET    /short_pplicationForm/payment/submit                   @controllers.ApplicationFormController.shortFormPaymentSubmit
+POST   /short_form/payment/complete                           @controllers.ApplicationFormController.shortFormPaymentComplete
+POST   /short_form/payment/authentication                     @controllers.ApplicationFormController.shortFormIntermediate
+POST   /short_form/payment/avc_credit                         @controllers.ApplicationFormController.shortFormPaymentThroughAVCcredit
+
+#Server Error
+GET    /error505                                              @controllers.Application.internalError505
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file                                          controllers.Assets.at(path="/public", file)
+
+GET    /*page                                                 @controllers.Application.notFound404(page)
+
+# Mobile Application Routes
+
+POST   /mobile/visitor/authcode/generate                      @controllers.Application.generateAuthCode
+POST   /mobile/visitor/authenticate                           @controllers.Application.mobileAuthenticateVisitor
+POST   /info										  		  @controllers.Pages.showPages	
+POST   /mobile/fill/short_personal_info/submit                @controllers.MobileApplicationFormController.MobileshortFormSubmit
+POST   /test                                                  @controllers.MobileApplicationFormController.Test
+POST   /mobile/applicant/change_password                      @controllers.MobileApplicantController.changeApplicantPasswordForMobile
+POST   /mobile/applicant/dashboard/sendQuery                  @controllers.MobileApplicantController.sendMobileQuery
+POST   /mobile/applicant/dashboard/referFriend                @controllers.MobileApplicantController.mobileReferFriend
+POST   /mobile/visitor/forget/authcode                        @controllers.Application.sendAuthcodeToVisitor
+POST   /mobile/member/forget/password                         @controllers.Application.sendPasswordToApplicant
+POST   /mobile/agent/forget/password                          @controllers.Application.sendPasswordToAgent
+POST   /mobile/applicant/authenticate                         @controllers.Application.mobileAuthenticateApplicant
+POST   /mobile/agent/authenticate							  @controllers.Application.MobileagentLogin
+
+OPTIONS /*path                             					  controllers.Application.returnCorsOptions(path: String)

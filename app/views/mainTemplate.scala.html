@@ -1,0 +1,36 @@
+@(title: String, user: User ,banner : Call = routes.Assets.at("images/content/banner_medium-01.jpg"))(body: Html)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en"><!-- InstanceBegin template="../../Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+
+	<title>@title</title>
+@head(title, true) {
+	
+}
+
+	
+</head>
+<body>
+	@header(user)
+	<!-- PG_CONTNET -->
+	<div id="pg_content">
+		<div class="container"><!-- InstanceBeginEditable name="content_area" -->
+			<div class="wrapper">
+				<!-- Main Banner -->
+				<div id="main_banner">
+					<img src=@banner alt="Banner Medium">
+				</div><!-- end main_banner -->
+				<!-- content area -->
+				<div id="content_area">
+					<div class="cms">
+						@body
+					</div>							
+				</div><!-- ends contnet area -->
+			</div>
+		<!-- InstanceEndEditable -->
+		</div>
+	</div><!-- end page content -->
+	<!-- FOOTER -->
+	@footer()
+</body>
+</html>

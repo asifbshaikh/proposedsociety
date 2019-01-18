@@ -1,0 +1,40 @@
+@(req : Form[Requirement])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+<div id="rowHousePlotRequirement">
+	<table id="rowHousePlotTable" class="fieldstable">
+	    <tr>
+	        <td style="width:300px;"><h4>If Row House Plot/Independent bungalow Plot/Joint bungalow Plot /Farm House Plot/Commercial Land/Agricultural Land/Business Center/Business Park</h4></td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Property Area</label></td>
+	        <td>@helper.inputText(req("plotArea"), 'class -> "input-medium", 'maxlength -> "9")</td>
+	        <td>@helper.select(req("plotAreaMeasure"), options = helper.options("Square Feet"->"Square Feet",
+	            "Square Yard"->"Square Yard",
+	            "Square Miles"->"Square Miles",
+	            "Square Meter"->"Square Meter",
+	            "Square ML"->"Square ML",
+	            "Square CM"->"Square CM",
+	            "Square KM"->"Square KM",
+	            "Acres"->"Acres",
+	            "Ares"->"Ares",
+	            "Hectares"->"Hectares",
+	            "Guntha"->"Guntha",
+	            "Bigha"->"Bigha",
+	            "Cent"->"Cent"
+	            ), 'class -> "input-medium")
+	        </td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Use of the Land/Plot</label></td>
+	        <td>@helper.inputText(req("useOfLand"), 'class -> "input-medium", 'maxlength -> "100")</td>
+	    </tr>
+	    <tr>
+	        <td style="width:300px;"><label>Other Details(If required)</label></td>
+	        <td>@helper.inputText(req("otherDetails"), 'class -> "input-medium", 'maxlength -> "50")</td>
+	    </tr>
+	</table>
+</div>

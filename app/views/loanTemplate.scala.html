@@ -1,0 +1,101 @@
+@(lfd : Form[ApplicationFormController.LoanFormDetails],
+data : Form[ApplicationFormController.DependentAndLoanForm], 
+isApplcnt: Boolean,
+prefix : String,
+loanData: List[LoanDetails])
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+@if(isApplcnt == true){
+	<div id="addLoanDetailsOfAppDiv">
+		<h1>Do you have any existing loan?</h1>
+		<table class="fieldstable">
+			 <tr>
+				<td></td>
+				<td>@form.horizontalRadioGroup(data("hasLoanOnApplicant"), options = Seq("true" -> "Yes", "false" -> "No"))
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="showLoanDivForApplicant">
+}else{
+	<div id="addLoanDetailsOfAppDiv">
+		<h1>Co-Applicant have any existing Loan?</h1>
+		<table class="fieldstable">
+			 <tr>
+				<td></td>
+				<td>@form.horizontalRadioGroup(data("hasLoanOnCoApplicant"), options = Seq("true" -> "Yes", "false" -> "No"))
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="showLoanDivForCoApplicant">
+}
+			
+	@if(prefix == "applicant"){
+		<div id="applicant_loanDetailsdiv">
+	}else {
+		<div id="co_applicant_loanDetailsdiv">
+	}
+		<h1>@if(isApplcnt == true){Applicant's Loan Details}else{Co-Applicant's Loan Details}</h1>
+		<hr/>
+		@if(prefix == "applicant"){
+			@if(loanData != null){
+				<div id="viewLoansTableDivOnLoad">
+					@getLoan(loanData,isApplcnt)
+				</div>
+			}
+			<div id="viewLoansTableDiv">
+				
+			</div>
+			<table id="applicant_loanDetailsTable" class="fieldstable">
+		}else{
+			@if(loanData != null){
+				<div id="viewCoAppLoansTableDivOnLoad">
+					@getLoan(loanData,isApplcnt)
+				</div>
+			}
+			<div id="viewCoAppLoansTableDiv">
+				
+			</div>
+			<table id="co_applicant_loanDetailsTable" class="fieldstable">
+		}
+				<tr>
+					<td><label class="fieldname">Is Loan EMI deducting your salary or Loan is shown on the Balance Sheet</label></td>
+					<td>@helper.select(lfd(prefix + "_amountPerMonthFromSal"), options = helper.options("true" -> "Yes", "false" -> "No"), 'class -> "input-small")</td>
+				</tr>
+	        	<tr>
+					<td><label class="fieldname">Name of the Financer</label></td>
+					<td>@helper.inputText(lfd(prefix + "_financer"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname">Loan Amount</label></td>
+					<td>@helper.inputText(lfd(prefix + "_loanAmount"), 'class -> "input-medium")</td>
+				</tr>
+	        	<tr>
+					<td><label class="fieldname">Monthly EMI Amount</label></td>
+					<td>@helper.inputText(lfd(prefix + "_monthlyEmi"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname">Number of Paid Installments</label></td>
+					<td>@helper.inputText(lfd(prefix + "_installmentsPaid"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td><label class="fieldname">Number of Balance Installment</label></td>
+					<td>@helper.inputText(lfd(prefix + "_installmentsBalance"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+			<div class="form-actions">
+				@if(isApplcnt == true){
+					<input type="button" id ="addMoreLoanButton"  class="btn btn-large btn-pink" align="right" value="Add More" onclick="addMoreLoanButtonClick(true);">
+					<input type="button" id ="saveLoanButton" class="btn btn-large btn-pink" align="right" value="Save" onclick="addLoanToList(true);">
+					<input type="button" id ="cancelLoanButton" class="btn btn-large btn-pink" align="right" value="Cancel" onclick="cancelLoanButtonClick(true);">
+				}else{
+					<input type="button" id ="addMoreLoanButton1"  class="btn btn-large btn-pink" align="right" value="Add More" onclick="addMoreLoanButtonClick(false);">
+					<input type="button" id ="saveLoanButton1"  class="btn btn-large btn-pink" align="right" value="Save" onclick="addLoanToList(false);">
+					<input type="button" id ="cancelLoanButton1" class="btn btn-large btn-pink" align="right" value="Cancel" onclick="cancelLoanButtonClick(false);">
+				}
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,51 @@
+<ion-view view-title="">
+  <ion-nav-buttons side=" right">
+    <button  ng-click="logoutBtn()" style="font-size: 15px;" class="button button-clear ion-log-out"> Logout</button>
+  </ion-nav-buttons>
+
+ <!--  <ion-content class="padding back-img">
+     <div class="padding padding-top" align="center">
+      <img  src="./img/logo.updated.png">
+    </div>
+  </ion-content> -->
+
+
+    <ion-content class="padding back-img">
+        <div class="content-sec padding">
+            <div class="col-lg-12 item-image" style="margin-left: 129px; width: 30%;">
+                <img src="./img/logo.updated.png" align="center">
+            </div>
+            <br>
+            <b class="cms"> <h1>Concept Introduction</h1></b>
+            <hr>
+            <h5>Hello Friends,</h5>
+            <div id="infoDiv" style=" display: flex; font-family: arial">
+We, M/s. Bhawani Vikasak (I) Pvt. Ltd. a reknown company serving Real Estate Industry since year 2000. We always try to reduce cost and provide property as per expectations. By research the company has introduce new concept - ‘Builder Society’s Promoter’ through this website - proposedsociety.com. <br><br>
+
+Among the basic needs of human beings, shelter is the most expensive one and nowadays it is not only a basic need but also a popular mode of investment. However, a lot of precious time is wasted in searching desirable property at a lowest rate and unfortunately sometimes one has to even face the losses. Apart from this, although one decides to build a home or property by investing time and using technology, success seems difficult to achieve. As another option of owning a home or property, if one acquires it directly from a builder, unfulfilled expectations keep him haunting and one is faced with a continuous sense of dissatisfaction. If one chooses to construct a building by forming a society along with friends and relatives, the lack of - sufficient finance, technical knowledge, professional experience and trust on the chief promoter prevents success and leads to consequent monetary loss.</div>
+
+<h5>Alas! many homes are vacant and many people are homeless.</h5>
+<div id = "para">
+The financial constraints prevent one’s dream from being materialised. It is as if there is no avenue all the doors seem closed, and even if one shares one’s dream with others, they may lack the desire or requisite capability to help him/her fulfill the expectation. But now your dream home can be a reality through our innovative concept. Through this concept, we support to provide shelter to those who never dream of it, thus we maintain the balance between demand and supply. <br>
+
+To understand this unique concept go through this website thoroughly and fill up the form to fulfill your demands better.
+
+Please do not apply for instant property requirement.
+</div>
+                <div id="infoDiv" ng-bind-html="info">
+            </div>
+        </div>
+        <div class="spinner" ng-show="!info">
+            <ion-spinner icon="android"></ion-spinner>
+        </div>
+    </ion-content>
+</ion-view>
+
+<style type="text/css">
+	.para {
+	font-family: "Trebuchet MS", arial, sans-serif;
+    font-size: 12px;
+    display: flex;
+    justify-content: center !important;
+}
+</style>

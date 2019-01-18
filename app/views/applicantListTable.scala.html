@@ -1,0 +1,37 @@
+@(appList: List[ApplicationForm])
+@import views.helpers.DateFormatHelper._
+
+@if(appList != null && !appList.isEmpty()){
+	<div>
+		<table id="viewBankDetails" class="table table-striped"  >
+			<thead>
+				<tr>	
+			  		<th class="leftAlignClass">Applicant Name</th>
+			  		<th class="leftAlignClass">Mobile Number</th>
+			  		<th class="leftAlignClass">Email Id</th>
+			  		<th class="leftAlignClass">Registered Date</th>
+			  		<th class="leftAlignClass">Budget</th>
+			  		<th class="leftAlignClass"> </th>
+				 </tr>
+			</thead>
+			<tbody>
+				@for(currentUsr <- appList) {
+				  	<tr>
+				  		<td class="leftAlignClass">@currentUsr.user.name </td>
+				  	    <td class="leftAlignClass">@currentUsr.user.mobile</td>
+				  		<td class="leftAlignClass">@currentUsr.user.email</td>				  		
+						<td class="leftAlignClass">@formatDate("dd/MM/yyyy HH:mm a",currentUsr.user.joiningDate)</td>	
+						<td class="leftAlignClass">@currentUsr.user.form.calculatedBudget</td>
+						<td class="leftAlignClass">
+							<div >
+								<p style="text-align: center;">
+									<a href="@routes.ManagerUserController.applicantRequirement(currentUsr.id)" class="btn  btn-info " style="color:#ffffff" >Show</a>
+								</p>
+							</div>	
+						</td>			  		
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}

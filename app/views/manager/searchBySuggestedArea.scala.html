@@ -1,0 +1,43 @@
+@(user : User, appList: List[ApplicationForm])
+@import views.html.manager._
+@managerDashboardTemplate("Proposed Society -Search by suggested area",user,Seq(),Seq(routes.Assets.at("stylesheets/searchApplicantByBudget.css"))){
+<h2>Search Applicant By</h2>
+<div class="panelForSearch">	
+	<form    method="POST"  action="@routes.ManagerUserController.submitToSearch">
+		<table >
+			<thead>
+				<tr>	
+			  		<th><label>State</label></th>
+			  		<th><label>District</label></th>
+			  		<th><label>Taluka</label></th>
+			  		<th><label>Pincode</label></th>
+				 </tr>
+			</thead>
+			<tbody>
+				<tr>
+				   <td class="leftAlignClass"><select name="State" id="State" class="input-large"></select></td>
+				   <td class="leftAlignClass"><select name="District" id="District" class="input-large"></select></td>
+				   <td class="leftAlignClass"><select name="Taluka" id="Taluka" class="input-large"></select></td>
+				   <td class="leftAlignClass"><select name="Pincode" id="Pincode" class="input-large" required></select></td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tr>
+				<td style="text-align: center; "><input  style="visibility:hidden;" type="text" name="otherPincode"  pattern="[0-9]{6}" placeholder="6 Digit Pincode" id="otherPincode" class="input-medium" maxlength="6"></td>
+				<td style="text-align: center; "><input style="visibility:hidden;" type="text" name="otherLocality"  placeholder="Locality" id="otherLocality" class="input-large" maxlength="100"></td>
+				<td><label>Budget Range</label><input type="text" name="minBudget" id="minBudget" placeholder="Min Budget" class="input-small" pattern="[0-9]{0,12}" maxlength="15" required >   
+				<input type="text" name="maxBudget"  placeholder="Max Budget" id="maxBudget" class="input-small" pattern="[0-9]{0,12}" maxlength="15" required ></td>
+				<td><input type="submit" id="searchBtn" value="Search" class="btn btn-medium btn-pink"></td>
+			</tr>
+		</table>	
+	</form>
+</div>
+	<div id="foundApplicant" style="margin-top:20px;">
+		@if(appList != null && !appList.isEmpty()){
+			@applicantListTable(appList)
+		}else{
+			<p><h3>No Data Found</h3></p>
+		}
+	</div>
+}

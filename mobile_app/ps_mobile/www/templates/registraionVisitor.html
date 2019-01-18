@@ -1,0 +1,57 @@
+<ion-view>
+
+    <ion-content class="padding back-img">
+        <div class=" content-sec padding form-group">
+
+            <div class="text-info text-info-back padding" ng-show="msgFlag">
+              <!--   Welcome to ProposedSociety for the first time, to fulfill your dreams! You must enter following
+                details
+                to view the application. -->
+                Welcome to ProposedSociety.com for the first time, to fulfill your dreams! You must enter following details to view the website.
+            </div>
+            <div class="notify-error padding" ng-hide="msgFlag">
+                Either mobile number or e-mail is already registered with us. To request for authentication code again,
+                please provide same mobile number / e-mail pair.
+            </div>
+            <br>
+
+            <form name="myForm" ng-submit="getCode()" novalidate>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Name</span>
+                    <input type="text" class="form-control" ng-model="user.name" name="name" placeholder="Name"
+                           required>
+                    <span style="color:#FA5858" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+<span ng-show="myForm.name.$error.required">Username is required.</span>
+</span>
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Phone Number</span>
+                    <input type="number" class="form-control" ng-minlength="10" ng-maxlength="10" id="inputmobile"
+                           name="mobile" placeholder="Phone Number" ng-model="user.mobile" ng-required="true">
+                    <span style="color:#FA5858" ng-show="myForm.mobile.$dirty && myForm.mobile.$invalid">
+<span class="help-block" ng-show="myForm.mobile.$error.required || myForm.mobile.$error.number">Valid mobile number is required</span>
+<span class="help-block"
+      ng-show="((myForm.mobile.$error.minlength || myForm.mobile.$error.maxlength) && myForm.mobile.$dirty) ">mobile number should be 10 digits</span>
+</span>
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Email</span>
+                    <input type="email" name="email" ng-model="user.email" placeholder="Email" required>
+                    <span style="color:#FA5858" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+<span ng-show="myForm.email.$error.required">Email is required.</span>
+<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+</span>
+                </label>
+                <br>
+                <center>
+                    <button type="submit" ng-disabled="myForm.$invalid" ng-click="submitted=true"
+                            class=" btn btn-info ">
+                        Get Code
+                    </button>
+                </center>
+
+            </form>
+        </div>
+
+    </ion-content>
+</ion-view>

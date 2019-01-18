@@ -1,0 +1,28 @@
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant - Payment Details", 6) {
+	<h2>Select payment mode</h2>
+	<hr>
+	<br>
+	<form method="post" action="@routes.ApplicationFormController.intermediate" class="form-horizontal">
+			<div align="center">
+				<table class="fieldstable">
+					<tr>
+						<td>
+							<label style="margin-right: 10px" class="required">Select Payment Option</label>
+						</td>
+						<td>
+							<select name="payment_mode">
+								<option value="internet_banking" selected="selected">Using Internet Banking</option>	
+								<option value="avc_credit">Using AVC credit</option>		
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="form-actions"><button type="submit" class="btn btn-pink btn-small"  > Proceed to payment</button></div>
+	</form>	
+}

@@ -1,0 +1,12 @@
+@(user : User,agent: Agent)
+
+@adminTemplate("Proposed Society - Agent Confirm",user,Seq(),Seq()){
+	<div>
+		<hr/>	  
+	  	<p class="message" style="text-align: center;font-size: 14px;font-weight: bold;padding: 10px;"> Your mail has been successfully sent to @agent.user.email.<br/></p>
+		<hr/>
+		<div class="buttons">
+			<a href="@routes.AdminUserController.displayAgentsList(0)" class="btn btn-large btn-pink" style="color:white">Back</a>
+		</div>
+	</div>
+}

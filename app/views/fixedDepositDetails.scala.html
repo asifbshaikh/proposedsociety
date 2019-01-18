@@ -1,0 +1,136 @@
+@(fd: Form[OwnContributionController.FixedDepositDetails],
+dedFrmSal: Form[OwnContributionController.FixedDepositDetailsDedFrmSal],
+will: Form[OwnContributionController.FixedDepositDetailsWillSurrender],
+useAmnt: Form[OwnContributionController.FixedDepositDetailsUseAmnt],
+lonDtls: Form[OwnContributionController.FDLoanDetails])
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("Applicant's Fixed Deposite Details", 4) {
+		@helper.form(action = routes.OwnContributionController.fixedDepositDetailsSubmit, 'class -> "form-horizontal") {
+		<h1>Fixed Deposit Details</h1>
+		<!--	<table>
+					<tr>
+						<td style="width:250px;"><label class="fieldname" for="fixedDeposit">Fixed Deposit?</label></td>
+						<td>@form.horizontalRadioGroup(fd("fixedDeposit"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+					</tr>
+				</table>	
+		-->
+		<hr/>
+		<div id="fdBankDetailsDiv">
+			<table id="fdBankDetails" class="fieldstable">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Name of the Bank/Company</label></td>
+					<td>@helper.inputText(fd("bankName"), 'class -> "input-large")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Name of Deposit Holder</label></td>
+					<td>@helper.inputText(fd("nameOfHolder"), 'class -> "input-large")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Date of Deposit</label></td>
+					<td>@helper.inputText(fd("startDate"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Date of Maturity</label></td>
+					<td>@helper.inputText(fd("maturityDate"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Principal Amount</label></td>
+					<td>@helper.inputText(fd("pricipal"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Interest Rate</label></td>
+					<td>@helper.inputText(fd("interestRate"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Amount receivable on maturity date</label></td>
+					<td>@helper.inputText(fd("maturityAmount"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname" for="haveTakenLoanOnFD">Have you taken any Loan on FD</label></td>
+					<td>@form.horizontalRadioGroup(fd("haveTakenLoanOnFD"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+				</tr>
+				<tr id="deductionFrmSalTr">
+					<td style="width:250px;"><label class="fieldname" for="monthlyAmntDedctedFrmSal">Total monthly installment amount deducted from your salary</label></td>
+					<td>@form.horizontalRadioGroup(dedFrmSal("monthlyAmntDedctedFrmSal"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+				</tr>
+			</table>
+		</div>
+		<div id="fdLoanDiv">
+			<h2>FD Loan Details</h2>
+			<hr/>
+			<table id="FDLoanDetailsTable" class="fieldstable">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Loan Amount</label></td>
+					<td>@helper.inputText(lonDtls("loanAmount"), 'class -> "input-medium")</td>
+				</tr>
+	        	<tr>
+					<td style="width:250px;"><label class="fieldname">Monthly EMI Amount</label></td>
+					<td>@helper.inputText(lonDtls("montlyEmi"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Number of Paid Installments</label></td>
+					<td>@helper.inputText(lonDtls("installmentsPaid"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Number of Balance Installment</label></td>
+					<td>@helper.inputText(lonDtls("balanceInstallments"), 'class -> "input-medium")</td>
+				</tr>
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Total Balance Loan Amount</label></td>
+					<td>@helper.inputText(lonDtls("balanceLoanAmount"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+		<table id="willtoSurrenderTable" class="fieldstable">
+			<tr>
+				<td style="width:250px;"><label class="fieldname" for="willSurrender">Are you willing to use your fixed deposit for searching property purpose?</label></td>
+				<td>@form.horizontalRadioGroup(will("willSurrender"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+			</tr>
+		</table>
+		<div id="amountAllocationYes">
+			<h2>FD Amount Allocation For Property</h2>
+			<hr/>	
+			<table id="fdAmountForPropertySearchYes" class="fieldstable">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Total Fixed Deposit Amount you can avail from financer/bank?</label></td>
+					<td>@helper.inputText(useAmnt("amountCanAvail"), 'class -> "input-medium")</td>
+				</tr>	
+				<tr>
+					<td style="width:250px;"><label class="fieldname">How much amount from your FD would you like to use for searching property purpose?</label></td>
+					<td>@helper.inputText(useAmnt("allocation"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+		<div id="amountAllocationNo">
+			<h2>FD Amount Allocation For Property</h2>
+			<hr/>
+			<table id="fdAmountForPropertySearchNo" class="fieldstable">
+				<tr>
+					<td style="width:250px;"><label class="fieldname">Amount deducted</label></td>
+					<td>@helper.inputText(fd("AmountDeducted"), 'class -> "input-medium")</td>
+				</tr>
+			</table>
+		</div>
+
+		<!-- <input type="button" id ="buttonAddFD" value="Add More" onclick="addFDsToList();"> -->
+		
+		<div id="viewfdTable">
+				
+		</div>
+		<div class="form-actions">
+				<a href="@routes.OwnContributionController.recurringDep" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		<!--<div class="form-actions" id="fdSubmitButtonDiv">
+			<button type="submit" class="btn btn-large btn-pink">Next</button>
+		</div>
+		--><!--	<div class="form-actions" id="fdRedirectButtonDiv" style="display:none" >
+					<input type="button" class="btn btn-large btn-pink">Next</input>
+				</div>
+		-->
+	}
+}

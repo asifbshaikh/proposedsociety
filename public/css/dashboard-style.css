@@ -1,0 +1,20 @@
+body{
+	background-color:#000; margin:0;
+}
+p#title{
+	display:block; position:absolute; height:20px; bottom:-60px; background:#222; color:#444; text-align:center; padding:5px; text-transform:uppercase;
+}
+a#next{
+	display:block; width:450px; height:560px; position:absolute; z-index:21; border:none; outline:none; top:0; right:0; text-indent:-35000px; overflow:hidden;
+}
+a#previous{
+	display:block; width:450px; height:560px; position:absolute; z-index:20; border:none; outline:none; top:0; left:0; text-indent:-35000px; overflow:hidden;
+}
+#image{
+	position:relative; 
+	height:1323px;
+	width:1600px;
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow:    0px 0px 8px rgba(0, 0, 0, 0.75);
+	box-shadow:         0px 0px 8px rgba(0, 0, 0, 0.75);
+}

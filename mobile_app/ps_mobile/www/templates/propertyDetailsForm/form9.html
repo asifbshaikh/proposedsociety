@@ -1,0 +1,204 @@
+<b>If Shop</b>
+<br><br>
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.carpetArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.carpetArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Carpet Area required(sq.ft.)</span>
+  <input type="number" name="carpetArea" ng-model="user.requirement.carpetArea" placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.carpetArea.$dirty && applyForm.carpetArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.carpetArea.$dirty && applyForm.carpetArea.$invalid">
+                <span class="help-block" ng-show="applyForm.carpetArea.$error.required || applyForm.carpetArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.builtupArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.builtupArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Built up area required(sq.ft.)</span>
+  <input type="number" name="builtupArea" ng-model="user.requirement.builtupArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span class="help-block" ng-show="applyForm.builtupArea.$error.required || applyForm.builtupArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Specify Required Loft Area
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqLoftArea" value="true" ng-model="user.requirement.loftRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqLoftArea" value='false' ng-model="user.requirement.loftRequired">
+</label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.loftRequired == 'true'" ng-class="{ 'has-errors' : applyForm.loftArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.loftArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required Area:(sq.ft.)</span>
+  <input type="number" name="loftArea" ng-model="user.requirement.loftArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.loftArea.$dirty && applyForm.loftArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.loftArea.$dirty && applyForm.loftArea.$invalid">
+                <span class="help-block" ng-show="applyForm.loftArea.$error.required || applyForm.loftArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Specify Required Otla area
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqOtlaArea" value="true" ng-model="user.requirement.otlaRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqOtlaArea" value='false' ng-model="user.requirement.otlaRequired">
+</label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.otlaRequired == 'true'" ng-class="{ 'has-errors' : applyForm.otlaArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.otlaArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required Area:(sq.ft.)</span>
+  <input type="number" name="otlaArea"  ng-model="user.requirement.otlaArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.otlaArea.$dirty && applyForm.otlaArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.otlaArea.$dirty && applyForm.otlaArea.$invalid">
+                <span class="help-block" ng-show="applyForm.otlaArea.$error.required || applyForm.otlaArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+
+<div class="item item-divider">
+  Specify Required Height
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqHeight" value="true" ng-model="user.requirement.specifyHeightRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqHeight" value='false' ng-model="user.requirement.specifyHeightRequired">
+</label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.specifyHeightRequired == 'true'" ng-class="{ 'has-errors' : applyForm.height.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.height.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required Height:(ft.)</span>
+  <input type="number" name="height" ng-model="user.requirement.height"  placeholder="ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.height.$dirty && applyForm.height.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.height.$dirty && applyForm.height.$invalid">
+                <span class="help-block" ng-show="applyForm.height.$error.required || applyForm.height.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Specify Required Open Space
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqOpenSpace" value="true" ng-model="user.requirement.openSpaceRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqOpenSpace" value='false' ng-model="user.requirement.openSpaceRequired">
+</label>
+
+<label class="item item-input item-stacked-label" ng-if="user.requirement.openSpaceRequired == 'true'" ng-class="{ 'has-errors' : applyForm.openSpace.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.openSpace.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required Area (sq.ft.)</span>
+  <input type="number" name="openSpace" ng-model="user.requirement.openSpace"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.openSpace.$dirty && applyForm.openSpace.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.openSpace.$dirty && applyForm.openSpace.$invalid">
+                <span class="help-block" ng-show="applyForm.openSpace.$error.required || applyForm.openSpace.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Specify Required Terrace
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqTerrace" value="true" ng-model="user.requirement.terraceRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqTerrace" value='false' ng-model="user.requirement.terraceRequired">
+</label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.terraceRequired == 'true'" ng-class="{ 'has-errors' : applyForm.terraceArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.terraceArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required Area:(sq.ft.)</span>
+  <input type="number" name="terraceArea" ng-model="user.requirement.terraceArea"  placeholder="sq.ft.">
+</label>
+<label class="item item-input" ng-if="applyForm.terraceArea.$dirty && applyForm.terraceArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.terraceArea.$dirty && applyForm.terraceArea.$invalid">
+                <span class="help-block" ng-show="applyForm.terraceArea.$error.required || applyForm.terraceArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Toilet
+</div>
+<label class="item  ">
+  <input type="radio" name="groupToilet" value="common" ng-model="user.requirement.toiletType" > Common(In building area)
+
+</label>
+<label class="item  ">
+  <input type="radio" name="groupToilet" value='attach' ng-model="user.requirement.toiletType"> Attached:(Private toilets in your commercial area)
+
+</label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.toiletType == 'attach'" ng-class="{ 'has-errors' : applyForm.noOfAttachedToilets.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.noOfAttachedToilets.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required number of attached toilets</span>
+  <input type="number" name="noOfAttachedToilets" ng-model="user.requirement.noOfAttachedToilets" placeholder="" required>
+</label>
+<label class="item item-input" ng-if="applyForm.noOfAttachedToilets.$dirty && applyForm.noOfAttachedToilets.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.noOfAttachedToilets.$dirty && applyForm.noOfAttachedToilets.$invalid">
+                <span class="help-block" ng-show="applyForm.noOfAttachedToilets.$error.required || applyForm.noOfAttachedToilets.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<label class="item item-input item-stacked-label" ng-if="user.requirement.toiletType == 'attach'" ng-class="{ 'has-errors' : applyForm.noOfAttachedUrinals.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.noOfAttachedUrinals.$valid  && applyForm.$submitted}">
+  <span class="input-label">Required number of attached urinals</span>
+  <input type="number" name="noOfAttachedUrinals" ng-model="user.requirement.noOfAttachedUrinals" placeholder="" required>
+</label>
+<label class="item item-input" ng-if="applyForm.noOfAttachedUrinals.$dirty && applyForm.noOfAttachedUrinals.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.noOfAttachedUrinals.$dirty && applyForm.noOfAttachedUrinals.$invalid">
+                <span class="help-block" ng-show="applyForm.noOfAttachedUrinals.$error.required || applyForm.noOfAttachedUrinals.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Required Separate Water Connection
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqSepWaterCon" value="true" ng-model="user.requirement.isSeparateWaterConnectionRequired">
+ </label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqSepWaterCon" value='false' ng-model="user.requirement.isSeparateWaterConnectionRequired">
+ </label>
+<label class="item item-input item-stacked-label" ng-if="user.requirement.isSeparateWaterConnectionRequired == 'true'" ng-class="{ 'has-errors' : applyForm.waterPipeSize.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.waterPipeSize.$valid  && applyForm.$submitted}">
+  <span class="input-label">How much Diameter of Water Pipe:(Inch)</span>
+  <input type="number" name="waterPipeSize" ng-model="user.requirement.waterPipeSize"  placeholder="Inch" required>
+</label>
+<label class="item item-input" ng-if="applyForm.waterPipeSize.$dirty && applyForm.waterPipeSize.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.waterPipeSize.$dirty && applyForm.waterPipeSize.$invalid">
+                <span class="help-block" ng-show="applyForm.waterPipeSize.$error.required || applyForm.waterPipeSize.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Required Separate Electrical Connectio
+</div>
+<label class="item  ">
+  Yes : <input type="radio" name="groupreqOtlaArea" value="true" ng-model="user.requirement.isSeparatePowerConnectionRequired">
+</label>
+<label class="item  ">
+  No : <input type="radio" name="groupreqOtlaArea" value='false' ng-model="user.requirement.isSeparatePowerConnectionRequired">
+</label>
+
+<label class="item item-input item-select">
+  <div class="input-label">
+    Specify Phase
+  </div>
+  <select ng-model="user.requirement.powerConnectionType">
+    <option value="SinglePhase">Single Phase</option>
+    <option value="DoublePhase">Double Phase</option>
+    <option value="ThreePhase">Three Phase</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+
+<label class="item item-input item-stacked-label" ng-if="user.requirement.powerConnectionType == 'Other'" ng-class="{ 'has-errors' : applyForm.ifConnectionTypeOther.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.ifConnectionTypeOther.$valid  && applyForm.$submitted}">
+  <span class="input-label">Specify Preferred Phase</span>
+  <input type="text" name="ifConnectionTypeOther" ng-model="user.requirement.ifConnectionTypeOther"  placeholder="Phase" required>
+</label>
+
+<label class="item item-input">
+  <input type="text" ng-model="user.requirement.otherDetails" placeholder="Other Details(If required)">
+</label>
+
+<br>
+
+ 

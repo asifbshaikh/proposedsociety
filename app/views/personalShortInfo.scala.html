@@ -1,0 +1,97 @@
+@(applicant : Applicant,
+isApplicant: Boolean)
+@import views.helpers.DateFormatHelper._
+
+<div>
+	<table  class="table table-striped" class="span12">
+		<tr>
+			<td style="width:250px;">
+				@if(isApplicant ==true){
+					Applicant's Name
+				}else{	
+					Co-Applicant's Name
+				}
+			</td>
+			<td>
+				@defaultIfNull(applicant.title,"")
+				@defaultIfNull(applicant.fname,"")
+				@defaultIfNull(applicant.mname,"")
+				@defaultIfNull(applicant.lname,"")
+			</td>
+		</tr>
+		<tr calspan="1">
+			<td style="width:350px;">
+				@if(applicant.fh_relation != null){@if(applicant.fh_relation.equals("F")){Father}else{Husband}'s Name}else{NA}
+			</td>
+			<td >
+				@defaultIfNull(applicant.fh_title,"")
+				@defaultIfNull(applicant.fh_fname,"")
+				@defaultIfNull(applicant.fh_mname,"")
+				@defaultIfNull(applicant.fh_lname,"")
+			</td>
+		</tr>
+		<tr>
+			<td>Date of Birth of Applicant</td>
+			<td>@if(applicant.dob != null){@formatDate("dd/MM/yyyy",applicant.dob)}else{NA}</td>
+		</tr>
+		<tr>	
+			<td>Sex</td>
+			<td>@if(applicant.sex != null){@if(applicant.sex.equals("M")){Male}else{Female}}else{NA}</td>								
+		</tr>	
+		<tr>	 
+			 <td>Residential Status</td>
+			 <td>@if(applicant.resi_status != null){@if(applicant.resi_status.equals("I")){Indian}else{Non Indian}}else{NA}</td>
+		</tr>	
+		<tr>
+			<td>Email</td>
+			<td>@defaultIfNull(applicant.email,"NA")</td>
+		</tr>
+		<tr>
+			<td>Phone 1</td>
+			<td>@phonetype(applicant.phone1_type,applicant.phone1,"NA") @defaultIfNull(applicant.phone1,"NA")</td>
+		</tr>
+		<tr>	
+			<td>Phone 2</td>
+			<td>@phonetype(applicant.phone2_type,applicant.phone2,"NA") @defaultIfNull(applicant.phone2,"NA")</td>
+		</tr>
+		<tr>	
+			<td>Phone 3</td>
+			<td>@phonetype(applicant.phone3_type,applicant.phone3,"NA") @defaultIfNull(applicant.phone3,"NA")</td>
+		</tr>
+		<tr>	
+			<td>Identity 1</td>
+			<td>@defaultIfNull(applicant.identity_number1_type,"NA")
+				@defaultIfNull(applicant.identity_number1,"NA")
+			</td>								
+		</tr>
+		<tr>	
+			<td>Identity 2 </td>
+			<td>@defaultIfNull(applicant.identity_number2_type,"NA")
+				@defaultIfNull(applicant.identity_number2,"NA")
+			</td>
+		</tr>	
+		<tr>	
+			<td>Identity 3</td>
+			<td>@defaultIfNull(applicant.identity_number3_type,"NA")
+				@defaultIfNull(applicant.identity_number3,"NA")
+			</td>
+		</tr>	
+	
+	</table>
+</div>
+
+@defaultIfNull(field: Object,defaultVal: String) = {
+	@if(field != null) {
+		@field	
+	}else{
+		@defaultVal
+	}
+}
+@phonetype(phonefield: String, phoneNumber: String, defaultVal: String) = {
+	@if((phoneNumber != null && !phoneNumber.isEmpty()) && phonefield != null){
+		@if(phonefield.equals("M")){Mob.}
+		@if(phonefield.equals("L")){Landline}
+	}else{
+		@defaultVal
+	}
+}

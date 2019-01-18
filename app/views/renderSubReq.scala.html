@@ -1,0 +1,51 @@
+@(req : Form[Requirement],
+reqSubType : String)
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@if((reqSubType.equals("res_Other")) || (reqSubType.equals("comm_Other")) || (reqSubType.equals("agri_Other"))){
+	<div>
+		<table>
+			<tr id="selectionOther">
+	           <td style="width:300px;"><label>If other</label></td>
+	           <td>@helper.inputText(req("typeDetail"), 'class -> "input-medium", 'maxlength -> "8")</td>
+	       	</tr>
+	   	</table>
+ 	</div>
+}
+
+@{
+	if(reqSubType.contains("res_")){
+	   	if(reqSubType == "res_ChawlRoom"){
+	   		chawlSearching(req)
+	   	}else if((reqSubType == "res_FlatOrTerraceFlat") || (reqSubType == "res_DuplexFlat") || (reqSubType == "res_SecondHome")){
+	   		flatSearching(req)
+	   	}else if((reqSubType == "res_RowHouse") || (reqSubType == "res_IndependentBungalow") || (reqSubType == "res_FarmHouse") || (reqSubType == "res_JointBanglowOrTwinBungalow") || (reqSubType == "res_HolidayHome") || (reqSubType == "res_Villa") || (reqSubType == "res_PentHouse")){
+	   		rowHouseSearching(req)
+	   	}else if((reqSubType == "res_RowHousePlot") || (reqSubType == "res_IndependentBungalowPlot") || (reqSubType == "res_JointBungalowPlot") || (reqSubType == "res_FarmHousePlot")){
+	   		rowHousePlotSearching(req)
+	   	}else if((reqSubType == "res_StudioApartment") || (reqSubType == "res_HighriseApartment") || (reqSubType == "res_ServiceApartment")){
+	   		studioSearching(req)
+	   	}
+	}else if(reqSubType.contains("comm_")){
+	   	if (reqSubType == "comm_Shop"){
+	   		shopSearching(req)
+	   	}else if(reqSubType == "comm_GuestHouse"){
+	   		rowHouseSearching(req)
+	   	}else if((reqSubType == "comm_CommercialLand") || (reqSubType == "comm_BusinessCenterOrBusinessPark")){
+	   		rowHousePlotSearching(req)
+	   	}else if((reqSubType == "comm_OfficeInITParkOrSez") || (reqSubType == "comm_Warehouse") || (reqSubType == "comm_CommercialOfficeOrSpace") || (reqSubType == "comm_ConstructedHotelSpace") || (reqSubType == "comm_BenquetHall") || (reqSubType == "comm_IndustrialBuilding")){
+	   		officeSearching(req)
+	   	}else if((reqSubType == "comm_HotelPlot") || (reqSubType == "comm_IndustrialLand") || (reqSubType == "comm_HotelSpace") || (reqSubType == "comm_HospitalSpace") || (reqSubType == "comm_SchoolSpace") || (reqSubType == "BankSpace")){
+	   		hotelPlotSearching(req)
+	   	}else if((reqSubType == "comm_IndustrialShed") || (reqSubType == "comm_SpaceInRetailMall") || (reqSubType == "comm_Godown") || (reqSubType == "comm_ColdStorage") || (reqSubType == "comm_ManufacturingUnit") || (reqSubType == "comm_Factory")|| (reqSubType == "comm_CommercialShowroom")|| (reqSubType == "comm_Kiosk")){
+			industrySearching(req)
+		}
+	}else if(reqSubType.contains("agri_")){
+		if((reqSubType == "agri_AgriculturalLand") || (reqSubType == "agri_FarmLand")){
+			rowHousePlotSearching(req)
+		}
+	}
+}

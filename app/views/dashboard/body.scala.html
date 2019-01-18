@@ -1,0 +1,37 @@
+@(user: User)(body: Html)
+<body>
+	<div id="header" class="gradient">
+		<div class="container">
+			<h1 id="logo">
+				<a href="@routes.Application.index">Proposed Society.com</a>
+			</h1>
+		</div>
+	</div>
+
+	<div id="pg_content">
+		<div class="container">
+			<div class="wrapper">
+				<div id="content_area">
+					<div class="greeting">Welcome @user.name | <a href="@routes.UserController.logout">Logout</a></div>
+					<div class="row">
+						<div class="span12">
+							@body
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="span9">
+						<p>Copyright 2013 &copy; <em>Builder Society's Promoter.</em> All Rights Reserved.</p>
+						<p>Email: <a href="mailto:proposedsociety@@gmail.com">proposedsociety@@gmail.com</a></p>
+						<p>Tel.: <em>022-40135757</em></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

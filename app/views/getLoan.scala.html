@@ -1,0 +1,30 @@
+@(loanData: List[LoanDetails],
+isApplcnt: Boolean)
+@import views.helpers.FieldValue._
+<div id="loanDiv">
+	@if(loanData != null && !loanData.isEmpty()) {
+		<table id="viewloans" class="table table-striped">
+			<tr>	
+				<th class="leftAlignClass">Financer</label></th>
+				<th class="leftAlignClass">Loan Amount</th>
+				<th class="leftAlignClass">Monthly Emi</th>
+				<th class="leftAlignClass">Installments Paid</th>	
+				<th class="leftAlignClass">Installments Balance</th>
+				<th></th>
+			</tr>
+				@for(loanDtl <- loanData) {
+				  	<tr>
+						<td>@fieldVal(loanDtl.financer,"NA")</td>
+						<td>@fieldVal(loanDtl.loanAmount,"NA")</td>
+						<td>@fieldVal(loanDtl.monthlyEmi,"NA")</td>
+						<td>@fieldVal(loanDtl.installmentsPaid,"NA")</td>
+						<td>@fieldVal(loanDtl.installmentsBalance,"NA")</td>
+						@if(loanDtl.id != null){
+							<td class="rightAlignClass"><input type="button" id="btnLoanDelete" class="btn btn-mini btn-danger " onclick="deleteLoanDetailsFromList(@loanDtl.id,@isApplcnt)" value="X" style="font-weight: bold;"></td>
+						}
+					</tr>
+				}
+		</table>
+	}
+	<p id="loan_notify"></p>
+</div>

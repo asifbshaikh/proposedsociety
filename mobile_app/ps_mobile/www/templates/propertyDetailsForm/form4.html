@@ -1,0 +1,179 @@
+<b>If Studio Apartment/Highrise Apartment/Service Apartment</b>
+<br><br>
+
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.carpetArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.carpetArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Carpet Area required(sq.ft.)</span>
+  <input type="number" name="carpetArea" ng-model="user.requirement.carpetArea" placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.carpetArea.$dirty && applyForm.carpetArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.carpetArea.$dirty && applyForm.carpetArea.$invalid">
+                <span class="help-block" ng-show="applyForm.carpetArea.$error.required || applyForm.carpetArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.builtupArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.builtupArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Built up area required(sq.ft.)</span>
+  <input type="number" name="builtupArea" ng-model="user.requirement.builtupArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span class="help-block" ng-show="applyForm.builtupArea.$error.required || applyForm.builtupArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+
+<div class="item item-divider">
+  Terrace carpet area if required
+</div>
+<label class="item  ">
+  No Extra Requirement : <input type="radio" name="groupNoTWB1" value="AsPerPlan" ng-model="user.requirement.terraceCarpetArea"  >
+
+</label>
+
+<label class="item  ">
+  Required : <input type="radio" name="groupNoTWB1" value='Required' ng-model="user.requirement.terraceCarpetArea">
+
+</label>
+
+
+<label class="item item-input item-stacked-label" ng-if="user.requirement.terraceCarpetArea == 'Required'" ng-class="{ 'has-errors' : applyForm.terraceArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.terraceArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Specify Area(sq.ft.)</span>
+  <input type="number" name="terraceArea" ng-model="user.requirement.terraceArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.terraceArea.$dirty && applyForm.terraceArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.terraceArea.$dirty && applyForm.terraceArea.$invalid">
+                <span class="help-block" ng-show="applyForm.terraceArea.$error.required || applyForm.terraceArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.openspaceArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.openspaceArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Open Space around the Buildup area(sq.ft.)</span>
+  <input type="number" name="openspaceArea" ng-model="user.requirement.openspaceArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.openspaceArea.$dirty && applyForm.openspaceArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.openspaceArea.$dirty && applyForm.openspaceArea.$invalid">
+                <span class="help-block" ng-show="applyForm.openspaceArea.$error.required || applyForm.openspaceArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<div class="item item-divider">
+  Required Numbers of Bedrooms
+</div>
+<label class="item item-input item-select">
+  <div class="input-label">
+    &nbsp;
+  </div>
+  <select ng-model="user.requirement.noOfBedrooms">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</label>
+
+<div class="item item-divider">
+  Specify Numbers of Toilet/WC/Bath
+</div>
+<label class="item  ">
+  No Extra Requirement : <input type="radio" name="groupNoTWB" value="AsPerPlan" ng-model="user.requirement.toiletWcBathRequirements" >
+
+</label>
+
+<label class="item  ">
+  Required : <input type="radio" name="groupNoTWB" value='Required' ng-model="user.requirement.toiletWcBathRequirements">
+
+</label>
+<label class="item item-input item-select" ng-if="user.requirement.toiletWcBathRequirements == 'Required'" ng-class="{ 'has-errors' : applyForm.noOfCommonToilets.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.noOfCommonToilets.$valid  && applyForm.$submitted}">
+    <div class="input-label">
+      common toilets
+    </div>
+    <select ng-model="user.requirement.noOfCommonToilets" name="noOfCommonToilets" required>
+      <option value="" selected>Select</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+</label>
+<label class="item item-input item-select" ng-if="user.requirement.toiletWcBathRequirements == 'Required'" ng-class="{ 'has-errors' : applyForm.noOfSeparateWc.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.noOfSeparateWc.$valid  && applyForm.$submitted}">
+  <div class="input-label">
+    separate WC
+  </div>
+  <select ng-model="user.requirement.noOfSeparateWc" name="noOfSeparateWc" required>
+    <option value="" selected>Select</option>
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</label>
+<label class="item item-input item-select" ng-if="user.requirement.toiletWcBathRequirements == 'Required'" ng-class="{ 'has-errors' : applyForm.noOfSeparateBathroom.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.noOfSeparateBathroom.$valid  && applyForm.$submitted}">
+  <div class="input-label">
+    separate Bathroom
+  </div>
+  <select ng-model="user.requirement.noOfSeparateBathroom" name="noOfSeparateBathroom" required>
+    <option value="" selected>Select</option>
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</label>
+
+<div class="item item-divider">
+Garden Area
+</div>
+<label class="item  ">
+  Not Required : <input type="radio" name="groupGardenArea" value="NotRequired" ng-model="user.requirement.gardenAreaRequired"   >
+</label>
+
+<label class="item  ">
+  Required :<input type="radio" name="groupGardenArea" value='Required' ng-model="user.requirement.gardenAreaRequired">
+</label>
+
+<label class="item item-input item-stacked-label" ng-if="user.requirement.gardenAreaRequired == 'Required'" ng-class="{ 'has-errors' : applyForm.gardenArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.gardenArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Specify Area(sq.ft.)</span>
+  <input type="number" name="gardenArea" ng-model="user.requirement.gardenArea" placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.gardenArea.$dirty && applyForm.gardenArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.gardenArea.$dirty && applyForm.gardenArea.$invalid">
+                <span class="help-block" ng-show="applyForm.gardenArea.$error.required || applyForm.gardenArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+<label class="item item-input">
+  <input type="text" ng-model="user.requirement.otherDetails" placeholder="Other Details(If required)">
+</label>
+
+<br>
+
+ 

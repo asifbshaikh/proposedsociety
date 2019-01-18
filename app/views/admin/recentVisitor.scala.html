@@ -1,0 +1,28 @@
+@(ruser: List[User], user :User)
+@import views.html._ 
+@import views.helpers.DateFormatHelper._
+
+@adminTemplate("Proposed Society -Resent Visitor",user,Seq(),Seq()){
+	<h1>Recent Visitors</h1>
+	<hr/>
+	<table id="viewBankDetails" class="table table-striped">
+			<thead>
+				<tr>	
+			  		<th class="leftAlignClass">Visitor</th>
+			  		<th class="leftAlignClass">Mobile Number</th>
+			  		<th class="leftAlignClass">Email Id</th>
+			  		<th class="leftAlignClass">Registered Date</th>
+				 </tr>
+			</thead>
+			<tbody>
+				@for(currentUsr <- ruser) {
+				  	<tr>
+				  		<td class="leftAlignClass">@currentUsr.name </td>
+				  	    <td class="leftAlignClass">@currentUsr.mobile</td>
+				  		<td class="leftAlignClass">@currentUsr.email</td>				  		
+						<td class="leftAlignClass">@formatDate("dd/MM/yyyy HH:mm a",currentUsr.joiningDate)</td>				  		
+					</tr>
+				}
+			</tbody>
+		</table>
+}

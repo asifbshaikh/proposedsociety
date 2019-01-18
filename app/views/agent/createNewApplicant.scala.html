@@ -1,0 +1,71 @@
+@(agent: Agent ,message : String)
+@import views.html.agent._
+@import common.PSError
+
+@agentDashboardTemlate("Proposed Society - Create New Applicant ",Seq(),Seq(routes.Assets.at("js/home.js"),routes.Assets.at("js/json2.js")), agent){
+	
+		
+    <style type="text/css">
+    	.fields {
+    		margin: 40px auto;
+    		border: 1px solid silver;
+    		padding: 30px;
+    		width: 400px;
+    		border-radius: 10px;
+    	
+    	}
+
+    </style>
+			
+		<form class="fields form-horizontal" method="post" action="@routes.ApplicationFormController.createNewApplicant">
+			<h2>Create New Applicant</h2><hr>
+			@if(message != null){
+			
+				 
+               		 @if(message.equals(PSError.OK)){
+               		 	   <div class="alert alert-info">
+                   	 		<button type="button" class="close" data-dismiss="alert">&times;</button>
+                 	  		<p>An authentication code is successfully generated and sent message to your mobile, and emailed to you. Please use this authentication code to access the website by clicking on existing visitor tab.</p>
+               		 	  </div> 
+               		 }
+               		 @if(message.equals(PSError.VALIDATION_ERRORS)){
+               		 	 <div class="alert alert-error">
+                   	 		<button type="button" class="close" data-dismiss="alert">&times;</button>
+                 	  		<p>Please provide valid name, mobile number and e-mail. All the fields are mandatory.</p>
+               		 	</div> 
+               		 }
+               		 @if(message.equals(PSError.EMAIL_OR_MOBILE_EXISTS)){
+               		 	 <div class="alert alert-error">
+                   	 		<button type="button" class="close" data-dismiss="alert">&times;</button>
+                 	  		<p>Either mobile number or e-mail is already registered with us. To request for authentication code again, please provide same mobile number / e-mail pair.</p>
+               		 	</div>  
+               		 }
+			}
+			<table class="fieldstable">
+				<tr>
+					<td><label class="fieldname required">Name</label></td>
+					<td><input type="text" name = "name" required="required" placeholder="Name" /></td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required"> Phone Number </label></td>
+					<td><input type="text" name = "mobile"  required="required" placeholder="Phone Number"/></td>
+				</tr>
+				<tr>
+					<td><label class="fieldname required"> Email </label></td>
+					<td><input type="email" name = "email"   placeholder="Email"/></td>
+				</tr>
+			</table>
+			<hr>
+			 <div align="center">
+			 	<a href="@routes.AgentDashboardController.agentDashboard" class="btn  btn-info" style="color:#ffffff" >Cancel</a>
+             	<button type="submit" class="btn btn-info ">Create</button>
+             	@if(message != null){
+             		@if(message.equals(PSError.OK)){
+             		<a href="@routes.Application.logout" class="btn  btn-info" style="color:#ffffff" >Proceed To Form</a>
+             		}
+             	}
+			 </div>
+		</form>
+		
+	
+}

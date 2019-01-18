@@ -1,0 +1,102 @@
+@(aff: Form[OwnContributionController.AmountFromFriends],
+affan: Form[OwnContributionController.AmountFromFriendsAmountNature],
+affl: Form[OwnContributionController.AmountFromFriendsAsLoan],
+affd: Form[OwnContributionController.AmountFromFriendsAsDonation],
+affr: Form[OwnContributionController.AmountFromFriendsAsRepayment])
+ 
+
+@import helper.FieldConstructor
+
+@implicitFormHelper = @{ FieldConstructor(persInfoFieldTemplate.f) }
+
+@form.formTemplate("miscellaneous Borrowing", 7) {
+		@helper.form(action = routes.OwnContributionController.amountFromFriendsSubmit, 'class -> "form-horizontal") {
+		<h1>Miscellaneous Borrowing</h1>
+		<hr/>
+		<table id="amountTaken" class="fieldstable">	
+			<tr>
+				<td style="width:300px;"><label for="isAmountFromFriends">Expected amount from friends/relative for buying a property?</label></td>
+				<td>@form.horizontalRadioGroup(aff("isAmountFromFriends"), options = Seq("true" -> "YES", "false" -> "NO"))</td>
+			</tr>
+		</table>
+		<table id="amountNatureTable" class="fieldstable" style="display:none">
+			
+		</table>
+		<div id="moneyFromFriends" style="display:none">
+			<h2>Details Of The Amount</h2>
+			<hr/>
+			<table class="fieldstable">
+				<tr>
+					<td style="width:300px;"><label>Amount expected from relatives/friends for buying a property</label></td>
+					<td>
+						@form.verticalRadioGroup(affan("amountNature"), options = Seq("asLoan" -> "As Loan", "asDonation" -> "As Donation", "moneyOwed" -> "Will you be receiving any money that anybody owed you?"))
+					</td>
+				</tr>
+				<tr class="asLoanClass">
+					<td style="width:300px;"><label>How much amount of loan you can get from Relatives/Friend ?</label></td>
+					<td>@helper.inputText(affl("amount"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asLoanClass">
+					<td style="width:300px;"><label>Interest Rate(%)</label></td>
+					<td>@helper.inputText(affl("interestRate"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asLoanClass">
+					<td style="width:300px;"><label>Monthly EMI</label></td>
+					<td>@helper.inputText(affl("emi"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asLoanClass">
+					<td style="width:300px;"><label>for How many years</label></td>
+					<td>@helper.inputText(affl("numberOfYears"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asLoanClass">
+					<td style="width:300px;"><label>Total Loan Deduction Amount</label></td>
+					<td>@helper.inputText(affl("totalDeduction"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asDonationClass">
+					<td style="width:300px;"><label>Donated total amount</label></td>
+					<td>@helper.inputText(affd("donation"), 'class -> "input-medium")</td>
+				</tr>
+				<tr class="asOwedMoneyClass">
+					<td style="width:300px;"><label>Money Amount to be received that anybody owed you</label></td>
+					<td>@helper.inputText(affr("repayment"), 'class -> "input-medium")</td>
+				</tr>
+				<!--
+					<tr>
+						<td></td>
+						<td></td>
+						<td><input type="button" value="Add More" id="addAmountFromFriends" onclick="addAmntFrmFrndsToList();"/></td>
+					</tr>
+				-->
+			</table>
+		</div>
+		<table id="calcutedValuesTable" class="fieldstable" style="display:none">
+			<tr></tr>
+			<tr class="totalExpectedAmntSummary">
+				<td style="width:300px;"><label><b>Total Expected Amount from Friend/Relative Summary Amount</b></label></td>
+			</tr>
+			<tr class="totalExpectedAmntSummary">
+				<td style="width:300px;"><label>Total amount summary to be borrowed</label></td>
+				<td></td>
+			</tr>
+			<tr class="totalExpectedAmntSummary">
+				<td style="width:300px;"><label>Total  loan of Relatives deduction amount</label></td>
+				<td></td>
+			</tr>
+			<tr class="totalExpectedAmntSummary">
+				<td style="width:300px;"><label>Total donation amount</label></td>
+				<td></td>
+			</tr>
+			<tr class="totalExpectedAmntSummary">
+				<td style="width:300px;"><label>Total of previously given amount returned</label></td>
+				<td></td>
+			</tr>
+			
+		</table>
+		<div class="form-actions">
+				<a href="@routes.OwnContributionController.propertyDetails" class="btn btn-large btn-pink" align="right">Next</a>
+		</div>
+		<!--<div class="form-actions">
+			<button type="submit" class="btn btn-large btn-pink">Next</button>
+		</div>-->
+		}
+}

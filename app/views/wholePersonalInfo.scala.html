@@ -1,0 +1,88 @@
+@(appForm : Form[ApplicationForm],
+data : Form[ApplicationFormController.DependentAndLoanForm],
+dd : Form[ApplicationFormController.DependentDetails],
+lfd : Form[ApplicationFormController.LoanFormDetails],
+appDependentsData: List[Dependent],
+coappDependentsData: List[Dependent],
+appLoanData: List[LoanDetails],
+coappLoanData: List[LoanDetails],
+isPaid : Boolean)
+
+@form.formTemplate("Proposed Society - Application Form",
+					 1, 
+					Seq(
+						routes.Assets.at("css/file-upload.css"),
+						routes.Assets.at("stylesheets/addresses.css"),
+						routes.Assets.at("stylesheets/personalInfo.css"),
+						routes.Assets.at("stylesheets/income.css")
+						
+					),
+					Seq(
+						routes.Assets.at("js/file-upload.js"),
+						routes.Assets.at("js/wholePersonalInfo.js"),
+						routes.Assets.at("js/personalInfo.js"),
+						routes.Assets.at("js/dependents.js"),
+						routes.Assets.at("js/co_applicants_incomeDetails.js"),
+						routes.Assets.at("js/co_applicant.js"),
+						routes.Assets.at("js/incomeDetails.js"),
+						routes.Assets.at("js/applicantsLoan.js")
+					)
+
+) {
+	@helper.form(action = routes.ApplicationFormController.wholePersonalInfoSubmit, 'class -> "form-horizontal") {
+		<div>
+			@if(appForm.hasErrors()) {
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <p>There are errors in form. Please correct fields marked in red.</p>
+                </div> 
+			}
+			
+			<div >
+				@personalInfo(appForm,true,isPaid,"applicant")
+			</div>
+			<hr/>
+			
+			<div id="appDependentsTemplateDiv">
+				@dependentsTemplate(dd,data,true,"applicant",appDependentsData)
+			</div>
+			<hr/>
+			
+			<div id="appLoanTemplateDiv">
+				@loanTemplate(lfd,data,true,"applicant",appLoanData)
+			</div>
+			<hr/>
+			
+			<div id="wantToAddCoApplicantDiv">
+				<h1>Do you want to add Co-applicant for loan?</h1>
+				<table id="addCoApplicantChoiceTable" class="fieldstable">
+					 <tr>
+						<td></td>
+						<td>@form.horizontalRadioGroup(appForm("coApplicantExists"), options = Seq("true" -> "Yes", "false" -> "No"))
+						</td>
+					</tr>
+				</table>
+				<hr/>
+			</div>
+			<div id="showEntireDivForCoapplicant">
+				<div>
+					@personalInfo(appForm,false,isPaid,"co_applicant")
+				</div>
+				<hr/>
+				
+				<div id="coappDependentsTemplateDiv">
+					@dependentsTemplate(dd,data,false,"co_applicant",coappDependentsData)
+				</div>
+				<hr/>
+				
+				<div id="coappLoanTemplateDiv">
+					@loanTemplate(lfd,data,false,"co_applicant",coappLoanData)
+				</div>
+				<hr/>
+			</div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-large btn-pink">Next</button>
+			</div>
+		</div>
+	}
+}

@@ -1,0 +1,47 @@
+<b>If Row House Plot/Independent bungalow Plot/Joint bungalow Plot /Farm House Plot/Commercial Land/Agricultural Land/Business Center/Business Park/FarmLand</b>
+<br><br>
+
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.plotArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.plotArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Property Area</span>
+  <input type="number" name="plotArea" ng-model="user.requirement.plotArea"  placeholder="" required>
+</label>
+<label class="item item-input" ng-if="applyForm.plotArea.$dirty && applyForm.plotArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.plotArea.$dirty && applyForm.plotArea.$invalid">
+                <span class="help-block" ng-show="applyForm.plotArea.$error.required || applyForm.plotArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+<label class="item item-input  " ng-class="{ 'has-errors' : applyForm.plotAreaMeasure.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.plotAreaMeasure.$valid  && applyForm.$submitted}">
+  <select ng-model="user.requirement.plotAreaMeasure" name="plotAreaMeasure" required>
+    <option value="Square Feet">Square Feet</option>
+    <option value="Square Yard">Square Yard</option>
+    <option value="Square Miles">Square Miles</option>
+  </select>
+</label>
+
+
+<label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.builtupArea.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.builtupArea.$valid  && applyForm.$submitted}">
+  <span class="input-label">Built up area required(sq.ft.)</span>
+  <input type="number" name="builtupArea" ng-model="user.requirement.builtupArea"  placeholder="sq.ft." required>
+</label>
+<label class="item item-input" ng-if="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span style="color:#FA5858" ng-show="applyForm.builtupArea.$dirty && applyForm.builtupArea.$invalid">
+                <span class="help-block" ng-show="applyForm.builtupArea.$error.required || applyForm.builtupArea.$error.number">"Enter valid value"</span>
+                </span>
+</label>
+
+
+  <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : applyForm.useOfLand.$invalid  && applyForm.$submitted, 'no-errors' : applyForm.useOfLand.$valid  && applyForm.$submitted}">
+    <span class="input-label">Use of the Land/Plot</span>
+    <input type="text" ng-model="user.requirement.useOfLand"  placeholder="enter use of land" name="useOfLand" required>
+    <i class="icon ion-alert-circled error"> Required</i>
+  </label>
+
+
+<label class="item item-input">
+  <input type="text" ng-model="user.requirement.otherDetails" placeholder="Other Details(If required)">
+</label>
+
+<br>
+
+ 

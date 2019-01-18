@@ -1,0 +1,13 @@
+@(pages: List[Page], user: User)
+
+@adminTemplate("Proposed Society - CMS - Page List", user, Seq(), Seq()) {
+	<div>
+		<h2>CMS - List of editable pages</h2>
+		<hr/>
+		<ul>
+			@pages.map { p =>
+				<li><a href="@routes.AdminUserController.cmsEditPage(p.id)">@p.title</a></li>
+			}	
+		</ul>
+	</div>
+}
